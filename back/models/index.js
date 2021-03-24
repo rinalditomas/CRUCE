@@ -1,10 +1,19 @@
+const User = require ('./User')
+const Order = require ('./Order')
+const Cadeteria = require ('./Cadeteria')
 
-const db = require("../db/index");
-const User = require("./User");
 
+
+User.belongsTo(Cadeteria)
+Cadeteria.hasMany(User)
+
+Order.belongsTo(Cadeteria)
+Cadeteria.hasMany(Order)
+
+Order.belongsTo(User)
+User.hasMany(Order)
 
 module.exports = {
-  db,
-  User,
- 
-};
+    User,
+    Order,
+    Cadeteria}

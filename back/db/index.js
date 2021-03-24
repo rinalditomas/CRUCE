@@ -1,13 +1,10 @@
-const S = require("sequelize");
 
+const Sequelize = require ('sequelize')
+const db = new Sequelize ( "postgres:/cruce",
+   
+{
+    logging: false,
+    dialect: "postgres",
+  })
 
-// env(path.join((__dirname, './.env')))
-
-// postgres://mgmarian:admin@localhost:5432/getaway
-// postgres://postgres@localhost/getaway
-
-const db = new S("postgres://postgres@localhost/getaway", {
-  logging: false,
-});
-
-module.exports = db;
+module.exports = db
