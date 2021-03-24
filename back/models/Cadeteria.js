@@ -1,5 +1,6 @@
 const S = require("sequelize");
 const db = require("../db");
+const crypto = require ("crypto")
 
   
 class Cadeteria extends S.Model {}
@@ -11,7 +12,7 @@ class Cadeteria extends S.Model {}
         allowNull: false,
       },
       CUIT: {
-        type: S.NUMBER,
+        type: S.STRING,
         allowNull: false,
         validate:{
             len:[11,11]| {
@@ -22,6 +23,7 @@ class Cadeteria extends S.Model {}
       email: {
         type: S.STRING,
         allowNull: false,
+        unique: true,
         validate:{
           isEmail:{
               msg: 'Agrega un correo válido'
@@ -29,14 +31,15 @@ class Cadeteria extends S.Model {}
           notEmpty:{
               msg:'Favor ingrese un correo electronico'
           }
+          
         }
       }, 
       password: {
         type: S.STRING,
         allowNull: false
       },
-      phone_num: {
-        type: S.NUMBER,
+      phoneNum: {
+        type: S.STRING,
         allowNull: false,
         validate:{
             len:[10,10]| {
@@ -52,8 +55,10 @@ class Cadeteria extends S.Model {}
         type:S.STRING,
       }
     },
-    { sequelize: db, modelName: "cadeteria" }
-  );
+    { sequelize:db , modelName: "cadeteria" });
+ 
+ 
+ 
   Cadeteria.addHook("beforeCreate",(cadeteria)=>{
     cadeteria.salt=crypto.randomBytes(20).toString("hex")
     cadeteria.password = cadeteria.hashPassword(cadeteria.password)

@@ -6,32 +6,37 @@ const crypto = require ("crypto")
 class User extends S.Model {}
   User.init(
     {
-      first_name: {
+      firstName: {
         type: S.STRING,
         allowNull: false,
       },
-      last_name: {
+      lastName: {
         type: S.STRING,
         allowNull: false,
       },
       email: {
         type: S.STRING,
         allowNull: false,
+       
         validate:{
+          
+          unique: true,
+
           isEmail:{
               msg: 'Agrega un correo válido'
           },
           notEmpty:{
               msg:'Favor ingrese un correo electronico'
-          }
+          },
+          
         }
       }, 
       password: {
         type: S.STRING,
         allowNull: false
       },
-      phone_num: {
-        type: S.NUMBER,
+      phoneNum: {
+        type: S.STRING,
         allowNull: false,
         validate:{
             len:[10,10]| {
@@ -39,12 +44,12 @@ class User extends S.Model {}
             }
         }
       },
-      isAdmin: {
+      admin: {
         type: S.BOOLEAN,
         defaultValue: false
       },
       vehicle: {
-        type: Sequelize.ENUM({
+        type: S.ENUM({
             values: ['bicicleta', 'auto','moto']
           }),
       },
@@ -52,8 +57,8 @@ class User extends S.Model {}
         type:S.STRING,
       }
     },
-    { sequelize: db, modelName: "user" }
-  );
+    { sequelize: db, modelName: "user" });
+
   User.addHook("beforeCreate",(user)=>{
     user.salt=crypto.randomBytes(20).toString("hex")
     user.password = user.hashPassword(user.password)

@@ -1,15 +1,13 @@
 const express = require("express");
-const dotenv = require("dotenv").config();
+
+
 const app = express();
-const volleyball = require("volleyball");
+const db = require("./db");
 const cors = require("cors");
-const db = require("./db/index");
-const PORT = process.env.PORT;
 
-/* const routes = require('./routes') */
+const config = require("./server.config.js");
+const routes = require('./routes')
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 
 app.use(
   cors({
@@ -18,13 +16,16 @@ app.use(
   })
 );
 
-/* app.use("/api", routes);
- */
+app.use(express.json());
+app.use(express.urlencoded());
 
-db.sync({ force: false })
-  .then((connection) => {
-    app.listen(PORT, () => console.log(`server listening at port ${PORT}`));
-  })
-  .catch((err) => {
-    console.log("DB sync failed", err);
+
+
+app.use("/api", routes);
+ 
+
+db.sync({ force: false}).then(() => {
+  app.listen(config.port, () => {
+    console.log(`Server listening at port ${config.port}`);
   });
+});
