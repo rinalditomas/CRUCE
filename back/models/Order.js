@@ -6,23 +6,23 @@ class Order extends S.Model {}
   
   Order.init(
     {
-      buyer_name: {
+      buyerName: {
         type: S.STRING,
         allowNull: false,
       },
-      delivery_adress: {
+      deliveryAdress: {
         type: S.STRING,
         allowNull: false,
       },
       notes: {
         type: S.TEXT,
       }, 
-      buyer_phone_num: {
-        type: S.NUMBER,
+      buyerPhoneNum: {
+        type: S.STRING,
         allowNull: false,
       },
       status: {
-        type: Sequelize.ENUM({
+        type: S.ENUM({
             values: ['Pendiente de retiro en sucursal', 'En camino','Entregado','Devuelto a sucursal'],
             defaultValue: 'Pendiente de retiro en sucursal'
         }),
