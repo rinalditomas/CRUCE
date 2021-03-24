@@ -1,6 +1,12 @@
-const Sequelize = require("sequelize");
+const S = require("sequelize");
 
-const db = new Sequelize("postgres://localhost:5432/cruce", {
+
+// env(path.join((__dirname, './.env')))
+
+// postgres://mgmarian:admin@localhost:5432/getaway
+// postgres://postgres@localhost/getaway
+
+const db = new S("postgres://postgres@localhost/getaway", {
   logging: false,
 });
 
