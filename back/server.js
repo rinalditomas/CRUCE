@@ -3,20 +3,29 @@ const dotenv = require("dotenv").config();
 const app = express();
 const volleyball = require("volleyball");
 const cors = require("cors");
-const db = require("./db/index");
+const db = require("./db");
 const PORT = process.env.PORT;
+const routes = require('./routes')
+
 
 /* const routes = require('./routes') */
 
-app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
+app.use(cors())
 
-app.use(
-  cors({
-    origin: "http://localhost:3000",
-    credentials: true,
-  })
-);
+app.use(express.json());
+
+app.use(express.urlencoded({ extended: false }));
+
+app.use(routes)
+
+
+
+// app.use(
+//   cors({
+//     origin: "http://localhost:3000",
+//     credentials: true,
+//   })
+// );
 
 /* app.use("/api", routes);
  */

@@ -1,24 +1,24 @@
-const S = require("sequelize");
-const db = require("../db");
+const Sequelize = require("sequelize");
+const db = require("../db/index");
 
   
-class Order extends S.Model {}
+class Order extends Sequelize.Model {}
   
   Order.init(
     {
-      buyer_name: {
-        type: S.STRING,
+      buyerName: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      delivery_adress: {
-        type: S.STRING,
+      deliveryAdress: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       notes: {
-        type: S.TEXT,
+        type: Sequelize.TEXT,
       }, 
-      buyer_phone_num: {
-        type: S.NUMBER,
+      buyerPhoneNum: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       status: {

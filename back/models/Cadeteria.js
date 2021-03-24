@@ -1,17 +1,16 @@
-const S = require("sequelize");
-const db = require("../db");
+const Sequelize = require("sequelize");
+const db = require("../db/index");
 
   
-class Cadeteria extends S.Model {}
+class Cadeteria extends Sequelize.Model {}
   
-  Cadeteria.init(
-    {
-      name_company: {
-        type: S.STRING,
+  Cadeteria.init({
+      nameCompany: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      CUIT: {
-        type: S.NUMBER,
+      cuit: {
+        type: Sequelize.STRING,
         allowNull: false,
         validate:{
             len:[11,11]| {
@@ -20,7 +19,7 @@ class Cadeteria extends S.Model {}
         }
       },
       email: {
-        type: S.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate:{
           isEmail:{
@@ -32,11 +31,11 @@ class Cadeteria extends S.Model {}
         }
       }, 
       password: {
-        type: S.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
-      phone_num: {
-        type: S.NUMBER,
+      phoneNum: {
+        type: Sequelize.STRING,
         allowNull: false,
         validate:{
             len:[10,10]| {
@@ -45,15 +44,15 @@ class Cadeteria extends S.Model {}
         }
       },
       address: {
-        type: S.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
       salt:{
-        type:S.STRING,
+        type:Sequelize.STRING,
       }
-    },
-    { sequelize: db, modelName: "cadeteria" }
-  );
+    },{ sequelize: db, modelName: "cadeteria" });
+
+
   Cadeteria.addHook("beforeCreate",(cadeteria)=>{
     cadeteria.salt=crypto.randomBytes(20).toString("hex")
     cadeteria.password = cadeteria.hashPassword(cadeteria.password)

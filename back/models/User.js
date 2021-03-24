@@ -1,21 +1,21 @@
-const S = require("sequelize");
-const db = require("../db");
+const Sequelize = require("sequelize");
+const db = require("../db/index");
 const crypto = require ("crypto")
 
   
-class User extends S.Model {}
+class User extends Sequelize.Model {}
   User.init(
     {
-      first_name: {
-        type: S.STRING,
+      firstName: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
-      last_name: {
-        type: S.STRING,
+      lastName: {
+        type: Sequelize.STRING,
         allowNull: false,
       },
       email: {
-        type: S.STRING,
+        type: Sequelize.STRING,
         allowNull: false,
         validate:{
           isEmail:{
@@ -27,11 +27,11 @@ class User extends S.Model {}
         }
       }, 
       password: {
-        type: S.STRING,
+        type: Sequelize.STRING,
         allowNull: false
       },
-      phone_num: {
-        type: S.NUMBER,
+      phoneNum: {
+        type: Sequelize.STRING,
         allowNull: false,
         validate:{
             len:[10,10]| {
@@ -40,7 +40,7 @@ class User extends S.Model {}
         }
       },
       isAdmin: {
-        type: S.BOOLEAN,
+        type: Sequelize.BOOLEAN,
         defaultValue: false
       },
       vehicle: {
@@ -49,20 +49,22 @@ class User extends S.Model {}
           }),
       },
       salt:{
-        type:S.STRING,
+        type:Sequelize.STRING,
       }
-    },
-    { sequelize: db, modelName: "user" }
-  );
+    },{ sequelize: db, modelName: "user" });
+
+
   User.addHook("beforeCreate",(user)=>{
     user.salt=crypto.randomBytes(20).toString("hex")
     user.password = user.hashPassword(user.password)
-  })
+  });
+
   User.prototype.hashPassword=function(password){
     return crypto.createHmac ("Sha1", this.salt).update(password).digest("hex")
-  }
+  };
+
   User.prototype.validPassword = function(passwordEnLogin){
     return this.password === this.hashPassword(passwordEnLogin)
-  }
+  };
   
   module.exports = User;
