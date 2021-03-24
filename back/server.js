@@ -3,7 +3,7 @@ const dotenv = require("dotenv").config();
 const app = express();
 const volleyball = require("volleyball");
 const cors = require("cors");
-const db = require("./db");
+const db = require("./db/index");
 const PORT = process.env.PORT;
 
 /* const routes = require('./routes') */
