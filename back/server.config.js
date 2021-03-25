@@ -1,4 +1,5 @@
+const dotenv = require("dotenv").config("back/.env");
+
 module.exports = {
-    name: 'Passport',
-    port: 8000,
-  }
+  port: process.env.PORT
+};
