@@ -1,11 +1,12 @@
 
 import { Switch, Route, Redirect } from "react-router-dom";
-import Navbar from "../App/Navbar";
+import Navbar from "../components/Navbar";
 // import Home from "../Home";
-import Login from "../Users/Login";
-import Main from '../Users/Main'
-import Home from "./Home";
-import Prueba from "./prueba"
+import Login from "../components/Login";
+import Main from '../components/SelectButtons'
+import Home from "../components/Home";
+import Footer from "../components/Footer";
+import Prueba from "../components/prueba"
 // import Cadete from "../Cadete";
 // import Cadeteria from "../Cadeteria";
 // import Admin from "../Admin";
@@ -14,7 +15,7 @@ import Prueba from "./prueba"
 export default function App() {
   return (
     <div>
-      {/* <Navbar /> */}
+      <Navbar />
       <Switch>
         <Route exact path="/" component={Home}/>
         <Route exact path="/login"  component={Login}/>
@@ -29,6 +30,7 @@ export default function App() {
         <Route exact path="/admin" />
         <Redirect to="/" />
       </Switch>
+     <Footer/>
     </div>
   );
 }

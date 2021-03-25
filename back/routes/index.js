@@ -9,8 +9,4 @@ router.use("/register", RegisterRoutes);
 router.use("/login", LoginRoutes);
 router.use("/me", Me);
 
-router.post('/upload',(req,res,next)=>{
-    items = req.body
-  console.log(items)
-})
 module.exports = router;
