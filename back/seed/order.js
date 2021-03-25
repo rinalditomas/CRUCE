@@ -3,19 +3,19 @@ module.exports=[
 
     {
     buyerName: 'Lionel',
-    deliveryAdress:'Messi',
+    deliveryAddress:'Messi',
     notes:'Llamarme',
     buyerPhoneNum:"2983745678",
     },
     {
     buyerName: 'Luis',
-    delivery_adress:'Suarez',
+    deliveryAddress:'Suarez',
     notes:'Tocarme timbre',
     buyerPhoneNum:"2983745678",
     },
     {
     buyerName: 'Carlos',
-    deliveryAdress:'Tevez',
+    deliveryAddress:'Tevez',
     notes:'Dejarlo en la puerta',
     buyerPhoneNum:"2983745678",
     }

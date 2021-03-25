@@ -10,7 +10,7 @@ class Order extends S.Model {}
         type: S.STRING,
         allowNull: false,
       },
-      deliveryAdress: {
+      deliveryAddress: {
         type: S.STRING,
         allowNull: false,
       },

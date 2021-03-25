@@ -22,7 +22,7 @@ module.exports= [
     CUIT:'25524902349',
     email:'justEat@gmail.com',
     password:"12345678",
-    phone_num:"2983745678",
+    phoneNum:"2983745678",
     address:'San Juan 123'
     }
 ]
