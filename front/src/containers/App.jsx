@@ -1,10 +1,11 @@
 
 import { Switch, Route, Redirect } from "react-router-dom";
-import Navbar from "../App/Navbar";
+import Navbar from "../components/Navbar";
 // import Home from "../Home";
-import Login from "../Users/Login";
-import Main from '../Users/Main'
-import Home from "./Home";
+import Login from "../components/Login";
+import Main from '../components/SelectButtons'
+import Home from "../components/Home";
+import Footer from "../components/Footer";
 // import Cadete from "../Cadete";
 // import Cadeteria from "../Cadeteria";
 // import Admin from "../Admin";
@@ -27,6 +28,7 @@ export default function App() {
         <Route exact path="/admin" />
         <Redirect to="/" />
       </Switch>
+     <Footer/>
     </div>
   );
 }

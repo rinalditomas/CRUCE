@@ -1,10 +1,10 @@
 import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 
-import { Cadete } from "./RegistroCadete";
-import { Cadeteria } from "./RegistroCadeteria";
+import { Cadete } from "./RegisterUser";
+import { Cadeteria } from "./RegisterCadeteria";
 
-import useStyles from "../../utils/stylesRegister";
+import useStyles from "../utils/stylesRegister";
 
 const Main = () => {
 

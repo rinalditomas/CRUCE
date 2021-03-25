@@ -11,8 +11,8 @@ import Container from "@material-ui/core/Container";
 
 import {Link} from 'react-router-dom'
 
-import useStyles from "../../utils/stylesRegister";
-import Copyright from "../../utils/Copyright";
+import useStyles from "../utils/stylesRegister";
+import Copyright from "../utils/Copyright";
 
 
 export const Cadete = () => {

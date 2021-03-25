@@ -12,8 +12,8 @@ import Typography from "@material-ui/core/Typography";
 
 import Container from "@material-ui/core/Container";
 
-import useStyles from "../../utils/stylesRegister";
-import Copyright from "../../utils/Copyright";
+import useStyles from "../utils/stylesRegister";
+import Copyright from "../utils/Copyright";
 
 export const Cadeteria = () => {
 const classes = useStyles();

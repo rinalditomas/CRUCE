@@ -8,7 +8,7 @@ import KeyboardArrowLeft from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardArrowRight from "@material-ui/icons/KeyboardArrowRight";
 
 
-import useStyles from '../../utils/stylesCarousel'
+import useStyles from '../utils/stylesCarousel'
 
 const tutorialSteps = [
   {
