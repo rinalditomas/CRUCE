@@ -12,6 +12,8 @@ import Prueba from "../components/prueba"
 // import Admin from "../Admin";
 // import SingleCadete from "../SingleCadete";
 
+
+
 export default function App() {
   return (
     <div>

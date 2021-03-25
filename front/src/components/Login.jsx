@@ -1,22 +1,46 @@
-import React from 'react';
-import Avatar from '@material-ui/core/Avatar';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import TextField from '@material-ui/core/TextField';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
-import Checkbox from '@material-ui/core/Checkbox';
-import {Link} from 'react-router-dom'
-import Paper from '@material-ui/core/Paper';
-import Box from '@material-ui/core/Box';
-import Grid from '@material-ui/core/Grid';
-import LockOutlinedIcon from '@material-ui/icons/LockOutlined';
-import Typography from '@material-ui/core/Typography';
-import Copyright from '../utils/Copyright'
-import useStyles from '../utils/stylesLogins'
+import React, { useState } from "react";
+import Avatar from "@material-ui/core/Avatar";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import TextField from "@material-ui/core/TextField";
+import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Checkbox from "@material-ui/core/Checkbox";
+import { Link, useHistory } from "react-router-dom";
+import Paper from "@material-ui/core/Paper";
+import Box from "@material-ui/core/Box";
+import Grid from "@material-ui/core/Grid";
+import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
+import Typography from "@material-ui/core/Typography";
+import Copyright from "../utils/Copyright";
+import useStyles from "../utils/stylesLogins";
+import axios from "axios";
 
 export default function Login() {
   const classes = useStyles();
-  
+
+  const [input, setInput] = useState({});
+
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    const key = e.target.name;
+    const value = e.target.value;
+    setInput({ ...input, [key]: value });
+  };
+
+  const handleSubmit = (e) => {
+    console.log("click");
+    e.preventDefault();
+    axios
+      .post("http://localhost:5000/api/login", input)
+      .then((res) => {
+        localStorage.setItem("user", res.data.user.firstName);
+        localStorage.setItem("token", res.data.token);
+      })
+      .then((e) => alert("logueado"))
+      .then((redirect) => history.push("/home"))
+      .catch((err) => console.log(err));
+  };
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -30,7 +54,7 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form} >
+          <form className={classes.form} onSubmit={handleSubmit}>
             <TextField
               variant="outlined"
               margin="normal"
@@ -41,6 +65,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
+              value={input.email}
             />
             <TextField
               variant="outlined"
@@ -52,6 +78,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
+              value={input.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
@@ -73,9 +101,7 @@ export default function Login() {
                 </Link>
               </Grid>
               <Grid item>
-                <Link to='/register'>
-                  {"No tienes cuenta? Registrate"}
-                </Link>
+                <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
               </Grid>
             </Grid>
             <Box mt={5}>
