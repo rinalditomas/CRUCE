@@ -17,10 +17,9 @@ class User extends S.Model {}
       email: {
         type: S.STRING,
         allowNull: false,
-       
-        validate:{
-          
-          unique: true,
+        unique: true,
+
+        validate:{         
 
           isEmail:{
               msg: 'Agrega un correo válido'
@@ -48,6 +47,12 @@ class User extends S.Model {}
         type: S.BOOLEAN,
         defaultValue: false
       },
+
+      active: {
+        type: S.BOOLEAN,
+        defaultValue: false
+      },
+
       vehicle: {
         type: S.ENUM({
             values: ['bicicleta', 'auto','moto']

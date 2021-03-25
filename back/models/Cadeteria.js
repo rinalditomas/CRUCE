@@ -7,7 +7,7 @@ class Cadeteria extends S.Model {}
   
   Cadeteria.init(
     {
-      name_company: {
+      nameCompany: {
         type: S.STRING,
         allowNull: false,
       },
@@ -47,6 +47,12 @@ class Cadeteria extends S.Model {}
             }
         }
       },
+
+      active: {
+        type: S.BOOLEAN,
+        defaultValue: false
+      },
+      
       address: {
         type: S.STRING,
         allowNull: false

@@ -10,7 +10,7 @@ class Order extends S.Model {}
         type: S.STRING,
         allowNull: false,
       },
-      deliveryAdress: {
+      deliveryAddress: {
         type: S.STRING,
         allowNull: false,
       },
@@ -21,10 +21,16 @@ class Order extends S.Model {}
         type: S.STRING,
         allowNull: false,
       },
+
+      products: {
+        type: S.ARRAY(S.DataTypes.JSON),
+        defaultValue: []
+        },
+
       status: {
         type: S.ENUM({
-            values: ['Pendiente de retiro en sucursal', 'En camino','Entregado','Devuelto a sucursal'],
-            defaultValue: 'Pendiente de retiro en sucursal'
+            values: ['Pendiente', 'En camino','Entregado','Devuelto a sucursal'],
+            defaultValue: 'Pendiente'
         }),
       }
 },{ sequelize: db, modelName: "order" });
