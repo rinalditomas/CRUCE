@@ -1,13 +1,9 @@
 const express = require("express");
-
-
 const app = express();
 const db = require("./db");
 const cors = require("cors");
-
 const config = require("./server.config.js");
-const routes = require('./routes')
-
+const routes = require("./routes");
 
 app.use(
   cors({
@@ -17,15 +13,20 @@ app.use(
 );
 
 app.use(express.json());
-app.use(express.urlencoded());
-
-
-
+app.use(express.urlencoded({ extended: true }));
 app.use("/api", routes);
- 
 
-db.sync({ force: false}).then(() => {
+/* db.sync({ force: false }).then(() => {
   app.listen(config.port, () => {
     console.log(`Server listening at port ${config.port}`);
   });
-});
+}); */
+
+const startServer = async () => {
+  await db.sync({ force: false });
+  await app.listen(config.port, () =>
+    console.log(`Server listening at port ${config.port}`)
+  );
+};
+
+startServer();
