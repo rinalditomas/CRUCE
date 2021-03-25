@@ -47,6 +47,12 @@ class Cadeteria extends S.Model {}
             }
         }
       },
+
+      active: {
+        type: S.BOOLEAN,
+        defaultValue: false
+      },
+      
       address: {
         type: S.STRING,
         allowNull: false

@@ -21,6 +21,12 @@ class Order extends S.Model {}
         type: S.STRING,
         allowNull: false,
       },
+
+      products: {
+        type: S.ARRAY(S.DataTypes.JSON),
+        defaultValue: []
+        },
+
       status: {
         type: S.ENUM({
             values: ['Pendiente', 'En camino','Entregado','Devuelto a sucursal'],
