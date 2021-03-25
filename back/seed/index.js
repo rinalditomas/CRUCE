@@ -1,3 +1,4 @@
+
 const { User, Order, Cadeteria } = require("../models");
 
 const userArr = require("./user");
@@ -22,13 +23,14 @@ let userPromise = () =>
     return res;
   });
 
-let orderPromise = () =>
-  Order.bulkCreate(orderArr).then((res) => {
+
+let orderPromise = () => Order.bulkCreate(orderArr)
+  .then(res => {
     console.log(`-->Ordenes creadas`);
     return res;
   });
-
-cadeteriaPromise()
-  .then(() => userPromise())
-  .then(() => orderPromise())
+  
+  cadeteriaPromise()
+  .then(()=>userPromise()) 
+  .then(()=>orderPromise()) 
   .then(() => console.log(`----Seed terminado----`));

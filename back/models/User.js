@@ -40,6 +40,7 @@ User.init(
           {
             msg: "Por favor, ingrese un numero valido",
           },
+
       },
     },
     admin: {

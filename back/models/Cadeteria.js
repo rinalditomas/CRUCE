@@ -3,36 +3,31 @@ const db = require("../db");
 const crypto = require("crypto");
 
 class Cadeteria extends S.Model {}
-
-Cadeteria.init(
-  {
-    nameCompany: {
-      type: S.STRING,
-      allowNull: false,
-    },
-    CUIT: {
-      type: S.STRING,
-      allowNull: false,
-      validate: {
-        len:
-          [11, 11] |
-          {
-            msg: "Por favor, ingrese un numero valido",
-          },
+  
+  Cadeteria.init(
+    {
+      nameCompany: {
+        type: S.STRING,
+        allowNull: false,
       },
-    },
-    email: {
-      type: S.STRING,
-      allowNull: false,
-      unique: true,
-      validate: {
-        isEmail: {
-          msg: "Agrega un correo válido",
-        },
-        notEmpty: {
-          msg: "Favor ingrese un correo electronico",
-        },
+      CUIT: {
+        type: S.STRING,
+        allowNull: false,
+        validate:{
+            len:[11,11]| {
+                msg:"Por favor, ingrese un numero valido"
+            }
+        }
       },
+      email: {
+        type: S.STRING,
+        allowNull: false,
+        unique: true,
+        validate:{
+          isEmail:{
+              msg: 'Agrega un correo válido'},
+      },             
+           
     },
     password: {
       type: S.STRING,
