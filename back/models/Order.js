@@ -23,8 +23,8 @@ class Order extends S.Model {}
       },
       status: {
         type: S.ENUM({
-            values: ['Pendiente de retiro en sucursal', 'En camino','Entregado','Devuelto a sucursal'],
-            defaultValue: 'Pendiente de retiro en sucursal'
+            values: ['Pendiente', 'En camino','Entregado','Devuelto a sucursal'],
+            defaultValue: 'Pendiente'
         }),
       }
 },{ sequelize: db, modelName: "order" });

@@ -7,7 +7,7 @@ class Cadeteria extends S.Model {}
   
   Cadeteria.init(
     {
-      name_company: {
+      nameCompany: {
         type: S.STRING,
         allowNull: false,
       },
