@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -13,7 +13,12 @@ import useStyles from "../utils/stylesNavbar";
 const Navbar = () => {
   const classes = useStyles();
   const history = useHistory();
+  const [log, setLog] = useState(false);
   const token = localStorage.getItem("token");
+
+  useEffect(() => {
+    !log ? setLog(true) : setLog(false)
+  }, [log])
 
   const logout = () => {
     localStorage.removeItem("user");

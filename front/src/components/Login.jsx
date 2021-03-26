@@ -13,12 +13,18 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../state/user";
+
 import axios from "axios";
 
 export default function Login() {
   const classes = useStyles();
 
   const [input, setInput] = useState({});
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
 
   const history = useHistory();
 
@@ -28,19 +34,23 @@ export default function Login() {
     setInput({ ...input, [key]: value });
   };
 
-  const handleSubmit = (e) => {
-    console.log("click");
+  const handleSubmit = async (e) => {
+    const { firstName, lastName, email, password, token, admin } = input;
+
+    console.log({ firstName, lastName, email, password, token, admin });
     e.preventDefault();
-    axios
-      .post("http://localhost:5000/api/login", input)
-      .then((res) => {
-        localStorage.setItem("user", res.data.user.firstName);
-        localStorage.setItem("token", res.data.token);
-      })
-      .then((e) => alert("logueado"))
-      .then((redirect) => history.push("/home"))
-      .catch((err) => console.log(err));
+    try {
+      await dispatch(
+        loginRequest({ firstName, lastName, email, password, token, admin })
+      );
+      alert("usuario logueado");
+      history.push("/home");
+    } catch (err) {
+      console.log(err);
+    }
   };
+
+  console.log("User en login ===>", user);
 
   return (
     <Grid container component="main" className={classes.root}>

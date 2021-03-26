@@ -2,8 +2,9 @@ import React from "react";
 import Carousel from "./Carousel";
 
 const Home = () => {
+  
   const token = localStorage.getItem("token");
-  const user = localStorage.getItem("user");
+  const user = JSON.parse(localStorage.getItem("user"));
 
   token
     ? console.log("El usuario esta logueado")
@@ -17,7 +18,7 @@ const Home = () => {
         </>
       ) : (
         <>
-          <h1>{`Bienvenido ${user}`}</h1>
+          <h1>{`Bienvenido ${user.firstName} ${user.lastName}`}</h1>
           <Carousel />
         </>
       )}
