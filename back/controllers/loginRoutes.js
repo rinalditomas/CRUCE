@@ -17,6 +17,7 @@ const loginController = {
           { email, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
           "P5"
         );
+        console.log('TOKEN =>', token)
         return res.status(200).json({ token, user });
       })
       .catch((e) => {

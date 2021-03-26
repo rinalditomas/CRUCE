@@ -6,6 +6,7 @@ const { User } = require("../models/index"); // revisar posteriormente
 router.get("/", tokenMiddleware, (req, res, next) => {
   const token = req.headers.authorization.split(" ")[1]; // Token
   const user = req.user; // Objeto user
+  console.log('Logueado, este el token', token)
   res.json({ token, user });
 });
 
