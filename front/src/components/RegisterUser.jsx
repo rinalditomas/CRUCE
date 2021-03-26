@@ -8,14 +8,25 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
+
 import { useDispatch } from "react-redux";
-import { Link } from "react-router-dom";
+
 import { register } from "../state/CadetesReducer";
+
+
+import MenuItem from "@material-ui/core/MenuItem";
+
+import Select from "@material-ui/core/Select";
+
+import axios from "axios";
+import { Link } from "react-router-dom";
+
 
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
 
 export const Cadete = () => {
+
   const classes = useStyles();
 
   const [input, setInput] = useState({});
@@ -58,6 +69,7 @@ export const Cadete = () => {
                   label="Nombre"
                   autoFocus
                   onChange={handleChange}
+
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -70,18 +82,28 @@ export const Cadete = () => {
                   name="lastName"
                   autoComplete="lname"
                   onChange={handleChange}
+
                 />
-              </Grid>
+           
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
+                <Select
                   fullWidth
-                  id="vehicle"
-                  label="auto"
+                  labelId="demo-simple-select-filled-label"
                   name="vehicle"
+                  id="demo-simple-select-filled"
                   onChange={handleChange}
-                />
+                >
+                  <MenuItem value="moto" key={1}>
+                    Moto
+                  </MenuItem>
+                  <MenuItem value="bicicleta" key={2}>
+                    Bicicleta
+                  </MenuItem>
+                  <MenuItem value="auto" key={3}>
+                    Auto
+                  </MenuItem>
+                </Select>
+
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -93,6 +115,7 @@ export const Cadete = () => {
                   name="company"
                   autoComplete="company"
                   onChange={handleChange}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -101,10 +124,12 @@ export const Cadete = () => {
                   required
                   fullWidth
                   id="phoneNum"
+
                   label="phoneNum"
                   name="phoneNum"
                   autoComplete="phoneNum"
                   onChange={handleChange}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -116,7 +141,7 @@ export const Cadete = () => {
                   label="Email"
                   name="email"
                   autoComplete="email"
-                  onChange={handleChange}
+
                 />
               </Grid>
               <Grid item xs={12}>
@@ -130,6 +155,7 @@ export const Cadete = () => {
                   id="password"
                   autoComplete="current-password"
                   onChange={handleChange}
+
                 />
               </Grid>
             </Grid>
@@ -147,6 +173,7 @@ export const Cadete = () => {
                 <Link to="/login">Ya tienes una cuenta? Logueate.</Link>
               </Grid>
             </Grid>
+
           </form>
         </div>
         <Box mt={5}>

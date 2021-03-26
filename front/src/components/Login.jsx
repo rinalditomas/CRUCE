@@ -1,11 +1,14 @@
-import React from "react";
+
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-import { Link } from "react-router-dom";
+
+
+import { Link, useHistory } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
@@ -14,8 +17,44 @@ import Typography from "@material-ui/core/Typography";
 import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
 
+import { useDispatch, useSelector } from "react-redux";
+import { loginRequest } from "../state/user";
+
+import axios from "axios";
+
 export default function Login() {
   const classes = useStyles();
+
+  const [input, setInput] = useState({});
+
+  const user = useSelector((state) => state.user);
+  const dispatch = useDispatch();
+
+  const history = useHistory();
+
+  const handleChange = (e) => {
+    const key = e.target.name;
+    const value = e.target.value;
+    setInput({ ...input, [key]: value });
+  };
+
+  const handleSubmit = async (e) => {
+    const { firstName, lastName, email, password, token, admin } = input;
+
+    console.log({ firstName, lastName, email, password, token, admin });
+    e.preventDefault();
+    try {
+      await dispatch(
+        loginRequest({ firstName, lastName, email, password, token, admin })
+      );
+      alert("usuario logueado");
+      history.push("/home");
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  console.log("User en login ===>", user);
 
   return (
     <Grid container component="main" className={classes.root}>
@@ -29,7 +68,9 @@ export default function Login() {
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <form className={classes.form}>
+
+          <form className={classes.form} onSubmit={handleSubmit}>
+
             <TextField
               variant="outlined"
               margin="normal"
@@ -40,6 +81,8 @@ export default function Login() {
               name="email"
               autoComplete="email"
               autoFocus
+              onChange={handleChange}
+              value={input.email}
             />
             <TextField
               variant="outlined"
@@ -51,6 +94,8 @@ export default function Login() {
               type="password"
               id="password"
               autoComplete="current-password"
+              onChange={handleChange}
+              value={input.password}
             />
             <FormControlLabel
               control={<Checkbox value="remember" color="primary" />}
