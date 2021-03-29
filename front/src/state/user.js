@@ -11,7 +11,7 @@ export const clearUser = createAction("CLEAR_USER");
 export const fetchMe = createAsyncThunk("FETCH_ME", () => {
   const loginToken = JSON.parse(localStorage.getItem("user")).token;
   return axios
-    .get(`http://localhost:5000/api/me`, {
+    .get(`http://localhost:8000/api/me`, {
       headers: { Authorization: `Bearer ${loginToken}` },
     })
     .then((r) => {
@@ -21,7 +21,7 @@ export const fetchMe = createAsyncThunk("FETCH_ME", () => {
 
 export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (user) => {
   return axios
-    .post("http://localhost:5000/api/login", user)
+    .post("http://localhost:8000/api/login", user)
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.data.token));
      localStorage.setItem("user", JSON.stringify(res.data.user))

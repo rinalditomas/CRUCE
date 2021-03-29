@@ -16,9 +16,9 @@ const Navbar = () => {
   const [log, setLog] = useState(false);
   const token = localStorage.getItem("token");
 
-  useEffect(() => {
+ /*  useEffect(() => {
     !log ? setLog(true) : setLog(false)
-  }, [log])
+  }, [log]) */
 
   const logout = () => {
     localStorage.removeItem("user");

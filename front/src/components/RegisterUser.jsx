@@ -13,7 +13,6 @@ import { useDispatch } from "react-redux";
 
 import { register } from "../state/CadetesReducer";
 
-
 import MenuItem from "@material-ui/core/MenuItem";
 
 import Select from "@material-ui/core/Select";
@@ -21,12 +20,10 @@ import Select from "@material-ui/core/Select";
 import axios from "axios";
 import { Link } from "react-router-dom";
 
-
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
 
 export const Cadete = () => {
-
   const classes = useStyles();
 
   const [input, setInput] = useState({});
@@ -38,8 +35,9 @@ export const Cadete = () => {
     const value = e.target.value;
     console.log(e.target.value);
     setInput({ ...input, [key]: value });
+    
   };
-
+console.log(input)
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(register(input)).then(alert("Estas Registrado"));
@@ -69,7 +67,6 @@ export const Cadete = () => {
                   label="Nombre"
                   autoFocus
                   onChange={handleChange}
-
                 />
               </Grid>
               <Grid item xs={12} sm={6}>
@@ -82,9 +79,8 @@ export const Cadete = () => {
                   name="lastName"
                   autoComplete="lname"
                   onChange={handleChange}
-
                 />
-           
+              </Grid>
               <Grid item xs={12}>
                 <Select
                   fullWidth
@@ -103,7 +99,6 @@ export const Cadete = () => {
                     Auto
                   </MenuItem>
                 </Select>
-
               </Grid>
               <Grid item xs={12}>
                 <TextField
@@ -115,7 +110,6 @@ export const Cadete = () => {
                   name="company"
                   autoComplete="company"
                   onChange={handleChange}
-
                 />
               </Grid>
               <Grid item xs={12}>
@@ -124,12 +118,10 @@ export const Cadete = () => {
                   required
                   fullWidth
                   id="phoneNum"
-
                   label="phoneNum"
                   name="phoneNum"
                   autoComplete="phoneNum"
                   onChange={handleChange}
-
                 />
               </Grid>
               <Grid item xs={12}>
@@ -141,7 +133,7 @@ export const Cadete = () => {
                   label="Email"
                   name="email"
                   autoComplete="email"
-
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -155,7 +147,6 @@ export const Cadete = () => {
                   id="password"
                   autoComplete="current-password"
                   onChange={handleChange}
-
                 />
               </Grid>
             </Grid>
@@ -173,9 +164,9 @@ export const Cadete = () => {
                 <Link to="/login">Ya tienes una cuenta? Logueate.</Link>
               </Grid>
             </Grid>
-
           </form>
         </div>
+
         <Box mt={5}>
           <Copyright />
         </Box>
