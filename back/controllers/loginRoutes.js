@@ -8,6 +8,7 @@ const loginController = {
       where: { email },
     })
       .then((user) => {
+        console.log('Usuario en el back ====>', user )
         const isValid = user.validPassword(password);
 
         if (!user) return res.status(401).send("El usuario no existe");
