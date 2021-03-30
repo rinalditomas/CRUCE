@@ -23,7 +23,7 @@ app.use("/api", routes);
 }); */
 
 const startServer = async () => {
-  await db.sync({ force: true });
+  await db.sync({ force: false});
   await app.listen(config.port, () =>
     console.log(`Server listening at port ${config.port}`)
   );

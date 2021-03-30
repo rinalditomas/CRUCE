@@ -23,8 +23,7 @@ let userPromise = () =>
     return res;
   });
 
-
-
+ 
   cadeteriaPromise()
   .then(()=>userPromise()) 
-  .then(() => console.log(`----Seed terminado----`));
+   .then(() => console.log(`----Seed terminado----`));
