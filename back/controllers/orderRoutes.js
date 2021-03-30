@@ -1,9 +1,9 @@
 const { Order } = require("../models");
 
 const NewOrderController = {
-  newOrder(req, res) {
+  newOrder(req, res, next) {
   
-   const orders = req.body.items
+   const orders = req.body
    
    orders.map((order)=>{
  
@@ -21,7 +21,8 @@ const NewOrderController = {
         productSku:order['ID_SKU']
       })
     })
-      console.log ("----------------------> Archivo Cargado con Exito")
+    .then(res.sendStatus(200))
+    
   },
 };
 

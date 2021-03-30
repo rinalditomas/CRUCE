@@ -11,6 +11,7 @@ import Prueba from "../components/prueba"
 // import Cadeteria from "../Cadeteria";
 // import Admin from "../Admin";
 // import SingleCadete from "../SingleCadete";
+import adminPanel from "../privateComponents/adminPanel"
 
 
 
@@ -31,13 +32,16 @@ export default function App() {
         <Route exact path="/login"  component={Login}/>
         <Route exact path="/register" component={Main}/>
         <Route exact path="/prueba" component={Prueba}/>
+
         <Route exact path="/cadete" />
+
         {/* <Route
           path="/cadete/:id"
           render={({ match }) => <SingleCadete cadeteId={match.params.id} />}
         /> */}
         <Route exact path="/cadeteria" />
-        <Route exact path="/admin" />
+        <Route exact path="/admin" component= {adminPanel}/>
+        <Route exact path="/admin/uploadOrders" component= {Prueba}/>
         <Redirect to="/" />
       </Switch>
      <Footer/>
