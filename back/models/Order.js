@@ -5,27 +5,60 @@ class Order extends S.Model {}
 
 Order.init(
   {
-    buyerName: {
+    clientName: {
       type: S.STRING,
       allowNull: false,
     },
-    deliveryAddress: {
+    clientLastName: {
       type: S.STRING,
       allowNull: false,
     },
-    notes: {
-      type: S.TEXT,
-    },
-    buyerPhoneNum: {
+    orderNumber: {
       type: S.STRING,
       allowNull: false,
     },
-
-    products: {
-      type: S.ARRAY(S.DataTypes.JSON),
-      defaultValue: [],
+    creationDate: {
+      type: S.STRING,
+      allowNull: false,
     },
-
+    productSku: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    productName: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    // clientProducts: {
+    //   // type: S.STRING,
+    //   // allowNull: false,
+    //   type: S.ARRAY(S.DataTypes.JSON),
+    //   defaultValue: [],
+    // },
+    province: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    city: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    street: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    number: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    complement: {
+      type: S.STRING,
+      allowNull: true,
+    },
+    // notes: {
+    //   type: S.STRING,
+    //   allowNull: false,
+    // },
     status: {
       type: S.ENUM({
         values: ["Pendiente", "En camino", "Entregado", "Devuelto a sucursal"],
