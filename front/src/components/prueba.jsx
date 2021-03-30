@@ -34,6 +34,7 @@ const Prueba = () => {
   };
 
   const upload = () => {
+    console.log(items)
       axios.post("http://localhost:8000/api/order", {items
       });
     };

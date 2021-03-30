@@ -13,6 +13,22 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
+    orderNumber: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    creationDate: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    productSku: {
+      type: S.STRING,
+      allowNull: false,
+    },
+    productName: {
+      type: S.STRING,
+      allowNull: false,
+    },
     // clientProducts: {
     //   // type: S.STRING,
     //   // allowNull: false,
@@ -39,10 +55,10 @@ Order.init(
       type: S.STRING,
       allowNull: true,
     },
-    notes: {
-      type: S.STRING,
-      allowNull: false,
-    },
+    // notes: {
+    //   type: S.STRING,
+    //   allowNull: false,
+    // },
     status: {
       type: S.ENUM({
         values: ["Pendiente", "En camino", "Entregado", "Devuelto a sucursal"],
