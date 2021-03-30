@@ -23,14 +23,7 @@ let userPromise = () =>
     return res;
   });
 
-
-let orderPromise = () => Order.bulkCreate(orderArr)
-  .then(res => {
-    console.log(`-->Ordenes creadas`);
-    return res;
-  });
-  
+ 
   cadeteriaPromise()
   .then(()=>userPromise()) 
-  .then(()=>orderPromise()) 
-  .then(() => console.log(`----Seed terminado----`));
+   .then(() => console.log(`----Seed terminado----`));
