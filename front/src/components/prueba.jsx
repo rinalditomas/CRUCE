@@ -28,25 +28,15 @@ const Prueba = () => {
       };
     });
 
-    promise.then((d) => {
-      setItems(d);
+    promise.then((data) => {
+      setItems(data);
     });
   };
 
   const upload = () => {
-    //   console.log(items)
-    items.map((item) => {
-      console.log(item);
-      axios.post("http://localhost:8000/api/upload", {
-        email: item.Email,
-        phone: item.Phone,
-        city: item.city,
-        street: item.Street,
-        number: item.Number,
-        sku: item.ID_SKU,
+      axios.post("http://localhost:8000/api/order", {items
       });
-    });
-  };
+    };
   return (
     <div>
       <input
