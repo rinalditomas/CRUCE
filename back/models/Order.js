@@ -29,12 +29,7 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
-    // clientProducts: {
-    //   // type: S.STRING,
-    //   // allowNull: false,
-    //   type: S.ARRAY(S.DataTypes.JSON),
-    //   defaultValue: [],
-    // },
+   
     province: {
       type: S.STRING,
       allowNull: false,
