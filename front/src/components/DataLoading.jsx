@@ -12,33 +12,41 @@ import adminMenuStyles from "../utils/adminStyles";
 const Prueba = () => {
     const classes = adminMenuStyles();
   const [items, setItems] = useState([]);
+
   const readExcel = (file) => {
-    const promise = new Promise((resolve, reject) => {
-      const fileReader = new FileReader();
-      fileReader.readAsArrayBuffer(file);
+     if (file.name.slice(file.name.length-4,file.name.length)==".xls") {
+    
+                      const promise = new Promise((resolve, reject) => {
+                      const fileReader = new FileReader();
+                    
+                      fileReader.readAsArrayBuffer(file);
 
-      fileReader.onload = (e) => {
-        const bufferArray = e.target.result;
-        
-        const wb = XLSX.read(bufferArray, { type: "buffer" });
+                      fileReader.onload = (e) => {
+                        const bufferArray = e.target.result;
+                        
+                        const wb = XLSX.read(bufferArray, { type: "buffer" });
 
-        const wsname = wb.SheetNames;
+                        const wsname = wb.SheetNames;
 
-        const ws = wb.Sheets[wsname];
+                        const ws = wb.Sheets[wsname];
 
-        const data = XLSX.utils.sheet_to_json(ws);
+                        const data = XLSX.utils.sheet_to_json(ws);
 
-        resolve(data);
-      };
+                        resolve(data);
+                      };
+                      
+                      fileReader.onerror = (error) => {
+                        alert(error);
+                      };
+                      
+                      });
 
-      fileReader.onerror = (error) => {
-        alert(error);
-      };
-    });
+                      promise.then((data) => {
+                        setItems(data);
+                      });
+  }
+  else (alert("Archivo Invalido"))
 
-    promise.then((data) => {
-      setItems(data);
-    });
   };
   const cambio = (e) => {
           const file = e.target.files[0];
@@ -51,8 +59,10 @@ const Prueba = () => {
       })
       .then((res)=>
       {if(res.status === 200){
+      
         alert("Tu archivo se cargo correctamente")
       }else{
+    
         alert("Hubo un error en la carga")
       }})
     };
@@ -69,7 +79,7 @@ const Prueba = () => {
                 <Grid item xs={12}>
                           <input
                 type="file"
-                onChange={(e) => {
+                   onChange={(e) => {
                   const file = e.target.files[0];
                   readExcel(file);
                 }}

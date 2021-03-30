@@ -8,9 +8,9 @@ import { Link } from "react-router-dom"
 import adminMenuStyles from "../utils/adminStyles";
 
 
-const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
-export default function Album() {
+
+export default function adminPanel () {
   const classes = adminMenuStyles();
 
   return (
@@ -24,7 +24,7 @@ export default function Album() {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item xs={12}>
-                  <Link to="/admin/uploadOrders" style={{ textDecoration: 'none', color: "inherit" }}>
+                  <Link to="/admin/uploadorders" style={{ textDecoration: 'none', color: "inherit" }}>
                     <Button variant="contained"
                       color="primary">
                       Cargar Ordenes
