@@ -1,17 +1,16 @@
 import React from "react";
 import Carousel from "./Carousel";
+import NavBar from '../components/Navbar'
 
 const Home = () => {
-  
+
   const token = localStorage.getItem("token");
   const user = JSON.parse(localStorage.getItem("user"));
-
-  token
-    ? console.log("El usuario esta logueado")
-    : console.log("no estas logueado");
-
+  
   return (
+
     <div>
+      <NavBar/>
       {!user ? (
         <>
           <h1>NO estas logueado</h1>

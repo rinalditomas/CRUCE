@@ -11,19 +11,17 @@ import { Link, useHistory } from "react-router-dom";
 import useStyles from "../utils/stylesNavbar";
 
 const Navbar = () => {
+
   const classes = useStyles();
   const history = useHistory();
   const [log, setLog] = useState(false);
-  const token = localStorage.getItem("token");
 
- /*  useEffect(() => {
-    !log ? setLog(true) : setLog(false)
-  }, [log]) */
+  const token = localStorage.getItem("token");
 
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
-    history.push("/home");
+    history.push("/");
   };
 
   return (

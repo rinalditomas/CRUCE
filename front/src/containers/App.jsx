@@ -14,12 +14,20 @@ import Prueba from "../components/prueba"
 
 
 
+const token = localStorage.getItem("token");
+const user = JSON.parse(localStorage.getItem("user"));
+
+token
+  ? console.log("El usuario esta logueado")
+  : console.log("no estas logueado");
+
+
 export default function App() {
   return (
     <div>
-      <Navbar />
+      <Route exact path="/" component={Home}/>
       <Switch>
-        <Route exact path="/" component={Home}/>
+       {/*  <Route exact path="/home" component={Home}/> */}
         <Route exact path="/login"  component={Login}/>
         <Route exact path="/register" component={Main}/>
         <Route exact path="/prueba" component={Prueba}/>

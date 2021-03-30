@@ -1,10 +1,8 @@
 const jwt = require("jsonwebtoken");
 
-
 const checkJWT = async (req, res, next) => {
-
   const authHeader = req.headers.authorization;
-  const token = authHeader && authHeader.split(" ")[1];  
+  const token = authHeader && authHeader.split(" ")[1];
   if (token == null) return res.status(401).send("no puedes entrar a la ruta");
 
   try {
@@ -20,9 +18,5 @@ const checkJWT = async (req, res, next) => {
     console.log(err);
   }
 };
-
-
-
-
 
 module.exports = checkJWT;

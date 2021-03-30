@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 
 import { useDispatch } from "react-redux";
 
-import { register } from "../state/CadetesReducer";
+import { registerRequest } from "../state/user";
 
 import MenuItem from "@material-ui/core/MenuItem";
 
@@ -40,7 +40,7 @@ export const Cadete = () => {
 console.log(input)
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(register(input)).then(alert("Estas Registrado"));
+    dispatch(registerRequest(input)).then(alert("Estas Registrado"));
   };
 
   return (
