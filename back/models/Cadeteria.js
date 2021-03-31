@@ -49,6 +49,10 @@ class Cadeteria extends S.Model {}
       type: S.BOOLEAN,
       defaultValue: false,
     },
+    authorized: {
+      type: S.BOOLEAN,
+      defaultValue: false,
+    },
 
     address: {
       type: S.STRING,
