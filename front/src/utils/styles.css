@@ -187,3 +187,12 @@ body {
 header {
   padding-top: 50px;
 }
+.titulo{
+width: 50%;
+justify-items: center;
+}
+.icono{
+width: 50%;
+justify-items: center;
+
+}

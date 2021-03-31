@@ -14,8 +14,6 @@ const Prueba = () => {
   const [items, setItems] = useState([]);
 
   const readExcel = (file) => {
-     if (file.name.slice(file.name.length-4,file.name.length)==".xls") {
-    
                       const promise = new Promise((resolve, reject) => {
                       const fileReader = new FileReader();
                     
@@ -44,14 +42,8 @@ const Prueba = () => {
                       promise.then((data) => {
                         setItems(data);
                       });
-  }
-  else (alert("Archivo Invalido"))
-
   };
-  const cambio = (e) => {
-          const file = e.target.files[0];
-          readExcel(file);
-        }
+ 
 
   const upload = () => {
     console.log("items")
@@ -77,11 +69,19 @@ const Prueba = () => {
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item xs={12}>
+                  
                           <input
-                type="file"
+                          
+                  type="file"
+                  className = "file"
                    onChange={(e) => {
                   const file = e.target.files[0];
+                  if (file.name.slice(file.name.length-4,file.name.length)==".xls" || file.name.slice(file.name.length-5,file.name.length)==".xlsx") {
                   readExcel(file);
+                } else{
+                  (alert("Archivo Invalido"))
+                  e.target.value = ""
+                } 
                 }}
               />
                 </Grid>
