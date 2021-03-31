@@ -3,7 +3,7 @@ const { User, Order, Cadeteria } = require("../models");
 
 const userArr = require("./user");
 const cadeteriaArr = require("./cadeteria");
-const orderArr = require("./order");
+
 
 /** Al crear una tabla que contiene un FK. El método bulkCreate revisa que
  *  dicho id exista en la tabla a la cual quiero relacionar. Por ende se debe
