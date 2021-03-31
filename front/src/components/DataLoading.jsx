@@ -19,8 +19,6 @@ const Prueba = () => {
 
       fileReader.readAsArrayBuffer(file);
 
-      fileReader.readAsArrayBuffer(file);
-
       fileReader.onload = (e) => {
         const bufferArray = e.target.result;
 
@@ -29,15 +27,24 @@ const Prueba = () => {
         const wsname = wb.SheetNames;
 
         const ws = wb.Sheets[wsname];
+
+        const data = XLSX.utils.sheet_to_json(ws);
+
+        resolve(data);
+      };
+
+      fileReader.onerror = (error) => {
+        alert(error);
       };
     });
+
     promise.then((data) => {
       setItems(data);
     });
   };
 
   const upload = () => {
-    console.log("items Data loading");
+    console.log("items");
     axios.post("http://localhost:8000/api/orders", { items }).then((res) => {
       if (res.status === 200) {
         alert("Tu archivo se cargo correctamente");
