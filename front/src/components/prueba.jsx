@@ -3,9 +3,13 @@ import * as XLSX from "xlsx";
 import axios from "axios";
 
 const Prueba = () => {
+
   const [items, setItems] = useState([]);
+
   const readExcel = (file) => {
+
     const promise = new Promise((resolve, reject) => {
+
       const fileReader = new FileReader();
       fileReader.readAsArrayBuffer(file);
 
@@ -38,6 +42,7 @@ const Prueba = () => {
       axios.post("http://localhost:8000/api/order", {items
       });
     };
+
   return (
     <div>
       <input

@@ -12,8 +12,6 @@ import Prueba from "../components/prueba"
 // import Admin from "../Admin";
 // import SingleCadete from "../SingleCadete";
 
-
-
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -44,3 +42,4 @@ export default function App() {
     </div>
   );
 }
+

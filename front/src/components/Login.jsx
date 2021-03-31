@@ -16,15 +16,23 @@ import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
 import NavBar from '../components/Navbar'
 
+
+
 import { useDispatch, useSelector } from "react-redux";
+
+
+
+
 import { loginRequest } from "../state/user";
 
 export default function Login() {
   const classes = useStyles();
 
+
+  const user = useSelector(state => state.user)
+
   const [input, setInput] = useState({});
 
-  const user = useSelector((state) => state.user);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -35,19 +43,13 @@ export default function Login() {
   };
 
   const handleSubmit = async (e) => {
-
     e.preventDefault();
-
     const { firstName, lastName, email, password, token, admin } = input;
-
-    
     await dispatch(
       loginRequest({ firstName, lastName, email, password, token, admin })
     );
     alert("usuario logueado");
     history.push("/");
-
-
   };
 
   console.log("User en login ===>", user);
