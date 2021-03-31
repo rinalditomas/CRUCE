@@ -14,6 +14,7 @@ module.exports = [
     password: "1234",
     phoneNum: "2983745678",
     address: "Tucuman 123",
+    authorized: true,
   },
   {
     nameCompany: "JustEat",
