@@ -40,7 +40,7 @@ const useStyles = makeStyles((theme) => ({
 //   );
 // }
 
-export default function ListCadeterias() {
+export default function CadeteriaRequest() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
@@ -54,7 +54,7 @@ export default function ListCadeterias() {
 
   const handleActive = (id) => {
     axios
-      .put(`http://localhost:8000/api/admin/editCadeterias/${id}`)
+      .put(`http://localhost:8000/api/admin/admitCadeterias/${id}`)
       .then((res) => {
         res.status === 200
           ? alert("Estado cambiado correctamente")
@@ -78,7 +78,7 @@ export default function ListCadeterias() {
       <div className={classes.demo}>
         <List dense={dense}>
           {cadeterias.map((cadeteria) => {
-            return cadeteria.authorized ? (
+            return cadeteria.authorized === false ? (
               <ListItem key={cadeteria.id}>
                 <ListItemText primary={cadeteria.nameCompany} />
                 <ListItemSecondaryAction>

@@ -9,44 +9,31 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../utils/adminStyles";
 
-const DataLoading = () => {
+const Prueba = () => {
   const classes = adminMenuStyles();
   const [items, setItems] = useState([]);
 
   const readExcel = (file) => {
-    if (file.name.slice(file.name.length - 4, file.name.length) == ".xls") {
-      const promise = new Promise((resolve, reject) => {
-        const fileReader = new FileReader();
+    const promise = new Promise((resolve, reject) => {
+      const fileReader = new FileReader();
 
-        fileReader.readAsArrayBuffer(file);
+      fileReader.readAsArrayBuffer(file);
 
-        fileReader.onload = (e) => {
-          const bufferArray = e.target.result;
+      fileReader.readAsArrayBuffer(file);
 
-          const wb = XLSX.read(bufferArray, { type: "buffer" });
+      fileReader.onload = (e) => {
+        const bufferArray = e.target.result;
 
-          const wsname = wb.SheetNames;
+        const wb = XLSX.read(bufferArray, { type: "buffer" });
 
-          const ws = wb.Sheets[wsname];
+        const wsname = wb.SheetNames;
 
-          const data = XLSX.utils.sheet_to_json(ws);
-
-          resolve(data);
-        };
-
-        fileReader.onerror = (error) => {
-          alert(error);
-        };
-      });
-
-      promise.then((data) => {
-        setItems(data);
-      });
-    } else alert("Archivo Invalido");
-  };
-  const cambio = (e) => {
-    const file = e.target.files[0];
-    readExcel(file);
+        const ws = wb.Sheets[wsname];
+      };
+    });
+    promise.then((data) => {
+      setItems(data);
+    });
   };
 
   const upload = () => {
@@ -71,9 +58,24 @@ const DataLoading = () => {
                 <Grid item xs={12}>
                   <input
                     type="file"
+                    className="file"
                     onChange={(e) => {
                       const file = e.target.files[0];
-                      readExcel(file);
+                      if (
+                        file.name.slice(
+                          file.name.length - 4,
+                          file.name.length
+                        ) == ".xls" ||
+                        file.name.slice(
+                          file.name.length - 5,
+                          file.name.length
+                        ) == ".xlsx"
+                      ) {
+                        readExcel(file);
+                      } else {
+                        alert("Archivo Invalido");
+                        e.target.value = "";
+                      }
                     }}
                   />
                 </Grid>
@@ -111,4 +113,4 @@ const DataLoading = () => {
   );
 };
 
-export default DataLoading;
+export default Prueba;

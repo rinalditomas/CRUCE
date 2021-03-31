@@ -32,7 +32,7 @@ export default function adminPanel () {
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/users" style={{ textDecoration: 'none', color: "inherit" }}>
+                  <Link to="/admin/listCadeterias" style={{ textDecoration: 'none', color: "inherit" }}>
                     <Button variant="contained"
                       color="primary">
                       Cadeteria
@@ -40,7 +40,7 @@ export default function adminPanel () {
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/categories" style={{ textDecoration: 'none', color: "inherit" }}>
+                  <Link to="/admin/listCadetes" style={{ textDecoration: 'none', color: "inherit" }}>
                     <Button variant="contained"
                       color="primary">
                       Cadete
@@ -48,7 +48,7 @@ export default function adminPanel () {
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/orders" style={{ textDecoration: 'none', color: "inherit" }}>
+                  <Link to="/admin/cadeteriaRequest" style={{ textDecoration: 'none', color: "inherit" }}>
                     <Button variant="contained"
                       color="primary">
                       Solicitudes

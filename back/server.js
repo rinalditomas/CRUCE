@@ -28,5 +28,3 @@ const startServer = async () => {
     console.log(`Server listening at port ${config.port}`)
   );
 };
-
-startServer();

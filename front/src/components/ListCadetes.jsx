@@ -9,8 +9,8 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
+import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
-import { Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,69 +25,57 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-
-export default function ListCadeterias() {
+export default function ListCadetes() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const [cadeterias, setCadeterias] = useState([]);
+  const [cadetes, setCadetes] = useState([]);
 
   useEffect(() => {
     axios
-      .get("http://localhost:8000/api/admin/allCadeterias")
-      .then((res) => setCadeterias(res.data));
-  }, [cadeterias]);
+      .get("http://localhost:8000/api/admin/allCadetes")
+      .then((res) => setCadetes(res.data));
+  }, [cadetes]);
 
   const handleActive = (id) => {
+    console.log("ACA ESTA EL ID", id);
     axios
-      .put(`http://localhost:8000/api/admin/editCadeterias/${id}`)
+      .put(`http://localhost:8000/api/admin/editCadete/${id}`)
       .then((res) => {
         res.status === 200
-          ? alert("Estado cambiado correctamente")
-          : alert("Hubo un problema");
+          ? alert("El estado se cambio correctamente")
+          : alert("Hubo un error");
       });
   };
 
   return (
     <div className={classes.root}>
       <div>
-        <h1 className="titulo">Lista de cadeterias</h1>
+        <h1 className="titulo">Lista de cadetes</h1>
         <Link
           to="/register"
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <IconButton edge="end" aria-label="delete" className="icono">
-            <GroupAddIcon fontSize="large" />
+            <PersonAddIcon fontSize="large" />
           </IconButton>
         </Link>
       </div>
       <div className={classes.demo}>
         <List dense={dense}>
-          {cadeterias.map((cadeteria) => {
-            return cadeteria.authorized ? (
-              <ListItem key={cadeteria.id}>
-                <ListItemText primary={cadeteria.nameCompany} />
+          {cadetes.map((cadete) => {
+            return (
+              <ListItem>
+                <ListItemText
+                  primary={cadete.firstName + " " + cadete.lastName}
+                />
                 <ListItemSecondaryAction>
-                  {cadeteria.active ? (
+                  {cadete.active ? (
                     <IconButton
                       edge="end"
                       aria-label="delete"
                       onClick={() => {
-                        handleActive(cadeteria.id);
+                        handleActive(cadete.id);
                       }}
                     >
                       <BlockIcon />
@@ -97,7 +85,7 @@ export default function ListCadeterias() {
                       edge="end"
                       aria-label="delete"
                       onClick={() => {
-                        handleActive(cadeteria.id);
+                        handleActive(cadete.id);
                       }}
                     >
                       <CheckIcon />
@@ -105,7 +93,7 @@ export default function ListCadeterias() {
                   )}
                 </ListItemSecondaryAction>
               </ListItem>
-            ) : null;
+            );
           })}
         </List>
       </div>
