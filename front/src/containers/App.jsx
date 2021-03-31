@@ -13,8 +13,6 @@ import DataLoading from "../components/DataLoading"
 // import SingleCadete from "../SingleCadete";
 import adminPanel from "../privateComponents/adminPanel"
 
-
-
 const token = localStorage.getItem("token");
 const user = JSON.parse(localStorage.getItem("user"));
 
@@ -46,3 +44,4 @@ export default function App() {
     </div>
   );
 }
+

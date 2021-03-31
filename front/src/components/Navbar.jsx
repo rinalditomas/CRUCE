@@ -14,7 +14,6 @@ const Navbar = () => {
 
   const classes = useStyles();
   const history = useHistory();
-  const [log, setLog] = useState(false);
 
   const token = localStorage.getItem("token");
 

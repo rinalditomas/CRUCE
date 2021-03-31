@@ -35,12 +35,13 @@ export const Cadete = () => {
     const value = e.target.value;
     console.log(e.target.value);
     setInput({ ...input, [key]: value });
-    
   };
-console.log(input)
+  console.log(input);
   const handleSubmit = (e) => {
     e.preventDefault();
-    dispatch(registerRequest(input)).then(alert("Estas Registrado"));
+    dispatch(registerRequest(input))
+      .then(alert("Estas Registrado"))
+      .catch((err) => alert("El usuario no existe"));
   };
 
   return (

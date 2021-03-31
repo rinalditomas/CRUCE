@@ -8,6 +8,7 @@ import axios from "axios";
 export const setUser = createAction("SET_USER");
 export const clearUser = createAction("CLEAR_USER");
 
+
 export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   console.log(input);
   return axios
@@ -38,11 +39,12 @@ export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (user) => {
       return res.data;
     })
     .catch("Error en las credenciales");
+
 });
 
 const userReducer = createReducer([], {
   [fetchMe.fulfilled]: (state, action) => action.payload,
-  [setUser]: (state, action) => action.payload,
+  [setUser]: (state, action) => action.payload,  
   [loginRequest.fulfilled]: (state, action) => action.payload,
   [registerRequest.fulfilled]: (state, action) => action.payload,
   [clearUser]: (state, action) => {
