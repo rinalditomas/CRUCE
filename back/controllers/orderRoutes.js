@@ -1,10 +1,9 @@
 const { Order } = require("../models");
 
 const NewOrderController = {
-  
   newOrder(req, res, next) {
     const orders = req.body.items;
-    console.log(req.body.items[0]);
+    console.log(req.body.items);
 
     const promise = new Promise((resolve, reject) => {
       orders.map((order) => {

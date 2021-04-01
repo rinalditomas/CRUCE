@@ -9,13 +9,18 @@ import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from "react-router-dom";
 
 import useStyles from "../utils/stylesNavbar";
+import { createMuiTheme, ThemeProvider } from "@material-ui/core";
+import { red, blue, yellow } from "@material-ui/core/colors";
+import { useSelector } from "react-redux";
 
 const Navbar = () => {
-
   const classes = useStyles();
   const history = useHistory();
 
   const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.user);
+
+  console.log(user);
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -23,44 +28,56 @@ const Navbar = () => {
     history.push("/");
   };
 
-  return (
-    <div className={classes.root}>
-      <AppBar position="static">
-        <Toolbar>
-          <IconButton
-            edge="start"
-            className={classes.menuButton}
-            color="inherit"
-            aria-label="menu"
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
-          {!token ? (
-            <>
-              <Link to="/login" style={{ color: "inherit" }}>
-                <Button color="inherit">Login</Button>
-              </Link>
-              <Link to="/register" style={{ color: "inherit" }}>
-                <Button color="inherit">Register</Button>
-              </Link>
-            </>
-          ) : (
-            <>
-              <Button color="inherit" onClick={logout}>
-                Logout
-              </Button>
-            </>
-          )}
+  const theme = createMuiTheme({
+    palette: {
+      primary: {
+        main: red[800],
+        /*  main: yellow[800],
+        main: blue[900] */
+      },
+    },
+  });
 
-          <Link to="/home" style={{ color: "inherit" }}>
-            <Button color="inherit">Home</Button>
-          </Link>
-        </Toolbar>
-      </AppBar>
-    </div>
+  return (
+    <ThemeProvider theme={theme}>
+      <div className={classes.root}>
+        <AppBar position="static">
+          <Toolbar>
+            <IconButton
+              edge="start"
+              className={classes.menuButton}
+              color="inherit"
+              aria-label="menu"
+            >
+              <MenuIcon />
+            </IconButton>
+            <Typography variant="h6" className={classes.title}>
+              News
+            </Typography>
+            {!token ? (
+              <>
+                <Link to="/login" style={{ color: "inherit" }}>
+                  <Button color="inherit">Login</Button>
+                </Link>
+                <Link to="/register" style={{ color: "inherit" }}>
+                  <Button color="inherit">Register</Button>
+                </Link>
+              </>
+            ) : (
+              <>
+                <Button color="inherit" onClick={logout}>
+                  Logout
+                </Button>
+              </>
+            )}
+
+            <Link to="/home" style={{ color: "inherit" }}>
+              <Button color="inherit">Home</Button>
+            </Link>
+          </Toolbar>
+        </AppBar>
+      </div>
+    </ThemeProvider>
   );
 };
 export default Navbar;
