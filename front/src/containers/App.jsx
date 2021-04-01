@@ -16,7 +16,8 @@ import ListCadetes from "../components/ListCadetes";
 import adminPanel from "../privateComponents/adminPanel";
 
 const token = localStorage.getItem("token");
-const user = JSON.parse(localStorage.getItem("user"));
+const user = JSON.parse(localStorage.getItem("user"))
+/* const user = 'ivan' */
 
 token
   ? console.log("El usuario esta logueado")

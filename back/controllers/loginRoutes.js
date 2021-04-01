@@ -4,11 +4,15 @@ const jwt = require("jsonwebtoken");
 const loginController = {
   loginUser(req, res, next) {
     const { email, password } = req.body;
+
+    console.log(req.body.email, req.body.password)
+
     User.findOne({
       where: { email },
     })
       .then((user) => {
         const isValid = user.validPassword(password);
+        console.log('validar==>', isValid)
 
         if (!user) return res.status(401).send("El usuario no existe");
         if (isValid !== true) return res.send("Password incorrecto");

@@ -1,8 +1,6 @@
 const {User} = require ('../models')
 
-
-const isAdmin = (req,res,next)=>{
-    
+const isAdmin = (req,res,next)=>{    
    User.findOne({
        where:{
            email: req.body.email
