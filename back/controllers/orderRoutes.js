@@ -1,7 +1,10 @@
 const { Order, Product } = require("../models");
 
 const NewOrderController = {
+
+  
   async newOrder(req, res, next) {
+
     const orders = req.body.items;
     const ordenes = await orders.map((order) => {
       Order.create({
@@ -15,6 +18,7 @@ const NewOrderController = {
         city: order.City,
         street: order.Street,
         number: order.Number,
+
         complement: order.Complement,
       });
 
@@ -24,6 +28,7 @@ const NewOrderController = {
         orderNumber: order.Order,
       });
     });
+
   },
 
   async allOrders(req, res) {
@@ -45,6 +50,7 @@ const NewOrderController = {
     }
   },
 
+
   async changeStateOrders(req, res) {
     const id = req.params.id;
     const status = req.body.status;
@@ -54,15 +60,10 @@ const NewOrderController = {
         status: status,
       });
 
-      // if (state == "Pendiente") {
-      //   order.update({ status: "En camino" }).then((res) => res.status);
-      // } else if (state == "En camino") {
-      //   order.update({ status: "Entregado" }).then((res) => res.status);
-      // } else if (state == "Entregado") {
-      //   order.update({ status: "Entregado" }).then((res) => res.status);
-      // }
+      
     });
   },
+
 };
 
 module.exports = NewOrderController;
