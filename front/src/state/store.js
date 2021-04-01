@@ -7,8 +7,7 @@ import userReducer from "./user";
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
   reducer: {
-    cadete: userReducer,
-   /*cadeteria: cadeteriaReducer,*/
+    user: userReducer,
   },
 });
 

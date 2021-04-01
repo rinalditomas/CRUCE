@@ -9,7 +9,6 @@ const Home = () => {
 
   return (
     <div>
-      <NavBar />
       {!user ? (
         <>
           <h1>NO estas logueado</h1>

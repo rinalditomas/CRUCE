@@ -27,15 +27,14 @@ export const Cadete = () => {
   const classes = useStyles();
 
   const [input, setInput] = useState({});
-
   const dispatch = useDispatch();
-
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
     console.log(e.target.value);
     setInput({ ...input, [key]: value });
   };
+  
   console.log(input);
   const handleSubmit = (e) => {
     e.preventDefault();

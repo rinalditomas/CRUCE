@@ -5,11 +5,10 @@ import {
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const setUser = createAction("SET_USER");
 export const clearUser = createAction("CLEAR_USER");
+export const setUser = createAction("SET_USER");
 
 export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
-  console.log(input);
   return axios
     .post("http://localhost:8000/api/register", input)
     .then((res) => res.data)
@@ -19,11 +18,13 @@ export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
 
 export const fetchMe = createAsyncThunk("FETCH_ME", () => {
   const loginToken = JSON.parse(localStorage.getItem("user")).token;
+  console.log(loginToken);
   return axios
     .get(`http://localhost:8000/api/me`, {
       headers: { Authorization: `Bearer ${loginToken}` },
     })
     .then((r) => {
+      console.log("data ===>", r.data);
       return r.data;
     });
 });

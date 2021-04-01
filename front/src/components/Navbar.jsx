@@ -7,19 +7,21 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from "react-router-dom";
-
+import { useSelector, useDispatch } from "react-redux";
+import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
 
 const Navbar = () => {
-
   const classes = useStyles();
   const history = useHistory();
 
+  const dispatch = useDispatch();
   const token = localStorage.getItem("token");
 
   const logout = () => {
     localStorage.removeItem("user");
     localStorage.removeItem("token");
+    dispatch(clearUser());
     history.push("/");
   };
 
