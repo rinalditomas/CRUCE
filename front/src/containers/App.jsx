@@ -9,6 +9,10 @@ import DataLoading from "../components/DataLoading";
 import ListCadeterias from "../components/ListCadeterias";
 import CadeteriaRequest from "../components/CadeteriaRequest";
 import ListCadetes from "../components/ListCadetes";
+
+import CadeteOrders from "../cadeteComponent/CadeteOrders";
+import SingleOrder from "../cadeteComponent/SingleOrder";
+
 // import Cadete from "../Cadete";
 // import Cadeteria from "../Cadeteria";
 // import Admin from "../Admin";
@@ -30,12 +34,14 @@ export default function App() {
         {/*  <Route exact path="/home" component={Home}/> */}
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={Main} />
-        <Route exact path="/cadete" />
 
-        {/* <Route
-          path="/cadete/:id"
-          render={({ match }) => <SingleCadete cadeteId={match.params.id} />}
-        /> */}
+        <Route exact path="/cadeteOrders" component={CadeteOrders} />
+
+
+        <Route
+          path="/singleOrder/:id"
+          render={({ match }) => <SingleOrder match={match.params.id} />}
+        />
         <Route exact path="/cadeteria" />
         <Route exact path="/admin" component={adminPanel} />
         <Route exact path="/admin/uploadorders" component={DataLoading} />
