@@ -43,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 export default function CadeteriaRequest() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
   const [cadeterias, setCadeterias] = useState([]);
 
   useEffect(() => {

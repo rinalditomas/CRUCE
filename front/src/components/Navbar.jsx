@@ -18,9 +18,6 @@ const Navbar = () => {
   const history = useHistory();
 
   const token = localStorage.getItem("token");
-  const user = useSelector((state) => state.user);
-
-  console.log(user);
 
   const logout = () => {
     localStorage.removeItem("user");

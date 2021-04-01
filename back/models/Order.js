@@ -29,7 +29,7 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
-   
+
     province: {
       type: S.STRING,
       allowNull: false,
@@ -57,8 +57,8 @@ Order.init(
     status: {
       type: S.ENUM({
         values: ["Pendiente", "En camino", "Entregado", "Devuelto a sucursal"],
-        defaultValue: "Pendiente",
       }),
+      defaultValue: "Pendiente",
     },
   },
   { sequelize: db, modelName: "order" }

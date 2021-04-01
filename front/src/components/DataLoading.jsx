@@ -44,7 +44,6 @@ const Prueba = () => {
   };
 
   const upload = () => {
-    console.log("items");
     axios.post("http://localhost:8000/api/orders", { items }).then((res) => {
       if (res.status === 200) {
         alert("Tu archivo se cargo correctamente");
