@@ -1,17 +1,17 @@
-import React from 'react';
-import Button from '@material-ui/core/Button';
-import CssBaseline from '@material-ui/core/CssBaseline';
-import Grid from '@material-ui/core/Grid';
-import Typography from '@material-ui/core/Typography';
-import Container from '@material-ui/core/Container';
-import { Link } from "react-router-dom"
+import React from "react";
+import Button from "@material-ui/core/Button";
+import CssBaseline from "@material-ui/core/CssBaseline";
+import Grid from "@material-ui/core/Grid";
+import Typography from "@material-ui/core/Typography";
+import Container from "@material-ui/core/Container";
+import { Link } from "react-router-dom";
 import adminMenuStyles from "../utils/adminStyles";
 
 
+export default function adminPanel() {
 
-
-export default function adminPanel () {
   const classes = adminMenuStyles();
+
 
   return (
     <React.Fragment>
@@ -20,47 +20,56 @@ export default function adminPanel () {
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
-
             <div className={classes.heroButtons}>
               <Grid container spacing={2} justify="center">
                 <Grid item xs={12}>
-                  <Link to="/admin/uploadorders" style={{ textDecoration: 'none', color: "inherit" }}>
-                    <Button variant="contained"
-                      color="primary">
+                  <Link
+                    to="/admin/uploadorders"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" color="primary">
                       Cargar Ordenes
-                  </Button>
+                    </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/listCadeterias" style={{ textDecoration: 'none', color: "inherit" }}>
-                    <Button variant="contained"
-                      color="primary">
+                  <Link
+                    to="/admin/listCadeterias"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" color="primary">
                       Cadeteria
-                  </Button>
+                    </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/listCadetes" style={{ textDecoration: 'none', color: "inherit" }}>
-                    <Button variant="contained"
-                      color="primary">
+                  <Link
+                    to="/admin/listCadetes"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" color="primary">
                       Cadete
-                  </Button>
+                    </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/cadeteriaRequest" style={{ textDecoration: 'none', color: "inherit" }}>
-                    <Button variant="contained"
-                      color="primary">
+                  <Link
+                    to="/admin/cadeteriaRequest"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" color="primary">
                       Solicitudes
-                  </Button>
+                    </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
-                  <Link to="/admin/orders" style={{ textDecoration: 'none', color: "inherit" }}>
-                    <Button variant="contained"
-                      color="primary">
+                  <Link
+                    to="/admin/orders"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" color="primary">
                       Metricas
-                  </Button>
+                    </Button>
                   </Link>
                 </Grid>
               </Grid>

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -22,7 +22,9 @@ import { loginRequest } from "../state/user";
 
 export default function Login() {
   const classes = useStyles();
-  const user = useSelector((state) => state.user);
+
+  const user = useSelector((state) => state.cadete);
+
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,23 +37,19 @@ export default function Login() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const { firstName, lastName, email, password, token, admin } = input;
+    const { email, password } = input;
     try {
-      await dispatch(
-        loginRequest({ firstName, lastName, email, password, token, admin })
-      );
+      await dispatch(loginRequest({ email, password }));
     } catch (e) {
       alert("El usuario no existe");
     }
     alert("usuario logueado");
-    history.push("/");
-  };
 
-  console.log("User en login ===>", user);
+    history.push("/admin");
+  };
 
   return (
     <>
-      <NavBar />
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

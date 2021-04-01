@@ -2,7 +2,7 @@ import React from "react";
 import ReactDOM from "react-dom";
 /* import { BrowserRouter } from "react-router-dom"; */
 import "./utils/styles.css";
-import App from "./containers/App";
+import Index from "./containers/Index";
 
 import { Provider } from "react-redux";
 import store from "./state/store";
@@ -12,7 +12,7 @@ ReactDOM.render(
 
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <Index />
     </Provider>
   </BrowserRouter>,
   document.getElementById("root")
