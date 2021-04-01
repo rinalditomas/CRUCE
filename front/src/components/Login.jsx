@@ -23,7 +23,7 @@ import { loginRequest } from "../state/user";
 export default function Login() {
   const classes = useStyles();
 
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.cadete);
 
   const [input, setInput] = useState({});
   const dispatch = useDispatch();

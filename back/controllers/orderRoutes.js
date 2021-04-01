@@ -1,6 +1,7 @@
 const { Order, Product } = require("../models");
 
 const NewOrderController = {
+
   
   async newOrder(req, res, next) {
 
@@ -17,7 +18,7 @@ const NewOrderController = {
         city: order.City,
         street: order.Street,
         number: order.Number,
-        status: "Pendiente",
+
         complement: order.Complement,
       });
 
@@ -49,6 +50,19 @@ const NewOrderController = {
     }
   },
 
+
+  async changeStateOrders(req, res) {
+    const id = req.params.id;
+    const status = req.body.status;
+
+    Order.findByPk(id).then((order) => {
+      order.update({
+        status: status,
+      });
+
+      
+    });
+  },
 
 };
 

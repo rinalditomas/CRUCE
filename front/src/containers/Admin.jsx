@@ -12,12 +12,11 @@ import adminPanel from "../privateComponents/adminPanel";
 
 export default function App() {
   const token = localStorage.getItem("token");
-  const user = useSelector((state) => state.user);
+  const user = useSelector((state) => state.cadete);
 
   return (
     <div>
       <Navbar />
-
       {!user ? (
         <>
           <Redirect from="/admin" />
@@ -40,11 +39,9 @@ export default function App() {
               component={CadeteriaRequest}
             />
             <Redirect to="/admin" />
-            </Switch>
-          </>
-        
+          </Switch>
+        </>
       )}
-
       <Footer />
     </div>
   );
