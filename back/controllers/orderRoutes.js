@@ -1,9 +1,10 @@
 const { Order, Product } = require("../models");
 
 const NewOrderController = {
+  
   async newOrder(req, res, next) {
-    const orders = req.body.items;
 
+    const orders = req.body.items;
     const ordenes = await orders.map((order) => {
       Order.create({
         clientName: order["Client Name"],
@@ -26,6 +27,7 @@ const NewOrderController = {
         orderNumber: order.Order,
       });
     });
+
   },
 
   async allOrders(req, res) {
@@ -46,6 +48,8 @@ const NewOrderController = {
       res.send(e);
     }
   },
+
+
 };
 
 module.exports = NewOrderController;
