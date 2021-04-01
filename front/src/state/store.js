@@ -9,7 +9,6 @@ const store = configureStore({
   reducer: {
     cadete: userReducer,
     orders: orderReducer,
-    /*cadeteria: cadeteriaReducer,*/
   },
 });
 
