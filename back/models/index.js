@@ -12,6 +12,12 @@ Cadeteria.hasMany(Order);
 Order.belongsTo(User);
 User.hasMany(Order);
 
+/* 
+////
+Product.belongsTo(Order)
+Order.hasMany(Product)
+ */
+
 module.exports = {
   User,
   Order,
