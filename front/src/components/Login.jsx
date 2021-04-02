@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
 import { Link, useHistory } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -14,18 +13,17 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
-import NavBar from "../components/Navbar";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import { loginRequest } from "../state/user";
+import { fetchMe } from "../state/user";
 
 export default function Login() {
   const classes = useStyles();
 
-  const user = useSelector((state) => state.cadete);
-
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -35,19 +33,38 @@ export default function Login() {
     setInput({ ...input, [key]: value });
   };
 
-  const handleSubmit = async (e) => {
+  ////Patch
+
+  const handleSubmit = (e) => {
     e.preventDefault();
     const { email, password } = input;
-    try {
-      await dispatch(loginRequest({ email, password }));
-    } catch (e) {
-      alert("El usuario no existe");
-    }
-    alert("usuario logueado");
+    axios
+      .post("http://localhost:8000/api/login", { email, password })
+      .then((res) => {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+        localStorage.setItem("user", JSON.stringify(res.data.user));
+        alert("login exitoso");
+        const check = dispatch(fetchMe()).payload;
+        check && check.admin ? history.push("/admin") : history.push("/");
+      })
+      .catch((err) => alert("no ha sido posible loguearte"));
 
-    history.push("/admin");
   };
 
+  ///Original
+  /*   const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const { email, password } = input;
+      const login = await dispatch(loginRequest({ email, password }));
+      const check = await dispatch(fetchMe()).payload;
+      check && check.admin ? history.push("/admin") : history.push("/");
+    } catch (e) {
+      console.log("ERROR EN  LOGIN COMPONENT==>", e);
+    }
+  }; */
+
+  
   return (
     <>
       <Grid container component="main" className={classes.root}>
@@ -103,8 +120,8 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
+                  <Link to="/adminlogin" variant="body2">
+                    Administrador?
                   </Link>
                 </Grid>
                 <Grid item>
