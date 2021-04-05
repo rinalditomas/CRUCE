@@ -9,14 +9,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useDispatch } from "react-redux";
-
 import { registerRequest } from "../state/user";
-
 import MenuItem from "@material-ui/core/MenuItem";
-
 import Select from "@material-ui/core/Select";
-
-import axios from "axios";
 import { Link } from "react-router-dom";
 
 import useStyles from "../utils/stylesRegister";
@@ -33,7 +28,7 @@ export const Cadete = () => {
     console.log(e.target.value);
     setInput({ ...input, [key]: value });
   };
-  
+
   console.log(input);
   const handleSubmit = (e) => {
     e.preventDefault();

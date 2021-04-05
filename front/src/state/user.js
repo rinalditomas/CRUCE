@@ -17,33 +17,30 @@ export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
 });
 
 export const fetchMe = createAsyncThunk("FETCH_ME", () => {
-  const loginToken = JSON.parse(localStorage.getItem("user")).token;
-  console.log(loginToken);
+  const loginToken = JSON.parse(localStorage.getItem("token"));
   return axios
     .get(`http://localhost:8000/api/me`, {
       headers: { Authorization: `Bearer ${loginToken}` },
     })
     .then((r) => {
-      console.log("data ===>", r.data);
       return r.data;
-    });
+    })
+    .catch((err) => console.log(err));
 });
 
-export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (user) => {
+export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
   return axios
-    .post("http://localhost:8000/api/login", user)
+    .post("http://localhost:8000/api/login", input)
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.data.token));
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      return res.data;
     })
-    .catch("Error en las credenciales");
+    .catch((err) => err);
 });
 
 const userReducer = createReducer([], {
   [fetchMe.fulfilled]: (state, action) => action.payload,
   [setUser]: (state, action) => action.payload,
-  [loginRequest.fulfilled]: (state, action) => action.payload,
+  /*   [loginRequest.fulfilled]: (state, action) => action.payload, */
   [registerRequest.fulfilled]: (state, action) => action.payload,
   [clearUser]: (state, action) => {
     return {};

@@ -8,12 +8,14 @@ const productRoutes = require("./productRoutes");
 const adminRoutes = require("./adminRoutes");
 const Me = require("./me");
 
+
+router.use("/me", Me);
 router.use("/register", RegisterRoutes);
 router.use("/orders", ordersRoutes);
 router.use("/product", productRoutes);
 router.use("/login", LoginRoutes);
 router.use("/admin", adminRoutes);
 
-router.use("/me", Me);
+
 
 module.exports = router;
