@@ -12,13 +12,17 @@ import { useDispatch } from "react-redux";
 import { registerRequest } from "../state/user";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
+import { useSnackbar } from "notistack";
 
 export const Cadete = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
+
+  const history = useHistory();
 
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
@@ -29,12 +33,21 @@ export const Cadete = () => {
     setInput({ ...input, [key]: value });
   };
 
-  console.log(input);
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerRequest(input))
-      .then(alert("Estas Registrado"))
-      .catch((err) => alert("El usuario no existe"));
+      .then(({ payload }) => {
+        const r = payload.errors[0].message;
+        if (payload.errors)
+          enqueueSnackbar(`${r}`, {
+            variant: "error",
+          });
+      })
+      .catch((err) => {
+        enqueueSnackbar("Usuario registrado", {
+          variant: "success",
+        }) && history.push("/login");
+      });
   };
 
   return (
@@ -160,7 +173,6 @@ export const Cadete = () => {
             </Grid>
           </form>
         </div>
-
         <Box mt={5}>
           <Copyright />
         </Box>

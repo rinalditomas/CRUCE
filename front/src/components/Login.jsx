@@ -131,9 +131,6 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link to="/adminlogin" variant="body2">
-                    Administrador?
-                  </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
