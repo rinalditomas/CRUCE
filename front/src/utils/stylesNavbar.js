@@ -10,6 +10,14 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
+
+  admin: {
+    background: "#e8e810",
+    color: "black",
+  },
+  cadeteria: {
+    background: "red",
+  },
 }));
 
 export default useStyles;

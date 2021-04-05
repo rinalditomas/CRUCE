@@ -3,28 +3,31 @@ const { Order, Product } = require("../models");
 const NewOrderController = {
   async newOrder(req, res, next) {
     const orders = req.body.items;
-    const ordenes = await orders.map((order) => {
-      Order.create({
-        clientName: order["Client Name"],
-        clientLastName: order["Client Last Name"],
-        productName: order["SKU Name"],
-        productSku: order["ID_SKU"],
-        orderNumber: order.Order,
-        creationDate: order["Creation Date"],
-        province: order["UF"],
-        city: order.City,
-        street: order.Street,
-        number: order.Number,
+    const ordenes = await orders
+      .map((order) => {
+        Order.create({
+          clientName: order["Client Name"],
+          clientLastName: order["Client Last Name"],
+          productName: order["SKU Name"],
+          productSku: order["ID_SKU"],
+          orderNumber: order.Order,
+          creationDate: order["Creation Date"],
+          province: order["UF"],
+          city: order.City,
+          street: order.Street,
+          number: order.Number,
 
-        complement: order.Complement,
-      });
+          complement: order.Complement,
+        });
 
-      Product.create({
-        productName: order["SKU Name"],
-        productSku: order["ID_SKU"],
-        orderNumber: order.Order,
-      });
-    });
+        Product.create({
+          productName: order["SKU Name"],
+          productSku: order["ID_SKU"],
+          orderNumber: order.Order,
+        });
+      })
+      .then(res.sendStatus(200))
+      .catch(res.sendStatus(401));
   },
 
   async allOrders(req, res) {
@@ -51,9 +54,13 @@ const NewOrderController = {
     const status = req.body.status;
 
     Order.findByPk(id).then((order) => {
-      order.update({
-        status: status,
-      });
+      order
+        .update({
+          status: status,
+        })
+        .then((order) => {
+          res.send(order);
+        });
     });
   },
 };

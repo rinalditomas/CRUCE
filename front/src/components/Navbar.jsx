@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -10,8 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
-import { createMuiTheme, ThemeProvider } from "@material-ui/core";
-import { red, blue, yellow } from "@material-ui/core/colors";
+import { setUser } from "../state/user";
 
 const Navbar = () => {
   const classes = useStyles();
@@ -22,63 +20,70 @@ const Navbar = () => {
   const user = useSelector((state) => state.cadete);
 
   const logout = () => {
-    localStorage.removeItem("user");
     localStorage.removeItem("token");
     dispatch(clearUser());
     history.push("/");
   };
 
-  const theme = createMuiTheme({
-    palette: {
-      primary: {
-        main: user && user.admin ? yellow[800] : blue[800],
+  const userTypeColor = (color = "") => {
+    let admin = user && user.admin;
+    switch (admin) {
+      case true:
+        console.log("caso admin");
+        color = "admin";
+        break;
+      default:
+        color = "cadete";
+    }
 
-        /* main: yellow[800],
-        main: blue[900]  */
-      },
-    },
-  });
+    return color;
+  };
 
   return (
-    <ThemeProvider>
-      <div className={classes.root}>
-        <AppBar position="static">
-          <Toolbar>
-            <IconButton
-              edge="start"
-              className={classes.menuButton}
-              color="inherit"
-              aria-label="menu"
-            >
-              <MenuIcon />
-            </IconButton>
-            <Typography variant="h6" className={classes.title}>
-              News
-            </Typography>
-            {!token ? (
-              <>
-                <Link to="/login" style={{ color: "inherit" }}>
-                  <Button color="inherit">Login</Button>
-                </Link>
-                <Link to="/register" style={{ color: "inherit" }}>
-                  <Button color="inherit">Register</Button>
-                </Link>
-              </>
-            ) : (
-              <>
-                <Button color="inherit" onClick={logout}>
-                  Logout
-                </Button>
-              </>
-            )}
-
-            <Link to="/home" style={{ color: "inherit" }}>
-              <Button color="inherit">Home</Button>
-            </Link>
-          </Toolbar>
-        </AppBar>
-      </div>
-    </ThemeProvider>
+    <div className={classes.root}>
+      <AppBar position="static" className={classes[`${userTypeColor()}`]}>
+        <Toolbar>
+          <IconButton
+            edge="start"
+            className={classes.menuButton}
+            color="inherit"
+            aria-label="menu"
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" className={classes.title}></Typography>
+          {!token ? (
+            <>
+              <Link to="/login" style={{ color: "inherit" }}>
+                <Button color="inherit">Login</Button>
+              </Link>
+              <Link to="/register" style={{ color: "inherit" }}>
+                <Button color="inherit">Register</Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" onClick={logout}>
+                Logout
+              </Button>
+            </>
+          )}
+          <Link to="/" style={{ color: "inherit" }}>
+            <Button color="inherit">Home</Button>
+          </Link>
+          {user.admin ? (
+            <>
+              {" "}
+              <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
+                <Button color="inherit">admin panel</Button>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
+        </Toolbar>
+      </AppBar>
+    </div>
   );
 };
 export default Navbar;
