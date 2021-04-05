@@ -41,8 +41,8 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListCadeterias() {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  const [dense, setDense] = useState(false);
+  const [secondary, setSecondary] = useState(false);
   const [cadeterias, setCadeterias] = useState([]);
 
   useEffect(() => {

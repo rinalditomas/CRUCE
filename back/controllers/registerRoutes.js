@@ -1,5 +1,4 @@
-const { User,Cadeteria } = require("../models");
-
+const { User, Cadeteria } = require("../models");
 
 const registerController = {
   register(req, res) {
@@ -10,15 +9,9 @@ const registerController = {
       })
       .catch((err) => res.send(err));
   },
-  bringCadeterias(req, res, next){
-    Cadeteria.findAll()
-    .then (cadeterias => {
-        res.send (cadeterias)
-    })
-    .catch (error =>{
-        next (error)
-    })
-  }
+
+
+
 };
 
 module.exports = registerController;
