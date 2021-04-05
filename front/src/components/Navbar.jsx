@@ -12,7 +12,6 @@ import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
 import { createMuiTheme, ThemeProvider } from "@material-ui/core";
 import { red, blue, yellow } from "@material-ui/core/colors";
-import { useSelector } from "react-redux";
 
 const Navbar = () => {
   const classes = useStyles();
@@ -20,6 +19,7 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.cadete);
 
   const logout = () => {
     localStorage.removeItem("user");
@@ -31,15 +31,16 @@ const Navbar = () => {
   const theme = createMuiTheme({
     palette: {
       primary: {
-        main: red[800],
-        /*  main: yellow[800],
-        main: blue[900] */
+        main: user && user.admin ? yellow[800] : blue[800],
+
+        /* main: yellow[800],
+        main: blue[900]  */
       },
     },
   });
 
   return (
-    <ThemeProvider theme={theme}>
+    <ThemeProvider>
       <div className={classes.root}>
         <AppBar position="static">
           <Toolbar>

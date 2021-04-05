@@ -5,12 +5,6 @@ class Product extends S.Model {}
 
 Product.init(
   {
-<<<<<<< HEAD
-    name: {
-      type: S.TEXT,
-    },
-  },
-=======
     productSku: {
       type: S.STRING,
       allowNull: false,
@@ -25,7 +19,6 @@ Product.init(
     },
   },
 
->>>>>>> 4960e63fde1112cea6971ff79b0829f1c2fd9dd8
   { sequelize: db, modelName: "product" }
 );
 
