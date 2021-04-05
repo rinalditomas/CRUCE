@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -26,6 +26,15 @@ export const Cadete = () => {
 
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
+  // const cadeterias = useSelector((state) => state.cadeteria);
+
+  // useEffect(() => {
+  //   dispatch(bringCadeteriasNoAdminRequest())
+  //   .then((res)=>console.log(res));
+  // }, []);
+
+  
+
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
@@ -119,6 +128,36 @@ export const Cadete = () => {
                   onChange={handleChange}
                 />
               </Grid>
+              {/* <Grid item xs={12}>
+              <Select
+                   fullWidth
+                   labelId="demo-simple-select-filled-label"
+                   name="cadeteria"
+                   id="demo-simple-select-filled"
+                   onChange={handleChange}
+                 >
+                   */}
+                  {/* {cadeterias.map((cadeteria)=>{
+                   {console.log("ACA ESTA LA CADETERIA",cadeteria.nameCompany)}
+                   <MenuItem value={cadeteria.nameCompany} key={cadeteria.id}>
+                   {cadeteria.nameCompany} 
+                 </MenuItem>
+                
+                  })} */}
+                  {/* </Select>
+              </Grid> */}
+              {/* <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="company"
+                  label="Cadeteria afiliada"
+                  name="company"
+                  autoComplete="company"
+                  onChange={handleChange}
+                />
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"

@@ -7,9 +7,8 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { singleOrder } from "../state/orders";
+import { singleOrder,orderState } from "../state/orders";
 import { useSelector, useDispatch } from "react-redux";
-import { orderState } from "../state/orders";
 const useStyles = makeStyles({
   root: {
     maxWidth: 500,
@@ -22,8 +21,9 @@ const useStyles = makeStyles({
 export default function SingleOrder({ match }) {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const order = useSelector((state) => state.orders.singleOrder);
 
+  console.log("ACA ESTA LA SINGLE ORDER",order)
   useEffect(() => {
     dispatch(singleOrder(match));
   }, []);
@@ -57,20 +57,20 @@ export default function SingleOrder({ match }) {
         ;
         <CardContent>
           <Typography gutterBottom variant="h5" component="h2">
-            {orders.orderNumber}
+            {order.orderNumber}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
-            {orders.productName}
+            {order.productName}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
-            {orders.clientName + " " + orders.clientLastName}
+            {order.clientName + " " + order.clientLastName}
           </Typography>
           <Typography gutterBottom variant="h5" component="h2">
-            {orders.street +
+            {order.street +
               " " +
-              orders.number +
+              order.number +
               " " +
-              (orders.complement ? orders.complement : "")}
+              (order.complement ? order.complement : "")}
           </Typography>
           <Typography
             variant="body2"
@@ -83,21 +83,21 @@ export default function SingleOrder({ match }) {
         <Button
           size="small"
           color="primary"
-          onClick={() => Entregado(orders.id, "Entregado")}
+          onClick={() => Entregado(order.id, "Entregado")}
         >
           ENTREGADO
         </Button>
         <Button
           size="small"
           color="primary"
-          onClick={() => DevueltoAsuc(orders.id, "Devuelto a sucursal")}
+          onClick={() => DevueltoAsuc(order.id, "Devuelto a sucursal")}
         >
           DEVUELTO A SUCURSAL
         </Button>
         <Button
           size="small"
           color="primary"
-          onClick={() => Cancelado(orders.id, "Pendiente")}
+          onClick={() => Cancelado(order.id, "Pendiente")}
         >
           CANCELAR
         </Button>

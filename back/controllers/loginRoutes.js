@@ -13,7 +13,7 @@ const loginController = {
         if (isValid !== true)return res.sendStatus(401)
 
         const token = jwt.sign(
-          { email, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
+          {id:user.id,email:user.email,firsName:user.firstName,admin:user.admin},
           "P5"
         );
         return res.status(200).json({token});
@@ -22,7 +22,6 @@ const loginController = {
         return res.status(401).send("Error en autenticación");
       });
   },
-
   logoutUser(req, res, next) {
     res.status(200).send("Usuario deslogeado con éxito");
   },
