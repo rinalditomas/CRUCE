@@ -29,12 +29,12 @@ import { makeStyles } from '@material-ui/core/styles';
 export const Cadete = () => {
 
 
-  const useStyles = makeStyles((theme) => ({
+/*   const useStyles = makeStyles((theme) => ({
     formControl: {
       minWidth: 395,
     },
   }));
-
+ */
 
 
   const { enqueueSnackbar } = useSnackbar();
@@ -110,7 +110,7 @@ export const Cadete = () => {
                 />
               </Grid>
               <Grid item xs={12}>
-              <FormControl variant="outlined" className={classes.formControl}>
+              <FormControl variant="outlined" style={{minWidth: 395}}>
               <InputLabel htmlFor="outlined-age-native-simple">Medio de transporte</InputLabel>
                 <Select
                   fullWidth
@@ -135,7 +135,7 @@ export const Cadete = () => {
 
             
               <Grid item xs={12}>
-              <FormControl variant="outlined" className={classes.formControl}>
+              <FormControl variant="outlined" style={{minWidth: 395}}>
               <InputLabel htmlFor="outlined-age-native-simple">Cadeterias</InputLabel>
                 <Select
                   fullWidth
