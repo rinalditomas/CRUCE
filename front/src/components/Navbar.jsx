@@ -1,5 +1,4 @@
-import React, { useEffect, useState } from "react";
-
+import React, { useEffect } from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -10,6 +9,7 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
+import { setUser } from "../state/user";
 
 const Navbar = () => {
   const classes = useStyles();
@@ -19,7 +19,6 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.cadete);
 
-  console.log("ACA ESTA EL USUARIO",user)
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -27,9 +26,23 @@ const Navbar = () => {
     history.push("/");
   };
 
+  const userTypeColor = (color = "") => {
+    let admin = user && user.admin;
+    switch (admin) {
+      case true:
+        console.log("caso admin");
+        color = "admin";
+        break;
+      default:
+        color = "cadete";
+    }
+
+    return color;
+  };
+
   return (
     <div className={classes.root}>
-      <AppBar position="static">
+      <AppBar position="static" className={classes[`${userTypeColor()}`]}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -39,9 +52,7 @@ const Navbar = () => {
           >
             <MenuIcon />
           </IconButton>
-          <Typography variant="h6" className={classes.title}>
-            News
-          </Typography>
+          <Typography variant="h6" className={classes.title}></Typography>
           {!token ? (
             <>
               <Link to="/login" style={{ color: "inherit" }}>
@@ -58,10 +69,13 @@ const Navbar = () => {
               </Button>
             </>
           )}
-
-          <Link to="/home" style={{ color: "inherit" }}>
+          <Link to="/" style={{ color: "inherit" }}>
             <Button color="inherit">Home</Button>
           </Link>
+          {user.admin ? <>  <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
+            <Button color="inherit">admin panel</Button>
+          </Link></> : <></>}
+        
         </Toolbar>
       </AppBar>
     </div>

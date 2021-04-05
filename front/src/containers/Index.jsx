@@ -1,20 +1,18 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-
-import { setUser } from "../state/user";
-
+import { useDispatch, useSelector } from "react-redux";
+import { setUser, fetchMe } from "../state/user";
+import { Redirect } from "react-router-dom";
 import App from "./App";
 import Admin from "./Admin";
+import { SnackbarProvider } from 'notistack';
 
 const Index = () => {
-
-  const user = JSON.parse(localStorage.getItem("user"));
+  const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
 
-  dispatch(setUser(user));
 
-  console.log("User ===>", user);
+
 
   return (
     <div>

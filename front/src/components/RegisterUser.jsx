@@ -8,18 +8,22 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { useDispatch,useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 import { registerRequest } from "../state/user";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-import axios from "axios";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
+
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
-import { bringCadeteriasNoAdminRequest } from "../state/cadeteria";
+import { useSnackbar } from "notistack";
 
 export const Cadete = () => {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
+
+  const history = useHistory();
+
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
   const cadeterias = useSelector((state) => state.cadeteria);
@@ -37,13 +41,22 @@ export const Cadete = () => {
     console.log(e.target.value);
     setInput({ ...input, [key]: value });
   };
-  
-  console.log(input);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerRequest(input))
-      .then(alert("Estas Registrado"))
-      .catch((err) => alert("El usuario no existe"));
+      .then(({ payload }) => {
+        const r = payload.errors[0].message;
+        if (payload.errors)
+          enqueueSnackbar(`${r}`, {
+            variant: "error",
+          });
+      })
+      .catch((err) => {
+        enqueueSnackbar("Usuario registrado", {
+          variant: "success",
+        }) && history.push("/login");
+      });
   };
 
   return (
@@ -186,7 +199,6 @@ export const Cadete = () => {
             </Grid>
           </form>
         </div>
-
         <Box mt={5}>
           <Copyright />
         </Box>

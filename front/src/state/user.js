@@ -16,38 +16,25 @@ export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
     .catch((e) => console.log(e));
 });
 
-// export const fetchMe = createAsyncThunk("FETCH_ME", () => {
-//   const loginToken = JSON.parse(localStorage.getItem("user")).token;
-//   console.log(loginToken);
-//   return axios
-//     .get(`http://localhost:8000/api/me`, {
-//       headers: { Authorization: `Bearer ${loginToken}` },
-//     })
-//     .then((r) => {
-//       console.log("data ===>", r.data);
-//       return r.data;
-//     });
-// });
-const  parseJwt = (token) => {
-  var base64Url = token.split('.')[1];
-  var base64 = base64Url.replace(/-/g, '+').replace(/_/g, '/');
-  var jsonPayload = decodeURIComponent(atob(base64).split('').map(function(c) {
-      return '%' + ('00' + c.charCodeAt(0).toString(16)).slice(-2);
-  }).join(''));
-  return JSON.parse(jsonPayload);
-};
-
-export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (user) => {
+export const fetchMe = createAsyncThunk("FETCH_ME", () => {
+  const loginToken = JSON.parse(localStorage.getItem("token"));
   return axios
-    .post("http://localhost:8000/api/login", user)
-    .then((res) => {
-      localStorage.setItem("token", res.data.token);
-      const data = parseJwt(res.data.token);
-      console.log("ACA ESTA EL USUARIO PARSEADO",data)
-      return data;
-
+    .get(`http://localhost:8000/api/me`, {
+      headers: { Authorization: `Bearer ${loginToken}` },
     })
-    .catch("Error en las credenciales");
+    .then((r) => {
+      return r.data;
+    })
+    .catch((err) => console.log(err));
+});
+
+export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
+  return axios
+    .post("http://localhost:8000/api/login", input)
+    .then((res) => {
+      localStorage.setItem("token", JSON.stringify(res.data.token));
+    })
+    .catch((err) => err);
 });
 
 export const sendToken = createAsyncThunk("LOGIN", (token,thunkAPI) => {
@@ -58,7 +45,7 @@ export const sendToken = createAsyncThunk("LOGIN", (token,thunkAPI) => {
   });
 
 const userReducer = createReducer([], {
-  // [fetchMe.fulfilled]: (state, action) => action.payload,
+  [fetchMe.fulfilled]: (state, action) => action.payload,
   [setUser]: (state, action) => action.payload,
   [loginRequest.fulfilled]: (state, action) => action.payload,
   [registerRequest.fulfilled]: (state, action) => action.payload,

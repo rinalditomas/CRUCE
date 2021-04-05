@@ -1,11 +1,10 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
 import Checkbox from "@material-ui/core/Checkbox";
-
 import { Link, useHistory } from "react-router-dom";
 import Paper from "@material-ui/core/Paper";
 import Box from "@material-ui/core/Box";
@@ -14,18 +13,19 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
-import NavBar from "../components/Navbar";
+import { useSnackbar } from "notistack";
 
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
+import axios from "axios";
 
 import { loginRequest } from "../state/user";
+import { fetchMe } from "../state/user";
 
 export default function Login() {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
 
-  const user = useSelector((state) => state.cadete);
-
-  const [input, setInput] = useState({});
+  const [input, setInput] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
 
@@ -35,31 +35,46 @@ export default function Login() {
     setInput({ ...input, [key]: value });
   };
 
+  const messages = {
+    error: () =>
+      enqueueSnackbar("Datos incorrectos", {
+        variant: "error",
+        preventDuplicate: true,
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      }),
+      
+    success: () =>
+      enqueueSnackbar("Usuario ingresado correctamente", {
+        variant: "success",
+        preventDuplicate: true,
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      }),
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    const { email, password } = input;
-    dispatch(loginRequest({ email, password }))
-    .then((res)=>{
-      console.log(res)
-      if(res.payload){
-        if(res.payload.admin == false){
-          alert('Bienvenido ')
-          return history.push("/cadeteOrders");
-     }
-      if(res.payload.admin == true){
-          alert('Bienvenido')
-
-         return history.push("/admin");
-     }
-      }else{
-        if(res.error.message === 'Request failed with status code 401'){
-          return alert("Usuario inexistente")}
-         if(res.error.message === 'Request failed with status code 400'){
-           return alert("Los datos ingresados son incorrectos")}
-      }
-    })
+    admin: () =>
+      enqueueSnackbar("Ingresando como usuario administrador", {
+        variant: "warning",
+        preventDuplicate: true,
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      }),
   };
+
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    dispatch(loginRequest(input))
+      .then((res) => dispatch(fetchMe()))
+      .then((res) => {
+        const check = res.payload;
+        if (!check) messages.error() && history.push("/login");
+        else
+          check && check.admin
+            ? messages.admin() && history.push("/admin")
+            : messages.success() && history.push("/");
+      })
+      .catch((e) => history.push("/login"));
+  };
+
+
 
   return (
     <>
@@ -116,9 +131,6 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link href="#" variant="body2">
-                    Forgot password?
-                  </Link>
                 </Grid>
                 <Grid item>
                   <Link to="/register">{"No tienes cuenta? Registrate"}</Link>

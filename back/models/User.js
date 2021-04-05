@@ -34,13 +34,11 @@ User.init(
     phoneNum: {
       type: S.STRING,
       allowNull: false,
+      unique: true,
       validate: {
         len:
-          [10, 10] |
-          {
-            msg: "Por favor, ingrese un numero valido",
-          },
-
+          [10, 10]
+          
       },
     },
     admin: {
