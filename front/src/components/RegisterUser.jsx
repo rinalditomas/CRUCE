@@ -26,12 +26,12 @@ export const Cadete = () => {
 
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
-  const cadeterias = useSelector((state) => state.cadeteria);
+  // const cadeterias = useSelector((state) => state.cadeteria);
 
-  useEffect(() => {
-    dispatch(bringCadeteriasNoAdminRequest())
-    .then((res)=>console.log(res));
-  }, []);
+  // useEffect(() => {
+  //   dispatch(bringCadeteriasNoAdminRequest())
+  //   .then((res)=>console.log(res));
+  // }, []);
 
   
 
@@ -117,6 +117,18 @@ export const Cadete = () => {
                 </Select>
               </Grid>
               <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="company"
+                  label="Cadeteria afiliada"
+                  name="company"
+                  autoComplete="company"
+                  onChange={handleChange}
+                />
+              </Grid>
+              {/* <Grid item xs={12}>
               <Select
                    fullWidth
                    labelId="demo-simple-select-filled-label"
@@ -124,15 +136,16 @@ export const Cadete = () => {
                    id="demo-simple-select-filled"
                    onChange={handleChange}
                  >
-                  {cadeterias.map((cadeteria)=>{
+                   */}
+                  {/* {cadeterias.map((cadeteria)=>{
                    {console.log("ACA ESTA LA CADETERIA",cadeteria.nameCompany)}
                    <MenuItem value={cadeteria.nameCompany} key={cadeteria.id}>
                    {cadeteria.nameCompany} 
                  </MenuItem>
                 
-                  })}
-                  </Select>
-              </Grid>
+                  })} */}
+                  {/* </Select>
+              </Grid> */}
               {/* <Grid item xs={12}>
                 <TextField
                   variant="outlined"
