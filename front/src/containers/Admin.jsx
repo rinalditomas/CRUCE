@@ -6,6 +6,7 @@ import Login from "../components/Login";
 import Footer from "../components/Footer";
 import DataLoading from "../components/DataLoading";
 import ListCadeterias from "../components/ListCadeterias";
+import ListCadetes from "../components/ListCadetes";
 import CadeteriaRequest from "../components/CadeteriaRequest";
 import { useSelector , useDispatch} from "react-redux";
 import {setUser,fetchMe} from '../state/user'
@@ -30,6 +31,7 @@ export default function App() {
             {user && !user.admin && <Redirect from="/admin" to="/" />}
             <Route exact path="/admin" component={adminPanel} />
             <Route exact path="/admin/uploadorders" component={DataLoading} />
+            <Route exact path="/admin/ListCadetes" component={ListCadetes} />
             <Route
               exact
               path="/admin/listCadeterias"

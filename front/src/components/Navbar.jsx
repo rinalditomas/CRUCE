@@ -19,10 +19,8 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.cadete);
 
-  console.log('TOKEN EN EL NAVBAR =->', token)
 
   const logout = () => {
-    localStorage.removeItem("user");
     localStorage.removeItem("token");
     dispatch(clearUser());
     history.push("/");

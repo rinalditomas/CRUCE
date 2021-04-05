@@ -37,11 +37,19 @@ export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
     .catch((err) => err);
 });
 
+export const sendToken = createAsyncThunk("LOGIN", (token,thunkAPI) => {
+  console.log("llego hasta aca")
+    return axios.post("http://localhost:8000/api/me",{}, {headers: { Authorization: `Bearer ${token}`}} )
+    .then((res)=> res.data) 
+    .catch((err) => console.log(err))
+  });
+
 const userReducer = createReducer([], {
   [fetchMe.fulfilled]: (state, action) => action.payload,
   [setUser]: (state, action) => action.payload,
-  /*   [loginRequest.fulfilled]: (state, action) => action.payload, */
+  [loginRequest.fulfilled]: (state, action) => action.payload,
   [registerRequest.fulfilled]: (state, action) => action.payload,
+  [sendToken.fulfilled]: (state, action) => action.payload,
   [clearUser]: (state, action) => {
     return {};
   },
