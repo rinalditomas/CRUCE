@@ -27,7 +27,9 @@ const NewOrderController = {
         productSku: order["ID_SKU"],
         orderNumber: order.Order,
       });
-    });
+    }).then(res.sendStatus(200))
+    .catch(res.sendStatus(401));
+    
 
   },
 
@@ -54,13 +56,11 @@ const NewOrderController = {
   async changeStateOrders(req, res) {
     const id = req.params.id;
     const status = req.body.status;
-
+    
     Order.findByPk(id).then((order) => {
       order.update({
         status: status,
-      });
-
-      
+      }).then((order)=>{res.send(order)});
     });
   },
 

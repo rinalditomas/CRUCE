@@ -35,17 +35,30 @@ export default function Login() {
     setInput({ ...input, [key]: value });
   };
 
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { email, password } = input;
-    try {
-      await dispatch(loginRequest({ email, password }));
-    } catch (e) {
-      alert("El usuario no existe");
-    }
-    alert("usuario logueado");
+    dispatch(loginRequest({ email, password }))
+    .then((res)=>{
+      console.log(res)
+      if(res.payload){
+        if(res.payload.admin == false){
+          alert('Bienvenido ')
+          return history.push("/cadeteOrders");
+     }
+      if(res.payload.admin == true){
+          alert('Bienvenido')
 
-    history.push("/admin");
+         return history.push("/admin");
+     }
+      }else{
+        if(res.error.message === 'Request failed with status code 401'){
+          return alert("Usuario inexistente")}
+         if(res.error.message === 'Request failed with status code 400'){
+           return alert("Los datos ingresados son incorrectos")}
+      }
+    })
   };
 
   return (

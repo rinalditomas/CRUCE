@@ -12,7 +12,8 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Typography, Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { ordersList, orderState } from "../state/orders";
+import { ordersList,orderState} from "../state/orders";
+// import { orderState} from "../state/order";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,11 +32,13 @@ const CadeteOrders = () => {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders);
+  const orders = useSelector((state) => state.orders.orders);
 
   useEffect(() => {
-    dispatch(ordersList(orders));
+    dispatch(ordersList());
   }, []);
+
+
   const update = (id, status) => {
     let state = "";
     if (status == "En camino") {

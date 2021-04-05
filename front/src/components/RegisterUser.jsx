@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Avatar from "@material-ui/core/Avatar";
 import Button from "@material-ui/core/Button";
 import CssBaseline from "@material-ui/core/CssBaseline";
@@ -8,25 +8,29 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { useDispatch } from "react-redux";
-
+import { useDispatch,useSelector } from "react-redux";
 import { registerRequest } from "../state/user";
-
 import MenuItem from "@material-ui/core/MenuItem";
-
 import Select from "@material-ui/core/Select";
-
 import axios from "axios";
 import { Link } from "react-router-dom";
-
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
+import { bringCadeteriasNoAdminRequest } from "../state/cadeteria";
 
 export const Cadete = () => {
   const classes = useStyles();
-
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
+  const cadeterias = useSelector((state) => state.cadeteria);
+
+  useEffect(() => {
+    dispatch(bringCadeteriasNoAdminRequest())
+    .then((res)=>console.log(res));
+  }, []);
+
+  
+
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
@@ -100,6 +104,23 @@ export const Cadete = () => {
                 </Select>
               </Grid>
               <Grid item xs={12}>
+              <Select
+                   fullWidth
+                   labelId="demo-simple-select-filled-label"
+                   name="cadeteria"
+                   id="demo-simple-select-filled"
+                   onChange={handleChange}
+                 >
+                  {cadeterias.map((cadeteria)=>{
+                   {console.log("ACA ESTA LA CADETERIA",cadeteria.nameCompany)}
+                   <MenuItem value={cadeteria.nameCompany} key={cadeteria.id}>
+                   {cadeteria.nameCompany} 
+                 </MenuItem>
+                
+                  })}
+                  </Select>
+              </Grid>
+              {/* <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   required
@@ -110,7 +131,7 @@ export const Cadete = () => {
                   autoComplete="company"
                   onChange={handleChange}
                 />
-              </Grid>
+              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"

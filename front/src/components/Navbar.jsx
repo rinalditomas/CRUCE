@@ -17,9 +17,11 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
+  const user = useSelector((state) => state.cadete);
+
+  console.log("ACA ESTA EL USUARIO",user)
 
   const logout = () => {
-    localStorage.removeItem("user");
     localStorage.removeItem("token");
     dispatch(clearUser());
     history.push("/");
