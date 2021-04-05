@@ -8,7 +8,7 @@ const loginController = {
       where: { email },
     })
       .then((user) => {
-        if (!user) return res.status(401).send("El usuario no existe");
+        if (!user) return res.sendStatus(401)
         const isValid = user.validPassword(password);
         if (isValid !== true)return res.sendStatus(401)
 
@@ -16,10 +16,10 @@ const loginController = {
           { email, exp: Math.floor(Date.now() / 1000) + 60 * 60 },
           "P5"
         );
-        return res.status(200).json({ token, user });
+        return res.status(200).json({token});
       })
       .catch((e) => {
-        res.status(401).send("Error en autenticación");
+        return res.status(401).send("Error en autenticación");
       });
   },
 

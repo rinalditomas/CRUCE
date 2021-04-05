@@ -4,7 +4,9 @@ const tokenMiddleware = require("./tokenMiddleware");
 const { User } = require("../models/index");
 
 router.get("/", tokenMiddleware, (req, res, next) => {
+  
   const email = req.user.email;
+  console.log(req.body)
   User.findOne({ where: { email } })
     .then((user) => {
       res.status(200).json(user);

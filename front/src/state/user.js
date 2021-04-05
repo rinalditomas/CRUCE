@@ -25,26 +25,22 @@ export const fetchMe = createAsyncThunk("FETCH_ME", () => {
     .then((r) => {
       return r.data;
     })
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 });
-/* 
-export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (user) => {
 
+export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
   return axios
-    .post("http://localhost:8000/api/login", user)
+    .post("http://localhost:8000/api/login", input)
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.data.token));
-      localStorage.setItem("user", JSON.stringify(res.data.user));
-      return res.data
     })
-    .catch((err) => console.log(err));
-    
-}); */
+    .catch((err) => err);
+});
 
 const userReducer = createReducer([], {
   [fetchMe.fulfilled]: (state, action) => action.payload,
   [setUser]: (state, action) => action.payload,
-/*   [loginRequest.fulfilled]: (state, action) => action.payload, */
+  /*   [loginRequest.fulfilled]: (state, action) => action.payload, */
   [registerRequest.fulfilled]: (state, action) => action.payload,
   [clearUser]: (state, action) => {
     return {};

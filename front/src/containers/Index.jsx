@@ -5,6 +5,7 @@ import { setUser, fetchMe } from "../state/user";
 import { Redirect } from "react-router-dom";
 import App from "./App";
 import Admin from "./Admin";
+import { SnackbarProvider } from 'notistack';
 
 const Index = () => {
   const user = useSelector((state) => state.cadete);

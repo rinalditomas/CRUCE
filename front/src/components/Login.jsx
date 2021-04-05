@@ -13,6 +13,7 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
+import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
 import axios from "axios";
@@ -21,6 +22,7 @@ import { loginRequest } from "../state/user";
 import { fetchMe } from "../state/user";
 
 export default function Login() {
+  const { enqueueSnackbar } = useSnackbar();
   const classes = useStyles();
 
   const [input, setInput] = useState([]);
@@ -33,38 +35,47 @@ export default function Login() {
     setInput({ ...input, [key]: value });
   };
 
-  ////Patch
+  const messages = {
+    error: () =>
+      enqueueSnackbar("Datos incorrectos", {
+        variant: "error",
+        preventDuplicate: true,
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      }),
+      
+    success: () =>
+      enqueueSnackbar("Usuario ingresado correctamente", {
+        variant: "success",
+        preventDuplicate: true,
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      }),
+
+    admin: () =>
+      enqueueSnackbar("Ingresando como usuario administrador", {
+        variant: "warning",
+        preventDuplicate: true,
+        anchorOrigin: { vertical: "top", horizontal: "center" },
+      }),
+  };
+
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    const { email, password } = input;
-    axios
-      .post("http://localhost:8000/api/login", { email, password })
+    dispatch(loginRequest(input))
+      .then((res) => dispatch(fetchMe()))
       .then((res) => {
-        localStorage.setItem("token", JSON.stringify(res.data.token));
-        localStorage.setItem("user", JSON.stringify(res.data.user));
-        alert("login exitoso");
-        const check = dispatch(fetchMe()).payload;
-        check && check.admin ? history.push("/admin") : history.push("/");
+        const check = res.payload;
+        if (!check) messages.error() && history.push("/login");
+        else
+          check && check.admin
+            ? messages.admin() && history.push("/admin")
+            : messages.success() && history.push("/");
       })
-      .catch((err) => alert("no ha sido posible loguearte"));
-
+      .catch((e) => history.push("/login"));
   };
 
-  ///Original
-  /*   const handleSubmit = async (e) => {
-    e.preventDefault();
-    try {
-      const { email, password } = input;
-      const login = await dispatch(loginRequest({ email, password }));
-      const check = await dispatch(fetchMe()).payload;
-      check && check.admin ? history.push("/admin") : history.push("/");
-    } catch (e) {
-      console.log("ERROR EN  LOGIN COMPONENT==>", e);
-    }
-  }; */
 
-  
+
   return (
     <>
       <Grid container component="main" className={classes.root}>
