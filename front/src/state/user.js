@@ -38,7 +38,6 @@ export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
 });
 
 export const sendToken = createAsyncThunk("LOGIN", (token, thunkAPI) => {
-  console.log("llego hasta aca");
   return axios
     .post(
       "http://localhost:8000/api/me",

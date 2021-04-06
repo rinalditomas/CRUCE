@@ -9,16 +9,16 @@ Cadeteria.init(
     nameCompany: {
       type: S.STRING,
       allowNull: false,
+      unique: true,
     },
     CUIT: {
       type: S.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        len:
-          [11, 11] |
-          {
-            msg: "Por favor, ingrese un numero valido",
-          },
+        len: [11, 11] || {
+          msg: "Por favor, ingrese un numero valido",
+        },
       },
     },
     email: {
@@ -38,15 +38,13 @@ Cadeteria.init(
     phoneNum: {
       type: S.STRING,
       allowNull: false,
+      unique: true,
       validate: {
-        len:
-          [10, 10] |
-          {
-            msg: "Por favor, ingrese un numero valido",
-          },
+        len: [10, 10] || {
+          msg: "Por favor, ingrese un numero valido",
+        },
       },
     },
-
     active: {
       type: S.BOOLEAN,
       defaultValue: false,
@@ -55,7 +53,6 @@ Cadeteria.init(
       type: S.BOOLEAN,
       defaultValue: false,
     },
-
     address: {
       type: S.STRING,
       allowNull: false,

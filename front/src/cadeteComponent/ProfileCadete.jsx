@@ -46,13 +46,11 @@ export default function ProfileCadete() {
 
     setInput({ ...input, [key]: value });
   };
-  console.log(user);
 
   const editCadete = (e) => {
     e.preventDefault();
     const id = user.id;
     dispatch(editProfileUser({ id, input })).then((res) => {
-      console.log(res);
       if (res.payload == 201) {
         alert("datos actualizados");
         history.push("/cadeteOrders");

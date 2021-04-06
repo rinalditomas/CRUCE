@@ -7,11 +7,19 @@ import App from "./App";
 import Admin from "./Admin";
 import { SnackbarProvider } from 'notistack';
 
+import {allCadeterias} from '../state/cadeteria'
+
 const Index = () => {
+
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
 
-
+  
+  useEffect(() => {
+    dispatch(allCadeterias())
+      .then((res) => console.log(res))
+      .catch((err) => err);
+  }, []);
 
 
   return (

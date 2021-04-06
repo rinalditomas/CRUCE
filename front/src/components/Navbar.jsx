@@ -29,7 +29,6 @@ const Navbar = () => {
     let admin = user && user.admin;
     switch (admin) {
       case true:
-        console.log("caso admin");
         color = "admin";
         break;
       default:

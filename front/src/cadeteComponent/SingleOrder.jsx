@@ -32,7 +32,6 @@ export default function SingleOrder({ match }) {
   const ChangeState = (id, state) => {
     const state2 = { id: id, state: state };
     dispatch(orderState(state2)).then((order) => {
-      console.log(order);
       if (order.payload.status != "En camino") history.push("/cadeteOrders");
       else dispatch(singleOrder(match));
     });

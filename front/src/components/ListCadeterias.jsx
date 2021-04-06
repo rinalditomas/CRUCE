@@ -55,13 +55,11 @@ export default function ListCadeterias() {
 
   const handleActive = (id) => {
     dispatch(editStateCadeteria(id)).then((res) => {
-      console.log("NUEVOOOOOOOOO", res);
       res.payload
         ? alert("Estado cambiado correctamente")
         : alert("Hubo un problema");
     });
   };
-  console.log(cadeterias);
 
   return (
     <div className={classes.root}>

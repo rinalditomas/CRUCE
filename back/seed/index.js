@@ -10,17 +10,22 @@ const cadeteriaArr = require("./cadeteria");
  *  y luego el resto.**/
 
 let cadeteriaPromise = () =>
-  Cadeteria.bulkCreate(cadeteriaArr).then((res) => {
-    console.log(`--> Cadeterias creadas`);
-    return res;
-  });
+  Cadeteria.bulkCreate(cadeteriaArr)
+    .then((res) => {
+      console.log(`--> Cadeterias creadas`);
+      return res;
+    })
+    .catch((err) => err);
 
 let userPromise = () =>
-  User.bulkCreate(userArr).then((res) => {
-    console.log(`-->Usuarios creados`);
-    return res;
-  });
+  User.bulkCreate(userArr)
+    .then((res) => {
+      console.log(`-->Usuarios creados`);
+      return res;
+    })
+    .catch((err) => err);
 
 cadeteriaPromise()
   .then(() => userPromise())
-  .then(() => console.log(`----Seed terminado----`));
+  .then(() => console.log(`----Seed terminado----`))
+  .catch((err) => err);

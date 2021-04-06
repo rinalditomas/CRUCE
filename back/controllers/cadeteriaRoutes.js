@@ -29,11 +29,16 @@ const cadeteriaController = {
           authorized: !cadeteria.authorized,
         })
         .then((cadeteria) => {
-          console.log("ACAAAAAAAAA", cadeteria);
           return cadeteria;
         })
         .then((cadeteria) => res.status(200).send(cadeteria));
     });
+  },
+
+  registerCadeteria(req, res) {
+    Cadeteria.create(req.body)
+      .then((cadeteria) => res.status(201).send(cadeteria))
+      .catch((err) => res.send(err));
   },
 };
 module.exports = cadeteriaController;
