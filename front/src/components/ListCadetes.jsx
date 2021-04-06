@@ -11,6 +11,8 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
+import { allCadetes, editStateCadete } from "../state/admin";
+import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -29,23 +31,19 @@ export default function ListCadetes() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const [cadetes, setCadetes] = useState([]);
+  const cadetes = useSelector((state) => state.admin.cadetes);
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/admin/allCadetes")
-      .then((res) => setCadetes(res.data));
-  }, [cadetes]);
+    dispatch(allCadetes());
+  }, []);
 
   const handleActive = (id) => {
-    console.log("ACA ESTA EL ID", id);
-    axios
-      .put(`http://localhost:8000/api/admin/editCadete/${id}`)
-      .then((res) => {
-        res.status === 200
-          ? alert("El estado se cambio correctamente")
-          : alert("Hubo un error");
-      });
+    dispatch(editStateCadete(id)).then((res) => {
+      res.payload
+        ? alert("Estado cambiado correctamente")
+        : alert("Hubo un problema");
+    });
   };
 
   return (

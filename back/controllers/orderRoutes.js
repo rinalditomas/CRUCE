@@ -3,7 +3,8 @@ const { Order, Product } = require("../models");
 const NewOrderController = {
   async newOrder(req, res, next) {
     const orders = req.body.items;
-    const ordenes = await orders
+    await orders
+
       .map((order) => {
         Order.create({
           clientName: order["Client Name"],

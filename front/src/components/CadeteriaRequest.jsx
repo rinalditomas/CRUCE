@@ -12,6 +12,9 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { Typography } from "@material-ui/core";
 
+import { useDispatch, useSelector } from "react-redux";
+import { admitCadeteria, AllCadeterias } from "../state/admin";
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -41,25 +44,21 @@ const useStyles = makeStyles((theme) => ({
 // }
 
 export default function CadeteriaRequest() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
-  const [cadeterias, setCadeterias] = useState([]);
+  const cadeterias = useSelector((state) => state.admin.cadeterias);
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/admin/allCadeterias")
-      .then((res) => setCadeterias(res.data));
-  }, [cadeterias]);
+    dispatch(AllCadeterias());
+  }, []);
 
   const handleActive = (id) => {
-    axios
-      .put(`http://localhost:8000/api/admin/admitCadeterias/${id}`)
-      .then((res) => {
-        res.status === 200
-          ? alert("Estado cambiado correctamente")
-          : alert("Hubo un problema");
-      });
+    dispatch(admitCadeteria(id)).then((res) => {
+      res.payload
+        ? alert("Estado cambiado correctamente")
+        : alert("Hubo un problema");
+    });
   };
 
   return (

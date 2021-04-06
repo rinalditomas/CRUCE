@@ -4,31 +4,36 @@ const jwt = require("jsonwebtoken");
 const cadeteriaController = {
   allCadeterias(req, res, next) {
     Cadeteria.findAll()
-    .then (cadeterias => {
-        res.send (cadeterias)
-    })
-    .catch (error =>{
-        next (error)
-    })
+      .then((cadeterias) => {
+        res.send(cadeterias);
+      })
+      .catch((error) => {
+        next(error);
+      });
   },
-  editCadeterias(req, res, next){
-   Cadeteria.findByPk(req.params.id)
-   .then((cadeteria)=>{cadeteria.update({
-       active: !cadeteria.active
-      }).then(res.sendStatus(200))
-      .catch("hubo un error")
-})},
-  admitCadeterias(req, res, next){
-   Cadeteria.findByPk(req.params.id)
-   .then((cadeteria)=>{
-       console.log(cadeteria, "ANTES DE CAMBIAR")
-    cadeteria.update({
-       active: !cadeteria.active,
-       authorized: !cadeteria.authorized
-      }).then((cadeteria)=>{console.log("DESPUES DE CAMBIAR",cadeteria)})
-      .then(res.sendStatus(200))
-      .catch("hubo un error")
-})}
-
-    }
+  editCadeterias(req, res, next) {
+    Cadeteria.findByPk(req.params.id).then((cadeteria) => {
+      cadeteria
+        .update({
+          active: !cadeteria.active,
+        })
+        .then((cadeteria) => res.status(200).send(cadeteria))
+        .catch("hubo un error");
+    });
+  },
+  admitCadeterias(req, res, next) {
+    Cadeteria.findByPk(req.params.id).then((cadeteria) => {
+      cadeteria
+        .update({
+          active: !cadeteria.active,
+          authorized: !cadeteria.authorized,
+        })
+        .then((cadeteria) => {
+          console.log("ACAAAAAAAAA", cadeteria);
+          return cadeteria;
+        })
+        .then((cadeteria) => res.status(200).send(cadeteria));
+    });
+  },
+};
 module.exports = cadeteriaController;
