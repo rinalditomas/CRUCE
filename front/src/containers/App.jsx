@@ -10,6 +10,7 @@ import SingleOrder from "../cadeteComponent/SingleOrder";
 import Home from "../components/Home";
 import ProfileCadete from "../cadeteComponent/ProfileCadete";
 
+
 import { fetchMe } from "../state/user";
 
 export default function App() {
@@ -25,20 +26,19 @@ export default function App() {
       <Navbar />
       <>
         <Switch>
-          {user && user.admin && <Redirect from="/" to="/admin" />}
+           {user && user.admin && <Redirect from="/" to="/admin" />} 
           <Route exact path="/" component={Home} />
           <Route exact path="/login" component={Login} />
           <Route exact path="/register" component={Main} />
           <Route exact path="/cadete" />
           <Route exact path="/cadeteOrders" component={CadeteOrders} />
           <Route exact path="/profileCadete" component={ProfileCadete} />
-          <Route exact path="/cadeteria" />
           <Route
             exact
             path="/singleOrder/:id"
             render={({ match }) => <SingleOrder match={match.params.id} />}
           />
-          <Redirect to="/" />
+           <Redirect to="/" /> 
         </Switch>
       </>
       <Footer />
