@@ -10,6 +10,8 @@ import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useDispatch, useSelector } from "react-redux";
+import { AllCadeterias, editStateCadeteria } from "../state/admin";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,24 +43,22 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListCadeterias() {
   const classes = useStyles();
-  const [dense, setDense] = useState(false);
-  const [secondary, setSecondary] = useState(false);
-  const [cadeterias, setCadeterias] = useState([]);
+  const [dense, setDense] = React.useState(false);
+  const [secondary, setSecondary] = React.useState(false);
+  const cadeterias = useSelector((state) => state.admin.cadeterias);
+
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/admin/allCadeterias")
-      .then((res) => setCadeterias(res.data));
-  }, [cadeterias]);
+    dispatch(AllCadeterias());
+  }, []);
 
   const handleActive = (id) => {
-    axios
-      .put(`http://localhost:8000/api/admin/editCadeterias/${id}`)
-      .then((res) => {
-        res.status === 200
-          ? alert("Estado cambiado correctamente")
-          : alert("Hubo un problema");
-      });
+    dispatch(editStateCadeteria(id)).then((res) => {
+      res.payload
+        ? alert("Estado cambiado correctamente")
+        : alert("Hubo un problema");
+    });
   };
 
   return (
@@ -76,36 +76,37 @@ export default function ListCadeterias() {
       </div>
       <div className={classes.demo}>
         <List dense={dense}>
-          {cadeterias.map((cadeteria) => {
-            return cadeteria.authorized ? (
-              <ListItem key={cadeteria.id}>
-                <ListItemText primary={cadeteria.nameCompany} />
-                <ListItemSecondaryAction>
-                  {cadeteria.active ? (
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => {
-                        handleActive(cadeteria.id);
-                      }}
-                    >
-                      <BlockIcon />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => {
-                        handleActive(cadeteria.id);
-                      }}
-                    >
-                      <CheckIcon />
-                    </IconButton>
-                  )}
-                </ListItemSecondaryAction>
-              </ListItem>
-            ) : null;
-          })}
+          {cadeterias &&
+            cadeterias.map((cadeteria) => {
+              return cadeteria.authorized ? (
+                <ListItem key={cadeteria.id}>
+                  <ListItemText primary={cadeteria.nameCompany} />
+                  <ListItemSecondaryAction>
+                    {cadeteria.active ? (
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          handleActive(cadeteria.id);
+                        }}
+                      >
+                        <BlockIcon />
+                      </IconButton>
+                    ) : (
+                      <IconButton
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          handleActive(cadeteria.id);
+                        }}
+                      >
+                        <CheckIcon />
+                      </IconButton>
+                    )}
+                  </ListItemSecondaryAction>
+                </ListItem>
+              ) : null;
+            })}
         </List>
       </div>
     </div>

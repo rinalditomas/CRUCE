@@ -13,7 +13,7 @@ const useStyles = makeStyles((theme) => ({
 
   admin: {
     background: "#e8e810",
-    color: 'black',
+    color: "black",
   },
   cadeteria: {
     background: "red",

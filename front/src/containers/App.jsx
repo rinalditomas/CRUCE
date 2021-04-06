@@ -8,19 +8,17 @@ import { useSelector, useDispatch } from "react-redux";
 import CadeteOrders from "../cadeteComponent/CadeteOrders";
 import SingleOrder from "../cadeteComponent/SingleOrder";
 import Home from "../components/Home";
+import ProfileCadete from "../cadeteComponent/ProfileCadete";
 
 import { fetchMe } from "../state/user";
 
 export default function App() {
-
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
 
   useEffect(() => {
     dispatch(fetchMe());
   }, []);
-
-
 
   return (
     <div>
@@ -33,7 +31,8 @@ export default function App() {
           <Route exact path="/register" component={Main} />
           <Route exact path="/cadete" />
           <Route exact path="/cadeteOrders" component={CadeteOrders} />
-          <Route exact path="/cadeteria"/>
+          <Route exact path="/profileCadete" component={ProfileCadete} />
+          <Route exact path="/cadeteria" />
           <Route
             exact
             path="/singleOrder/:id"

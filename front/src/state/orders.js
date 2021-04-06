@@ -14,8 +14,13 @@ export const ordersList = createAsyncThunk("OREDERS_LIST", () => {
     .catch((e) => console.log(e));
 });
 
-export const orderState = createAsyncThunk("ORDERS_STATE",(order, thunkApi) => {
-    return axios.put(`http://localhost:8000/api/orders/edit/${order.id}`, {status: order.state})
+export const orderState = createAsyncThunk(
+  "ORDERS_STATE",
+  (order, thunkApi) => {
+    return axios
+      .put(`http://localhost:8000/api/orders/edit/${order.id}`, {
+        status: order.state,
+      })
       .then((res) => res.data)
       .catch((e) => console.log(e));
   }
@@ -29,21 +34,25 @@ export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
     .catch((e) => console.log(e));
 });
 const updateOrder = (orders, newOrder) => {
-  return orders.map((order) => (order.id === newOrder.id ? { ...order, status: newOrder.status } : order));
+  return orders.map((order) =>
+    order.id === newOrder.id ? { ...order, status: newOrder.status } : order
+  );
 };
-const initialState= {
-  orders:[],
-  singleOrder:{},
-}
-const ordersReducer = createReducer(initialState,{
+const initialState = {
+  orders: [],
+  singleOrder: {},
+};
+const ordersReducer = createReducer(initialState, {
   [setOrders]: (state, action) => action.payload,
   [ordersList.fulfilled]: (state, action) => {
-    return{...state,orders:action.payload}},
+    return { ...state, orders: action.payload };
+  },
   [orderState.fulfilled]: (state, action) => {
-   return{...state,orders:updateOrder(state.orders,action.payload)} 
+    return { ...state, orders: updateOrder(state.orders, action.payload) };
   },
   [singleOrder.fulfilled]: (state, action) => {
-    return{...state,singleOrder:action.payload}}
+    return { ...state, singleOrder: action.payload };
+  },
 });
 
 export default ordersReducer;

@@ -1,7 +1,7 @@
 const User = require("./User");
 const Order = require("./Order");
 const Cadeteria = require("./Cadeteria");
-const Product = require("./Product")
+const Product = require("./Product");
 
 User.belongsTo(Cadeteria);
 Cadeteria.hasMany(User);

@@ -19,7 +19,6 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.cadete);
 
-
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(clearUser());
@@ -30,7 +29,6 @@ const Navbar = () => {
     let admin = user && user.admin;
     switch (admin) {
       case true:
-        console.log("caso admin");
         color = "admin";
         break;
       default:
@@ -72,10 +70,16 @@ const Navbar = () => {
           <Link to="/" style={{ color: "inherit" }}>
             <Button color="inherit">Home</Button>
           </Link>
-          {user.admin ? <>  <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
-            <Button color="inherit">admin panel</Button>
-          </Link></> : <></>}
-        
+          {user.admin ? (
+            <>
+              {" "}
+              <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
+                <Button color="inherit">admin panel</Button>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
         </Toolbar>
       </AppBar>
     </div>

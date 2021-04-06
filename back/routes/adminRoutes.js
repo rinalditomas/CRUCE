@@ -9,6 +9,7 @@ router.put("/admitCadeterias/:id", cadeteriaController.admitCadeterias);
 
 // RUTAS CADETE
 router.get("/allCadetes", userController.allCadetes);
-router.put("/editCadete/:id", userController.editCadete);
+router.put("/editCadete/:id", userController.editCadeteState);
+router.put("/editProfileCadete/:id", userController.editProfileCadete);
 
 module.exports = router;
