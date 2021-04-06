@@ -2,6 +2,7 @@ const { Cadeteria } = require("../models/index");
 const jwt = require("jsonwebtoken");
 
 const cadeteriaController = {
+
   allCadeterias(req, res, next) {
     Cadeteria.findAll()
       .then((cadeterias) => {
@@ -11,6 +12,7 @@ const cadeteriaController = {
         next(error);
       });
   },
+  
   editCadeterias(req, res, next) {
     Cadeteria.findByPk(req.params.id).then((cadeteria) => {
       cadeteria
