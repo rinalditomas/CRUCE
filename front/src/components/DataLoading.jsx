@@ -8,10 +8,13 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../utils/adminStyles";
+import { upLoadOrders } from "../state/admin";
+import { useDispatch } from "react-redux";
 
 const Prueba = () => {
   const classes = adminMenuStyles();
   const [items, setItems] = useState([]);
+  const dispatch = useDispatch();
 
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
@@ -44,9 +47,8 @@ const Prueba = () => {
   };
 
   const upload = () => {
-    console.log("items");
-    axios.post("http://localhost:8000/api/orders", { items }).then((res) => {
-      if (res.status === 200) {
+    dispatch(upLoadOrders({ items })).then((res) => {
+      if (res.payload === 200) {
         alert("Tu archivo se cargo correctamente");
       } else {
         alert("Hubo un error en la carga");

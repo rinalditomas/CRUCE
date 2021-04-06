@@ -2,7 +2,6 @@ const { Cadeteria } = require("../models/index");
 const jwt = require("jsonwebtoken");
 
 const cadeteriaController = {
-
   allCadeterias(req, res, next) {
     Cadeteria.findAll()
       .then((cadeterias) => {
@@ -12,39 +11,34 @@ const cadeteriaController = {
         next(error);
       });
   },
-  
   editCadeterias(req, res, next) {
     Cadeteria.findByPk(req.params.id).then((cadeteria) => {
       cadeteria
         .update({
           active: !cadeteria.active,
         })
-        .then(res.sendStatus(200))
+        .then((cadeteria) => res.status(200).send(cadeteria))
         .catch("hubo un error");
     });
   },
   admitCadeterias(req, res, next) {
     Cadeteria.findByPk(req.params.id).then((cadeteria) => {
-      console.log(cadeteria, "ANTES DE CAMBIAR");
       cadeteria
         .update({
           active: !cadeteria.active,
           authorized: !cadeteria.authorized,
         })
         .then((cadeteria) => {
-          console.log("DESPUES DE CAMBIAR", cadeteria);
+          return cadeteria;
         })
-        .then(res.sendStatus(200))
-        .catch("hubo un error");
+        .then((cadeteria) => res.status(200).send(cadeteria));
     });
   },
 
   registerCadeteria(req, res) {
-    console.log('llegando', req.body)
     Cadeteria.create(req.body)
       .then((cadeteria) => res.status(201).send(cadeteria))
       .catch((err) => res.send(err));
   },
-
 };
 module.exports = cadeteriaController;

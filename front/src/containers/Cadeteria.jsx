@@ -21,8 +21,6 @@ export default function Cadeteria() {
 
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
-
-
   const cadeteria = {companyName: 'JustEat'}
 
 

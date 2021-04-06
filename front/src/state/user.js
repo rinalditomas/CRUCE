@@ -37,14 +37,30 @@ export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
     .catch((err) => err);
 });
 
-export const sendToken = createAsyncThunk("LOGIN", (token,thunkAPI) => {
-  console.log("llego hasta aca")
-    return axios.post("http://localhost:8000/api/me",{}, {headers: { Authorization: `Bearer ${token}`}} )
-    .then((res)=> res.data) 
-    .catch((err) => console.log(err))
-  });
+export const sendToken = createAsyncThunk("LOGIN", (token, thunkAPI) => {
+  return axios
+    .post(
+      "http://localhost:8000/api/me",
+      {},
+      { headers: { Authorization: `Bearer ${token}` } }
+    )
+    .then((res) => res.data)
+    .catch((err) => console.log(err));
+});
 
-const userReducer = createReducer([], { 
+export const editProfileUser = createAsyncThunk(
+  "EDIT_PROFILE_USER",
+  (dates) => {
+    return axios
+      .put(
+        `http://localhost:8000/api/user/editProfileCadete/${dates.id}`,
+        dates.input
+      )
+      .then((res) => res.status);
+  }
+);
+
+const userReducer = createReducer([], {
   [fetchMe.fulfilled]: (state, action) => action.payload,
   [setUser]: (state, action) => action.payload,
   [loginRequest.fulfilled]: (state, action) => action.payload,
@@ -53,6 +69,7 @@ const userReducer = createReducer([], {
   [clearUser]: (state, action) => {
     return {};
   },
+  [editProfileUser.fulfilled]: (state, action) => action.payload,
 });
 
 export default userReducer;

@@ -7,8 +7,9 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { singleOrder,orderState } from "../state/orders";
+import { singleOrder, orderState } from "../state/orders";
 import { useSelector, useDispatch } from "react-redux";
+import { useHistory } from "react-router";
 const useStyles = makeStyles({
   root: {
     maxWidth: 500,
@@ -19,28 +20,21 @@ const useStyles = makeStyles({
 });
 
 export default function SingleOrder({ match }) {
+  const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orders.singleOrder);
 
-  console.log("ACA ESTA LA SINGLE ORDER",order)
   useEffect(() => {
     dispatch(singleOrder(match));
   }, []);
 
-  const Entregado = (id, state) => {
+  const ChangeState = (id, state) => {
     const state2 = { id: id, state: state };
-    dispatch(orderState(state2));
-  };
-
-  const DevueltoAsuc = (id, state) => {
-    const state2 = { id: id, state: state };
-    dispatch(orderState(state2));
-  };
-
-  const Cancelado = (id, state) => {
-    const state2 = { id: id, state: state };
-    dispatch(orderState(state2));
+    dispatch(orderState(state2)).then((order) => {
+      if (order.payload.status != "En camino") history.push("/cadeteOrders");
+      else dispatch(singleOrder(match));
+    });
   };
 
   return (
@@ -80,27 +74,39 @@ export default function SingleOrder({ match }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => Entregado(order.id, "Entregado")}
-        >
-          ENTREGADO
-        </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => DevueltoAsuc(order.id, "Devuelto a sucursal")}
-        >
-          DEVUELTO A SUCURSAL
-        </Button>
-        <Button
-          size="small"
-          color="primary"
-          onClick={() => Cancelado(order.id, "Pendiente")}
-        >
-          CANCELAR
-        </Button>
+        {order.status == "Pendiente" ? (
+          <Button
+            size="small"
+            color="primary"
+            onClick={() => ChangeState(order.id, "En camino")}
+          >
+            TOMAR
+          </Button>
+        ) : order.status == "En camino" ? (
+          <>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => ChangeState(order.id, "Entregado")}
+            >
+              ENTREGADO
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => ChangeState(order.id, "Devuelto a sucursal")}
+            >
+              DEVUELTO A SUCURSAL
+            </Button>
+            <Button
+              size="small"
+              color="primary"
+              onClick={() => ChangeState(order.id, "Pendiente")}
+            >
+              CANCELAR
+            </Button>{" "}
+          </>
+        ) : null}
       </CardActions>
     </Card>
   );
