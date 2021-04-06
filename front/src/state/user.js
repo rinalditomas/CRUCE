@@ -44,7 +44,7 @@ export const sendToken = createAsyncThunk("LOGIN", (token,thunkAPI) => {
     .catch((err) => console.log(err))
   });
 
-const userReducer = createReducer([], {
+const userReducer = createReducer([], { 
   [fetchMe.fulfilled]: (state, action) => action.payload,
   [setUser]: (state, action) => action.payload,
   [loginRequest.fulfilled]: (state, action) => action.payload,

@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 
 const RegisterRoutes = require("./registerRoutes");
+const cadeteriaRoutes = require('./cadeteriaRoutes')
 const LoginRoutes = require("./loginRoutes");
 const ordersRoutes = require("./ordersRoutes");
 const productRoutes = require("./productRoutes");
@@ -11,11 +12,11 @@ const Me = require("./me");
 
 router.use("/me", Me);
 router.use("/register", RegisterRoutes);
+router.use("/cadeteria", cadeteriaRoutes);
 router.use("/orders", ordersRoutes);
 router.use("/product", productRoutes);
 router.use("/login", LoginRoutes);
 router.use("/admin", adminRoutes);
-
 
 
 module.exports = router;

@@ -14,14 +14,53 @@ import Container from "@material-ui/core/Container";
 
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
+import { useSnackbar } from "notistack";
+
+import { useHistory } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
+
+import { registerCadeteria } from "../state/cadeteria";
 
 export const Cadeteria = () => {
-const classes = useStyles();
+  const { enqueueSnackbar } = useSnackbar();
+
+  const classes = useStyles();
+  const history = useHistory();
+
+  const [input, setInput] = useState({});
+  const dispatch = useDispatch();
+
+  const handleChange = (e) => {
+    const key = e.target.name;
+    const value = e.target.value;
+    setInput({ ...input, [key]: value });
+  };
 
 
+  
 
-    return(
-      <div style={{paddingTop: '2rem'}}>
+
+  const handleSubmit = (e) => {
+    console.log('click register')
+    e.preventDefault();
+    dispatch(registerCadeteria(input))
+      .then(({ payload }) => {
+        console.log('payload register cadeteria', payload)
+        const r = payload.errors[0].message;
+        if (payload.errors)
+          enqueueSnackbar(`${r}`, {
+            variant: "error",
+          });
+      })
+      .catch((err) => {
+        enqueueSnackbar("Cadeteria registrada", {
+          variant: "success",
+        }) && history.push("/login");
+      });
+  };
+
+  return (
+    <div style={{ paddingTop: "2rem" }}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -31,17 +70,18 @@ const classes = useStyles();
           <Typography component="h1" variant="h5">
             Registro de Cadeteria
           </Typography>
-          <form className={classes.form}>
+          <form className={classes.form} onSubmit={handleSubmit}>
             <Grid container spacing={2}>
-            <Grid item xs={12}>
+              <Grid item xs={12}>
                 <TextField
                   variant="outlined"
                   required
                   fullWidth
                   id="name"
-                  label="Nombre"
-                  name="name"
-                  autoComplete="name"
+                  label="Nombre de la empresa"
+                  name="nameCompany"
+                  autoComplete="nameCompany"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -49,10 +89,23 @@ const classes = useStyles();
                   variant="outlined"
                   required
                   fullWidth
-                  id="adress"
+                  id="CUIT"
+                  label="CUIT"
+                  name="CUIT"
+                  autoComplete="CUIT"
+                  onChange={handleChange}
+                />
+              </Grid>
+              <Grid item xs={12}>
+                <TextField
+                  variant="outlined"
+                  required
+                  fullWidth
+                  id="address"
                   label="Direccion"
-                  name="adress"
-                  autoComplete="adress"
+                  name="address"
+                  autoComplete="address"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -60,25 +113,13 @@ const classes = useStyles();
                   variant="outlined"
                   required
                   fullWidth
-                  id="tel"
-                  label="Telefono"
-                  name="tel"
-                  autoComplete="tel"
+                  id="phoneNum"
+                  label="+54"
+                  name="phoneNum"
+                  autoComplete="phoneNum"
+                  onChange={handleChange}
                 />
               </Grid>
-           
-            {/*   <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="company"
-                  name="company"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="company"
-                  label="Empresa"
-                  autoFocus
-                />
-              </Grid> */}
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
@@ -88,6 +129,7 @@ const classes = useStyles();
                   label="Email"
                   name="email"
                   autoComplete="email"
+                  onChange={handleChange}
                 />
               </Grid>
               <Grid item xs={12}>
@@ -100,9 +142,9 @@ const classes = useStyles();
                   type="password"
                   id="password"
                   autoComplete="current-password"
+                  onChange={handleChange}
                 />
               </Grid>
-             
             </Grid>
             <Button
               type="submit"
@@ -116,7 +158,7 @@ const classes = useStyles();
             <Grid container justify="flex-end">
               <Grid item>
                 <Link href="#" variant="body2">
-                  Ya tienes una cuenta? Logueate.
+                  Ya estas registrado? Logueate.
                 </Link>
               </Grid>
             </Grid>
@@ -126,6 +168,6 @@ const classes = useStyles();
           <Copyright />
         </Box>
       </Container>
-      </div>
-    );
-}
+    </div>
+  );
+};

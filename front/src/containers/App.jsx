@@ -12,13 +12,14 @@ import Home from "../components/Home";
 import { fetchMe } from "../state/user";
 
 export default function App() {
+
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
-
 
   useEffect(() => {
     dispatch(fetchMe());
   }, []);
+
 
 
   return (
@@ -32,7 +33,7 @@ export default function App() {
           <Route exact path="/register" component={Main} />
           <Route exact path="/cadete" />
           <Route exact path="/cadeteOrders" component={CadeteOrders} />
-          <Route exact path="/cadeteria" />
+          <Route exact path="/cadeteria"/>
           <Route
             exact
             path="/singleOrder/:id"

@@ -6,11 +6,8 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../utils/adminStyles";
 
-
 export default function adminPanel() {
-
   const classes = adminMenuStyles();
-
 
   return (
     <React.Fragment>

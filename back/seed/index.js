@@ -1,9 +1,7 @@
-
 const { User, Order, Cadeteria } = require("../models");
 
 const userArr = require("./user");
 const cadeteriaArr = require("./cadeteria");
-
 
 /** Al crear una tabla que contiene un FK. El método bulkCreate revisa que
  *  dicho id exista en la tabla a la cual quiero relacionar. Por ende se debe
@@ -12,18 +10,22 @@ const cadeteriaArr = require("./cadeteria");
  *  y luego el resto.**/
 
 let cadeteriaPromise = () =>
-  Cadeteria.bulkCreate(cadeteriaArr).then((res) => {
-    console.log(`--> Cadeterias creadas`);
-    return res;
-  });
+  Cadeteria.bulkCreate(cadeteriaArr)
+    .then((res) => {
+      console.log(`--> Cadeterias creadas`);
+      return res;
+    })
+    .catch((err) => err);
 
 let userPromise = () =>
-  User.bulkCreate(userArr).then((res) => {
-    console.log(`-->Usuarios creados`);
-    return res;
-  });
+  User.bulkCreate(userArr)
+    .then((res) => {
+      console.log(`-->Usuarios creados`);
+      return res;
+    })
+    .catch((err) => err);
 
- 
-  cadeteriaPromise()
-  .then(()=>userPromise()) 
-   .then(() => console.log(`----Seed terminado----`));
+cadeteriaPromise()
+  .then(() => userPromise())
+  .then(() => console.log(`----Seed terminado----`))
+  .catch((err) => err);

@@ -8,8 +8,11 @@ import Box from "@material-ui/core/Box";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
-import { useDispatch } from "react-redux";
+import NativeSelect from '@material-ui/core/NativeSelect';
+import { useDispatch, useSelector } from "react-redux";
+
 import { registerRequest } from "../state/user";
+
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { Link, useHistory } from "react-router-dom";
@@ -17,23 +20,32 @@ import { Link, useHistory } from "react-router-dom";
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
 import { useSnackbar } from "notistack";
+import InputLabel from '@material-ui/core/InputLabel';
+
+import { allCadeterias } from "../state/cadeteria";
+import FormControl from '@material-ui/core/FormControl';
+import { makeStyles } from '@material-ui/core/styles';
 
 export const Cadete = () => {
+
+
+/*   const useStyles = makeStyles((theme) => ({
+    formControl: {
+      minWidth: 395,
+    },
+  }));
+ */
+
+
   const { enqueueSnackbar } = useSnackbar();
+
   const classes = useStyles();
-
   const history = useHistory();
-
   const [input, setInput] = useState({});
+
   const dispatch = useDispatch();
-  // const cadeterias = useSelector((state) => state.cadeteria);
 
-  // useEffect(() => {
-  //   dispatch(bringCadeteriasNoAdminRequest())
-  //   .then((res)=>console.log(res));
-  // }, []);
-
-  
+  const cadeteriaList = useSelector((state) => state.cadeteria);
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -98,9 +110,12 @@ export const Cadete = () => {
                 />
               </Grid>
               <Grid item xs={12}>
+              <FormControl variant="outlined" style={{minWidth: 395}}>
+              <InputLabel htmlFor="outlined-age-native-simple">Medio de transporte</InputLabel>
                 <Select
                   fullWidth
                   labelId="demo-simple-select-filled-label"
+                  label= 'Medio de transporte'
                   name="vehicle"
                   id="demo-simple-select-filled"
                   onChange={handleChange}
@@ -115,49 +130,34 @@ export const Cadete = () => {
                     Auto
                   </MenuItem>
                 </Select>
+                </FormControl>
               </Grid>
+
+            
               <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
+              <FormControl variant="outlined" style={{minWidth: 395}}>
+              <InputLabel htmlFor="outlined-age-native-simple">Cadeterias</InputLabel>
+                <Select
                   fullWidth
-                  id="company"
-                  label="Cadeteria afiliada"
-                  name="company"
-                  autoComplete="company"
+                  labelId="demo-simple-select-filled-label"
+                  label='Cadeterias'
+                  name="cadeterias"
+                  id="demo-simple-select-filled"
                   onChange={handleChange}
-                />
+                >
+                  {cadeteriaList &&
+                    cadeteriaList.map((cad, i) => {
+                      console.log('Cadeterias',cad)
+                      return (
+                        <MenuItem value={`${cad.nameCompany}`} key={i}>
+                          {`${cad.nameCompany}`}
+                        </MenuItem>
+                      );
+                    })}
+                </Select>
+                </FormControl>
               </Grid>
-              {/* <Grid item xs={12}>
-              <Select
-                   fullWidth
-                   labelId="demo-simple-select-filled-label"
-                   name="cadeteria"
-                   id="demo-simple-select-filled"
-                   onChange={handleChange}
-                 >
-                   */}
-                  {/* {cadeterias.map((cadeteria)=>{
-                   {console.log("ACA ESTA LA CADETERIA",cadeteria.nameCompany)}
-                   <MenuItem value={cadeteria.nameCompany} key={cadeteria.id}>
-                   {cadeteria.nameCompany} 
-                 </MenuItem>
-                
-                  })} */}
-                  {/* </Select>
-              </Grid> */}
-              {/* <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="company"
-                  label="Cadeteria afiliada"
-                  name="company"
-                  autoComplete="company"
-                  onChange={handleChange}
-                />
-              </Grid> */}
+
               <Grid item xs={12}>
                 <TextField
                   variant="outlined"
