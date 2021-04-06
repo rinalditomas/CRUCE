@@ -145,6 +145,7 @@ export const Cadete = () => {
                   id="demo-simple-select-filled"
                   onChange={handleChange}
                 >
+
                   {cadeteriaList &&
                     cadeteriaList.map((cad, i) => {
                       console.log('Cadeterias',cad)

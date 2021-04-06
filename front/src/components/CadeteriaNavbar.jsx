@@ -11,7 +11,7 @@ import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
 import { setUser } from "../state/user";
 
-const Navbar = () => {
+const CadeteriaNavbar = () => {
   const classes = useStyles();
   const history = useHistory();
 
@@ -19,29 +19,15 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.cadete);
 
-
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(clearUser());
     history.push("/");
   };
 
-  const userTypeColor = (color = "") => {
-    let admin = user && user.admin;
-    switch (admin) {
-      case true:
-        console.log("caso admin");
-        color = "admin";
-        break;
-      default:
-        color = "cadete";
-    }
-    return color;
-  };
-
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes[`${userTypeColor()}`]}>
+      <AppBar position="static" style={{ backgroundColor: "red" }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -68,16 +54,12 @@ const Navbar = () => {
               </Button>
             </>
           )}
-          <Link to="/" style={{ color: "inherit" }}>
+          <Link to="/cadeteria" style={{ color: "inherit" }}>
             <Button color="inherit">Home</Button>
           </Link>
-          {user.admin ? <>  <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
-            <Button color="inherit">admin panel</Button>
-          </Link></> : <></>}
-        
         </Toolbar>
       </AppBar>
     </div>
   );
 };
-export default Navbar;
+export default CadeteriaNavbar;

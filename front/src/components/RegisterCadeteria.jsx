@@ -36,16 +36,10 @@ export const Cadeteria = () => {
     setInput({ ...input, [key]: value });
   };
 
-
-  
-
-
   const handleSubmit = (e) => {
-    console.log('click register')
     e.preventDefault();
     dispatch(registerCadeteria(input))
       .then(({ payload }) => {
-        console.log('payload register cadeteria', payload)
         const r = payload.errors[0].message;
         if (payload.errors)
           enqueueSnackbar(`${r}`, {
