@@ -16,15 +16,18 @@ import useStyles from "../utils/stylesLogins";
 import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
-import axios from "axios";
 
 import { loginRequest } from "../state/user";
 import { fetchMe } from "../state/user";
 
-export default function Login() {
-  const { enqueueSnackbar } = useSnackbar();
-  const classes = useStyles();
+import messagesHandler from '../utils/messagesHandler'
 
+
+export default function Login() {
+
+  const messages = messagesHandler(useSnackbar())
+
+  const classes = useStyles();
   const [input, setInput] = useState([]);
   const dispatch = useDispatch();
   const history = useHistory();
@@ -35,46 +38,21 @@ export default function Login() {
     setInput({ ...input, [key]: value });
   };
 
-  const messages = {
-    error: () =>
-      enqueueSnackbar("Datos incorrectos", {
-        variant: "error",
-        preventDuplicate: true,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-      }),
-      
-    success: () =>
-      enqueueSnackbar("Usuario ingresado correctamente", {
-        variant: "success",
-        preventDuplicate: true,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-      }),
-
-    admin: () =>
-      enqueueSnackbar("Ingresando como usuario administrador", {
-        variant: "warning",
-        preventDuplicate: true,
-        anchorOrigin: { vertical: "top", horizontal: "center" },
-      }),
-  };
-
-
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(loginRequest(input))
       .then((res) => dispatch(fetchMe()))
       .then((res) => {
         const check = res.payload;
-        if (!check) messages.error() && history.push("/login");
+        console.log("checl=======>", res);
+        if (!check) messages.error("pass incorrecto") && history.push("/login");
         else
           check && check.admin
             ? messages.admin() && history.push("/admin")
-            : messages.success() && history.push("/");
+            : messages.success('Usuario ingresado correctamente') && history.push("/");
       })
       .catch((e) => history.push("/login"));
   };
-
-
 
   return (
     <>
@@ -130,8 +108,7 @@ export default function Login() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs>
-                </Grid>
+                <Grid item xs></Grid>
                 <Grid item>
                   <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
                 </Grid>

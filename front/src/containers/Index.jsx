@@ -15,11 +15,6 @@ const Index = () => {
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    dispatch(allCadeterias())
-      .then((res) => console.log(res))
-      .catch((err) => err);
-  }, []);
 
   return (
     <div>

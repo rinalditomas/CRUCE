@@ -9,8 +9,13 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { Typography } from "@material-ui/core";
+
+import { useDispatch, useSelector } from "react-redux";
+import { admitCadeteria, AllCadeterias } from "../../state/admin";
+
+import { useSnackbar } from "notistack";
+import messagesHandler from '../../utils/messagesHandler'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -25,42 +30,28 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
 
-export default function CadeteRequest() {
+export default function CadeteriaRequest() {
+
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
-  const [cadeterias, setCadeterias] = useState([]);
+  
+  const cadeterias = useSelector((state) => state.admin.cadeterias);
 
-/*   useEffect(() => {
-    axios
-      .get("http://localhost:8000/api/admin/allCadeterias")
-      .then((res) => setCadeterias(res.data));
-  }, [cadeterias]);
+  const messages = messagesHandler(useSnackbar())
+
+  useEffect(() => {
+    dispatch(AllCadeterias());
+  }, []);
 
   const handleActive = (id) => {
-    axios
-      .put(`http://localhost:8000/api/admin/admitCadeterias/${id}`)
-      .then((res) => {
-        res.status === 200
-          ? alert("Estado cambiado correctamente")
-          : alert("Hubo un problema");
-      });
-  }; */
+    dispatch(admitCadeteria(id)).then((res) => {
+      res.payload
+        ? messages.success("Estado cambiado correctamente")
+        : messages.error("Hubo un problema");
+    });
+  };
 
   return (
     <div className={classes.root}>
@@ -86,9 +77,9 @@ export default function CadeteRequest() {
                     <IconButton
                       edge="end"
                       aria-label="delete"
-                     /*  onClick={() => {
+                      onClick={() => {
                         handleActive(cadeteria.id);
-                      }} */
+                      }}
                     >
                       <BlockIcon />
                     </IconButton>
@@ -96,9 +87,9 @@ export default function CadeteRequest() {
                     <IconButton
                       edge="end"
                       aria-label="delete"
-                      /* onClick={() => {
+                      onClick={() => {
                         handleActive(cadeteria.id);
-                      }} */
+                      }}
                     >
                       <CheckIcon />
                     </IconButton>

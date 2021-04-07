@@ -36,12 +36,15 @@ User.init(
       allowNull: false,
       unique: true,
       validate: {
-        len:
-          [10, 10]
-          
+        len: [10, 10],
       },
     },
     admin: {
+      type: S.BOOLEAN,
+      defaultValue: false,
+    },
+
+    authorized: {
       type: S.BOOLEAN,
       defaultValue: false,
     },

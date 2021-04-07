@@ -25,9 +25,17 @@ export const registerCadeteria = createAsyncThunk(
   }
 );
 
+export const admitCadete = createAsyncThunk("ADMIT_CADETE", (id) => {
+  return axios
+    .put(`http://localhost:8000/api/cadeteria/admitCadete/${id}`)
+    .then((res) => res.data);
+});
+
+
 const cadeteriaReducer = createReducer([], {
   [setCadeteria]: (state, action) => action.payload,
   [allCadeterias.fulfilled]: (state, action) => action.payload,
+  [admitCadete.fullfiled]: (state,action) => action.paylad,
   [registerCadeteria]: (state, action) => action.payload,
 });
 

@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
-import { allCadetes, editStateCadete } from "../state/admin";
+import { allCadetes, editStateCadete } from "../../state/admin";
 import { useDispatch, useSelector } from "react-redux";
 
 const useStyles = makeStyles((theme) => ({
@@ -61,7 +61,7 @@ export default function ListCadetes() {
       </div>
       <div className={classes.demo}>
         <List dense={dense}>
-          {cadetes.map((cadete) => {
+          {cadetes && cadetes.map((cadete) => {
             return (
               <ListItem>
                 <ListItemText

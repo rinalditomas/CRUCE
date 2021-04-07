@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import Button from "@material-ui/core/Button";
 
 import { Cadete } from "./RegisterUser";
-import { Cadeteria } from "./RegisterCadeteria";
+import { Cadeteria } from "./Cadeteria/RegisterCadeteria";
 
 import useStyles from "../utils/stylesRegister";
 

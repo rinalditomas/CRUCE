@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCadeterias, editStateCadeteria } from "../state/admin";
+import { AllCadeterias, editStateCadeteria } from "../../state/admin";
 
 const useStyles = makeStyles((theme) => ({
   root: {

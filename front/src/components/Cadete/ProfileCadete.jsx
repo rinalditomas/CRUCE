@@ -10,7 +10,7 @@ import axios from "axios";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { InputLabel } from "@material-ui/core";
-import { editProfileUser } from "../state/user";
+import { editProfileUser } from "../../state/user";
 
 const useStyles = makeStyles((theme) => ({
   button: {

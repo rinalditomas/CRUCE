@@ -9,11 +9,14 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { Typography } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
-import { admitCadeteria, AllCadeterias } from "../state/admin";
+import { admitCadete} from '../../state/cadeteria'
+import { allCadetes } from "../../state/admin";
+
+
+import { useSnackbar } from "notistack";
+import messagesHandler from '../../utils/messagesHandler'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,43 +31,31 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
 
 export default function CadeteriaRequest() {
   const dispatch = useDispatch();
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
-  const cadeterias = useSelector((state) => state.admin.cadeterias);
+  
+  const cadetes = useSelector((state) => state.admin.cadetes);
+  const messages = messagesHandler(useSnackbar())
 
   useEffect(() => {
-    dispatch(AllCadeterias());
-  }, []);
+    dispatch(allCadetes());
+  }, [dispatch]);
 
   const handleActive = (id) => {
-    dispatch(admitCadeteria(id)).then((res) => {
+    dispatch(admitCadete(id)).then((res) => {
       res.payload
-        ? alert("Estado cambiado correctamente")
-        : alert("Hubo un problema");
+        ? messages.success("Estado cambiado correctamente")
+        : messages.error("Hubo un problema");
     });
   };
 
   return (
     <div className={classes.root}>
       <div>
-        <h1 className="titulo">Lista de cadeterias</h1>
+        <h1 className="titulo">Solicitudes de cadetes</h1>
         <Link
           to="/register"
           style={{ textDecoration: "none", color: "inherit" }}
@@ -76,17 +67,17 @@ export default function CadeteriaRequest() {
       </div>
       <div className={classes.demo}>
         <List dense={dense}>
-          {cadeterias.map((cadeteria) => {
-            return cadeteria.authorized === false ? (
-              <ListItem key={cadeteria.id}>
-                <ListItemText primary={cadeteria.nameCompany} />
+          {cadetes.map((cadete) => {
+            return cadete.authorized === false ? (
+              <ListItem key={cadete.id}>
+                <ListItemText primary={cadete.firstName} />
                 <ListItemSecondaryAction>
-                  {cadeteria.active ? (
+                  {cadete.active ? (
                     <IconButton
                       edge="end"
                       aria-label="delete"
                       onClick={() => {
-                        handleActive(cadeteria.id);
+                        handleActive(cadete.id);
                       }}
                     >
                       <BlockIcon />
@@ -96,7 +87,7 @@ export default function CadeteriaRequest() {
                       edge="end"
                       aria-label="delete"
                       onClick={() => {
-                        handleActive(cadeteria.id);
+                        handleActive(cadete.id);
                       }}
                     >
                       <CheckIcon />
