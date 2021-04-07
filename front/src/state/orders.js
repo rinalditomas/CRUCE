@@ -20,6 +20,7 @@ export const orderState = createAsyncThunk(
     return axios
       .put(`http://localhost:8000/api/orders/edit/${order.id}`, {
         status: order.state,
+        cadeteId: order.cadeteId,
       })
       .then((res) => res.data)
       .catch((e) => console.log(e));

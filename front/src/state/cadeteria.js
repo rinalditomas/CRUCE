@@ -31,11 +31,10 @@ export const admitCadete = createAsyncThunk("ADMIT_CADETE", (id) => {
     .then((res) => res.data);
 });
 
-
 const cadeteriaReducer = createReducer([], {
   [setCadeteria]: (state, action) => action.payload,
   [allCadeterias.fulfilled]: (state, action) => action.payload,
-  [admitCadete.fullfiled]: (state,action) => action.paylad,
+  [admitCadete.fullfiled]: (state, action) => action.paylad,
   [registerCadeteria]: (state, action) => action.payload,
 });
 

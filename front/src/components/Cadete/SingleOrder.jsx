@@ -26,6 +26,7 @@ export default function SingleOrder({ match }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orders.singleOrder);
+  const cadete = useSelector((state) => state.cadete);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -37,7 +38,7 @@ export default function SingleOrder({ match }) {
   }, []);
 
   const ChangeState = (id, state) => {
-    const state2 = { id: id, state: state };
+    const state2 = { id: id, state: state, cadeteId: cadete.id };
     dispatch(orderState(state2)).then((order) => {
       if (order.payload.status != "En camino") history.push("/cadeteOrders");
       else dispatch(singleOrder(match));
