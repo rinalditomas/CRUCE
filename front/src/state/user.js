@@ -62,8 +62,8 @@ export const editProfileUser = createAsyncThunk(
 
 const userReducer = createReducer([], {
   [fetchMe.fulfilled]: (state, action) => action.payload,
-  [setUser]: (state, action) => action.payload,
   [loginRequest.fulfilled]: (state, action) => action.payload,
+  [setUser]: (state, action) => action.payload,
   [registerRequest.fulfilled]: (state, action) => action.payload,
   [sendToken.fulfilled]: (state, action) => action.payload,
   [clearUser]: (state, action) => {

@@ -8,6 +8,30 @@ import axios from "axios";
 
 const setCadeteria = createAction("SET_CADETERIA");
 
+export const fetchCad = createAsyncThunk("FETCH_CAD", () => {
+  const loginToken = JSON.parse(localStorage.getItem("token"));
+  return axios
+    .get(`http://localhost:8000/api/me/cadeteria`, {
+      headers: { Authorization: `Bearer ${loginToken}` },
+    })
+    .then((r) => {
+      return r.data;
+    })
+    .catch((err) => console.log(err));
+});
+
+export const CadloginRequest = createAsyncThunk(
+  "CAD_LOGIN_REQUEST",
+  (input) => {
+    return axios
+      .post("http://localhost:8000/api/cadeteria/login", input)
+      .then((res) => {
+        localStorage.setItem("token", JSON.stringify(res.data.token));
+      })
+      .catch((err) => console.log(err));
+  }
+);
+
 export const allCadeterias = createAsyncThunk("GET_ALL_CADETERIAS", () => {
   return axios
     .get("http://localhost:8000/api/cadeteria/allCadeterias")
@@ -31,12 +55,27 @@ export const admitCadete = createAsyncThunk("ADMIT_CADETE", (id) => {
     .then((res) => res.data);
 });
 
+export const editProfileCadeteria = createAsyncThunk(
+  "EDIT_PROFILE_CADETERIA",
+  (data) => {
+    return axios
+      .put(
+        `http://localhost:8000/api/cadeteria/editProfileCadeteria/${data.id}`,
+        data.input
+      )
+      .then((res) => res)
+      .catch((err) => err);
+  }
+);
 
 const cadeteriaReducer = createReducer([], {
+  [fetchCad.fulfilled]: (state, action) => action.payload,
+  [CadloginRequest.fulfilled]: (state, action) => action.payload,
   [setCadeteria]: (state, action) => action.payload,
   [allCadeterias.fulfilled]: (state, action) => action.payload,
-  [admitCadete.fullfiled]: (state,action) => action.paylad,
+  [admitCadete.fullfiled]: (state, action) => action.paylad,
   [registerCadeteria]: (state, action) => action.payload,
+  [editProfileCadeteria.fulfilled]: (state, action) => action.payload,
 });
 
 export default cadeteriaReducer;

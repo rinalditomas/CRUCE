@@ -4,7 +4,6 @@ const NewOrderController = {
   async newOrder(req, res, next) {
     const orders = req.body.items;
     await orders
-
       .map((order) => {
         Order.create({
           clientName: order["Client Name"],

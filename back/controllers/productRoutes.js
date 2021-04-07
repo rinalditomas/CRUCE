@@ -3,10 +3,7 @@ const sequelize = require("sequelize");
 
 const productController = {
   async findProductsByOrder(req, res, next) {
-
-    
     const orderNumber = "1119561076530-01";
-
     const products = await Product.findAndCountAll({
       where: { orderNumber },
       attributes: [

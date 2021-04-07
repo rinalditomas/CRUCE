@@ -11,10 +11,16 @@ import { SnackbarProvider } from "notistack";
 
 import { allCadeterias } from "../state/cadeteria";
 
+import {fetchCad} from '../state/cadeteria'
+
+
 const Index = () => {
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetchCad());
+  }, []);
 
   return (
     <div>

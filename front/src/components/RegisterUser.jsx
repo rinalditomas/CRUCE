@@ -34,6 +34,8 @@ import messageHandler from '../utils/messagesHandler'
 
 
 export const Cadete = () => {
+
+
   const { enqueueSnackbar } = useSnackbar();
 
   const classes = useStyles();
@@ -43,8 +45,6 @@ export const Cadete = () => {
   const dispatch = useDispatch();
 
   const cadeteriaList = useSelector((state) => state.cadeteria);
-
-
   const messages = messageHandler(useSnackbar())
 
 
@@ -61,6 +61,7 @@ export const Cadete = () => {
       .catch((err) => err);
   }, [dispatch]);
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerRequest(input))

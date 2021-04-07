@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { ordersList} from "../../state/orders";
+import { ordersList } from "../../state/orders";
 // import { orderState} from "../state/order";
 
 const useStyles = makeStyles((theme) => ({
@@ -25,7 +25,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const ListOrders = () => {
-
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const dispatch = useDispatch();
@@ -34,7 +33,6 @@ const ListOrders = () => {
   useEffect(() => {
     dispatch(ordersList());
   }, []);
-
 
   return (
     <div className={classes.root}>
@@ -45,8 +43,7 @@ const ListOrders = () => {
         <List dense={dense}>
           {orders &&
             orders.map((order) => {
-              return order.status === "Entregado" ||
-                order.status === "Devuelto a sucursal" ? null : (
+              return (
                 <ListItem key={order.id}>
                   <Link to={`/singleOrder/${order.id}`}>
                     <ListItemText
@@ -61,11 +58,7 @@ const ListOrders = () => {
                   </Link>
                   <ListItemSecondaryAction>
                     <IconButton>
-                      <Button
-                        variant="outlined"
-                        color="primary"
-                       
-                      >
+                      <Button variant="outlined" color="primary">
                         {order.status}
                       </Button>
                     </IconButton>
