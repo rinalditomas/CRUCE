@@ -1,4 +1,4 @@
-const { Order, Product } = require("../models");
+const { Order, Product, User, Cadeteria } = require("../models");
 
 const NewOrderController = {
   async newOrder(req, res, next) {
@@ -31,15 +31,6 @@ const NewOrderController = {
       .catch(res.sendStatus(401));
   },
 
-  /*  async allOrders(req, res) {
-    try {
-      const orders = await Order.findAll();
-      res.send(orders);
-    } catch (e) {
-      res.send(e);
-    }
-  }, */
-
   async allOrders(req, res) {
     let list = {};
     let ord = [];
@@ -61,27 +52,6 @@ const NewOrderController = {
     }
   },
 
-  /* allOrders(req, res) {
-    let list = {};
-    let orders = [];
-    Order.findAll()
-      .then((res) => {
-        return res.map((order) => {
-          list[order.orderNumber] = true;
-        });
-      })
-      .then(() => {
-
-        for (id in list) {
-          Order.findOne({ where: { orderNumber: id } }).then((ord) =>
-            orders.push(ord)
-          );
-        }
-        return orders;
-      })
-      .then((orders) => console.log(orders));
-  }, */
-
   async findOrderById(req, res) {
     const id = req.params.id;
     try {
@@ -92,19 +62,32 @@ const NewOrderController = {
     }
   },
 
-  async changeStateOrders(req, res) {
+  changeStateOrders(req, res) {
     const id = req.params.id;
     const status = req.body.status;
-
-    Order.findByPk(id).then((order) => {
-      order
-        .update({
-          status: status,
-        })
-        .then((order) => {
-          res.send(order);
+    const cadeteId = req.body.cadeteId;
+    User.findByPk(cadeteId)
+      .then((cadete) => {
+        Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
+          Order.findByPk(id).then((order) => {
+            order
+              .setUser(cadete)
+              .then(() => {
+                order.setCadeterium(cadeteria);
+              })
+              .then(() => {
+                order
+                  .update({
+                    status: status,
+                  })
+                  .then((order) => {
+                    res.send(order);
+                  });
+              });
+          });
         });
-    });
+      })
+      .catch((e) => console.log(e));
   },
 };
 

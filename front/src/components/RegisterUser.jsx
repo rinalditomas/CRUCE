@@ -20,18 +20,15 @@ import { Link, useHistory } from "react-router-dom";
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
 
-
 import InputLabel from "@material-ui/core/InputLabel";
 
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 
-import {allCadeterias} from '../state/cadeteria'
-
+import { allCadeterias } from "../state/cadeteria";
 
 import { useSnackbar } from "notistack";
-import messageHandler from '../utils/messagesHandler'
-
+import messageHandler from "../utils/messagesHandler";
 
 export const Cadete = () => {
   const { enqueueSnackbar } = useSnackbar();
@@ -44,9 +41,7 @@ export const Cadete = () => {
 
   const cadeteriaList = useSelector((state) => state.cadeteria);
 
-
-  const messages = messageHandler(useSnackbar())
-
+  const messages = messageHandler(useSnackbar());
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -66,14 +61,13 @@ export const Cadete = () => {
     dispatch(registerRequest(input))
       .then(({ payload }) => {
         const r = payload.errors[0].message;
-        if (payload.errors)
-          messages.error(r)
+        if (payload.errors) messages.error(r);
       })
       .catch((err) => {
-        messages.success('Usuario registrado') && history.push("/login");
+        messages.success("Usuario registrado") && history.push("/login");
       });
   };
-
+  console.log(input);
   return (
     <div style={{ paddingTop: "2rem" }}>
       <Container component="main" maxWidth="xs">

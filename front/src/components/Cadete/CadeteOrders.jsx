@@ -29,12 +29,22 @@ const CadeteOrders = () => {
   const [dense, setDense] = React.useState(false);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
-
+  const cadete = useSelector((state) => state.cadete);
   useEffect(() => {
-    dispatch(ordersList());
+    dispatch(ordersList(cadete.id));
   }, []);
 
-  const update = (id, status) => {
+  const ordersToShow = [];
+
+  // const filter = (orders) => {
+  //   orders.map((order) => {
+  //     order.userId == cadete.id || order.userId == null
+  //       ? ordersToShow.push(order)
+  //       : null;
+  //   });
+  // };
+
+  const update = (id, status, cadeteId) => {
     let state = "";
     if (status == "En camino") {
       state = "Entregado";
@@ -42,7 +52,9 @@ const CadeteOrders = () => {
     if (status == "Pendiente") {
       state = "En camino";
     }
-    dispatch(orderState({ id: id, state: state }));
+    console.log("cadete idddddddddddddddddddd", cadeteId);
+
+    dispatch(orderState({ id: id, state: state, cadeteId: cadeteId }));
   };
 
   return (
@@ -54,8 +66,7 @@ const CadeteOrders = () => {
         <List dense={dense}>
           {orders &&
             orders.map((order) => {
-              return order.status === "Entregado" ||
-                order.status === "Devuelto a sucursal" ? null : (
+              return order.userId === cadete.id || order.userId === null ? (
                 <ListItem key={order.id}>
                   <Link to={`/singleOrder/${order.id}`}>
                     <ListItemText
@@ -73,14 +84,16 @@ const CadeteOrders = () => {
                       <Button
                         variant="outlined"
                         color="primary"
-                        onClick={() => update(order.id, order.status)}
+                        onClick={() => {
+                          update(order.id, order.status, cadete.id);
+                        }}
                       >
                         {order.status}
                       </Button>
                     </IconButton>
                   </ListItemSecondaryAction>
                 </ListItem>
-              );
+              ) : null;
             })}
         </List>
       </div>
