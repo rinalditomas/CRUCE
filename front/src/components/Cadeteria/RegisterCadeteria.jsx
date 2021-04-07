@@ -12,17 +12,19 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 
-import useStyles from "../utils/stylesRegister";
-import Copyright from "../utils/Copyright";
-import { useSnackbar } from "notistack";
+import useStyles from "../../utils/stylesRegister";
+import Copyright from "../../utils/Copyright";
 
 import { useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 
-import { registerCadeteria } from "../state/cadeteria";
+import { registerCadeteria } from "../../state/cadeteria";
+
+import { useSnackbar } from "notistack";
+import messagesHandler from "../../utils/messagesHandler";
 
 export const Cadeteria = () => {
-  const { enqueueSnackbar } = useSnackbar();
+  const messages = messagesHandler(useSnackbar());
 
   const classes = useStyles();
   const history = useHistory();
@@ -41,15 +43,11 @@ export const Cadeteria = () => {
     dispatch(registerCadeteria(input))
       .then(({ payload }) => {
         const r = payload.errors[0].message;
-        if (payload.errors)
-          enqueueSnackbar(`${r}`, {
-            variant: "error",
-          });
+        if (payload.errors) messages.error(r);
       })
       .catch((err) => {
-        enqueueSnackbar("Cadeteria registrada", {
-          variant: "success",
-        }) && history.push("/login");
+        messages.success("Cadeteria registrada correctamente") &&
+          history.push("/login");
       });
   };
 

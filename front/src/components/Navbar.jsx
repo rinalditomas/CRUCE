@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -9,7 +9,9 @@ import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
-import { setUser } from "../state/user";
+
+import { useSnackbar } from "notistack";
+import messagesHandler from '../utils/messagesHandler'
 
 const Navbar = () => {
   const classes = useStyles();
@@ -19,9 +21,12 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.cadete);
 
+
+  const messages = messagesHandler(useSnackbar()) 
+
   const logout = () => {
     localStorage.removeItem("token");
-    dispatch(clearUser());
+    dispatch(clearUser()) && messages.info()
     history.push("/");
   };
 

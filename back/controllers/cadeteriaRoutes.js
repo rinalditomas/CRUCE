@@ -1,7 +1,8 @@
-const { Cadeteria } = require("../models/index");
+const { Cadeteria, User } = require("../models/index");
 const jwt = require("jsonwebtoken");
 
 const cadeteriaController = {
+  
   allCadeterias(req, res, next) {
     Cadeteria.findAll()
       .then((cadeterias) => {
@@ -32,6 +33,17 @@ const cadeteriaController = {
           return cadeteria;
         })
         .then((cadeteria) => res.status(200).send(cadeteria));
+    });
+  },
+
+  admitCadete(req, res, next) {
+    User.findByPk(req.params.id).then((cadete) => {
+      cadete
+        .update({
+          active: !cadete.active,
+          authorized: !cadete.authorized,
+        })
+        .then((cadete) => res.status(200).send(cadete));
     });
   },
 

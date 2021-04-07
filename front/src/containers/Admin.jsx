@@ -5,13 +5,13 @@ import Login from "../components/Login";
 
 import Footer from "../components/Footer";
 import DataLoading from "../components/DataLoading";
-import ListCadeterias from "../components/ListCadeterias";
-import ListCadetes from "../components/ListCadetes";
-import CadeteriaRequest from "../components/CadeteriaRequest";
+import ListCadeterias from "../components/Admin/ListCadeterias";
+import ListCadetes from "../components/Admin/ListCadetes";
+import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
 import { useSelector , useDispatch} from "react-redux";
 import {setUser,fetchMe} from '../state/user'
 
-import adminPanel from "../privateComponents/adminPanel";
+import adminPanel from "../components/Admin/AdminPanel";
 
 export default function App() {
   const user = useSelector((state) => state.cadete);

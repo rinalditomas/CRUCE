@@ -3,19 +3,20 @@ import { Switch, Route, Redirect } from "react-router-dom";
 import Login from "../components/Login";
 
 import Footer from "../components/Footer";
-import CadeteriaRequest from "../components/CadeteriaRequest";
+import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, fetchMe } from "../state/user";
 
-import ProfileCadeteria from "../components/ProfileCadeteria";
-import CadeteriaPanel from "../components/CadeteriaPanel";
+import ProfileCadeteria from "../components/Cadeteria/ProfileCadeteria";
+import CadeteriaPanel from "../components/Cadeteria/CadeteriaPanel";
 
-import ListOrders from '../components/ListOrders'
-import ListCadetes from '../components/ListCadetes'
+import ListOrders from '../components/Admin/ListOrders'
+import ListCadetes from '../components/Admin/ListCadetes'
 import Metricas from '../components/Metricas'
-import CadeteRequest from '../components/CadeteRequest'
+import CadeteRequest from '../components/Cadeteria/CadeteRequest'
 
-import CadeteriaNavbar from '../components/CadeteriaNavbar'
+
+import CadeteriaNavbar from '../components/Cadeteria/CadeteriaNavbar'
 
 export default function Cadeteria() {
 
@@ -34,8 +35,8 @@ export default function Cadeteria() {
           <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
           <Route exact path="/cadeteria/listOrders" component={ListOrders} />
           <Route exact path="/cadeteria/listCadetes" component={ListCadetes} />
-          <Route exact path="/cadeterias/solicitudes" component={ProfileCadeteria} />
-          <Route exact path="/cadeterias/metricas" component={ProfileCadeteria} />
+          <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
+          <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
         </Switch>
       </>
       <Footer />

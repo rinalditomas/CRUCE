@@ -4,11 +4,9 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
-import adminMenuStyles from "../utils/adminStyles";
+import adminMenuStyles from "../../utils/stylesAdmin";
 
-
-const CadeteriaPanel = () => {
-
+export default function adminPanel() {
   const classes = adminMenuStyles();
 
   return (
@@ -22,47 +20,47 @@ const CadeteriaPanel = () => {
               <Grid container spacing={2} justify="center">
                 <Grid item xs={12}>
                   <Link
-                    to="/cadeteria/listOrders"
+                    to="/admin/uploadorders"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Button variant="contained" color="primary">
-                      Ordenes
+                      Cargar Ordenes
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
                   <Link
-                    to="/cadeteria/listCadetes"
+                    to="/admin/listCadeterias"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Button variant="contained" color="primary">
-                     Cadetes
+                      Cadeteria
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
                   <Link
-                    to="/cadeteria/perfil"
+                    to="/admin/listCadetes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Button variant="contained" color="primary">
-                      Perfil
+                      Cadete
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
                   <Link
-                    to="/cadeteria/solicitudes"
+                    to="/admin/cadeteriaRequest"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Button variant="contained" color="primary">
-                      Solicitudes pendientes
+                      Solicitudes
                     </Button>
                   </Link>
                 </Grid>
                 <Grid item xs={12}>
                   <Link
-                    to="/cadeteria/metricas"
+                    to="/admin/orders"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Button variant="contained" color="primary">
@@ -77,6 +75,4 @@ const CadeteriaPanel = () => {
       </main>
     </React.Fragment>
   );
-};
-
-export default CadeteriaPanel;
+}

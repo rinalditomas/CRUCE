@@ -19,21 +19,21 @@ import { Link, useHistory } from "react-router-dom";
 
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
-import { useSnackbar } from "notistack";
+
+
 import InputLabel from "@material-ui/core/InputLabel";
 
-import { allCadeterias } from "../state/cadeteria";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 
-export const Cadete = () => {
-  /*   const useStyles = makeStyles((theme) => ({
-    formControl: {
-      minWidth: 395,
-    },
-  }));
- */
+import {allCadeterias} from '../state/cadeteria'
 
+
+import { useSnackbar } from "notistack";
+import messageHandler from '../utils/messagesHandler'
+
+
+export const Cadete = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const classes = useStyles();
@@ -44,6 +44,10 @@ export const Cadete = () => {
 
   const cadeteriaList = useSelector((state) => state.cadeteria);
 
+
+  const messages = messageHandler(useSnackbar())
+
+
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
@@ -51,20 +55,22 @@ export const Cadete = () => {
     setInput({ ...input, [key]: value });
   };
 
+  useEffect(() => {
+    dispatch(allCadeterias())
+      .then((res) => console.log(res))
+      .catch((err) => err);
+  }, [dispatch]);
+
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerRequest(input))
       .then(({ payload }) => {
         const r = payload.errors[0].message;
         if (payload.errors)
-          enqueueSnackbar(`${r}`, {
-            variant: "error",
-          });
+          messages.error(r)
       })
       .catch((err) => {
-        enqueueSnackbar("Usuario registrado", {
-          variant: "success",
-        }) && history.push("/login");
+        messages.success('Usuario registrado') && history.push("/login");
       });
   };
 
@@ -147,11 +153,12 @@ export const Cadete = () => {
                   >
                     {cadeteriaList &&
                       cadeteriaList.map((cad, i) => {
-                        return (
-                          <MenuItem value={`${cad.nameCompany}`} key={i}>
-                            {`${cad.nameCompany}`}
-                          </MenuItem>
-                        );
+                        if (cad.authorized !== false)
+                          return (
+                            <MenuItem value={`${cad.nameCompany}`} key={i}>
+                              {`${cad.nameCompany}`}
+                            </MenuItem>
+                          );
                       })}
                   </Select>
                 </FormControl>

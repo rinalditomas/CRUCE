@@ -4,5 +4,6 @@ const cadeteriaController = require("../controllers/cadeteriaRoutes");
 
 router.post("/register", cadeteriaController.registerCadeteria);
 router.get("/allCadeterias", cadeteriaController.allCadeterias);
+router.put("/admitCadete/:id", cadeteriaController.admitCadete);
 
 module.exports = router;
