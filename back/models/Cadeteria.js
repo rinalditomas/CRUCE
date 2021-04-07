@@ -64,10 +64,18 @@ Cadeteria.init(
   { sequelize: db, modelName: "cadeteria" }
 );
 
+
+
+Cadeteria.addHook("beforeUpdate", (cadeteria) => {
+  cadeteria.salt = crypto.randomBytes(20).toString("hex");
+  cadeteria.password = cadeteria.hashPassword(cadeteria.password);
+});
+
 Cadeteria.addHook("beforeCreate", (cadeteria) => {
   cadeteria.salt = crypto.randomBytes(20).toString("hex");
   cadeteria.password = cadeteria.hashPassword(cadeteria.password);
 });
+
 Cadeteria.prototype.hashPassword = function (password) {
   return crypto.createHmac("Sha1", this.salt).update(password).digest("hex");
 };

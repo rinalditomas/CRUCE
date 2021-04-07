@@ -27,7 +27,7 @@ const CadeteriaNavbar = () => {
   const logout = () => {
     localStorage.removeItem("token");
     dispatch(clearUser()) && messages.info('Deslogueado correctamente')
-    history.push("/");
+    history.push("/cadeteria/login");
   };
 
   return (

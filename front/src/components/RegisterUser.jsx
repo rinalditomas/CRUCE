@@ -31,6 +31,8 @@ import { useSnackbar } from "notistack";
 import messageHandler from "../utils/messagesHandler";
 
 export const Cadete = () => {
+
+
   const { enqueueSnackbar } = useSnackbar();
 
   const classes = useStyles();
@@ -56,6 +58,7 @@ export const Cadete = () => {
       .catch((err) => err);
   }, [dispatch]);
 
+  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerRequest(input))

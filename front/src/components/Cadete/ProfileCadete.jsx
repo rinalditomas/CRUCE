@@ -112,19 +112,20 @@ export default function ProfileCadete() {
               onChange={handleChange}
             />
           </Grid>
-          {/* <Grid item xs={10}>
+          <Grid item xs={10}>
           <TextField
-            id="Contraseña"
-            name="descripcion"
+            id="password"
+            name="password"
             label="Contraseña"
+            type='password'
             fullWidth
             onChange={handleChange}
             />
-        </Grid> */}
+        </Grid> 
           <Grid item xs={10}>
             <TextField
               name="phoneNum"
-              id="numeroDeTel"
+              id="phoneNum"
               label="Numero de telefono"
               fullWidth
               placeholder={user && user.phoneNum}

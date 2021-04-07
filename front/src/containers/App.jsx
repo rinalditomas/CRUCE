@@ -13,6 +13,7 @@ import ProfileCadete from "../components/Cadete/ProfileCadete";
 import { fetchMe } from "../state/user";
 
 export default function App() {
+  
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
 

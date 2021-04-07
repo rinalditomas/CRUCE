@@ -2,6 +2,7 @@ const { User } = require("../models/index");
 const jwt = require("jsonwebtoken");
 
 const loginController = {
+
   loginUser(req, res, next) {
     const { email, password } = req.body;
     User.findOne({
@@ -25,6 +26,10 @@ const loginController = {
   logoutUser(req, res, next) {
     res.status(200).send("Usuario deslogeado con éxito");
   },
+
+  
+
+
 };
 
 module.exports = loginController;
