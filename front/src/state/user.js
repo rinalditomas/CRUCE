@@ -34,10 +34,10 @@ export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.data.token));
     })
-    .catch((err) => err);
+    .catch((err) => console.log(err));
 });
 
-export const sendToken = createAsyncThunk("LOGIN", (token, thunkAPI) => {
+export const sendToken = createAsyncThunk("LOGIN", (token) => {
   return axios
     .post(
       "http://localhost:8000/api/me",

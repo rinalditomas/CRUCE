@@ -9,10 +9,14 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
-import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import axios from "axios";
-import { allCadetes, editStateCadete } from "../state/admin";
+
 import { useDispatch, useSelector } from "react-redux";
+import { admitCadete} from '../../state/cadeteria'
+import { allCadetes } from "../../state/admin";
+
+
+import { useSnackbar } from "notistack";
+import messagesHandler from '../../utils/messagesHandler'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,46 +31,46 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function ListCadetes() {
+
+export default function CadeteriaRequest() {
+  const dispatch = useDispatch();
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
+  
   const cadetes = useSelector((state) => state.admin.cadetes);
-  const dispatch = useDispatch();
+  const messages = messagesHandler(useSnackbar())
 
   useEffect(() => {
     dispatch(allCadetes());
-  }, []);
+  }, [dispatch]);
 
   const handleActive = (id) => {
-    dispatch(editStateCadete(id)).then((res) => {
+    dispatch(admitCadete(id)).then((res) => {
       res.payload
-        ? alert("Estado cambiado correctamente")
-        : alert("Hubo un problema");
+        ? messages.success("Estado cambiado correctamente")
+        : messages.error("Hubo un problema");
     });
   };
 
   return (
     <div className={classes.root}>
       <div>
-        <h1 className="titulo">Lista de cadetes</h1>
+        <h1 className="titulo">Solicitudes de cadetes</h1>
         <Link
           to="/register"
           style={{ textDecoration: "none", color: "inherit" }}
         >
           <IconButton edge="end" aria-label="delete" className="icono">
-            <PersonAddIcon fontSize="large" />
+            <GroupAddIcon fontSize="large" />
           </IconButton>
         </Link>
       </div>
       <div className={classes.demo}>
         <List dense={dense}>
           {cadetes.map((cadete) => {
-            return (
-              <ListItem>
-                <ListItemText
-                  primary={cadete.firstName + " " + cadete.lastName}
-                />
+            return cadete.authorized === false ? (
+              <ListItem key={cadete.id}>
+                <ListItemText primary={cadete.firstName} />
                 <ListItemSecondaryAction>
                   {cadete.active ? (
                     <IconButton
@@ -91,7 +95,7 @@ export default function ListCadetes() {
                   )}
                 </ListItemSecondaryAction>
               </ListItem>
-            );
+            ) : null;
           })}
         </List>
       </div>

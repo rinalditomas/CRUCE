@@ -9,11 +9,13 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
-import axios from "axios";
-import { Typography } from "@material-ui/core";
 
 import { useDispatch, useSelector } from "react-redux";
-import { admitCadeteria, AllCadeterias } from "../state/admin";
+import { admitCadeteria, AllCadeterias } from "../../state/admin";
+
+import { useSnackbar } from "notistack";
+import messagesHandler from '../../utils/messagesHandler'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -28,26 +30,16 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
 
 export default function CadeteriaRequest() {
+
   const dispatch = useDispatch();
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
+  
   const cadeterias = useSelector((state) => state.admin.cadeterias);
+
+  const messages = messagesHandler(useSnackbar())
 
   useEffect(() => {
     dispatch(AllCadeterias());
@@ -56,8 +48,8 @@ export default function CadeteriaRequest() {
   const handleActive = (id) => {
     dispatch(admitCadeteria(id)).then((res) => {
       res.payload
-        ? alert("Estado cambiado correctamente")
-        : alert("Hubo un problema");
+        ? messages.success("Estado cambiado correctamente")
+        : messages.error("Hubo un problema");
     });
   };
 

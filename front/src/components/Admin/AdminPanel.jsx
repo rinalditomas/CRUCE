@@ -4,7 +4,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
-import adminMenuStyles from "../utils/adminStyles";
+import adminMenuStyles from "../../utils/stylesAdmin";
 
 export default function adminPanel() {
   const classes = adminMenuStyles();

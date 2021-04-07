@@ -6,45 +6,33 @@ import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
-import { clearUser } from "../state/user";
-import useStyles from "../utils/stylesNavbar";
+import { useDispatch } from "react-redux";
+import { clearUser } from "../../state/user";
+import useStyles from "../../utils/stylesNavbar";
 
 import { useSnackbar } from "notistack";
-import messagesHandler from '../utils/messagesHandler'
+import messagesHandler from '../../utils/messagesHandler'
 
-const Navbar = () => {
+const CadeteriaNavbar = () => {
   const classes = useStyles();
   const history = useHistory();
 
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  const user = useSelector((state) => state.cadete);
 
 
-  const messages = messagesHandler(useSnackbar()) 
+  const messages = messagesHandler(useSnackbar())
+
 
   const logout = () => {
     localStorage.removeItem("token");
-    dispatch(clearUser()) && messages.info()
+    dispatch(clearUser()) && messages.info('Deslogueado correctamente')
     history.push("/");
-  };
-
-  const userTypeColor = (color = "") => {
-    let admin = user && user.admin;
-    switch (admin) {
-      case true:
-        color = "admin";
-        break;
-      default:
-        color = "cadete";
-    }
-    return color;
   };
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes[`${userTypeColor()}`]}>
+      <AppBar position="static" style={{ backgroundColor: "red" }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -71,22 +59,12 @@ const Navbar = () => {
               </Button>
             </>
           )}
-          <Link to="/" style={{ color: "inherit" }}>
+          <Link to="/cadeteria" style={{ color: "inherit" }}>
             <Button color="inherit">Home</Button>
           </Link>
-          {user.admin ? (
-            <>
-              {" "}
-              <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
-                <Button color="inherit">admin panel</Button>
-              </Link>
-            </>
-          ) : (
-            <></>
-          )}
         </Toolbar>
       </AppBar>
     </div>
   );
 };
-export default Navbar;
+export default CadeteriaNavbar;

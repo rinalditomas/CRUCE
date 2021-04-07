@@ -8,9 +8,9 @@ const loginController = {
       where: { email },
     })
       .then((user) => {
-        if (!user) return res.sendStatus(401)
+        if (!user) return res.status(401).send('El usuario no existe')
         const isValid = user.validPassword(password);
-        if (isValid !== true)return res.sendStatus(401)
+        if (isValid !== true)return res.status(401).send('La password es incorrecta')
 
         const token = jwt.sign(
           {id:user.id,email:user.email,firsName:user.firstName,admin:user.admin},

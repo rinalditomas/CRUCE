@@ -7,7 +7,7 @@ import CardContent from "@material-ui/core/CardContent";
 import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
-import { singleOrder, orderState } from "../state/orders";
+import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import axios from "axios";
