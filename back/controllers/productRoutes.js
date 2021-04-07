@@ -2,22 +2,17 @@ const { Order, Product } = require("../models");
 const sequelize = require("sequelize");
 
 const productController = {
-  async findProductsByOrder(req, res, next) {
-
-    
-    const orderNumber = "1119561076530-01";
-
+  async findProductsByOrderForCount(req, res, next) {
     const products = await Product.findAndCountAll({
-      where: { orderNumber },
+      where: { orderNumber: req.params.orderId },
       attributes: [
-        "productSku",
-        sequelize.fn("count", sequelize.col("productSku")),
+        "productName",
+        sequelize.fn("count", sequelize.col("productName")),
       ],
-      group: ["productSku"],
+      group: ["productName"],
     }).catch((e) => console.log(e));
     res.send(products);
   },
-  
 };
 
 module.exports = productController;
