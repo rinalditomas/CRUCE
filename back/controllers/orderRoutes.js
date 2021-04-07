@@ -31,14 +31,56 @@ const NewOrderController = {
       .catch(res.sendStatus(401));
   },
 
-  async allOrders(req, res) {
+  /*  async allOrders(req, res) {
     try {
       const orders = await Order.findAll();
       res.send(orders);
     } catch (e) {
       res.send(e);
     }
+  }, */
+
+  async allOrders(req, res) {
+    let list = {};
+    let ord = [];
+    try {
+      const orders = await Order.findAll();
+      orders.map((order) => {
+        list[order.orderNumber] = true;
+      });
+
+      for (id in list) {
+        const ordy = await Order.findOne({
+          where: { orderNumber: id },
+        });
+        ord.push(ordy);
+      }
+      res.send(ord);
+    } catch (e) {
+      res.send(e);
+    }
   },
+
+  /* allOrders(req, res) {
+    let list = {};
+    let orders = [];
+    Order.findAll()
+      .then((res) => {
+        return res.map((order) => {
+          list[order.orderNumber] = true;
+        });
+      })
+      .then(() => {
+
+        for (id in list) {
+          Order.findOne({ where: { orderNumber: id } }).then((ord) =>
+            orders.push(ord)
+          );
+        }
+        return orders;
+      })
+      .then((orders) => console.log(orders));
+  }, */
 
   async findOrderById(req, res) {
     const id = req.params.id;
