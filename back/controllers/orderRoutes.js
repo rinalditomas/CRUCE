@@ -1,4 +1,4 @@
-const { Order, Product } = require("../models");
+const { Order, Product, User, Cadeteria } = require("../models");
 
 const NewOrderController = {
   async newOrder(req, res, next) {
@@ -31,9 +31,21 @@ const NewOrderController = {
   },
 
   async allOrders(req, res) {
+    let list = {};
+    let ord = [];
     try {
       const orders = await Order.findAll();
-      res.send(orders);
+      orders.map((order) => {
+        list[order.orderNumber] = true;
+      });
+
+      for (id in list) {
+        const ordy = await Order.findOne({
+          where: { orderNumber: id },
+        });
+        ord.push(ordy);
+      }
+      res.send(ord);
     } catch (e) {
       res.send(e);
     }
@@ -49,19 +61,32 @@ const NewOrderController = {
     }
   },
 
-  async changeStateOrders(req, res) {
+  changeStateOrders(req, res) {
     const id = req.params.id;
     const status = req.body.status;
-
-    Order.findByPk(id).then((order) => {
-      order
-        .update({
-          status: status,
-        })
-        .then((order) => {
-          res.send(order);
+    const cadeteId = req.body.cadeteId;
+    User.findByPk(cadeteId)
+      .then((cadete) => {
+        Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
+          Order.findByPk(id).then((order) => {
+            order
+              .setUser(cadete)
+              .then(() => {
+                order.setCadeterium(cadeteria);
+              })
+              .then(() => {
+                order
+                  .update({
+                    status: status,
+                  })
+                  .then((order) => {
+                    res.send(order);
+                  });
+              });
+          });
         });
-    });
+      })
+      .catch((e) => console.log(e));
   },
 };
 

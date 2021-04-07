@@ -57,6 +57,7 @@ export default function ProfileCadete() {
       } else alert("ocurrió un error");
     });
   };
+  console.log("userrrrrrrrrrrr", user);
 
   return (
     <React.Fragment>

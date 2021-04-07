@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
@@ -10,6 +10,8 @@ import Typography from "@material-ui/core/Typography";
 import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
+import axios from "axios";
+import { Grid, ListItem } from "@material-ui/core";
 const useStyles = makeStyles({
   root: {
     maxWidth: 500,
@@ -24,13 +26,19 @@ export default function SingleOrder({ match }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orders.singleOrder);
+  const cadete = useSelector((state) => state.cadete);
+  const [products, setProducts] = useState([]);
 
   useEffect(() => {
-    dispatch(singleOrder(match));
+    dispatch(singleOrder(match)).then(
+      axios
+        .get(`http://localhost:8000/api/product/${order.orderNumber}`)
+        .then((res) => setProducts(res.data.count))
+    );
   }, []);
 
   const ChangeState = (id, state) => {
-    const state2 = { id: id, state: state };
+    const state2 = { id: id, state: state, cadeteId: cadete.id };
     dispatch(orderState(state2)).then((order) => {
       if (order.payload.status != "En camino") history.push("/cadeteOrders");
       else dispatch(singleOrder(match));
@@ -53,9 +61,21 @@ export default function SingleOrder({ match }) {
           <Typography gutterBottom variant="h5" component="h2">
             {order.orderNumber}
           </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            {order.productName}
-          </Typography>
+
+          {products &&
+            products.map((product) => {
+              return (
+                <Grid container spacing={2} key={product.id}>
+                  <Grid item xs={10}>
+                    {product.productName}
+                  </Grid>
+                  <Grid item xs={2}>
+                    {"cant: " + product.count}
+                  </Grid>
+                </Grid>
+              );
+            })}
+
           <Typography gutterBottom variant="h5" component="h2">
             {order.clientName + " " + order.clientLastName}
           </Typography>

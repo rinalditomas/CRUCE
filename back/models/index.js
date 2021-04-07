@@ -7,10 +7,8 @@ User.belongsTo(Cadeteria);
 Cadeteria.hasMany(User);
 
 Order.belongsTo(Cadeteria);
-Cadeteria.hasMany(Order);
 
 Order.belongsTo(User);
-User.hasMany(Order);
 
 /* 
 ////

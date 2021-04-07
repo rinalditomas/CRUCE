@@ -20,12 +20,10 @@ import { useDispatch } from "react-redux";
 import { loginRequest } from "../state/user";
 import { fetchMe } from "../state/user";
 
-import messagesHandler from '../utils/messagesHandler'
-
+import messagesHandler from "../utils/messagesHandler";
 
 export default function Login() {
-
-  const messages = messagesHandler(useSnackbar())
+  const messages = messagesHandler(useSnackbar());
 
   const classes = useStyles();
   const [input, setInput] = useState([]);
@@ -49,7 +47,8 @@ export default function Login() {
         else
           check && check.admin
             ? messages.admin() && history.push("/admin")
-            : messages.success('Usuario ingresado correctamente') && history.push("/");
+            : messages.success("Usuario ingresado correctamente") &&
+              history.push("/cadeteOrders");
       })
       .catch((e) => history.push("/login"));
   };
