@@ -1,42 +1,76 @@
 const { Order, Product, User, Cadeteria } = require("../models");
 
 const NewOrderController = {
-  async newOrder(req, res, next) {
+  newOrder(req, res, next) {
     const orders = req.body.items;
-    await orders
-      .map((order) => {
-        Order.create({
-          clientName: order["Client Name"],
-          clientLastName: order["Client Last Name"],
-          productName: order["SKU Name"],
-          productSku: order["ID_SKU"],
-          orderNumber: order.Order,
-          creationDate: order["Creation Date"],
-          province: order["UF"],
-          city: order.City,
-          street: order.Street,
-          number: order.Number,
-
-          complement: order.Complement,
+    orders.map((order) => {
+      /*  Order.findOrCreate({
+          where: {
+            orderNumber: order.Order,
+          },
+          defaults: {
+            clientName: order["Client Name"],
+            clientLastName: order["Client Last Name"],
+            productName: order["SKU Name"],
+            productSku: order["ID_SKU"],
+            creationDate: order["Creation Date"],
+            orderNumber: order.Order,
+            province: order["UF"],
+            city: order.City,
+            street: order.Street,
+            number: order.Number,
+            complement: order.Complement,
+          },
         });
+ */
+      Product.create({
+        productName: order["SKU Name"],
+        productSku: order["ID_SKU"],
+        orderNumber: order.Order,
+      });
+    });
+    let ids = [];
+    let newOrders = [];
+    orders.map((order) => {
+      if (!ids.includes(order.Order)) {
+        newOrders.push(order);
+        ids.push(order.Order);
+      }
+    });
+    let lastOrders = [];
+    newOrders.map((order) => {
+      Order.create({
+        clientName: order["Client Name"],
+        clientLastName: order["Client Last Name"],
+        creationDate: order["Creation Date"],
+        orderNumber: order.Order,
+        province: order["UF"],
+        city: order.City,
+        street: order.Street,
+        number: order.Number,
+        complement: order.Complement,
+      }).then((order) => lastOrders.push(order));
+    });
 
-        Product.create({
-          productName: order["SKU Name"],
-          productSku: order["ID_SKU"],
-          orderNumber: order.Order,
-        });
-      })
-      .then(res.sendStatus(200))
-      .catch(res.sendStatus(401));
+    res.status(200).send(lastOrders);
   },
 
   async allOrders(req, res) {
+    try {
+      const orders = await Order.findAll();
+      res.send(orders);
+    } catch (error) {
+      console.log(error);
+      res.send(error);
+    }
+  },
+  /*  async allOrders(req, res) {
     let list = {};
     let ord = [];
     try {
       const orders = await Order.findAll();
       orders.map((order) => {
-        list[order.orderNumber] = true;
+        if (!order.userId) list[order.orderNumber] = true;
       });
 
       for (id in list) {
@@ -49,7 +83,7 @@ const NewOrderController = {
     } catch (e) {
       res.send(e);
     }
-  },
+  }, */
 
   async findOrderById(req, res) {
     const id = req.params.id;
@@ -62,13 +96,29 @@ const NewOrderController = {
   },
 
   changeStateOrders(req, res) {
-    const id = req.params.id;
+    const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId;
-    User.findByPk(cadeteId)
-      .then((cadete) => {
-        Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
-          Order.findByPk(id).then((order) => {
+
+    User.findByPk(cadeteId).then((cadete) => {
+      Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
+        Order.findOne({
+          where: {
+            orderNumber: orderNumber,
+          },
+        }).then((order) => {
+          order
+            .setUser(cadete)
+            .then(order.setCadeterium(cadeteria))
+            .then(order.update({ status: status }))
+            .then((newOrders) => res.send(newOrders));
+        });
+      });
+    });
+  },
+};
+
+/*  Order.findByPk(id).then((order) => {
             order
               .setUser(cadete)
               .then(() => {
@@ -86,8 +136,6 @@ const NewOrderController = {
           });
         });
       })
-      .catch((e) => console.log(e));
-  },
-};
+      .catch((e) => console.log(e));*/
 
 module.exports = NewOrderController;

@@ -27,7 +27,6 @@ export default function SingleOrder({ match }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orders.singleOrder);
-  const cadete = useSelector((state) => state.cadete);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -35,12 +34,16 @@ export default function SingleOrder({ match }) {
       axios
         .get(`http://localhost:8000/api/product/${order.orderNumber}`)
         .then((res) => setProducts(res.data.count))
+
+        .then(() => console.log("PROOOOOODUCTS", products))
+
         .catch(err => console.log(err))
+
     );
   }, []);
 
   const ChangeState = (id, state) => {
-    const state2 = { id: id, state: state, cadeteId: cadete.id };
+    const state2 = { id: id, state: state };
     dispatch(orderState(state2)).then((order) => {
       if (order.payload.status !== "En camino") history.push("/cadeteOrders");
       else dispatch(singleOrder(match));
@@ -51,6 +54,8 @@ export default function SingleOrder({ match }) {
     <Card className={classes.root}>
       <CardActionArea>
         <iframe
+          /* src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAZW4doT6m-HwPOA0wpObfOHwO2CpQYPV0
+          &q=${order.street}+${order.number}+${order.city}+${order.province}`} */
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.274812272798!2d-68.84847478505935!3d-32.890901676398016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09c0d5fed751%3A0x859ef7231006759c!2sMITRE%20870!5e0!3m2!1ses-419!2sar!4v1617304827229!5m2!1ses-419!2sar"
           title='img'
           width="100%"
@@ -101,7 +106,7 @@ export default function SingleOrder({ match }) {
           <Button
             size="small"
             color="primary"
-            onClick={() => ChangeState(order.id, "En camino")}
+            onClick={() => ChangeState(order.orderNumber, "En camino")}
           >
             TOMAR
           </Button>
@@ -110,21 +115,23 @@ export default function SingleOrder({ match }) {
             <Button
               size="small"
               color="primary"
-              onClick={() => ChangeState(order.id, "Entregado")}
+              onClick={() => ChangeState(order.orderNumber, "Entregado")}
             >
               ENTREGADO
             </Button>
             <Button
               size="small"
               color="primary"
-              onClick={() => ChangeState(order.id, "Devuelto a sucursal")}
+              onClick={() =>
+                ChangeState(order.orderNumber, "Devuelto a sucursal")
+              }
             >
               DEVUELTO A SUCURSAL
             </Button>
             <Button
               size="small"
               color="primary"
-              onClick={() => ChangeState(order.id, "Pendiente")}
+              onClick={() => ChangeState(order.orderNumber, "Pendiente")}
             >
               CANCELAR
             </Button>
@@ -134,3 +141,7 @@ export default function SingleOrder({ match }) {
     </Card>
   );
 }
+
+/*
+                    href={`https://www.google.com/maps/place/${order.destination.street}%20${order.destination.number}%20${order.destination.city}`}
+ */

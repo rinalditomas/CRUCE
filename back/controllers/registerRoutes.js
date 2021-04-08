@@ -17,24 +17,33 @@ const registerController = {
       where: {
         nameCompany: req.body.cadeterias,
       },
-    })
-      .then((cadeteria) => {
-        User.create(req.body)
-          .then((user) => {
-            cadeteria
-              .setUsers(user)
-              .then(() =>
-                User.findOne({
-                  where: {
-                    id: user.id,
-                  },
-                })
-              )
-              .then((userSet) => res.status(200).send(userSet));
-          })
-          .catch(({ errors }) => res.status(500).send(errors[0].message));
+
+    }).then((cadeteria) => {
+      User.create({
+        firstName: req.body.firstName,
+        lastName: req.body.lastName,
+        email: req.body.email,
+        password: req.body.password,
+        phoneNum: req.body.phoneNum,
+        admin: req.body.admin,
+        vehicle: req.body.vehicle,
+      }).then((user) => {
+        user
+          .setCadeterium(cadeteria)
+          .then(() =>
+            User.findOne({
+              where: {
+                id: user.id,
+              },
+            })
+          )
+          .then((userSet) => res.status(200).send(userSet));
       })
-      .catch((err) => res.send(err));
+       .catch(({ errors }) => res.status(500).send(errors[0].message));
+    })
+    .catch((err) => res.send(err));
+=======
+  
   },
   // .catch((err) => res.send(err));
 };

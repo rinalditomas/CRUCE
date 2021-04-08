@@ -21,14 +21,6 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
-    productSku: {
-      type: S.STRING,
-      allowNull: false,
-    },
-    productName: {
-      type: S.STRING,
-      allowNull: false,
-    },
 
     province: {
       type: S.STRING,
