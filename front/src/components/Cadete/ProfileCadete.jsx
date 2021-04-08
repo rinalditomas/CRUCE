@@ -51,7 +51,7 @@ export default function ProfileCadete() {
     e.preventDefault();
     const id = user.id;
     dispatch(editProfileUser({ id, input })).then((res) => {
-      if (res.payload == 201) {
+      if (res.payload === 201) {
         alert("datos actualizados");
         history.push("/cadeteOrders");
       } else alert("ocurrió un error");

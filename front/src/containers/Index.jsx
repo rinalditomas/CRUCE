@@ -52,17 +52,15 @@ const Index = () => {
         <Route exact path="/login" component={Login} />
         <Route exact path="/register" component={SelectButtons} />
         <Route exact path="/cadeteria/login" component={CadeteriaLogin} />
-        <Route exact path="/cadete" component={Cadete} />
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="/cadeteria" component={Cadeteria} />
+       
         <Route exact path="/" component={Home} />
         <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
         <Route exact path="/cadeteria/listOrders" component={ListOrders} />
         <Route exact path="/cadeteria/listCadetes" component={ListCadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
         <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
-        <Route path="/cadete/cadeteOrders" component={CadeteOrders} />
-        <Route path="/cadete/profileCadete" component={ProfileCadete} />
+        <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} />
+        <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
           path="/cadete/singleOrder/:id"
           render={({ match }) => <SingleOrder match={match.params.id} />}
@@ -75,6 +73,7 @@ const Index = () => {
           path="/admin/cadeteriaRequest"
           component={CadeteriaRequest}
         />
+        
         <Redirect to="/" />
       </Switch>
     </div>

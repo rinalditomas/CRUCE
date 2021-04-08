@@ -1,6 +1,5 @@
 import {
   createReducer,
-  createAction,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
