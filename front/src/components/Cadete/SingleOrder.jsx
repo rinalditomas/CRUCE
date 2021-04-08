@@ -4,14 +4,15 @@ import Card from "@material-ui/core/Card";
 import CardActionArea from "@material-ui/core/CardActionArea";
 import CardActions from "@material-ui/core/CardActions";
 import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
 import Button from "@material-ui/core/Button";
 import Typography from "@material-ui/core/Typography";
 import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import axios from "axios";
-import { Grid, ListItem } from "@material-ui/core";
+import { Grid} from "@material-ui/core";
+
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 500,
@@ -33,14 +34,18 @@ export default function SingleOrder({ match }) {
       axios
         .get(`http://localhost:8000/api/product/${order.orderNumber}`)
         .then((res) => setProducts(res.data.count))
+
         .then(() => console.log("PROOOOOODUCTS", products))
+
+        .catch(err => console.log(err))
+
     );
   }, []);
 
   const ChangeState = (id, state) => {
     const state2 = { id: id, state: state };
     dispatch(orderState(state2)).then((order) => {
-      if (order.payload.status != "En camino") history.push("/cadeteOrders");
+      if (order.payload.status !== "En camino") history.push("/cadeteOrders");
       else dispatch(singleOrder(match));
     });
   };
@@ -52,6 +57,7 @@ export default function SingleOrder({ match }) {
           /* src={`https://www.google.com/maps/embed/v1/place?key=AIzaSyAZW4doT6m-HwPOA0wpObfOHwO2CpQYPV0
           &q=${order.street}+${order.number}+${order.city}+${order.province}`} */
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.274812272798!2d-68.84847478505935!3d-32.890901676398016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09c0d5fed751%3A0x859ef7231006759c!2sMITRE%20870!5e0!3m2!1ses-419!2sar!4v1617304827229!5m2!1ses-419!2sar"
+          title='img'
           width="100%"
           height="70%"
           style={{ border: 0 }}
@@ -96,7 +102,7 @@ export default function SingleOrder({ match }) {
         </CardContent>
       </CardActionArea>
       <CardActions>
-        {order.status == "Pendiente" ? (
+        {order.status === "Pendiente" ? (
           <Button
             size="small"
             color="primary"
@@ -104,7 +110,7 @@ export default function SingleOrder({ match }) {
           >
             TOMAR
           </Button>
-        ) : order.status == "En camino" ? (
+        ) : order.status === "En camino" ? (
           <>
             <Button
               size="small"
@@ -128,7 +134,7 @@ export default function SingleOrder({ match }) {
               onClick={() => ChangeState(order.orderNumber, "Pendiente")}
             >
               CANCELAR
-            </Button>{" "}
+            </Button>
           </>
         ) : null}
       </CardActions>

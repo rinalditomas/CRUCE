@@ -2,6 +2,7 @@ const { User, Cadeteria } = require("../models");
 
 const registerController = {
   register(req, res) {
+    console.log("registro de usuario", req.body);
     // const {
     //   firstName,
     //   lastName,
@@ -16,6 +17,7 @@ const registerController = {
       where: {
         nameCompany: req.body.cadeterias,
       },
+
     }).then((cadeteria) => {
       User.create({
         firstName: req.body.firstName,
@@ -36,8 +38,12 @@ const registerController = {
             })
           )
           .then((userSet) => res.status(200).send(userSet));
-      });
-    });
+      })
+       .catch(({ errors }) => res.status(500).send(errors[0].message));
+    })
+    .catch((err) => res.send(err));
+=======
+  
   },
   // .catch((err) => res.send(err));
 };

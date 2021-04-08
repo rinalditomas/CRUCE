@@ -1,26 +1,51 @@
-import React, { useEffect, useState } from "react";
-import Carousel from "./Carousel";
+import React from "react";
+
 import { useSelector, useDispatch } from "react-redux";
-import { setUser, fetchMe } from "../state/user";
-import { Redirect, useHistory } from "react-router-dom";
+
+
+import CssBaseline from "@material-ui/core/CssBaseline";
+
+import Grid from "@material-ui/core/Grid";
+
+
+import { makeStyles } from "@material-ui/core/styles";
+
+import HomeNavbar from "./HomeNavbar";
+
+const useStyles = makeStyles((theme) => ({
+  root: {
+    display: "flex",
+    flexWrap: "wrap",
+    "& > *": {
+      margin: theme.spacing(1),
+      width: theme.spacing(16),
+      height: theme.spacing(16),
+    },
+  },
+}));
 
 const Home = () => {
-  const user = useSelector((state) => state.cadete);
-
-  const dispatch = useDispatch();
-
+  const classes = useStyles();
   return (
     <div>
-      {user ? (
-        <>
-          <h1>No estas logueado</h1>
-        </>
-      ) : (
-        <>
-          <h1>{`Bienvenido ${user.firstName} ${user.lastName}`}</h1>
-          <Carousel />
-        </>
-      )}
+      <HomeNavbar />
+      <Grid container component="main" className={classes.root}>
+        <CssBaseline />
+        <Grid item xs={12} sm={8} md={5} elevation={2} square>
+          <div className={classes.paper}>
+            <img
+              style={{
+                width: "135%",
+                borderRadius: "5rem",
+                minWidth: "100%",
+                marginTop: "2rem",
+              }}
+              src="https://image.freepik.com/foto-gratis/servicio-mensajeria-joven-que-recibe-paquete-repartidor_38391-600.jpg"
+              alt="s"
+            ></img>
+          </div>
+        </Grid>
+      </Grid>
     </div>
   );
 };

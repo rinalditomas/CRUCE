@@ -43,21 +43,29 @@ const updateOrder = (orders, newOrder) => {
     order.id === newOrder.id ? { ...order, status: newOrder.status } : order
   );
 };
+
+
 const initialState = {
   orders: [],
   singleOrder: {},
 };
+
 const ordersReducer = createReducer(initialState, {
+  
   [setOrders]: (state, action) => action.payload,
+
   [ordersList.fulfilled]: (state, action) => {
     return { ...state, orders: action.payload };
   },
+
   [orderState.fulfilled]: (state, action) => {
     return { ...state, orders: updateOrder(state.orders, action.payload) };
   },
+
   [singleOrder.fulfilled]: (state, action) => {
     return { ...state, singleOrder: action.payload };
   },
+  
 });
 
 export default ordersReducer;
