@@ -36,7 +36,7 @@ User.init(
       allowNull: false,
       unique: true,
       validate: {
-        len: [10, 10],
+        len: { msg: "Debe tener 10 caracteres", args: [10, 10] },
       },
     },
     admin: {

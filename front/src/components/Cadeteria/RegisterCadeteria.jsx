@@ -42,13 +42,13 @@ export const Cadeteria = () => {
     e.preventDefault();
     dispatch(registerCadeteria(input))
       .then(({ payload }) => {
-        const r = payload.errors[0].message;
-        if (payload.errors) messages.error(r);
+        if (payload.errors)
+          payload.errors.map((e) => messages.error(e.message));
+        else
+          messages.success("Cadeteria registrada correctamente") &&
+            history.push("/cadeteria/login");
       })
-      .catch((err) => {
-        messages.success("Cadeteria registrada correctamente") &&
-          history.push("/login");
-      });
+      .catch((err) => {messages.error('Hubo un problema con el registro')});
   };
 
   return (

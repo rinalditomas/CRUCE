@@ -74,9 +74,9 @@ const Navbar = () => {
           <Link to="/" style={{ color: "inherit" }}>
             <Button color="inherit">Home</Button>
           </Link>
-          {user.admin ? (
+          {user && user.admin ? (
             <>
-              {" "}
+          
               <Link to="/admin/uploadOrders" style={{ color: "inherit" }}>
                 <Button color="inherit">admin panel</Button>
               </Link>

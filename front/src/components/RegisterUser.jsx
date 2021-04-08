@@ -29,10 +29,11 @@ import { allCadeterias } from "../state/cadeteria";
 
 import { useSnackbar } from "notistack";
 import messageHandler from "../utils/messagesHandler";
+///manejo de errores
+
+import { unwrapResult } from "@reduxjs/toolkit";
 
 export const Cadete = () => {
-
-
   const { enqueueSnackbar } = useSnackbar();
 
   const classes = useStyles();
@@ -58,19 +59,16 @@ export const Cadete = () => {
       .catch((err) => err);
   }, [dispatch]);
 
-  
   const handleSubmit = (e) => {
     e.preventDefault();
     dispatch(registerRequest(input))
       .then(({ payload }) => {
-        const r = payload.errors[0].message;
-        if (payload.errors) messages.error(r);
+        if (!payload) messages.error();
+        else messages.success("Usuario registrado") && history.push("/login");
       })
-      .catch((err) => {
-        messages.success("Usuario registrado") && history.push("/login");
-      });
+      .catch((err) => messages.error(err));
   };
-  console.log(input);
+
   return (
     <div style={{ paddingTop: "2rem" }}>
       <Container component="main" maxWidth="xs">
