@@ -6,7 +6,6 @@ import {
 import axios from "axios";
 
 export const clearUser = createAction("CLEAR_USER");
-export const setUser = createAction("SET_USER");
 
 export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   return axios
@@ -61,9 +60,9 @@ export const editProfileUser = createAsyncThunk(
 );
 
 const userReducer = createReducer([], {
+
   [fetchMe.fulfilled]: (state, action) => action.payload,
   [loginRequest.fulfilled]: (state, action) => action.payload,
-  [setUser]: (state, action) => action.payload,
   [registerRequest.fulfilled]: (state, action) => action.payload,
   [sendToken.fulfilled]: (state, action) => action.payload,
   [editProfileUser.fulfilled]: (state, action) => action.payload,

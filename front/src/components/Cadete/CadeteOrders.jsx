@@ -30,6 +30,8 @@ const CadeteOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const cadete = useSelector((state) => state.cadete);
+
+
   useEffect(() => {
     dispatch(ordersList(cadete.id));
   }, []);
@@ -46,13 +48,12 @@ const CadeteOrders = () => {
 
   const update = (id, status, cadeteId) => {
     let state = "";
-    if (status == "En camino") {
+    if (status === "En camino") {
       state = "Entregado";
     }
-    if (status == "Pendiente") {
+    if (status === "Pendiente") {
       state = "En camino";
     }
-    console.log("cadete idddddddddddddddddddd", cadeteId);
 
     dispatch(orderState({ id: id, state: state, cadeteId: cadeteId }));
   };
@@ -68,7 +69,7 @@ const CadeteOrders = () => {
             orders.map((order) => {
               return order.userId === cadete.id || order.userId === null ? (
                 <ListItem key={order.id}>
-                  <Link to={`singleOrder/${order.id}`}>
+                  <Link to={`cadete/singleOrder/${order.id}`}>
                     <ListItemText
                       primary={
                         order.street +
