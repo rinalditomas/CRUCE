@@ -46,6 +46,7 @@ const Prueba = () => {
 
   const upload = () => {
     dispatch(upLoadOrders({ items })).then((res) => {
+      console.log("PEEEEEEEEEEEEEEEEEEE", res);
       if (res.payload === 200) {
         alert("Tu archivo se cargo correctamente");
       } else {

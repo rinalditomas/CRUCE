@@ -26,8 +26,8 @@ const registerController = {
         admin: req.body.admin,
         vehicle: req.body.vehicle,
       }).then((user) => {
-        cadeteria
-          .setUsers(user)
+        user
+          .setCadeterium(cadeteria)
           .then(() =>
             User.findOne({
               where: {

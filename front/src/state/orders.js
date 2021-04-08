@@ -18,11 +18,15 @@ export const orderState = createAsyncThunk(
   "ORDERS_STATE",
   (order, thunkApi) => {
     return axios
-      .put(`http://localhost:8000/api/orders/edit/${order.id}`, {
+      .put(`http://localhost:8000/api/orders/edit/${order.orderNumber}`, {
         status: order.state,
         cadeteId: order.cadeteId,
       })
-      .then((res) => res.data)
+
+      .then((res) => {
+        console.log("HOOOOLAAAAAAA", res.data);
+        return res.data;
+      })
       .catch((e) => console.log(e));
   }
 );
