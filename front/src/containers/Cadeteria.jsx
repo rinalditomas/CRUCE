@@ -7,54 +7,35 @@ import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, fetchMe } from "../state/user";
 
-import ProfileCadeteria from "../components/Cadeteria/ProfileCadeteria";
-import CadeteriaPanel from "../components/Cadeteria/CadeteriaPanel";
 
-import ListOrders from "../components/Cadeteria/ListOrders";
-import ListCadetes from "../components/Admin/ListCadetes";
-import Metricas from "../components/Metricas";
-import CadeteRequest from "../components/Cadeteria/CadeteRequest";
+import { fetchCad } from "../state/cadeteria";
+
+import { useHistory } from "react-router-dom";
+import adminPanel from "../components/Admin/AdminPanel";
 
 import CadeteriaLogin from "../components/Cadeteria/CadeteriaLogin";
 import CadeteriaNavbar from "../components/Cadeteria/CadeteriaNavbar";
+import CadeteriaPanel from "../components/Cadeteria/CadeteriaPanel";
 
-import { fetchCad } from "../state/cadeteria";
+import Error from "../components/Error";
 
 export default function Cadeteria() {
   const user = useSelector((state) => state.cadete);
   const dispatch = useDispatch();
+  const history = useHistory();
 
-  /*   const cadeteria = {companyName: 'JustEat'} */
   const cadeteria = useSelector((state) => state.cadeteria);
 
+  const token = localStorage.getItem("token");
 
-
-
-  console.log('CADETERIA EN MAIN CAD', cadeteria)
 
   return (
     <div>
-      <>
-        <CadeteriaNavbar />
-        <Switch>
-          {/* {!user && <Redirect from="/" to="/cadeteria" />} */}
-          <Route exact path="/cadeteria" component={CadeteriaPanel} />
-          <Route exact path="/cadeteria/login" component={CadeteriaLogin} />
-          <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
-          <Route exact path="/cadeteria/listOrders" component={ListOrders} />
-          <Route exact path="/cadeteria/listCadetes" component={ListCadetes} />
-          <Route
-            exact
-            path="/cadeteria/solicitudes"
-            component={CadeteRequest}
-          />
-          <Route
-            exact
-            path="/cadeteria/metricas"
-            component={ProfileCadeteria}
-          />
-        </Switch>
-      </>
+      <CadeteriaNavbar />
+     {/*  {console.log('Cadeteria =>', cadeteria, 'id', cadeteria.id)} */}
+      {cadeteria && cadeteria.id ? <CadeteriaPanel /> : <Error />}
+
+     
       <Footer />
     </div>
   );

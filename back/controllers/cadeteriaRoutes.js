@@ -50,6 +50,7 @@ const cadeteriaController = {
   },
 
   registerCadeteria(req, res) {
+    console.log('llego a cadeteria', req.body)
     Cadeteria.create(req.body)
       .then((cadeteria) => res.status(201).send(cadeteria))
       .catch((err) => res.send(err));
@@ -61,9 +62,8 @@ const cadeteriaController = {
       where: { email },
     })
       .then((cad) => {
-        
         if (!cad) return res.status(401).send("La cadeteria no existe");
-
+        
         const isValid = cad.validPassword(password);
         console.log(isValid)
         if (isValid !== true)
@@ -79,16 +79,13 @@ const cadeteriaController = {
         );
         return res.status(200).json({ token });
       })
-      .catch((e) => {
-        return res.status(401).send("Error en autenticación");
-      });
+      .catch((e) => res.status(401).send("Error en autenticación")
+      );
   },
 
   editProfileCadeterias(req, res, next) {
     
     console.log(req.params.id, req.body);
-
-
     Cadeteria.findByPk(req.params.id)
       .then((cadeteria) => {
         cadeteria.update(req.body)

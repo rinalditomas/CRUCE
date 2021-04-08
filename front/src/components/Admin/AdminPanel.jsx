@@ -6,14 +6,13 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../../utils/stylesAdmin";
 
-export default function adminPanel() {
+const AdminPanel = () => {
   const classes = adminMenuStyles();
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <div className={classes.heroButtons}>
@@ -76,3 +75,5 @@ export default function adminPanel() {
     </React.Fragment>
   );
 }
+
+export default AdminPanel

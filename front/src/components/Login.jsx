@@ -22,6 +22,9 @@ import { fetchMe } from "../state/user";
 
 import messagesHandler from "../utils/messagesHandler";
 
+import HomeNavbar from '../components/HomeNavbar'
+
+
 export default function Login() {
   const messages = messagesHandler(useSnackbar());
 
@@ -43,7 +46,7 @@ export default function Login() {
       .then((res) => {
         const check = res.payload;
         console.log("checl=======>", res);
-        if (!check) messages.error("pass incorrecto") && history.push("/login");
+        if (!check) messages.error();
         else
           check && check.admin
             ? messages.admin() && history.push("/admin")
@@ -55,6 +58,7 @@ export default function Login() {
 
   return (
     <>
+    <HomeNavbar/>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

@@ -68,7 +68,7 @@ const CadeteOrders = () => {
             orders.map((order) => {
               return order.userId === cadete.id || order.userId === null ? (
                 <ListItem key={order.id}>
-                  <Link to={`/singleOrder/${order.id}`}>
+                  <Link to={`singleOrder/${order.id}`}>
                     <ListItemText
                       primary={
                         order.street +

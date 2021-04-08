@@ -10,7 +10,7 @@ export const setUser = createAction("SET_USER");
 
 export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   return axios
-    .post("http://localhost:8000/api/register", input)
+    .post("http://localhost:8000/api/register", input ,)
     .then((res) => res.data)
     .then((user) => user)
     .catch((e) => console.log(e));
@@ -66,10 +66,10 @@ const userReducer = createReducer([], {
   [setUser]: (state, action) => action.payload,
   [registerRequest.fulfilled]: (state, action) => action.payload,
   [sendToken.fulfilled]: (state, action) => action.payload,
+  [editProfileUser.fulfilled]: (state, action) => action.payload,
   [clearUser]: (state, action) => {
     return {};
   },
-  [editProfileUser.fulfilled]: (state, action) => action.payload,
 });
 
 export default userReducer;

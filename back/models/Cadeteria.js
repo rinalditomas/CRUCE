@@ -9,22 +9,20 @@ Cadeteria.init(
     nameCompany: {
       type: S.STRING,
       allowNull: false,
-      unique: true,
+      unique: {msg: 'Este nombre ya existe' },
     },
     CUIT: {
       type: S.STRING,
       allowNull: false,
-      unique: true,
+      unique: {msg: 'El CUIT ingresado ya existe'},
       validate: {
-        len: [11, 11] || {
-          msg: "Por favor, ingrese un numero valido",
-        },
+        len: { msg: "El CUIT debe tener 11 digitos", args: [11, 11] },
       },
     },
     email: {
       type: S.STRING,
       allowNull: false,
-      unique: true,
+      unique: {msg: 'El email ya existe'},
       validate: {
         isEmail: {
           msg: "Agrega un correo válido",
@@ -38,12 +36,10 @@ Cadeteria.init(
     phoneNum: {
       type: S.STRING,
       allowNull: false,
-      unique: true,
+      unique: {msg: 'Ya existe este numero telefonico'},
       validate: {
-        len: [10, 10] || {
-          msg: "Por favor, ingrese un numero valido",
+        len: { msg: "El telefono debe tener 10 digitos", args: [10, 10] },
         },
-      },
     },
     active: {
       type: S.BOOLEAN,
