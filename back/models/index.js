@@ -4,7 +4,6 @@ const Cadeteria = require("./Cadeteria");
 const Product = require("./Product");
 
 User.belongsTo(Cadeteria);
-Cadeteria.hasMany(User);
 
 Order.belongsTo(Cadeteria);
 

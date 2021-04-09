@@ -19,10 +19,18 @@ const registerController = {
       },
     })
       .then((cadeteria) => {
-        User.create(req.body)
+        User.create({
+          firstName: req.body.firstName,
+          lastName: req.body.lastName,
+          email: req.body.email,
+          password: req.body.password,
+          phoneNum: req.body.phoneNum,
+          admin: req.body.admin,
+          vehicle: req.body.vehicle,
+        })
           .then((user) => {
-            cadeteria
-              .setUsers(user)
+            user
+              .setCadeterium(cadeteria)
               .then(() =>
                 User.findOne({
                   where: {

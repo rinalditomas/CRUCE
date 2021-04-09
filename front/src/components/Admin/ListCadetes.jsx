@@ -13,6 +13,7 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
 import { allCadetes, editStateCadete } from "../../state/admin";
 import { useDispatch, useSelector } from "react-redux";
+import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,6 +48,8 @@ export default function ListCadetes() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className={classes.root}>
       <div>
         <h1 className="titulo">Lista de cadetes</h1>
@@ -96,5 +99,6 @@ export default function ListCadetes() {
         </List>
       </div>
     </div>
+    </>
   );
 }

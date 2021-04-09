@@ -16,54 +16,54 @@ const AdminPanel = () => {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
-                <Grid item xs={12}>
-                  <Link
-                    to="/admin/uploadorders"
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <Button variant="contained" color="primary">
-                      Cargar Ordenes
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={12}>
+              <Grid container spacing={4} justify="center">
+                <Grid item xs={14}>
                   <Link
                     to="/admin/listCadeterias"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" className={classes.button_admin}>
                       Cadeteria
                     </Button>
                   </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={15}>
                   <Link
                     to="/admin/listCadetes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" className={classes.button_admin}>
                       Cadete
                     </Button>
                   </Link>
                 </Grid>
-                <Grid item xs={12}>
-                  <Link
-                    to="/admin/cadeteriaRequest"
-                    style={{ textDecoration: "none", color: "inherit" }}
-                  >
-                    <Button variant="contained" color="primary">
-                      Solicitudes
-                    </Button>
-                  </Link>
-                </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={16}>
                   <Link
                     to="/admin/orders"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button variant="contained" className={classes.button_admin}>
                       Metricas
+                    </Button>
+                  </Link>
+                </Grid>
+                <Grid item xs={17}>
+                  <Link
+                    to="/admin/cadeteriaRequest"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" className={classes.button_admin}>
+                      Solicitudes
+                    </Button>
+                  </Link>
+                </Grid>
+                <Grid item xs={18}>
+                  <Link
+                    to="/admin/uploadorders"
+                    style={{ textDecoration: "none", color: "inherit" }}
+                  >
+                    <Button variant="contained" className={classes.button_admin}>
+                      Cargar Ordenes
                     </Button>
                   </Link>
                 </Grid>
@@ -74,6 +74,6 @@ const AdminPanel = () => {
       </main>
     </React.Fragment>
   );
-}
+};
 
-export default AdminPanel
+export default AdminPanel;

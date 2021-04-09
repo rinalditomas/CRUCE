@@ -50,7 +50,7 @@ const ListOrders = () => {
             orders.map((order) => {
               return (
                 <ListItem key={order.id}>
-                  <Link to={`/singleOrder/${order.id}`}>
+                  <Link to={`/cadeteria/singleOrder/${order.id}`}>
                     <ListItemText
                       primary={
                         order.street +

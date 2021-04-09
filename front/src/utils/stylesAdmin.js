@@ -33,6 +33,18 @@ const useStyles = makeStyles((theme) => ({
     padding: theme.spacing(6),
   },
 
+  button_admin:{
+    backgroundColor: "#fdd04c",
+    width: "130px",
+    height: "60px",
+    fontWeight: "bold",
+    borderRadius: "10px",
+    /*  
+      fontSize: "1.5rem",  */
+    color: "white",
+    margin: "auto",
+  },
+
   button_panel: {
     backgroundColor: "#ff5757",
     width: "130px",

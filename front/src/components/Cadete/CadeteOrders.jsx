@@ -36,7 +36,7 @@ const CadeteOrders = () => {
 
 
   useEffect(() => {
-    dispatch(ordersList(cadete.id));
+    dispatch(ordersList());
   }, []);
 
   const ordersToShow = [];
@@ -49,16 +49,21 @@ const CadeteOrders = () => {
   //   });
   // };
 
-  const update = (id, status, cadeteId) => {
-    let state = "";
-    if (status === "En camino") {
+
+  const update = (orderNumber, status, cadeteId) => {
+    let state;
+    if (status == "En camino") {
+
       state = "Entregado";
     }
     if (status === "Pendiente") {
       state = "En camino";
     }
 
-    dispatch(orderState({ id: id, state: state, cadeteId: cadeteId }));
+    dispatch(
+      orderState({ orderNumber: orderNumber, state: state, cadeteId: cadeteId })
+    );
+
   };
 
   return (
@@ -71,9 +76,12 @@ const CadeteOrders = () => {
         <List dense={dense}>
           {orders &&
             orders.map((order) => {
-              return order.userId === cadete.id || order.userId === null ? (
+              return (order.userId === cadete.id &&
+                order.status !== "Devuelto a sucursal") ||
+                (order.userId === cadete.id && order.status !== "Entregado") ||
+                (order.userId === null && order.status !== "Entregado") ? (
                 <ListItem key={order.id}>
-                  <Link to={`cadete/singleOrder/${order.id}`}>
+                  <Link to={`/cadete/singleOrder/${order.id}`}>
                     <ListItemText
                       primary={
                         order.street +
@@ -90,7 +98,7 @@ const CadeteOrders = () => {
                         variant="outlined"
                         color="primary"
                         onClick={() => {
-                          update(order.id, order.status, cadete.id);
+                          update(order.orderNumber, order.status, cadete.id);
                         }}
                       >
                         {order.status}

@@ -27,7 +27,6 @@ export default function SingleOrder({ match }) {
   const classes = useStyles();
   const dispatch = useDispatch();
   const order = useSelector((state) => state.orders.singleOrder);
-  const cadete = useSelector((state) => state.cadete);
   const [products, setProducts] = useState([]);
 
   useEffect(() => {
@@ -40,7 +39,7 @@ export default function SingleOrder({ match }) {
   }, []);
 
   const ChangeState = (id, state) => {
-    const state2 = { id: id, state: state, cadeteId: cadete.id };
+    const state2 = { id: id, state: state };
     dispatch(orderState(state2)).then((order) => {
       if (order.payload.status !== "En camino") history.push("/cadeteOrders");
       else dispatch(singleOrder(match));
@@ -103,10 +102,36 @@ export default function SingleOrder({ match }) {
             <Button
               size="small"
               color="primary"
-              onClick={() => ChangeState(order.id, "En camino")}
+              onClick={() => ChangeState(order.orderNumber, "En camino")}
             >
               TOMAR
             </Button>
+          ) : order.status === "En camino" ? (
+            <>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => ChangeState(order.orderNumber, "Entregado")}
+              >
+                ENTREGADO
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() =>
+                  ChangeState(order.orderNumber, "Devuelto a sucursal")
+                }
+              >
+                DEVUELTO A SUCURSAL
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => ChangeState(order.orderNumber, "Pendiente")}
+              >
+                TOMAR
+              </Button>
+            </>
           ) : order.status === "En camino" ? (
             <>
               <Button
@@ -137,3 +162,7 @@ export default function SingleOrder({ match }) {
     </>
   );
 }
+
+/*
+                    href={`https://www.google.com/maps/place/${order.destination.street}%20${order.destination.number}%20${order.destination.city}`}
+ */

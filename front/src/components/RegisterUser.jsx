@@ -44,9 +44,6 @@ const User = () => {
 
   const cadeteriaList = useSelector((state) => state.cadeteria);
 
-
-
-
   console.log('cadeteria ====>', cadeteriaList)
 
   const messages = messageHandler(useSnackbar());
@@ -153,7 +150,7 @@ const User = () => {
                       id="demo-simple-select-filled"
                       onChange={handleChange}
                     >
-                      {
+                      {cadeteriaList &&
                         cadeteriaList.map((cad, i) => {
                           if (cad.authorized !== false)
                             return (

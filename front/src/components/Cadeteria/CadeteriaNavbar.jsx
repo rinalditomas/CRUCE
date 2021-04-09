@@ -45,7 +45,7 @@ const CadeteriaNavbar = () => {
           <Typography variant="h6" className={classes.title}></Typography>
           {!token ? (
             <>
-              <Link to="/login" style={{ color: "inherit" }}>
+              <Link to="/selectLogin" style={{ color: "inherit" }}>
                 <Button color="inherit">Login</Button>
               </Link>
               <Link to="/register" style={{ color: "inherit" }}>

@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import adminMenuStyles from "../utils/stylesAdmin";
 import { upLoadOrders } from "../state/admin";
 import { useDispatch } from "react-redux";
+import Navbar from "./Navbar";
 
 const Prueba = () => {
   const classes = adminMenuStyles();
@@ -46,6 +47,7 @@ const Prueba = () => {
 
   const upload = () => {
     dispatch(upLoadOrders({ items })).then((res) => {
+      console.log("PEEEEEEEEEEEEEEEEEEE", res);
       if (res.payload === 200) {
         alert("Tu archivo se cargo correctamente");
       } else {
@@ -55,13 +57,14 @@ const Prueba = () => {
   };
   return (
     <React.Fragment>
+    <Navbar/>
       <CssBaseline />
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
+              <Grid container spacing={4} justify="center">
                 <Grid item xs={12}>
                   <input
                     type="file"
@@ -88,7 +91,7 @@ const Prueba = () => {
                 </Grid>
                 <Grid item xs={12}>
                   <Link
-                    to="/admin/users"
+                    to="/admin"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
                     <Button
