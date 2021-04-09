@@ -51,6 +51,16 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: "bold",
     fontSize: "1.8rem"
   },
+  button_home: {
+    backgroundColor: '#d9d9d9',
+    width: "200px",
+    height: "100px",
+    margin: '1rem',
+    borderRadius: '1rem',
+    fontWeight: "bold",
+    fontSize: "1.5rem",
+    textShadow: "1px 1px 2px black"
+  },
 
   small: {
     width: theme.spacing(3),
@@ -63,6 +73,10 @@ const useStyles = makeStyles((theme) => ({
   large2: {
     width: theme.spacing(12),
     height: theme.spacing(9),
+  },
+  largeMoto: {
+    width: theme.spacing(30),
+    height: theme.spacing(22),
   },
 
 }));

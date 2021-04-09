@@ -48,7 +48,7 @@ const CadeteriaNavbar = () => {
               <Link to="/selectLogin" style={{ color: "inherit" }}>
                 <Button color="inherit">Login</Button>
               </Link>
-              <Link to="/register" style={{ color: "inherit" }}>
+              <Link to="/select" style={{ color: "inherit" }}>
                 <Button color="inherit">Register</Button>
               </Link>
             </>

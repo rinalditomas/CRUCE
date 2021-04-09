@@ -111,7 +111,7 @@ const CadeteriaLogin = () => {
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
-                  <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/cadeteria/register">{"No tienes cuenta? Registrate"}</Link>
                 </Grid>
               </Grid>
               <Box mt={5}>

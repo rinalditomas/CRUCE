@@ -26,8 +26,10 @@ export default function SingleOrder({ match }) {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const order = useSelector((state) => state.orders.singleOrder);
   const [products, setProducts] = useState([]);
+  const order = useSelector((state) => state.orders.singleOrder);
+
+  const cadete = useSelector((state) => state.cadete);
 
   useEffect(() => {
     dispatch(singleOrder(match)).then(
@@ -37,11 +39,11 @@ export default function SingleOrder({ match }) {
         .catch((err) => console.log(err))
     );
   }, []);
-
-  const ChangeState = (id, state) => {
-    const state2 = { id: id, state: state };
+  
+  const ChangeState = (state) => {
+    const state2 = { cadeteId: cadete.id, state: state , orderNumber: order.orderNumber};
     dispatch(orderState(state2)).then((order) => {
-      if (order.payload.status !== "En camino") history.push("/cadeteOrders");
+      if (order.payload.status !== "En camino") history.push("/cadete");
       else dispatch(singleOrder(match));
     });
   };
@@ -102,7 +104,7 @@ export default function SingleOrder({ match }) {
             <Button
               size="small"
               color="primary"
-              onClick={() => ChangeState(order.orderNumber, "En camino")}
+              onClick={() => ChangeState("En camino")}
             >
               TOMAR
             </Button>
@@ -111,7 +113,7 @@ export default function SingleOrder({ match }) {
               <Button
                 size="small"
                 color="primary"
-                onClick={() => ChangeState(order.orderNumber, "Entregado")}
+                onClick={() => ChangeState( "Entregado")}
               >
                 ENTREGADO
               </Button>
@@ -119,7 +121,7 @@ export default function SingleOrder({ match }) {
                 size="small"
                 color="primary"
                 onClick={() =>
-                  ChangeState(order.orderNumber, "Devuelto a sucursal")
+                  ChangeState("Devuelto a sucursal")
                 }
               >
                 DEVUELTO A SUCURSAL
@@ -127,31 +129,7 @@ export default function SingleOrder({ match }) {
               <Button
                 size="small"
                 color="primary"
-                onClick={() => ChangeState(order.orderNumber, "Pendiente")}
-              >
-                TOMAR
-              </Button>
-            </>
-          ) : order.status === "En camino" ? (
-            <>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => ChangeState(order.id, "Entregado")}
-              >
-                ENTREGADO
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => ChangeState(order.id, "Devuelto a sucursal")}
-              >
-                DEVUELTO A SUCURSAL
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => ChangeState(order.id, "Pendiente")}
+                onClick={() => ChangeState( "Pendiente")}
               >
                 CANCELAR
               </Button>

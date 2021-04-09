@@ -17,6 +17,7 @@ export const ordersList = createAsyncThunk("OREDERS_LIST", () => {
 export const orderState = createAsyncThunk(
   "ORDERS_STATE",
   (order, thunkApi) => {
+    console.log("ACA ESTA LA ORDEN DE REDUX",order)
     return axios
       .put(`http://localhost:8000/api/orders/edit/${order.orderNumber}`, {
         status: order.state,
