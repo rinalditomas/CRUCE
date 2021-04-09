@@ -26,8 +26,9 @@ const NewOrderController = {
           orderNumber: order.Order,
         });
       })
-      .then(res.sendStatus(200))
-      .catch(res.sendStatus(401));
+
+      res.sendStatus(200);
+
   },
 
   async allOrders(req, res) {

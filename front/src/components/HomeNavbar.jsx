@@ -29,8 +29,8 @@ const HomeNavbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "grey" }}>
-        <Toolbar>
+      <AppBar position="static" style={{ backgroundColor: "#d9d9d9", color: 'black' }} >
+        <Toolbar  >
           <IconButton
             edge="start"
             className={classes.menuButton}

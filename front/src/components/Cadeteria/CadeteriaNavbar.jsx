@@ -32,7 +32,7 @@ const CadeteriaNavbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "red" }}>
+      <AppBar position="static" style={{ backgroundColor: "#ff5757" }}>
         <Toolbar>
           <IconButton
             edge="start"

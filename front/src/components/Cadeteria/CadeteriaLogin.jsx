@@ -12,6 +12,10 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 
+
+
+import CadeteriaNavbar from './CadeteriaNavbar'
+
 import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
@@ -52,6 +56,7 @@ const CadeteriaLogin = () => {
 
   return (
     <div>
+      <CadeteriaNavbar/>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

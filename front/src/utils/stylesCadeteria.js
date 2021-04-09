@@ -4,7 +4,7 @@ const useStyles = makeStyles((theme) => ({
     button: {
       marginTop: theme.spacing(3),
       marginLeft: theme.spacing(1),
-      backgroundColor: "#C25500",
+      backgroundColor: "#ff5757",
       width: "100%",
     },
     inputRoot: {
@@ -20,6 +20,16 @@ const useStyles = makeStyles((theme) => ({
         width: "20ch",
       },
     },
+    button_panel: {
+      backgroundColor: '#ff5757',
+      width: "200px",
+      height: "100px",
+      margin: '1rem',
+      borderRadius: '1rem',
+      fontWeight: "bold",
+      fontSize: "1.5rem",
+    },
+
   }));
 
 

@@ -32,8 +32,8 @@ import messageHandler from "../utils/messagesHandler";
 ///manejo de errores
 
 import { unwrapResult } from "@reduxjs/toolkit";
-
-export const Cadete = () => {
+import HomeNavbar from "./HomeNavbar";
+const User = () => {
   const { enqueueSnackbar } = useSnackbar();
 
   const classes = useStyles();
@@ -43,6 +43,11 @@ export const Cadete = () => {
   const dispatch = useDispatch();
 
   const cadeteriaList = useSelector((state) => state.cadeteria);
+
+
+
+
+  console.log('cadeteria ====>', cadeteriaList)
 
   const messages = messageHandler(useSnackbar());
 
@@ -70,153 +75,157 @@ export const Cadete = () => {
   };
 
   return (
-    <div style={{ paddingTop: "2rem" }}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <div className={classes.paper}>
-          <Avatar className={classes.avatar}>
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography component="h1" variant="h5">
-            Registro de Cadete
-          </Typography>
-          <form className={classes.form} onSubmit={handleSubmit}>
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  autoComplete="fname"
-                  name="firstName"
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="Nombre"
-                  autoFocus
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Apellido"
-                  name="lastName"
-                  autoComplete="lname"
-                  onChange={handleChange}
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControl variant="outlined" style={{ minWidth: 395 }}>
-                  <InputLabel htmlFor="outlined-age-native-simple">
-                    Medio de transporte
-                  </InputLabel>
-                  <Select
+    <>
+      <HomeNavbar />
+      <div style={{ paddingTop: "2rem" }}>
+        <Container component="main" maxWidth="xs">
+          <CssBaseline />
+          <div className={classes.paper}>
+            <Avatar className={classes.avatar}>
+              <LockOutlinedIcon />
+            </Avatar>
+            <Typography component="h1" variant="h5">
+              Registro de Cadete
+            </Typography>
+            <form className={classes.form} onSubmit={handleSubmit}>
+              <Grid container spacing={2}>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    autoComplete="fname"
+                    name="firstName"
+                    variant="outlined"
+                    required
                     fullWidth
-                    labelId="demo-simple-select-filled-label"
-                    label="Medio de transporte"
-                    name="vehicle"
-                    id="demo-simple-select-filled"
+                    id="firstName"
+                    label="Nombre"
+                    autoFocus
                     onChange={handleChange}
-                  >
-                    <MenuItem value="moto" key={1}>
-                      Moto
-                    </MenuItem>
-                    <MenuItem value="bicicleta" key={2}>
-                      Bicicleta
-                    </MenuItem>
-                    <MenuItem value="auto" key={3}>
-                      Auto
-                    </MenuItem>
-                  </Select>
-                </FormControl>
-              </Grid>
-
-              <Grid item xs={12}>
-                <FormControl variant="outlined" style={{ minWidth: 395 }}>
-                  <InputLabel htmlFor="outlined-age-native-simple">
-                    Cadeterias
-                  </InputLabel>
-                  <Select
+                  />
+                </Grid>
+                <Grid item xs={12} sm={6}>
+                  <TextField
+                    variant="outlined"
+                    required
                     fullWidth
-                    labelId="demo-simple-select-filled-label"
-                    label="Cadeterias"
-                    name="cadeterias"
-                    id="demo-simple-select-filled"
+                    id="lastName"
+                    label="Apellido"
+                    name="lastName"
+                    autoComplete="lname"
                     onChange={handleChange}
-                  >
-                    {cadeteriaList &&
-                      cadeteriaList.map((cad, i) => {
-                        if (cad.authorized !== false)
-                          return (
-                            <MenuItem value={`${cad.nameCompany}`} key={i}>
-                              {`${cad.nameCompany}`}
-                            </MenuItem>
-                          );
-                      })}
-                  </Select>
-                </FormControl>
-              </Grid>
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <FormControl variant="outlined" style={{ minWidth: 395 }}>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Medio de transporte
+                    </InputLabel>
+                    <Select
+                      fullWidth
+                      labelId="demo-simple-select-filled-label"
+                      label="Medio de transporte"
+                      name="vehicle"
+                      id="demo-simple-select-filled"
+                      onChange={handleChange}
+                    >
+                      <MenuItem value="moto" key={1}>
+                        Moto
+                      </MenuItem>
+                      <MenuItem value="bicicleta" key={2}>
+                        Bicicleta
+                      </MenuItem>
+                      <MenuItem value="auto" key={3}>
+                        Auto
+                      </MenuItem>
+                    </Select>
+                  </FormControl>
+                </Grid>
 
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="phoneNum"
-                  label="phoneNum"
-                  name="phoneNum"
-                  autoComplete="phoneNum"
-                  onChange={handleChange}
-                />
+                <Grid item xs={12}>
+                  <FormControl variant="outlined" style={{ minWidth: 395 }}>
+                    <InputLabel htmlFor="outlined-age-native-simple">
+                      Cadeterias
+                    </InputLabel>
+                    <Select
+                      fullWidth
+                      labelId="demo-simple-select-filled-label"
+                      label="Cadeterias"
+                      name="cadeterias"
+                      id="demo-simple-select-filled"
+                      onChange={handleChange}
+                    >
+                      {
+                        cadeteriaList.map((cad, i) => {
+                          if (cad.authorized !== false)
+                            return (
+                              <MenuItem value={`${cad.nameCompany}`} key={i}>
+                                {`${cad.nameCompany}`}
+                              </MenuItem>
+                            );
+                        })}
+                    </Select>
+                  </FormControl>
+                </Grid>
+
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="phoneNum"
+                    label="phoneNum"
+                    name="phoneNum"
+                    autoComplete="phoneNum"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    id="email"
+                    label="Email"
+                    name="email"
+                    autoComplete="email"
+                    onChange={handleChange}
+                  />
+                </Grid>
+                <Grid item xs={12}>
+                  <TextField
+                    variant="outlined"
+                    required
+                    fullWidth
+                    name="password"
+                    label="Password"
+                    type="password"
+                    id="password"
+                    autoComplete="current-password"
+                    onChange={handleChange}
+                  />
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email"
-                  name="email"
-                  autoComplete="email"
-                  onChange={handleChange}
-                />
+              <Button
+                type="submit"
+                fullWidth
+                variant="contained"
+                color="primary"
+                className={classes.submit}
+              >
+                Registrarse
+              </Button>
+              <Grid container justify="flex-end">
+                <Grid item>
+                  <Link to="/login">Ya tienes una cuenta? Logueate.</Link>
+                </Grid>
               </Grid>
-              <Grid item xs={12}>
-                <TextField
-                  variant="outlined"
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="current-password"
-                  onChange={handleChange}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              color="primary"
-              className={classes.submit}
-            >
-              Registrarse
-            </Button>
-            <Grid container justify="flex-end">
-              <Grid item>
-                <Link to="/login">Ya tienes una cuenta? Logueate.</Link>
-              </Grid>
-            </Grid>
-          </form>
-        </div>
-        <Box mt={5}>
-          <Copyright />
-        </Box>
-      </Container>
-    </div>
+            </form>
+          </div>
+          <Box mt={5}>
+            <Copyright />
+          </Box>
+        </Container>
+      </div>
+    </>
   );
 };
+export default User;

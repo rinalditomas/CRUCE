@@ -6,66 +6,78 @@ import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../../utils/stylesAdmin";
 
-
 const CadeteriaPanel = () => {
-
   const classes = adminMenuStyles();
 
   return (
     <React.Fragment>
       <CssBaseline />
       <main>
-        {/* Hero unit */}
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <div className={classes.heroButtons}>
-              <Grid container spacing={2} justify="center">
-                <Grid item xs={12}>
+              <Grid container spacing={4} justify="center" >
+                <Grid item xs={13}>
                   <Link
                     to="/cadeteria/listOrders"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      className={classes.button_panel}
+                    >
                       Ordenes
                     </Button>
                   </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={14}>
                   <Link
                     to="/cadeteria/listCadetes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
-                     Cadetes
+                    <Button
+                      variant="contained"
+                      className={classes.button_panel}
+                    >
+                      Lista de Cadetes
                     </Button>
                   </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={15}>
                   <Link
                     to="/cadeteria/perfil"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      className={classes.button_panel}
+                    >
                       Perfil
                     </Button>
                   </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={16}>
                   <Link
                     to="/cadeteria/solicitudes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      className={classes.button_panel}
+                    >
                       Solicitudes pendientes
                     </Button>
                   </Link>
                 </Grid>
-                <Grid item xs={12}>
+                <Grid item xs={17}>
                   <Link
                     to="/cadeteria/metricas"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" color="primary">
+                    <Button
+                      variant="contained"
+                      className={classes.button_panel}
+                    >
                       Metricas
                     </Button>
                   </Link>

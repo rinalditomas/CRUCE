@@ -45,13 +45,12 @@ export default function Login() {
       .then((res) => dispatch(fetchMe()))
       .then((res) => {
         const check = res.payload;
-        console.log("checl=======>", res);
         if (!check) messages.error();
         else
           check && check.admin
             ? messages.admin() && history.push("/admin")
             : messages.success("Usuario ingresado correctamente") &&
-              history.push("/cadeteOrders");
+              history.push("/cadete");
       })
       .catch((e) => history.push("/login"));
   };

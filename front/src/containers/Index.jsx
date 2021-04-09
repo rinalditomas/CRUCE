@@ -17,7 +17,7 @@ import ListOrders from "../components/Cadeteria/ListOrders";
 import ListCadetes from "../components/Admin/ListCadetes";
 import Metricas from "../components/Metricas";
 import CadeteRequest from "../components/Cadeteria/CadeteRequest";
-
+import Cadetes from "../components/Cadeteria/Cadetes";
 import CadeteriaLogin from "../components/Cadeteria/CadeteriaLogin";
 import CadeteriaNavbar from "../components/Cadeteria/CadeteriaNavbar";
 
@@ -34,6 +34,10 @@ import { fetchCad } from "../state/cadeteria";
 import Login from "../components/Login";
 
 import SelectButtons from "../components/SelectButtons";
+import HomeNavbar from "../components/HomeNavbar";
+
+import RegisterCadeteria from '../components/Cadeteria/RegisterCadeteria'
+import RegisterUser from '../components/RegisterUser';
 
 const Index = () => {
   const user = useSelector((state) => state.cadete);
@@ -49,22 +53,32 @@ const Index = () => {
   return (
     <div>
       <Switch>
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={SelectButtons} />
-        <Route exact path="/cadeteria/login" component={CadeteriaLogin} />
-       
-        <Route exact path="/" component={Home} />
+        
+        <Route exact path="/cadete" component={Cadete} />
+        <Route exact path="/cadeteria" component={Cadeteria} />
+        <Route exact path="/admin" component={Admin} />
+
+        <Route exact path="/select" component={SelectButtons} />
+
+
+     
+        <Route exact path="/cadeteria/register" component={RegisterCadeteria} />
         <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
         <Route exact path="/cadeteria/listOrders" component={ListOrders} />
-        <Route exact path="/cadeteria/listCadetes" component={ListCadetes} />
+        <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
         <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
+
+
+
+        <Route exact path="/register" component={RegisterUser} />
         <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} />
         <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
           path="/cadete/singleOrder/:id"
           render={({ match }) => <SingleOrder match={match.params.id} />}
         />
+
         <Route exact path="/admin/uploadorders" component={DataLoading} />
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
@@ -73,7 +87,12 @@ const Index = () => {
           path="/admin/cadeteriaRequest"
           component={CadeteriaRequest}
         />
-        
+
+        <Route exact path="/login" component={Login} />
+        <Route exact path="/register" component={SelectButtons} />
+        <Route exact path="/cadeteria/login" component={CadeteriaLogin} />
+
+        <Route exact path="/" component={Home} />
         <Redirect to="/" />
       </Switch>
     </div>

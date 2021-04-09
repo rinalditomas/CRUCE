@@ -10,8 +10,8 @@ import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import axios from "axios";
-import { Grid} from "@material-ui/core";
-
+import { Grid } from "@material-ui/core";
+import Navbar from "../Navbar";
 
 const useStyles = makeStyles({
   root: {
@@ -35,7 +35,7 @@ export default function SingleOrder({ match }) {
       axios
         .get(`http://localhost:8000/api/product/${order.orderNumber}`)
         .then((res) => setProducts(res.data.count))
-        .catch(err => console.log(err))
+        .catch((err) => console.log(err))
     );
   }, []);
 
@@ -48,89 +48,92 @@ export default function SingleOrder({ match }) {
   };
 
   return (
-    <Card className={classes.root}>
-      <CardActionArea>
-        <iframe
-          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.274812272798!2d-68.84847478505935!3d-32.890901676398016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09c0d5fed751%3A0x859ef7231006759c!2sMITRE%20870!5e0!3m2!1ses-419!2sar!4v1617304827229!5m2!1ses-419!2sar"
-          title='img'
-          width="100%"
-          height="70%"
-          style={{ border: 0 }}
-          allowfullscreen=""
-          loading="lazy"
-        ></iframe>
-        ;
-        <CardContent>
-          <Typography gutterBottom variant="h5" component="h2">
-            {order.orderNumber}
-          </Typography>
+    <>
+      <Navbar />
+      <Card className={classes.root}>
+        <CardActionArea>
+          <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.274812272798!2d-68.84847478505935!3d-32.890901676398016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09c0d5fed751%3A0x859ef7231006759c!2sMITRE%20870!5e0!3m2!1ses-419!2sar!4v1617304827229!5m2!1ses-419!2sar"
+            title="img"
+            width="100%"
+            height="70%"
+            style={{ border: 0 }}
+            allowfullscreen=""
+            loading="lazy"
+          ></iframe>
+          ;
+          <CardContent>
+            <Typography gutterBottom variant="h5" component="h2">
+              {order.orderNumber}
+            </Typography>
 
-          {products &&
-            products.map((product) => {
-              return (
-                <Grid container spacing={2} key={product.id}>
-                  <Grid item xs={10}>
-                    {product.productName}
+            {products &&
+              products.map((product) => {
+                return (
+                  <Grid container spacing={2} key={product.id}>
+                    <Grid item xs={10}>
+                      {product.productName}
+                    </Grid>
+                    <Grid item xs={2}>
+                      {"cant: " + product.count}
+                    </Grid>
                   </Grid>
-                  <Grid item xs={2}>
-                    {"cant: " + product.count}
-                  </Grid>
-                </Grid>
-              );
-            })}
+                );
+              })}
 
-          <Typography gutterBottom variant="h5" component="h2">
-            {order.clientName + " " + order.clientLastName}
-          </Typography>
-          <Typography gutterBottom variant="h5" component="h2">
-            {order.street +
-              " " +
-              order.number +
-              " " +
-              (order.complement ? order.complement : "")}
-          </Typography>
-          <Typography
-            variant="body2"
-            color="textSecondary"
-            component="p"
-          ></Typography>
-        </CardContent>
-      </CardActionArea>
-      <CardActions>
-        {order.status === "Pendiente" ? (
-          <Button
-            size="small"
-            color="primary"
-            onClick={() => ChangeState(order.id, "En camino")}
-          >
-            TOMAR
-          </Button>
-        ) : order.status === "En camino" ? (
-          <>
+            <Typography gutterBottom variant="h5" component="h2">
+              {order.clientName + " " + order.clientLastName}
+            </Typography>
+            <Typography gutterBottom variant="h5" component="h2">
+              {order.street +
+                " " +
+                order.number +
+                " " +
+                (order.complement ? order.complement : "")}
+            </Typography>
+            <Typography
+              variant="body2"
+              color="textSecondary"
+              component="p"
+            ></Typography>
+          </CardContent>
+        </CardActionArea>
+        <CardActions>
+          {order.status === "Pendiente" ? (
             <Button
               size="small"
               color="primary"
-              onClick={() => ChangeState(order.id, "Entregado")}
+              onClick={() => ChangeState(order.id, "En camino")}
             >
-              ENTREGADO
+              TOMAR
             </Button>
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => ChangeState(order.id, "Devuelto a sucursal")}
-            >
-              DEVUELTO A SUCURSAL
-            </Button>
-            <Button
-              size="small"
-              color="primary"
-              onClick={() => ChangeState(order.id, "Pendiente")}
-            >
-              CANCELAR
-            </Button>
-          </>
-        ) : null}
-      </CardActions>
-    </Card>
+          ) : order.status === "En camino" ? (
+            <>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => ChangeState(order.id, "Entregado")}
+              >
+                ENTREGADO
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => ChangeState(order.id, "Devuelto a sucursal")}
+              >
+                DEVUELTO A SUCURSAL
+              </Button>
+              <Button
+                size="small"
+                color="primary"
+                onClick={() => ChangeState(order.id, "Pendiente")}
+              >
+                CANCELAR
+              </Button>
+            </>
+          ) : null}
+        </CardActions>
+      </Card>
+    </>
   );
 }

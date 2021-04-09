@@ -19,6 +19,7 @@ import { useSnackbar } from "notistack";
 import messageHandler from "../../utils/messagesHandler";
 
 import { fetchCad } from "../../state/cadeteria";
+import CadeteriaNavbar from './CadeteriaNavbar'
 
 export default function ProfileCadeteria() {
   const dispatch = useDispatch();
@@ -59,6 +60,7 @@ export default function ProfileCadeteria() {
 
   return (
     <React.Fragment>
+      <CadeteriaNavbar/>
       <Typography variant="h6" gutterBottom>
         Editar el perfil de la cadeteria
       </Typography>
