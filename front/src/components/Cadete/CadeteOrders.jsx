@@ -81,7 +81,7 @@ const CadeteOrders = () => {
                 (order.userId === cadete.id && order.status !== "Entregado") ||
                 (order.userId === null && order.status !== "Entregado") ? (
                 <ListItem key={order.id}>
-                  <Link to={`/cadete/singleOrder/${order.id}`}>
+                  <Link to={`/cadete/singleOrder/${order.id}/${order.orderNumber}`}>
                     <ListItemText
                       primary={
                         order.street +

@@ -34,7 +34,8 @@ const cadeteriaController = {
         .then((cadeteria) => {
           return cadeteria;
         })
-        .then((cadeteria) => res.status(200).send(cadeteria));
+        .then((cadeteria) => res.status(200).send(cadeteria))
+        .catch((e)=> console.log(e));
     });
   },
 

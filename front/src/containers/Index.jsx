@@ -79,8 +79,8 @@ const Index = () => {
         <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} />
         <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
-          path="/cadete/singleOrder/:id"
-          render={({ match }) => <SingleOrder match={match.params.id} />}
+          path="/cadete/singleOrder/:id/:orderNumber"
+          render={({ match }) => <SingleOrder match={match.params} />}
         />
 
         <Route exact path="/admin/uploadorders" component={DataLoading} />
