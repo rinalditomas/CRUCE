@@ -62,7 +62,7 @@ export default function ProfileCadete() {
 
   return (
     <React.Fragment>
-      <Navbar/>
+      <Navbar />
       <Typography variant="h6" gutterBottom>
         Editar el perfil
       </Typography>
@@ -104,26 +104,17 @@ export default function ProfileCadete() {
               onChange={handleChange}
             />
           </Grid>
+
           <Grid item xs={10}>
             <TextField
-              name="email"
-              label="Email"
-              id="email"
+              id="password"
+              name="password"
+              label="Contraseña"
+              type="password"
               fullWidth
-              placeholder={user && user.email}
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={10}>
-          <TextField
-            id="password"
-            name="password"
-            label="Contraseña"
-            type='password'
-            fullWidth
-            onChange={handleChange}
-            />
-        </Grid> 
           <Grid item xs={10}>
             <TextField
               name="phoneNum"

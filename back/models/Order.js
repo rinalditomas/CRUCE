@@ -42,6 +42,10 @@ Order.init(
       type: S.STRING,
       allowNull: true,
     },
+    clientPhone: {
+      type: S.STRING,
+      allowNull: false,
+    },
     // notes: {
     //   type: S.STRING,
     //   allowNull: false,

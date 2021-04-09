@@ -36,10 +36,10 @@ import Login from "../components/Login";
 import SelectButtons from "../components/SelectButtons";
 import HomeNavbar from "../components/HomeNavbar";
 
-import RegisterCadeteria from '../components/Cadeteria/RegisterCadeteria'
-import RegisterUser from '../components/RegisterUser';
+import RegisterCadeteria from "../components/Cadeteria/RegisterCadeteria";
+import RegisterUser from "../components/RegisterUser";
 
-import SelectLogin from '../components/SelectLogin';
+import SelectLogin from "../components/SelectLogin";
 
 const Index = () => {
   const user = useSelector((state) => state.cadete);
@@ -55,7 +55,6 @@ const Index = () => {
   return (
     <div>
       <Switch>
-        
         <Route exact path="/cadete" component={Cadete} />
         <Route exact path="/cadeteria" component={Cadeteria} />
         <Route exact path="/admin" component={Admin} />
@@ -73,10 +72,8 @@ const Index = () => {
           render={({ match }) => <SingleOrder match={match.params.id} />}
         />
 
-
-
         <Route exact path="/register" component={RegisterUser} />
-        <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} />
+        {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
         <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
           path="/cadete/singleOrder/:id/:orderNumber"

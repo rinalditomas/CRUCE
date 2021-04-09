@@ -31,8 +31,6 @@ export default function SingleOrder({ match }) {
 
   const cadete = useSelector((state) => state.cadete);
 
-  console.log(match,"ACA ESTA EL MATCH")
-
   useEffect(() => {
     dispatch(singleOrder(match.id)).then(
       axios
@@ -41,12 +39,16 @@ export default function SingleOrder({ match }) {
         .catch((err) => console.log(err))
     );
   }, []);
-  
+
   const ChangeState = (state) => {
-    const state2 = { cadeteId: cadete.id, state: state , orderNumber: order.orderNumber};
+    const state2 = {
+      cadeteId: cadete.id,
+      state: state,
+      orderNumber: order.orderNumber,
+    };
     dispatch(orderState(state2)).then((order) => {
       if (order.payload.status !== "En camino") history.push("/cadete");
-      else dispatch(singleOrder(match));
+      else dispatch(singleOrder(match.id));
     });
   };
 
@@ -92,7 +94,9 @@ export default function SingleOrder({ match }) {
                 " " +
                 order.number +
                 " " +
-                (order.complement ? order.complement : "")}
+                (order.complement ? order.complement : "")}{" "}
+              <br />
+              {"tel: " + order.clientPhone}
             </Typography>
             <Typography
               variant="body2"
@@ -115,25 +119,16 @@ export default function SingleOrder({ match }) {
               <Button
                 size="small"
                 color="primary"
-                onClick={() => ChangeState( "Entregado")}
+                onClick={() => ChangeState("Entregado")}
               >
                 ENTREGADO
               </Button>
               <Button
                 size="small"
                 color="primary"
-                onClick={() =>
-                  ChangeState("Devuelto a sucursal")
-                }
+                onClick={() => ChangeState("Devuelto a sucursal")}
               >
                 DEVUELTO A SUCURSAL
-              </Button>
-              <Button
-                size="small"
-                color="primary"
-                onClick={() => ChangeState( "Pendiente")}
-              >
-                CANCELAR
               </Button>
             </>
           ) : null}
