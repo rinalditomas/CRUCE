@@ -43,6 +43,7 @@ export default function Cadetes() {
   const dispatch = useDispatch();
 
   const messages = messagesHandler(useSnackbar());
+  console.log("aca estan los cadetes",cadetes)
 
   useEffect(() => {
     dispatch(allCadetes());

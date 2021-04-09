@@ -71,4 +71,23 @@ const userReducer = createReducer([], {
   },
 });
 
+// const initialState = {
+//   cadeterias: [],
+
+// };
+
+// const cadeteriaReducer = createReducer(initialState, {
+  
+//   [setCadeteria]: (state, action) => action.payload,
+//   [allCadeterias.fulfilled]: (state, action) => {
+//     return { ...state, cadeterias: action.payload };
+//   },
+//   [registerCadeteria.fulfilled]: (state, action) => {
+//     return {
+//       ...state,
+//       cadeterias:[...state.cadeterias,action.payload]
+//     };
+//   },
+
+
 export default userReducer;

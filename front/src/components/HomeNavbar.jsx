@@ -16,10 +16,10 @@ import messagesHandler from "../utils/messagesHandler";
 const HomeNavbar = () => {
   const classes = useStyles();
   const history = useHistory();
-
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.cadete);
   const messages = messagesHandler(useSnackbar());
+  const token = localStorage.getItem("token");
 
   const logout = () => {
     localStorage.removeItem("token");
@@ -40,18 +40,35 @@ const HomeNavbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}></Typography>
-          <Link to="/selectLogin" style={{ color: "inherit" }}>
-            <Button color="inherit">Login</Button>
-          </Link>
-          <Link to="/select" style={{ color: "inherit" }}>
-            <Button color="inherit">Register</Button>
-          </Link>
-          <Button color="inherit" onClick={logout}>
-            Logout
-          </Button>
+          {!token ? (
+            <>
+              <Link to="/selectLogin" style={{ color: "inherit" }}>
+                <Button color="inherit">Login</Button>
+              </Link>
+              <Link to="/select" style={{ color: "inherit" }}>
+                <Button color="inherit">Register</Button>
+              </Link>
+            </>
+          ) : (
+            <>
+              <Button color="inherit" onClick={logout}>
+                Logout
+              </Button>
+            </>
+          )}
           <Link to="/" style={{ color: "inherit" }}>
             <Button color="inherit">Home</Button>
           </Link>
+          {user && user.admin ? (
+            <>
+          
+              <Link to="/admin" style={{ color: "inherit" }}>
+                <Button color="inherit">admin panel</Button>
+              </Link>
+            </>
+          ) : (
+            <></>
+          )}
         </Toolbar>
       </AppBar>
     </div>

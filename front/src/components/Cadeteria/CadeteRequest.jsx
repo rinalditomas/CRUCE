@@ -46,8 +46,9 @@ export default function CadeteriaRequest() {
 
   useEffect(() => {
     dispatch(allCadetes());
-  }, [dispatch]);
+  }, []);
 
+  
   const handleActive = (id) => {
     dispatch(admitCadete(id)).then((res) => {
       res.payload

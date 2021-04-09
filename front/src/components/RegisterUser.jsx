@@ -39,12 +39,9 @@ const User = () => {
   const classes = useStyles();
   const history = useHistory();
   const [input, setInput] = useState({});
-
   const dispatch = useDispatch();
+  const cadeteriaList = useSelector((state) => state.cadeteria.cadeterias);
 
-  const cadeteriaList = useSelector((state) => state.cadeteria);
-
-  console.log('cadeteria ====>', cadeteriaList)
 
   const messages = messageHandler(useSnackbar());
 
@@ -152,7 +149,7 @@ const User = () => {
                     >
                       {cadeteriaList &&
                         cadeteriaList.map((cad, i) => {
-                          if (cad.authorized !== false)
+                          if (cad.authorized && cad.active !== false)
                             return (
                               <MenuItem value={`${cad.nameCompany}`} key={i}>
                                 {`${cad.nameCompany}`}

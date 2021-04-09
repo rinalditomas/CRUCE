@@ -1,8 +1,10 @@
 import React, { useState } from "react";
+import Box from "@material-ui/core/Box";
 
 import CssBaseline from "@material-ui/core/CssBaseline";
 
 import Grid from "@material-ui/core/Grid";
+import useStyles from "../utils/stylesRegister";
 
 import { makeStyles } from "@material-ui/core/styles";
 
@@ -15,55 +17,94 @@ import { useHistory } from "react-router-dom";
 
 
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: "flex",
-    flexWrap: "wrap",
-    "& > *": {
-      margin: theme.spacing(1),
-      width: theme.spacing(16),
-      height: theme.spacing(16),
-    },
+// const useStyles = makeStyles((theme) => ({
+//   root: {
+//     display: "flex",
+//     flexWrap: "wrap",
+//     "& > *": {
+//       margin: theme.spacing(1),
+//       width: theme.spacing(16),
+//       height: theme.spacing(16),
+//     },
   
-  },
+//   },
 
 
-}));
+// }));
 
 const Home = () => {
   const history = useHistory();
   const classes = useStyles();
   return (
-    <div>
+
+      <div>
       <HomeNavbar />
-      <Grid container component="main" className={classes.root}>
-        <CssBaseline />
-        <Grid item xs={12} sm={8} md={5} elevation={2} square>
-          <div className={classes.paper}>
-            <img
-              style={{
-                width: "135%",
-                borderRadius: "5rem",
-                minWidth: "100%",
-                marginTop: "2rem",
-              }}
-              src="https://image.freepik.com/foto-gratis/servicio-mensajeria-joven-que-recibe-paquete-repartidor_38391-600.jpg"
-              alt="s"
-            ></img>
-            <Button variant="contained" size="large" className={classes.margin} onClick={() => history.push("/select")} >
-              Registro
-            </Button>
-            <Button
-              onClick={() => history.push("/login")}
-              variant="contained"
-              size="large"
-              className={classes.margin}
-            >
-              Login
-            </Button>
-          </div>
-        </Grid>
-      </Grid>
+      
+      <div>
+        <h1></h1>
+        <Box 
+          display="flex"
+          justifyContent="center"
+          flexDirection="column"
+          style={{ marginTop: "1rem"}}
+     
+        >
+        
+          <Box
+            display="flex"
+            justifyContent="center"
+            m={1}
+            p={1}
+       
+          >
+            <Box p={1} >
+              <Box display="flex" justifyContent="center">
+              <img
+                  className={classes.largeMoto}
+                  src={process.env.PUBLIC_URL + "moto.png"}
+                  alt=""
+                />
+              </Box>
+              <Button
+                color="primary"
+                variant="contained"
+                size="large"
+                className={classes.button_home}
+                onClick={() => history.push("/select")}
+              >
+                Registrarse
+              </Button>
+            </Box>
+          </Box>
+
+          <Box
+            display="flex"
+            justifyContent="center"
+            m={1}
+            p={1}
+     
+          >
+            <Box p={1} >
+              <Box display="flex" justifyContent="center">
+                {/* <img
+                  className={classes.large}
+                  src={process.env.PUBLIC_URL + "asd.png"}
+                  alt=""
+                />   */}
+              </Box>
+              <Button
+               color="primary"
+               variant="contained"
+               size="large"
+               className={classes.button_home}
+                onClick={() => history.push("/selectLogin")}
+              >
+                Loguearse
+              </Button>
+            </Box>
+          </Box>
+        </Box>
+      </div>
     </div>
   );
 };
