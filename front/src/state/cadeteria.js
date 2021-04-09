@@ -53,7 +53,7 @@ export const admitCadete = createAsyncThunk("ADMIT_CADETE", (id) => {
   return axios
     .put(`http://localhost:8000/api/cadeteria/admitCadete/${id}`)
     .then((res) => res.data)
-    .catch(err => console.log(err))
+    .catch((err) => console.log(err));
 });
 
 export const editProfileCadeteria = createAsyncThunk(
@@ -68,27 +68,29 @@ export const editProfileCadeteria = createAsyncThunk(
       .catch((err) => err);
   }
 );
+
 const initialState = {
   cadeterias: [],
-
 };
 
 const cadeteriaReducer = createReducer(initialState, {
   [fetchCad.fulfilled]: (state, action) => action.payload,
+
   [CadloginRequest.fulfilled]: (state, action) => action.payload,
   [setCadeteria]: (state, action) => action.payload,
   [allCadeterias.fulfilled]: (state, action) => {
-        return { ...state, cadeterias: action.payload };
-      },
-  [admitCadete.fullfiled]: (state, action) => action.paylad,
+    return { ...state, cadeterias: action.payload };
+  },
+  [admitCadete.fullfiled]: (state, action) => action.payload,
   [registerCadeteria.fulfilled]: (state, action) => {
-        return {
-          ...state,
-          cadeterias:[...state.cadeterias,action.payload]
-        }},
+    return {
+      ...state,
+      cadeterias: [...state.cadeterias, action.payload],
+    };
+  },
+
   [editProfileCadeteria.fulfilled]: (state, action) => action.payload,
 });
-
 
 // const initialState = {
 //   cadeterias: [],
@@ -96,7 +98,7 @@ const cadeteriaReducer = createReducer(initialState, {
 // };
 
 // const cadeteriaReducer = createReducer(initialState, {
-  
+
 //   [setCadeteria]: (state, action) => action.payload,
 //   [allCadeterias.fulfilled]: (state, action) => {
 //     return { ...state, cadeterias: action.payload };

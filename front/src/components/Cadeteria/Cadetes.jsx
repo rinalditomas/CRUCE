@@ -43,7 +43,7 @@ export default function Cadetes() {
   const dispatch = useDispatch();
 
   const messages = messagesHandler(useSnackbar());
-  console.log("aca estan los cadetes",cadetes)
+  console.log("aca estan los cadetes", cadetes);
 
   useEffect(() => {
     dispatch(allCadetes());
@@ -93,8 +93,7 @@ export default function Cadetes() {
       <List dense className={classes.root}>
         {cadetes &&
           cadetes.map((cadete) => {
-
-            if (!cadete.authorized)
+            if (!cadete.authorized && cadete.admin == false)
               return (
                 <ListItem key={cadete} button>
                   <ListItemAvatar>
@@ -109,14 +108,14 @@ export default function Cadetes() {
                   />
                   <ListItemSecondaryAction>
                     <Chip
-                      label='Solicitud pendiente'
+                      label="Solicitud pendiente"
                       disabled
                       variant="outlined"
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
               );
-            if (cadete.authorized)
+            if (cadete.authorized && cadete.admin == false)
               return (
                 <ListItem key={cadete} button>
                   <ListItemAvatar>
@@ -164,7 +163,6 @@ export default function Cadetes() {
                   </ListItemSecondaryAction>
                 </ListItem>
               );
-             
           })}
       </List>
 

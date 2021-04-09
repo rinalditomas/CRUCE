@@ -19,7 +19,7 @@ import { useSnackbar } from "notistack";
 import messageHandler from "../../utils/messagesHandler";
 
 import { fetchCad } from "../../state/cadeteria";
-import CadeteriaNavbar from './CadeteriaNavbar'
+import CadeteriaNavbar from "./CadeteriaNavbar";
 
 export default function ProfileCadeteria() {
   const dispatch = useDispatch();
@@ -46,7 +46,7 @@ export default function ProfileCadeteria() {
         console.log("RESPUES DE EDICION DE PERFIL", res);
 
         if (res.payload === undefined) {
-            messages.error("ocurrió un error");
+          messages.error("ocurrió un error");
           history.push("/cadeteria/listOrders");
         } else {
           dispatch(fetchCad());
@@ -60,7 +60,7 @@ export default function ProfileCadeteria() {
 
   return (
     <React.Fragment>
-      <CadeteriaNavbar/>
+      <CadeteriaNavbar />
       <Typography variant="h6" gutterBottom>
         Editar el perfil de la cadeteria
       </Typography>
@@ -76,17 +76,7 @@ export default function ProfileCadeteria() {
               onChange={handleChange}
             />
           </Grid>
-          <Grid item xs={10}>
-            <TextField
-              name="CUIT"
-              label="CUIT"
-              id="CUIT"
-              autoComplete="CUIT"
-              fullWidth
-              placeholder={cadeteria && cadeteria.CUIT}
-              onChange={handleChange}
-            />
-          </Grid>
+
           <Grid item xs={10}>
             <TextField
               name="email"

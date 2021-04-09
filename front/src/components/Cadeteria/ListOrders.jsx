@@ -11,8 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { ordersList } from "../../state/orders";
 // import { orderState} from "../state/order";
 
-import CadeteriaNavbar from './CadeteriaNavbar'
-
+import CadeteriaNavbar from "./CadeteriaNavbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -32,6 +31,7 @@ const ListOrders = () => {
   const [dense, setDense] = React.useState(false);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
+  const cadeteria = useSelector((state) => state.cadeteria);
 
   useEffect(() => {
     dispatch(ordersList());
@@ -39,41 +39,146 @@ const ListOrders = () => {
 
   return (
     <>
-    <CadeteriaNavbar/>
-    <div className={classes.root}>
-      <div>
-        <h1 className="titulo">Lista de Ordenes</h1>
+      <CadeteriaNavbar />
+      <div className={classes.root}>
+        <div>
+          <h1 className="titulo">Lista de Ordenes</h1>
+        </div>
+        <div>
+          <h3 className="titulo">Entregadas</h3>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {orders &&
+              orders.map((order) => {
+                return order.cadeteriumId == cadeteria.id &&
+                  order.status == "Entregado" ? (
+                  <ListItem key={order.id}>
+                    <Link to={`/cadeteria/singleOrder/${order.id}`}>
+                      <ListItemText
+                        primary={
+                          order.street +
+                          " " +
+                          order.number +
+                          " " +
+                          (order.complement ? order.complement : "")
+                        }
+                      />
+                    </Link>
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Button variant="outlined" color="primary">
+                          {order.status}
+                        </Button>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
+          </List>
+        </div>
+
+        <div>
+          <h3 className="titulo"> En Camino</h3>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {orders &&
+              orders.map((order) => {
+                return order.cadeteriumId == cadeteria.id &&
+                  order.status == "En camino" ? (
+                  <ListItem key={order.id}>
+                    <Link to={`/cadeteria/singleOrder/${order.id}`}>
+                      <ListItemText
+                        primary={
+                          order.street +
+                          " " +
+                          order.number +
+                          " " +
+                          (order.complement ? order.complement : "")
+                        }
+                      />
+                    </Link>
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Button variant="outlined" color="primary">
+                          {order.status}
+                        </Button>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
+          </List>
+        </div>
+
+        <div>
+          <h3 className="titulo"> Devuelto a Sucursal</h3>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {orders &&
+              orders.map((order) => {
+                return order.cadeteriumId == cadeteria.id &&
+                  order.status == "Devuelto a sucursal" ? (
+                  <ListItem key={order.id}>
+                    <Link to={`/cadeteria/singleOrder/${order.id}`}>
+                      <ListItemText
+                        primary={
+                          order.street +
+                          " " +
+                          order.number +
+                          " " +
+                          (order.complement ? order.complement : "")
+                        }
+                      />
+                    </Link>
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Button variant="outlined" color="primary">
+                          {order.status}
+                        </Button>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
+          </List>
+        </div>
+
+        <div>
+          <h3 className="titulo">Pendientes (Todas las cadeterías)</h3>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {orders &&
+              orders.map((order) => {
+                return order.status == "Pendiente" ? (
+                  <ListItem key={order.id}>
+                    <Link to={`/cadeteria/singleOrder/${order.id}`}>
+                      <ListItemText
+                        primary={
+                          order.street +
+                          " " +
+                          order.number +
+                          " " +
+                          (order.complement ? order.complement : "")
+                        }
+                      />
+                    </Link>
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Button variant="outlined" color="primary">
+                          {order.status}
+                        </Button>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
+          </List>
+        </div>
       </div>
-      <div className={classes.demo}>
-        <List dense={dense}>
-          {orders &&
-            orders.map((order) => {
-              return (
-                <ListItem key={order.id}>
-                  <Link to={`/cadeteria/singleOrder/${order.id}`}>
-                    <ListItemText
-                      primary={
-                        order.street +
-                        " " +
-                        order.number +
-                        " " +
-                        (order.complement ? order.complement : "")
-                      }
-                    />
-                  </Link>
-                  <ListItemSecondaryAction>
-                    <IconButton>
-                      <Button variant="outlined" color="primary">
-                        {order.status}
-                      </Button>
-                    </IconButton>
-                  </ListItemSecondaryAction>
-                </ListItem>
-              );
-            })}
-        </List>
-      </div>
-    </div>
     </>
   );
 };

@@ -45,6 +45,7 @@ const NewOrderController = {
         creationDate: order["Creation Date"],
         orderNumber: order.Order,
         province: order["UF"],
+        clientPhone: order.Phone,
         city: order.City,
         street: order.Street,
         number: order.Number,
@@ -99,10 +100,9 @@ const NewOrderController = {
     const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId;
-    console.log(orderNumber, "ACA ESTA LA ORDER NUMBER")
-    console.log(status, "ACA ESTA EL ESTADO")
-    console.log(cadeteId, "ACA ES EL ID DEL CADETE")
-
+    console.log(orderNumber, "ACA ESTA LA ORDER NUMBER");
+    console.log(status, "ACA ESTA EL ESTADO");
+    console.log(cadeteId, "ACA ES EL ID DEL CADETE");
 
     User.findByPk(cadeteId).then((cadete) => {
       Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
@@ -110,14 +110,15 @@ const NewOrderController = {
           where: {
             orderNumber: orderNumber,
           },
-        }).then((order) => {
-          order
-            .setUser(cadete)
-            .then(order.setCadeterium(cadeteria))
-            .then(order.update({ status: status }))
-            .then((newOrders) => res.send(newOrders));
         })
-        .catch(err => console.log(err))
+          .then((order) => {
+            order
+              .setUser(cadete)
+              .then(order.setCadeterium(cadeteria))
+              .then(order.update({ status: status }))
+              .then((newOrders) => res.send(newOrders));
+          })
+          .catch((err) => console.log(err));
       });
     });
   },

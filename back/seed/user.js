@@ -10,6 +10,8 @@ module.exports = [
     salt: "e4ea2395e8c4f012545e795efb74dae1ef224ec4",
     admin: true,
     vehicle: "auto",
+    authorized: true,
+    active: true,
   },
   {
     firstName: "Laura",
