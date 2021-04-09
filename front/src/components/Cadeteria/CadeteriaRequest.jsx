@@ -16,6 +16,9 @@ import { admitCadeteria, AllCadeterias } from "../../state/admin";
 import { useSnackbar } from "notistack";
 import messagesHandler from '../../utils/messagesHandler'
 
+import Navbar from '../../components/Navbar'
+import CadeteriaNavbar from './CadeteriaNavbar'
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +57,8 @@ export default function CadeteriaRequest() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className={classes.root}>
       <div>
         <h1 className="titulo">Lista de cadeterias</h1>
@@ -101,5 +106,6 @@ export default function CadeteriaRequest() {
         </List>
       </div>
     </div>
+    </>
   );
 }

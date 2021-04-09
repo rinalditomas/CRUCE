@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { ordersList, orderState } from "../../state/orders";
 // import { orderState} from "../state/order";
 
+
+import Navbar from '../Navbar'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -64,6 +67,7 @@ const CadeteOrders = () => {
   };
 
   return (
+    <> 
     <div className={classes.root}>
       <div>
         <h1 className="titulo">Lista de Ordenes</h1>
@@ -77,7 +81,7 @@ const CadeteOrders = () => {
                 (order.userId === cadete.id && order.status !== "Entregado") ||
                 (order.userId === null && order.status !== "Entregado") ? (
                 <ListItem key={order.id}>
-                  <Link to={`cadete/singleOrder/${order.id}`}>
+                  <Link to={`/cadete/singleOrder/${order.id}`}>
                     <ListItemText
                       primary={
                         order.street +
@@ -107,6 +111,7 @@ const CadeteOrders = () => {
         </List>
       </div>
     </div>
+    </>
   );
 };
 

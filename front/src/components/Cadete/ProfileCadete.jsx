@@ -11,6 +11,7 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { InputLabel } from "@material-ui/core";
 import { editProfileUser } from "../../state/user";
+import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -61,6 +62,7 @@ export default function ProfileCadete() {
 
   return (
     <React.Fragment>
+      <Navbar/>
       <Typography variant="h6" gutterBottom>
         Editar el perfil
       </Typography>

@@ -112,7 +112,8 @@ const NewOrderController = {
             .then(order.setCadeterium(cadeteria))
             .then(order.update({ status: status }))
             .then((newOrders) => res.send(newOrders));
-        });
+        })
+        .catch(err => console.log(err))
       });
     });
   },

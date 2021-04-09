@@ -12,6 +12,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { AllCadeterias, editStateCadeteria } from "../../state/admin";
+import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -62,6 +63,8 @@ export default function ListCadeterias() {
   };
 
   return (
+    <>
+    <Navbar/>
     <div className={classes.root}>
       <div>
         <h1 className="titulo">Lista de cadeterias</h1>
@@ -110,5 +113,6 @@ export default function ListCadeterias() {
         </List>
       </div>
     </div>
+    </>
   );
 }

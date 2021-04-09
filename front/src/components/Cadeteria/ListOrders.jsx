@@ -11,6 +11,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { ordersList } from "../../state/orders";
 // import { orderState} from "../state/order";
 
+import CadeteriaNavbar from './CadeteriaNavbar'
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -35,6 +38,8 @@ const ListOrders = () => {
   }, []);
 
   return (
+    <>
+    <CadeteriaNavbar/>
     <div className={classes.root}>
       <div>
         <h1 className="titulo">Lista de Ordenes</h1>
@@ -45,7 +50,7 @@ const ListOrders = () => {
             orders.map((order) => {
               return (
                 <ListItem key={order.id}>
-                  <Link to={`/singleOrder/${order.id}`}>
+                  <Link to={`/cadeteria/singleOrder/${order.id}`}>
                     <ListItemText
                       primary={
                         order.street +
@@ -69,6 +74,7 @@ const ListOrders = () => {
         </List>
       </div>
     </div>
+    </>
   );
 };
 

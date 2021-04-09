@@ -29,8 +29,8 @@ const HomeNavbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "grey" }}>
-        <Toolbar>
+      <AppBar position="static" style={{ backgroundColor: "#d9d9d9", color: 'black' }} >
+        <Toolbar  >
           <IconButton
             edge="start"
             className={classes.menuButton}
@@ -40,10 +40,10 @@ const HomeNavbar = () => {
             <MenuIcon />
           </IconButton>
           <Typography variant="h6" className={classes.title}></Typography>
-          <Link to="/login" style={{ color: "inherit" }}>
+          <Link to="/selectLogin" style={{ color: "inherit" }}>
             <Button color="inherit">Login</Button>
           </Link>
-          <Link to="/register" style={{ color: "inherit" }}>
+          <Link to="/select" style={{ color: "inherit" }}>
             <Button color="inherit">Register</Button>
           </Link>
           <Button color="inherit" onClick={logout}>

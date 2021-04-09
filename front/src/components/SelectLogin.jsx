@@ -18,8 +18,9 @@ const Main = () => {
   return (
     <div>
       <HomeNavbar />
+      
       <div>
-      <h1>Registrarse como</h1>
+        <h1>Ingresar como</h1>
         <Box 
           display="flex"
           justifyContent="center"
@@ -48,7 +49,7 @@ const Main = () => {
                 variant="contained"
                 size="large"
                 className={classes.button_cadete}
-                onClick={() => history.push("/register")}
+                onClick={() => history.push("/login")}
               >
                 Cadete
               </Button>
@@ -73,7 +74,7 @@ const Main = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => history.push("/cadeteria/register")}
+                onClick={() => history.push("/cadeteria/login")}
                 size="large"
                 className={classes.button_cadeteria}
               >

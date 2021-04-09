@@ -1,6 +1,7 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+
   root: {
     flexGrow: 1,
   },
@@ -10,14 +11,14 @@ const useStyles = makeStyles((theme) => ({
   title: {
     flexGrow: 1,
   },
-
   admin: {
-    background: "#e8e810",
-    color: "black",
+    background: "#fdd04c",
+    color: "white",
   },
   cadeteria: {
-    background: "red",
+    background: "#ff5757",
   },
+
 }));
 
 export default useStyles;

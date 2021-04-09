@@ -32,7 +32,7 @@ const CadeteriaNavbar = () => {
 
   return (
     <div className={classes.root}>
-      <AppBar position="static" style={{ backgroundColor: "red" }}>
+      <AppBar position="static" style={{ backgroundColor: "#ff5757" }}>
         <Toolbar>
           <IconButton
             edge="start"
@@ -45,7 +45,7 @@ const CadeteriaNavbar = () => {
           <Typography variant="h6" className={classes.title}></Typography>
           {!token ? (
             <>
-              <Link to="/login" style={{ color: "inherit" }}>
+              <Link to="/selectLogin" style={{ color: "inherit" }}>
                 <Button color="inherit">Login</Button>
               </Link>
               <Link to="/register" style={{ color: "inherit" }}>

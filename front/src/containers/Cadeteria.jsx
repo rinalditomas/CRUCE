@@ -7,7 +7,6 @@ import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
 import { useSelector, useDispatch } from "react-redux";
 import { setUser, fetchMe } from "../state/user";
 
-
 import { fetchCad } from "../state/cadeteria";
 
 import { useHistory } from "react-router-dom";
@@ -28,14 +27,10 @@ export default function Cadeteria() {
 
   const token = localStorage.getItem("token");
 
-
   return (
     <div>
       <CadeteriaNavbar />
-     {/*  {console.log('Cadeteria =>', cadeteria, 'id', cadeteria.id)} */}
       {cadeteria && cadeteria.id ? <CadeteriaPanel /> : <Error />}
-
-     
       <Footer />
     </div>
   );
