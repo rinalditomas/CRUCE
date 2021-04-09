@@ -31,10 +31,12 @@ export default function SingleOrder({ match }) {
 
   const cadete = useSelector((state) => state.cadete);
 
+  console.log(match,"ACA ESTA EL MATCH")
+
   useEffect(() => {
-    dispatch(singleOrder(match)).then(
+    dispatch(singleOrder(match.id)).then(
       axios
-        .get(`http://localhost:8000/api/product/${order.orderNumber}`)
+        .get(`http://localhost:8000/api/product/${match.orderNumber}`)
         .then((res) => setProducts(res.data.count))
         .catch((err) => console.log(err))
     );
