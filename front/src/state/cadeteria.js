@@ -75,7 +75,6 @@ const initialState = {
 
 const cadeteriaReducer = createReducer(initialState, {
   [fetchCad.fulfilled]: (state, action) => action.payload,
-
   [CadloginRequest.fulfilled]: (state, action) => action.payload,
   [setCadeteria]: (state, action) => action.payload,
   [allCadeterias.fulfilled]: (state, action) => {
@@ -83,22 +82,15 @@ const cadeteriaReducer = createReducer(initialState, {
   },
   [admitCadete.fullfiled]: (state, action) => action.payload,
   [registerCadeteria.fulfilled]: (state, action) => {
-    return {
-      ...state,
-      cadeterias: [...state.cadeterias, action.payload],
-    };
+    return { ...state, cadeterias: action.payload };
   },
-
   [editProfileCadeteria.fulfilled]: (state, action) => action.payload,
 });
 
 // const initialState = {
 //   cadeterias: [],
-
 // };
-
 // const cadeteriaReducer = createReducer(initialState, {
-
 //   [setCadeteria]: (state, action) => action.payload,
 //   [allCadeterias.fulfilled]: (state, action) => {
 //     return { ...state, cadeterias: action.payload };

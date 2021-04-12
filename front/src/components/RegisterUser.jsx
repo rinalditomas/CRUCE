@@ -29,19 +29,21 @@ import { allCadeterias } from "../state/cadeteria";
 
 import { useSnackbar } from "notistack";
 import messageHandler from "../utils/messagesHandler";
-///manejo de errores
 
-import { unwrapResult } from "@reduxjs/toolkit";
 import HomeNavbar from "./HomeNavbar";
-const User = () => {
-  const { enqueueSnackbar } = useSnackbar();
 
+import { sendmail } from "../state/sendmail";
+
+const User = () => {
   const classes = useStyles();
   const history = useHistory();
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
+
   const cadeteriaList = useSelector((state) => state.cadeteria.cadeterias);
 
+  const cadeteriaEmail = (companyId) =>
+    cadeteriaList.filter((e) => e.id === companyId);
 
   const messages = messageHandler(useSnackbar());
 
@@ -54,18 +56,19 @@ const User = () => {
 
   useEffect(() => {
     dispatch(allCadeterias())
-      .then((res) => console.log(res))
+      .then((res) => res)
       .catch((err) => err);
   }, [dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(registerRequest(input))
-      .then(({ payload }) => {
-        if (!payload) messages.error();
-        else messages.success("Usuario registrado") && history.push("/login");
-      })
-      .catch((err) => messages.error(err));
+    const register = await dispatch(registerRequest(input));
+    const email = register.payload.email;
+    const name = `${register.payload.firstName} ${register.payload.lastName}`;
+
+    const cad = cadeteriaEmail(register.payload.cadeteriumId)[0];
+    
+    return sendmail(email, name, cad);
   };
 
   return (
