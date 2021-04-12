@@ -20,8 +20,8 @@ import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
 
-import { CadloginRequest } from "../../state/cadeteria";
-import { fetchCad } from "../../state/cadeteria";
+import { CadloginRequest } from "../../state/cadeterias";
+import { fetchCad } from "../../state/cadeterias";
 
 //UTILS
 import messagesHandler from "../../utils/messagesHandler";

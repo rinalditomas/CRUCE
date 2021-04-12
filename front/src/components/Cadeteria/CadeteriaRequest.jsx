@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { admitCadeteria, AllCadeterias } from "../../state/admin";
+import { admitCadeteria, allCadeterias } from "../../state/cadeterias";
 
 import { useSnackbar } from "notistack";
 import messagesHandler from '../../utils/messagesHandler'
@@ -40,12 +40,12 @@ export default function CadeteriaRequest() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   
-  const cadeterias = useSelector((state) => state.admin.cadeterias);
+  const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
 
   const messages = messagesHandler(useSnackbar())
 
   useEffect(() => {
-    dispatch(AllCadeterias());
+    dispatch(allCadeterias());
   }, []);
 
   const handleActive = (id) => {

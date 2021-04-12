@@ -16,9 +16,7 @@ import useStyles from "../utils/stylesLogins";
 import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
-
-import { loginRequest } from "../state/user";
-import { fetchMe } from "../state/user";
+import { loginRequest , fetchMe } from "../state/users";
 
 import messagesHandler from "../utils/messagesHandler";
 

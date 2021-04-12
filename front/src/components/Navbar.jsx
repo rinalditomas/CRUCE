@@ -7,7 +7,7 @@ import IconButton from "@material-ui/core/IconButton";
 import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
-import { clearUser } from "../state/user";
+import { logout } from "../state/users";
 import useStyles from "../utils/stylesNavbar";
 
 import { useSnackbar } from "notistack";
@@ -26,7 +26,7 @@ const Navbar = () => {
 
   const logout = () => {
     localStorage.removeItem("token");
-    dispatch(clearUser()) && messages.info()
+    dispatch(logout()) && messages.info()
     history.push("/");
   };
 

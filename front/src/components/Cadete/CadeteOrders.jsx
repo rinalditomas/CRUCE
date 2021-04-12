@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { ordersList, orderState } from "../../state/orders";
+import { allOrders, orderState } from "../../state/orders";
 // import { orderState} from "../state/order";
 
 import Navbar from "../Navbar";
@@ -31,10 +31,10 @@ const CadeteOrders = () => {
   const [dense, setDense] = React.useState(false);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
-  const cadete = useSelector((state) => state.cadete);
+  const cadete = useSelector((state) => state.users.user);
 
   useEffect(() => {
-    dispatch(ordersList());
+    dispatch(allOrders());
   }, []);
 
   const ordersToShow = [];

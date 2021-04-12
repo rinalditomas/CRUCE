@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCadeterias, editStateCadeteria } from "../../state/admin";
+import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
 import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,12 +46,12 @@ export default function ListCadeterias() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const cadeterias = useSelector((state) => state.admin.cadeterias);
+  const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(AllCadeterias());
+    dispatch(allCadeterias());
   }, []);
 
   const handleActive = (id) => {

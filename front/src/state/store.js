@@ -1,18 +1,19 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 import logger from "redux-logger";
-import userReducer from "./user";
+import usersReducer from "./users";
 import ordersReducer from "./orders";
-import cadeteriaReducer from "./cadeteria";
+/* import cadeteriaReducer from "./cadeteria"; */
 import adminReducer from "./admin";
+import cadeteriasReducer from "./cadeterias";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  reducer: {
-    cadete: userReducer,
+  reducer: {    
     orders: ordersReducer,
-    cadeteria: cadeteriaReducer,
-    admin: adminReducer,
+    cadeterias: cadeteriasReducer,
+    /* admin: adminReducer, */
+    users: usersReducer,
   },
 });
 

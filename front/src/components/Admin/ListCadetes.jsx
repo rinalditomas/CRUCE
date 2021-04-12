@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
-import { allCadetes, editStateCadete } from "../../state/admin";
+import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import Navbar from "../Navbar";
 
@@ -32,7 +32,7 @@ export default function ListCadetes() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const cadetes = useSelector((state) => state.admin.cadetes);
+  const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
 
   useEffect(() => {
