@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
-import { allCadetes, editStateCadete } from "../../state/admin";
+import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import CadeteriaNavbar from "./CadeteriaNavbar";
 
@@ -39,7 +39,7 @@ export default function Cadetes() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const cadetes = useSelector((state) => state.admin.cadetes);
+  const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
 
   const messages = messagesHandler(useSnackbar());
@@ -78,9 +78,62 @@ export default function Cadetes() {
 
   return (
     <>
+      <cadeteriaNavbar />
+      <div className={classes.root}>
+        <div>
+          <h1 className="titulo">Lista de cadetes</h1>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <IconButton edge="end" aria-label="delete" className="icono">
+              <PersonAddIcon fontSize="large" />
+            </IconButton>
+          </Link>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {cadetes &&
+              cadetes.map((cadete) => {
+                return (
+                  <ListItem>
+                    <ListItemText
+                      primary={cadete.firstName + " " + cadete.lastName}
+                    />
+                    <ListItemSecondaryAction>
+                      {cadete.active ? (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <BlockIcon />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <CheckIcon />
+                        </IconButton>
+                      )}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+              })}
+          </List>
+        </div>
+      </div>
+    </>
+
+    /* <>
       <CadeteriaNavbar />
       <h1 className="titulo">Lista de cadetes</h1>
-
       <Link
         to="/cadeteria/register"
         style={{ textDecoration: "none", color: "inherit" }}
@@ -89,11 +142,10 @@ export default function Cadetes() {
           <PersonAddIcon fontSize="large" />
         </IconButton>
       </Link>
-
       <List dense className={classes.root}>
         {cadetes &&
-          cadetes.map((cadete) => {
-            if (!cadete.authorized && cadete.admin == false)
+          cadetes.map((cadete) => 
+             {if (!cadete.authorized && cadete.admin == false)
               return (
                 <ListItem key={cadete} button>
                   <ListItemAvatar>
@@ -114,8 +166,8 @@ export default function Cadetes() {
                     />
                   </ListItemSecondaryAction>
                 </ListItem>
-              );
-            if (cadete.authorized && cadete.admin == false)
+              ); */
+    /*       if (cadete.authorized && cadete.admin == false)
               return (
                 <ListItem key={cadete} button>
                   <ListItemAvatar>
@@ -164,9 +216,9 @@ export default function Cadetes() {
                 </ListItem>
               );
           })}
-      </List>
+      </List> */
 
-      {/*  <div className={classes.root}>
+    /*  <div className={classes.root}>
       <div>
         <h1 className="titulo">Lista de cadetes</h1>
         <Link
@@ -214,7 +266,7 @@ export default function Cadetes() {
           })}
         </List>
       </div>
-    </div> */}
-    </>
+    </div> */
+    /* </> */
   );
 }

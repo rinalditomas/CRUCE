@@ -11,14 +11,14 @@ import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 
 import { InputLabel } from "@material-ui/core";
-import { editProfileCadeteria } from "../../state/cadeteria";
+import { editProfileCadeteria } from "../../state/cadeterias";
 
 import useStyles from "../../utils/stylesCadeteria";
 
 import { useSnackbar } from "notistack";
 import messageHandler from "../../utils/messagesHandler";
 
-import { fetchCad } from "../../state/cadeteria";
+import { fetchCad } from "../../state/cadeterias";
 import CadeteriaNavbar from "./CadeteriaNavbar";
 
 export default function ProfileCadeteria() {
@@ -29,7 +29,7 @@ export default function ProfileCadeteria() {
 
   const messages = messageHandler(useSnackbar());
 
-  const cadeteria = useSelector((state) => state.cadeteria);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const handleChange = (e) => {
     const key = e.target.name;

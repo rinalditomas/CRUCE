@@ -12,16 +12,14 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 
-
-
-import CadeteriaNavbar from './CadeteriaNavbar'
+import CadeteriaNavbar from "./CadeteriaNavbar";
 
 import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
 
-import { CadloginRequest } from "../../state/cadeteria";
-import { fetchCad } from "../../state/cadeteria";
+import { CadloginRequest } from "../../state/cadeterias";
+import { fetchCad } from "../../state/cadeterias";
 
 //UTILS
 import messagesHandler from "../../utils/messagesHandler";
@@ -47,16 +45,18 @@ const CadeteriaLogin = () => {
     dispatch(CadloginRequest(input))
       .then((res) => dispatch(fetchCad()))
       .then((res) => {
-        console.log('resouesta en login ', res)
-        if (!res.payload)  messages.error() && history.push("/cadeteria/login");
-        else messages.success('Cadeteria ingresada correctamente') && history.push("/cadeteria");
+        console.log("resouesta en login ", res);
+        if (!res.payload) messages.error() && history.push("/cadeteria/login");
+        else
+          messages.success("Cadeteria ingresada correctamente") &&
+            history.push("/cadeteria");
       })
       .catch((e) => messages.error() && history.push("/cadeteria/login"));
   };
 
   return (
     <div>
-      <CadeteriaNavbar/>
+      <CadeteriaNavbar />
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -111,7 +111,9 @@ const CadeteriaLogin = () => {
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
-                  <Link to="/cadeteria/register">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/cadeteria/register">
+                    {"No tienes cuenta? Registrate"}
+                  </Link>
                 </Grid>
               </Grid>
               <Box mt={5}>

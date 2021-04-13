@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { Route, Switch } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
-import { setUser, fetchMe } from "../state/user";
+import { fetchMe } from "../state/users";
 import { Redirect } from "react-router-dom";
 
 import Cadete from "./Cadete";
@@ -29,7 +29,7 @@ import DataLoading from "../components/DataLoading";
 import ListCadeterias from "../components/Admin/ListCadeterias";
 import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
 
-import { fetchCad } from "../state/cadeteria";
+import { fetchCad } from "../state/cadeterias";
 
 import Login from "../components/Login";
 
@@ -42,8 +42,8 @@ import RegisterUser from "../components/RegisterUser";
 import SelectLogin from "../components/SelectLogin";
 
 const Index = () => {
-  const user = useSelector((state) => state.cadete);
-  const cadeteria = useSelector((state) => state.cadeteria);
+  const user = useSelector((state) => state.users.user);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const dispatch = useDispatch();
 
@@ -67,10 +67,6 @@ const Index = () => {
         <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
         <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
-        <Route
-          path="/cadeteria/singleOrder/:id"
-          render={({ match }) => <SingleOrder match={match.params.id} />}
-        />
 
         <Route exact path="/register" component={RegisterUser} />
         {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}

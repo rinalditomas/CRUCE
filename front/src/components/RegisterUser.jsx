@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { useDispatch, useSelector } from "react-redux";
 
-import { registerRequest } from "../state/user";
+import { registerRequest } from "../state/users";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -25,7 +25,7 @@ import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
 import { makeStyles } from "@material-ui/core/styles";
 
-import { allCadeterias } from "../state/cadeteria";
+import { allCadeterias } from "../state/cadeterias";
 
 import { useSnackbar } from "notistack";
 import messageHandler from "../utils/messagesHandler";
@@ -40,8 +40,7 @@ const User = () => {
   const history = useHistory();
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
-  const cadeteriaList = useSelector((state) => state.cadeteria.cadeterias);
-
+  const cadeteriaList = useSelector((state) => state.cadeterias.cadeterias);
 
   const messages = messageHandler(useSnackbar());
 

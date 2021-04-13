@@ -8,7 +8,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { ordersList } from "../../state/orders";
+import { allOrders } from "../../state/orders";
 // import { orderState} from "../state/order";
 
 import CadeteriaNavbar from "./CadeteriaNavbar";
@@ -31,10 +31,10 @@ const ListOrders = () => {
   const [dense, setDense] = React.useState(false);
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
-  const cadeteria = useSelector((state) => state.cadeteria);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   useEffect(() => {
-    dispatch(ordersList());
+    dispatch(allOrders());
   }, []);
 
   return (
@@ -54,7 +54,9 @@ const ListOrders = () => {
                 return order.cadeteriumId == cadeteria.id &&
                   order.status == "Entregado" ? (
                   <ListItem key={order.id}>
-                    <Link to={`/cadeteria/singleOrder/${order.id}`}>
+                    <Link
+                      to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
+                    >
                       <ListItemText
                         primary={
                           order.street +

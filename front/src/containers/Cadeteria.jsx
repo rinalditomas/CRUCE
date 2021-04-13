@@ -23,7 +23,7 @@ export default function Cadeteria() {
   const dispatch = useDispatch();
   const history = useHistory();
 
-  const cadeteria = useSelector((state) => state.cadeteria);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const token = localStorage.getItem("token");
 

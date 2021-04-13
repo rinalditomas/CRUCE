@@ -11,7 +11,7 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
-import { AllCadeterias, editStateCadeteria } from "../../state/admin";
+import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
 import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -46,12 +46,12 @@ export default function ListCadeterias() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
-  const cadeterias = useSelector((state) => state.admin.cadeterias);
+  const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(AllCadeterias());
+    dispatch(allCadeterias());
   }, []);
 
   const handleActive = (id) => {
@@ -64,55 +64,55 @@ export default function ListCadeterias() {
 
   return (
     <>
-    <Navbar/>
-    <div className={classes.root}>
-      <div>
-        <h1 className="titulo">Lista de cadeterias</h1>
-        <Link
-          to="/register"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <IconButton edge="end" aria-label="delete" className="icono">
-            <GroupAddIcon fontSize="large" />
-          </IconButton>
-        </Link>
+      <Navbar />
+      <div className={classes.root}>
+        <div>
+          <h1 className="titulo">Lista de cadeterias</h1>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <IconButton edge="end" aria-label="delete" className="icono">
+              <GroupAddIcon fontSize="large" />
+            </IconButton>
+          </Link>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {cadeterias &&
+              cadeterias.map((cadeteria) => {
+                return cadeteria.authorized ? (
+                  <ListItem key={cadeteria.id}>
+                    <ListItemText primary={cadeteria.nameCompany} />
+                    <ListItemSecondaryAction>
+                      {cadeteria.active ? (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadeteria.id);
+                          }}
+                        >
+                          <BlockIcon />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadeteria.id);
+                          }}
+                        >
+                          <CheckIcon />
+                        </IconButton>
+                      )}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
+          </List>
+        </div>
       </div>
-      <div className={classes.demo}>
-        <List dense={dense}>
-          {cadeterias &&
-            cadeterias.map((cadeteria) => {
-              return cadeteria.authorized ? (
-                <ListItem key={cadeteria.id}>
-                  <ListItemText primary={cadeteria.nameCompany} />
-                  <ListItemSecondaryAction>
-                    {cadeteria.active ? (
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadeteria.id);
-                        }}
-                      >
-                        <BlockIcon />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadeteria.id);
-                        }}
-                      >
-                        <CheckIcon />
-                      </IconButton>
-                    )}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ) : null;
-            })}
-        </List>
-      </div>
-    </div>
     </>
   );
 }

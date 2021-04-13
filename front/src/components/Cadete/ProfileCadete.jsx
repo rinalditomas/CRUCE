@@ -10,7 +10,7 @@ import axios from "axios";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { InputLabel } from "@material-ui/core";
-import { editProfileUser } from "../../state/user";
+import { editProfileUser } from "../../state/users";
 import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
@@ -37,7 +37,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfileCadete() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.cadete);
+  const user = useSelector((state) => state.users.user);
   const [input, setInput] = useState({});
   const history = useHistory();
 

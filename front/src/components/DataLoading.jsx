@@ -6,7 +6,7 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../utils/stylesAdmin";
-import { upLoadOrders } from "../state/admin";
+import { upLoadOrders } from "../state/orders";
 import { useDispatch } from "react-redux";
 import Navbar from "./Navbar";
 
@@ -57,7 +57,7 @@ const Prueba = () => {
   };
   return (
     <React.Fragment>
-    <Navbar/>
+      <Navbar />
       <CssBaseline />
       <main>
         {/* Hero unit */}
