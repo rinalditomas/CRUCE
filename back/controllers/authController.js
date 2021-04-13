@@ -49,7 +49,10 @@ const authController = {
       res.status(400).send({ error: "El usuario con este token no existe" });
     else {
       const obj = { password: newPass, resetToken: "" };
-      const updated = await user.update(obj);
+      const resetUser = await user.update(obj);
+      const hashPassword = resetUser.hashPassword(resetUser.password);
+
+      const updated = await user.update({ password: hashPassword });
 
       const sendEmail = transporter.sendMail(
         {

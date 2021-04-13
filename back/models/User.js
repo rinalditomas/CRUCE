@@ -68,6 +68,8 @@ User.init(
 
 
 
+
+
 User.addHook("beforeCreate", (user) => {
   user.salt = crypto.randomBytes(20).toString("hex");
   user.password = user.hashPassword(user.password);
