@@ -81,6 +81,8 @@ export const admitCadeteria = createAsyncThunk("ADMIT_CADETERIA", (id) => {
     .then((res) => res.data);
 });
 
+export const logout = createAction("LOGOUT");
+
 const updateCadeteria = (cadeterias, newCadeterias) => {
   return cadeterias.map((cadeteria) =>
     cadeteria.id === newCadeterias.id
@@ -143,6 +145,10 @@ const cadeteriasReducer = createReducer(initialState, {
       ...state,
       cadeterias: updateCadeteria(state.cadeterias, action.payload),
     };
+  },
+
+  [logout]: (state, action) => {
+    return {};
   },
 });
 

@@ -19,11 +19,11 @@ const Navbar = () => {
 
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-  const user = useSelector((state) => state.cadete);
+  const user = useSelector((state) => state.users.user);
 
   const messages = messagesHandler(useSnackbar());
 
-  const logout = () => {
+  const logoutUser = () => {
     localStorage.removeItem("token");
     dispatch(logout()) && messages.info();
     history.push("/");
@@ -65,7 +65,7 @@ const Navbar = () => {
             </>
           ) : (
             <>
-              <Button color="inherit" onClick={logout}>
+              <Button color="inherit" onClick={logoutUser}>
                 Logout
               </Button>
             </>

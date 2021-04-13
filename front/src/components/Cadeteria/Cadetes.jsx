@@ -33,6 +33,11 @@ const useStyles = makeStyles((theme) => ({
     maxWidth: 360,
     backgroundColor: theme.palette.background.paper,
   },
+  individualOrder: {
+    backgroundColor: "grey",
+    margin: 10,
+    borderRadius: 8,
+  },
 }));
 
 export default function Cadetes() {
@@ -43,13 +48,21 @@ export default function Cadetes() {
   const dispatch = useDispatch();
 
   const messages = messagesHandler(useSnackbar());
-  console.log("aca estan los cadetes", cadetes);
+  /*  console.log("aca estan los cadetes", cadetes); */
 
   useEffect(() => {
     dispatch(allCadetes());
   }, []);
 
-  const isActive = ({ active }) => (active ? "ACTIVO" : "INNACTIVO");
+  const handleActive = (id) => {
+    dispatch(editStateCadete(id)).then((res) => {
+      res.payload
+        ? messages.success("Estado cambiado correctamente")
+        : messages.error("Hubo un problema");
+    });
+  };
+
+  /*   const isActive = ({ active }) => (active ? "ACTIVO" : "INNACTIVO");
 
   const handleActive = (id) => {
     dispatch(editStateCadete(id)).then((res) => {
@@ -59,7 +72,7 @@ export default function Cadetes() {
         ? messages.info(`Estado cambiado a ${status}`)
         : messages.error("Hubo un problema");
     });
-  };
+  }; 
 
   const [checked, setChecked] = React.useState([1]);
 
@@ -74,20 +87,20 @@ export default function Cadetes() {
     }
 
     setChecked(newChecked);
-  };
+  }; */
 
   return (
     <>
-      <cadeteriaNavbar />
+      <CadeteriaNavbar />
       <div className={classes.root}>
         <div>
-          <h1 className="titulo">Lista de cadetes</h1>
+          <h1 className="titulo">Solicitudes de cadetes</h1>
           <Link
             to="/register"
             style={{ textDecoration: "none", color: "inherit" }}
           >
             <IconButton edge="end" aria-label="delete" className="icono">
-              <PersonAddIcon fontSize="large" />
+              <GroupAddIcon fontSize="large" />
             </IconButton>
           </Link>
         </div>
@@ -95,43 +108,56 @@ export default function Cadetes() {
           <List dense={dense}>
             {cadetes &&
               cadetes.map((cadete) => {
-                return (
-                  <ListItem>
-                    <ListItemText
-                      primary={cadete.firstName + " " + cadete.lastName}
-                    />
-                    <ListItemSecondaryAction>
-                      {cadete.active ? (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadete.id);
-                          }}
-                        >
-                          <BlockIcon />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadete.id);
-                          }}
-                        >
-                          <CheckIcon />
-                        </IconButton>
-                      )}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                );
+                if (cadete.authorized) {
+                  return (
+                    <ListItem key={cadete.id}>
+                      <ListItemText primary={cadete.firstName} />
+                      <ListItemSecondaryAction>
+                        {!cadete.active ? (
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => {
+                              handleActive(cadete.id);
+                            }}
+                          >
+                            <Chip
+                              icon={<DoneIcon />}
+                              label="Activo"
+                              style={{ color: "green" }}
+                              variant="outlined"
+                            />
+                          </IconButton>
+                        ) : (
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => {
+                              handleActive(cadete.id);
+                            }}
+                          >
+                            <Chip
+                              icon={<BlockIcon />}
+                              label="Inactivo"
+                              color="secondary"
+                              variant="outlined"
+                            />
+                          </IconButton>
+                        )}
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  );
+                }
               })}
           </List>
         </div>
       </div>
     </>
+  );
+}
 
-    /* <>
+{
+  /* <>
       <CadeteriaNavbar />
       <h1 className="titulo">Lista de cadetes</h1>
       <Link
@@ -144,32 +170,14 @@ export default function Cadetes() {
       </Link>
       <List dense className={classes.root}>
         {cadetes &&
-          cadetes.map((cadete) => 
-             {if (!cadete.authorized && cadete.admin == false)
+          cadetes.map((cadete) => {
+            if (cadete.authorized)
               return (
-                <ListItem key={cadete} button>
-                  <ListItemAvatar>
-                    <Avatar
-                      alt={`Avatar n°${cadete.id + 1}`}
-                      src={`/static/images/avatar/${cadete.fistName}.jpg`}
-                    />
-                  </ListItemAvatar>
-                  <ListItemText
-                    id={cadete.id}
-                    primary={`${cadete.firstName + " " + cadete.lastName}`}
-                  />
-                  <ListItemSecondaryAction>
-                    <Chip
-                      label="Solicitud pendiente"
-                      disabled
-                      variant="outlined"
-                    />
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ); */
-    /*       if (cadete.authorized && cadete.admin == false)
-              return (
-                <ListItem key={cadete} button>
+                <ListItem
+                  key={cadete}
+                  button
+                  className={classes.individualOrder}
+                >
                   <ListItemAvatar>
                     <Avatar
                       alt={`Avatar n°${cadete.id + 1}`}
@@ -216,57 +224,6 @@ export default function Cadetes() {
                 </ListItem>
               );
           })}
-      </List> */
-
-    /*  <div className={classes.root}>
-      <div>
-        <h1 className="titulo">Lista de cadetes</h1>
-        <Link
-          to="/register"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <IconButton edge="end" aria-label="delete" className="icono">
-            <PersonAddIcon fontSize="large" />
-          </IconButton>
-        </Link>
-      </div>
-      <div className={classes.demo}>
-        <List dense={dense} >
-          {cadetes && cadetes.map((cadete) => {
-            return (
-              <ListItem>
-                <ListItemText
-                  primary={cadete.firstName + " " + cadete.lastName}
-                />
-                <ListItemSecondaryAction>
-                  {cadete.active ? (
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => {
-                        handleActive(cadete.id);
-                      }}
-                    >
-                      <BlockIcon />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => {
-                        handleActive(cadete.id);
-                      }}
-                    >
-                      <CheckIcon />
-                    </IconButton>
-                  )}
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
-      </div>
-    </div> */
-    /* </> */
-  );
+      </List>
+    </> */
 }

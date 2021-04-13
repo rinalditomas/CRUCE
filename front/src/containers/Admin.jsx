@@ -7,13 +7,13 @@ import Footer from "../components/Footer";
 
 import { useSelector, useDispatch } from "react-redux";
 
-import AdminPanel from '../components/Admin/AdminPanel'
-import ListCadetes from '../components/Admin/ListCadetes'
+import AdminPanel from "../components/Admin/AdminPanel";
+import ListCadetes from "../components/Admin/ListCadetes";
 
 import Error from "../components/Error";
 
 export default function App() {
-  const user = useSelector((state) => state.cadete);
+  const user = useSelector((state) => state.users.user);
   const dispatch = useDispatch();
 
   user && !user.admin && console.log("user ===>", user);
@@ -23,7 +23,7 @@ export default function App() {
   return (
     <div>
       <Navbar />
-      {user && user.admin ? <AdminPanel/> : <Error />}
+      {user && user.admin ? <AdminPanel /> : <Error />}
     </div>
   );
 }

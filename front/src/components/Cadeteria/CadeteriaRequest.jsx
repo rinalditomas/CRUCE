@@ -70,36 +70,37 @@ export default function CadeteriaRequest() {
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
-            {cadeterias.map((cadeteria) => {
-              return cadeteria.authorized === false ? (
-                <ListItem key={cadeteria.id}>
-                  <ListItemText primary={cadeteria.nameCompany} />
-                  <ListItemSecondaryAction>
-                    {cadeteria.active ? (
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadeteria.id);
-                        }}
-                      >
-                        <BlockIcon />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadeteria.id);
-                        }}
-                      >
-                        <CheckIcon />
-                      </IconButton>
-                    )}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ) : null;
-            })}
+            {cadeterias &&
+              cadeterias.map((cadeteria) => {
+                return cadeteria.authorized === false ? (
+                  <ListItem key={cadeteria.id}>
+                    <ListItemText primary={cadeteria.nameCompany} />
+                    <ListItemSecondaryAction>
+                      {cadeteria.active ? (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadeteria.id);
+                          }}
+                        >
+                          <BlockIcon />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadeteria.id);
+                          }}
+                        >
+                          <CheckIcon />
+                        </IconButton>
+                      )}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
           </List>
         </div>
       </div>
