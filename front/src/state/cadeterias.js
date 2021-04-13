@@ -85,6 +85,8 @@ import {
   });
 
 
+  export const logout = createAction("LOGOUT"); 
+
   const updateCadeteria = (cadeterias, newCadeterias) => {
     return cadeterias.map((cadeteria) =>
       cadeteria.id === newCadeterias.id
@@ -96,6 +98,7 @@ import {
         : cadeteria
     );
   };
+
 
   
   const initialState = {
@@ -146,7 +149,10 @@ import {
       cadeterias: updateCadeteria(state.cadeterias, action.payload),
     };
   },
-
+  
+  [logout]: (state, action) => {
+    return {};
+  },
   });
  
   export default cadeteriasReducer;

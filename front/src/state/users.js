@@ -67,19 +67,20 @@ import {
   export const admitCadete = createAsyncThunk("ADMIT_CADETE", (id) => {
     return axios
       .put(`http://localhost:8000/api/cadeteria/admitCadete/${id}`)
-      .then((res) => res.data)
+      .then((res) => { 
+        return res.data})
       .catch((err) => console.log(err));
   });
 
-  const updateCadeteria = (cadeterias, newCadeterias) => {
-    return cadeterias.map((cadeteria) =>
-      cadeteria.id === newCadeterias.id
+  const updateCadete = (cadetes, newCadete) => {
+    return cadetes.map((cadete) =>
+      cadete.id === newCadete.id
         ? {
-            ...cadeteria,
-            active: newCadeterias.active,
-            authorized: newCadeterias.authorized,
+            ...cadete,
+            active: newCadete.active,
+            authorized: newCadete.authorized,
           }
-        : cadeteria
+        : cadete
     );
   };
 
@@ -126,14 +127,15 @@ const initialState ={
 [editStateCadete.fulfilled]: (state, action) => {
   return {
     ...state,
-    users: updateCadeteria(state.users, action.payload),
+    users: updateCadete(state.users, action.payload),
   };
 },
     
-[admitCadete.fullfiled]: (state, action) => {
-  return {
+[admitCadete.fulfilled]: (state, action) => {
+  console.log("----------------------------", action.payload)
+  return {    
     ...state,
-    users: updateCadeteria(state.users, action.payload),
+    users: updateCadete(state.users, action.payload),
   };
 },
     
