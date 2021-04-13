@@ -62,13 +62,25 @@ const User = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const register = await dispatch(registerRequest(input));
-    const email = register.payload.email;
-    const name = `${register.payload.firstName} ${register.payload.lastName}`;
 
-    const cad = cadeteriaEmail(register.payload.cadeteriumId)[0];
-    
-    return sendmail(email, name, cad);
+    try {
+      const res = await dispatch(registerRequest(input));
+      const { payload } = res;
+      console.log("PAYLOAD -=---->", payload);
+
+      if (payload) {
+        const email = payload.email;
+        const name = `${payload.firstName} ${payload.lastName}`;
+        const cad = cadeteriaEmail(payload.cadeteriumId)[0];
+
+        messages.success("Usuario registrado");
+        return sendmail(email, name, cad);
+      } else {
+        messages.error("No se ha podido registrar al usuario");
+      }
+    } catch (e) {
+      console.log("-----errr", e);
+    }
   };
 
   return (

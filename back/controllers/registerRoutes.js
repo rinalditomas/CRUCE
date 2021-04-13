@@ -2,17 +2,10 @@ const { User, Cadeteria } = require("../models");
 
 const registerController = {
   register(req, res) {
-    console.log("registro de usuario", req.body);
-    // const {
-    //   firstName,
-    //   lastName,
-    //   email,
-    //   password,
-    //   phoneNum,
-    //   admin,
-    //   vehicle,
-    //   cadeterias,
-    // } = req.body;
+
+    console.log(req.body)
+
+  req.body.cadeterias ?
     Cadeteria.findOne({
       where: {
         nameCompany: req.body.cadeterias,
@@ -40,10 +33,17 @@ const registerController = {
               )
               .then((userSet) => res.status(200).send(userSet));
           })
-          .catch(({ errors }) => res.status(500).send(errors[0].message));
+          .catch(({ errors }) => {
+            return res.status(500).send(errors[0].message);
+          });
       })
-      .catch((err) => res.send(err));
-  },
+      .catch((err) => { console.log(err);
+        return res.status(500).send(err) })
+
+        :
+        res.status(500).send({errors: 'deberia tener un nombre'});
+  }
+
   // .catch((err) => res.send(err));
 };
 

@@ -45,7 +45,25 @@ const CadeteriaRegister = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const res = await dispatch(registerCadeteria(input));
+    const { payload } = res;
     try {
+      if (!payload.errors) {
+        const name = payload.nameCompany;
+        const email = payload.email;
+
+        messages.success("Cadeteria registrada correctamente");
+        sendmail(email, name);
+        sendmailToAdmin(payload);
+      } else {
+        payload.errors.map((e) => messages.error(e.message));
+      }
+    } catch (e) {
+      messages.error("Hubo un problema con el registro");
+    }
+
+    /* try {
       const res = await dispatch(registerCadeteria(input));
       const { payload } = res;
       const name = payload.nameCompany;
@@ -59,7 +77,7 @@ const CadeteriaRegister = () => {
       history.push("/cadeteria/login");
     } catch (e) {
       messages.error("Hubo un problema con el registro");
-    }
+    } */
   };
 
   return (
