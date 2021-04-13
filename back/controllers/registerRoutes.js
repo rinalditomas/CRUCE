@@ -40,9 +40,10 @@ const registerController = {
               )
               .then((userSet) => res.status(200).send(userSet));
           })
-          // .catch(({ errors }) => res.status(500).send(errors[0].message));
+          //.catch(({ errors }) => res.status(500).send(errors[0].message));
       })
-      .catch((err) => res.send(err));
+     // .catch((err) => res.send(err));
+     .catch(({ errors }) => res.status(500).send(errors[0].message));
   },
   // .catch((err) => res.send(err));
 };

@@ -22,7 +22,7 @@ import Copyright from "../../utils/Copyright";
 import { useHistory } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
-import { registerCadeteria } from "../../state/cadeteria";
+import { registerCadeteria } from "../../state/cadeterias";
 
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
