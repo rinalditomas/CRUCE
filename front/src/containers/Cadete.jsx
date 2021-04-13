@@ -18,7 +18,6 @@ import ProfileCadete from "../components/Cadete/ProfileCadete";
 
 import { fetchMe } from "../state/user";
 
-
 import Error from "../components/Error";
 
 export default function Cadete() {
@@ -28,7 +27,7 @@ export default function Cadete() {
 
   const cadeteria = useSelector((state) => state);
   const history = useHistory();
- 
+
   /*   if (user && user.admin) <Redirect to="/admin" />;
   if (!user && cadeteria !== undefined) <Redirect to="/cadeteria" />;
   if (!user && !cadeteria) <Redirect to="/" />;
@@ -37,7 +36,7 @@ export default function Cadete() {
   return (
     <div>
       <Navbar />
-      {user && !user.admin ? <CadeteOrders/> : <Error />}
+      {user && !user.admin ? <CadeteOrders /> : <Error />}
       <Footer />
     </div>
   );

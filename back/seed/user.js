@@ -6,7 +6,7 @@ module.exports = [
     lastName: "admin",
     email: "admin@gmail.com",
     phoneNum: "1234567899",
-    password: "123",    
+    password: "123",
     admin: true,
     vehicle: "auto",
     authorized: true,

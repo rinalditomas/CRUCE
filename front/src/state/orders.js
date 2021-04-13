@@ -24,7 +24,7 @@ export const upLoadOrders = createAsyncThunk("UPLOAD_ORDERS", (items) => {
 export const orderState = createAsyncThunk(
   "ORDERS_STATE",
   (order, thunkApi) => {
-    console.log("ACA ESTA LA ORDEN DE REDUX",order)
+    console.log("ACA ESTA LA ORDEN DE REDUX", order);
     return axios
       .put(`http://localhost:8000/api/orders/edit/${order.orderNumber}`, {
         status: order.state,
@@ -53,15 +53,13 @@ const updateOrder = (orders, newOrder) => {
   );
 };
 
-
 const initialState = {
   orders: [],
   singleOrder: {},
 };
 
 const ordersReducer = createReducer(initialState, {
-  
- [allOrders.fulfilled]: (state, action) => {
+  [allOrders.fulfilled]: (state, action) => {
     return { ...state, orders: action.payload };
   },
 
@@ -76,7 +74,6 @@ const ordersReducer = createReducer(initialState, {
   [upLoadOrders.fulfilled]: (state, action) => {
     return { ...state, orders: action.payload };
   },
-  
 });
 
 export default ordersReducer;

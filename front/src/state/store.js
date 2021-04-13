@@ -9,15 +9,12 @@ import cadeteriasReducer from "./cadeterias";
 
 const store = configureStore({
   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
-  reducer: {    
+  reducer: {
     orders: ordersReducer,
     cadeterias: cadeteriasReducer,
     /* admin: adminReducer, */
     users: usersReducer,
   },
 });
-
-
-
 
 export default store;

@@ -11,7 +11,7 @@ import { logout } from "../state/users";
 import useStyles from "../utils/stylesNavbar";
 
 import { useSnackbar } from "notistack";
-import messagesHandler from '../utils/messagesHandler'
+import messagesHandler from "../utils/messagesHandler";
 
 const Navbar = () => {
   const classes = useStyles();
@@ -21,12 +21,11 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.users.user);
 
-
-  const messages = messagesHandler(useSnackbar()) 
+  const messages = messagesHandler(useSnackbar());
 
   const logoutUser = () => {
     localStorage.removeItem("token");
-    dispatch(logout()) && messages.info()
+    dispatch(logout()) && messages.info();
     history.push("/");
   };
 
@@ -76,7 +75,6 @@ const Navbar = () => {
           </Link>
           {user && user.admin ? (
             <>
-          
               <Link to="/admin" style={{ color: "inherit" }}>
                 <Button color="inherit">admin panel</Button>
               </Link>

@@ -27,23 +27,22 @@ const registerController = {
           phoneNum: req.body.phoneNum,
           admin: req.body.admin,
           vehicle: req.body.vehicle,
-        })
-          .then((user) => {
-            user
-              .setCadeterium(cadeteria)
-              .then(() =>
-                User.findOne({
-                  where: {
-                    id: user.id,
-                  },
-                })
-              )
-              .then((userSet) => res.status(200).send(userSet));
-          })
-          //.catch(({ errors }) => res.status(500).send(errors[0].message));
+        }).then((user) => {
+          user
+            .setCadeterium(cadeteria)
+            .then(() =>
+              User.findOne({
+                where: {
+                  id: user.id,
+                },
+              })
+            )
+            .then((userSet) => res.status(200).send(userSet));
+        });
+        //.catch(({ errors }) => res.status(500).send(errors[0].message));
       })
-     // .catch((err) => res.send(err));
-     .catch(({ errors }) => res.status(500).send(errors[0].message));
+      // .catch((err) => res.send(err));
+      .catch(({ errors }) => res.status(500).send(errors[0].message));
   },
   // .catch((err) => res.send(err));
 };

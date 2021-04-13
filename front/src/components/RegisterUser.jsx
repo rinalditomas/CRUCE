@@ -42,7 +42,6 @@ const User = () => {
   const dispatch = useDispatch();
   const cadeteriaList = useSelector((state) => state.cadeterias.cadeterias);
 
-
   const messages = messageHandler(useSnackbar());
 
   const handleChange = (e) => {
@@ -149,10 +148,11 @@ const User = () => {
                     >
                       {cadeteriaList &&
                         cadeteriaList.map((cad, i) => {
-                          if (cad.authorized && cad.active !== false)
+                          if (cad.authorized)
                             return (
                               <MenuItem value={`${cad.nameCompany}`} key={i}>
-                                {`${cad.nameCompany}`}
+                                {`${cad.nameCompany}`}{" "}
+                                {cad.active ? null : " (cadetería inactiva)"}
                               </MenuItem>
                             );
                         })}

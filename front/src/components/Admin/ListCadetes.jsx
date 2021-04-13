@@ -49,56 +49,57 @@ export default function ListCadetes() {
 
   return (
     <>
-    <Navbar/>
-    <div className={classes.root}>
-      <div>
-        <h1 className="titulo">Lista de cadetes</h1>
-        <Link
-          to="/register"
-          style={{ textDecoration: "none", color: "inherit" }}
-        >
-          <IconButton edge="end" aria-label="delete" className="icono">
-            <PersonAddIcon fontSize="large" />
-          </IconButton>
-        </Link>
+      <Navbar />
+      <div className={classes.root}>
+        <div>
+          <h1 className="titulo">Lista de cadetes</h1>
+          <Link
+            to="/register"
+            style={{ textDecoration: "none", color: "inherit" }}
+          >
+            <IconButton edge="end" aria-label="delete" className="icono">
+              <PersonAddIcon fontSize="large" />
+            </IconButton>
+          </Link>
+        </div>
+        <div className={classes.demo}>
+          <List dense={dense}>
+            {cadetes &&
+              cadetes.map((cadete) => {
+                return (
+                  <ListItem>
+                    <ListItemText
+                      primary={cadete.firstName + " " + cadete.lastName}
+                    />
+                    <ListItemSecondaryAction>
+                      {cadete.active ? (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <BlockIcon />
+                        </IconButton>
+                      ) : (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <CheckIcon />
+                        </IconButton>
+                      )}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                );
+              })}
+          </List>
+        </div>
       </div>
-      <div className={classes.demo}>
-        <List dense={dense}>
-          {cadetes && cadetes.map((cadete) => {
-            return (
-              <ListItem>
-                <ListItemText
-                  primary={cadete.firstName + " " + cadete.lastName}
-                />
-                <ListItemSecondaryAction>
-                  {cadete.active ? (
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => {
-                        handleActive(cadete.id);
-                      }}
-                    >
-                      <BlockIcon />
-                    </IconButton>
-                  ) : (
-                    <IconButton
-                      edge="end"
-                      aria-label="delete"
-                      onClick={() => {
-                        handleActive(cadete.id);
-                      }}
-                    >
-                      <CheckIcon />
-                    </IconButton>
-                  )}
-                </ListItemSecondaryAction>
-              </ListItem>
-            );
-          })}
-        </List>
-      </div>
-    </div>
     </>
   );
 }

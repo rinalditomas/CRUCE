@@ -57,7 +57,7 @@ const Prueba = () => {
   };
   return (
     <React.Fragment>
-    <Navbar/>
+      <Navbar />
       <CssBaseline />
       <main>
         {/* Hero unit */}
