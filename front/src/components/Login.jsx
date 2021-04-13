@@ -21,8 +21,8 @@ import { loginRequest } from "../state/user";
 import { fetchMe } from "../state/user";
 
 import messagesHandler from "../utils/messagesHandler";
-
-import HomeNavbar from '../components/HomeNavbar'
+import SimpleModal from '../components/ForgotPassword'
+import HomeNavbar from "../components/HomeNavbar";
 
 
 export default function Login() {
@@ -57,7 +57,7 @@ export default function Login() {
 
   return (
     <>
-    <HomeNavbar/>
+      <HomeNavbar />
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -110,7 +110,12 @@ export default function Login() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs></Grid>
+                <Grid item xs>
+                  <Link href="#" variant="body2">
+                    Forgot password?
+                  </Link>
+                </Grid>
+
                 <Grid item>
                   <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
                 </Grid>

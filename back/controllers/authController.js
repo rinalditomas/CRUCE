@@ -9,27 +9,28 @@ const authController = {
 
     if (!user)
       res.status(400).send({ error: "El usuario con este email no existe" });
+    else {
+      const token = jwt.sign({ id: user.id }, "reset-cruce", {
+        expiresIn: "20m",
+      });
 
-    const token = jwt.sign({ id: user.id }, "reset-cruce", {
-      expiresIn: "20m",
-    });
-
-    transporter.sendMail(
-      {
-        from: "cruceresetpass@gmail.com",
-        to: email,
-        subject: `Password reset`,
-        text: "Pedido de recuperacion de contrase;a",
-        html: `<div><b>Click to reset password http://localhost:3000/reset/${token}</b></div>`,
-      },
-      (error, info) => {
-        error
-          ? res.status(500).send(error.message)
-          : res.status(200).json(info);
-      }
-    );
-    const reset = await user.update({ resetToken: token });
-    if (!reset) res.status(400).send("no se ha podido asignar el token");
+      transporter.sendMail(
+        {
+          from: "cruceresetpass@gmail.com",
+          to: email,
+          subject: `Password reset`,
+          text: "Pedido de recuperacion de contrase;a",
+          html: `<div><b>Click to reset password http://localhost:3000/reset/${token}</b></div>`,
+        },
+        (error, info) => {
+          error
+            ? res.status(500).send(error.message)
+            : res.status(200).json(info);
+        }
+      );
+      const reset = await user.update({ resetToken: token });
+      if (!reset) res.status(400).send("no se ha podido asignar el token");
+    }
   },
 
   async resetPassword(req, res) {

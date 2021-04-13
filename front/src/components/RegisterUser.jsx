@@ -34,10 +34,13 @@ import HomeNavbar from "./HomeNavbar";
 
 import { sendmail } from "../state/sendmail";
 
+
 const User = () => {
   const classes = useStyles();
   const history = useHistory();
+
   const [input, setInput] = useState({});
+
   const dispatch = useDispatch();
 
   const cadeteriaList = useSelector((state) => state.cadeteria.cadeterias);
@@ -50,7 +53,6 @@ const User = () => {
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
-
     setInput({ ...input, [key]: value });
   };
 

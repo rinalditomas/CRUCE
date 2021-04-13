@@ -40,6 +40,8 @@ import RegisterCadeteria from "../components/Cadeteria/RegisterCadeteria";
 import RegisterUser from "../components/RegisterUser";
 
 import SelectLogin from "../components/SelectLogin";
+import ResetPassword from "../components/ResetPassword";
+import SimpleModal from "../components/ForgotPassword";
 
 const Index = () => {
   const user = useSelector((state) => state.cadete);
@@ -60,6 +62,9 @@ const Index = () => {
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/select" component={SelectButtons} />
         <Route exact path="/selectLogin" component={SelectLogin} />
+
+        <Route exact path="/reset/:token/" component={ResetPassword}/>
+        <Route exact path="/forgot/" component={SimpleModal}/>
 
         <Route exact path="/cadeteria/register" component={RegisterCadeteria} />
         <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
@@ -94,7 +99,7 @@ const Index = () => {
         <Route exact path="/cadeteria/login" component={CadeteriaLogin} />
 
         <Route exact path="/" component={Home} />
-        <Redirect to="/" />
+       <Redirect to="/" />
       </Switch>
     </div>
   );
