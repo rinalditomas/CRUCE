@@ -40,6 +40,9 @@ const ListOrders = () => {
   const orders = useSelector((state) => state.orders.orders);
   const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
+
+  console.log('orders', orders, 'cadeteria', cadeteria)
+
   const [selected, setSelected] = useState("Pendiente");
 
   useEffect(() => {
@@ -113,7 +116,8 @@ const ListOrders = () => {
               orders.map((order) => {
                 {
                   console.log(order.status);
-                }
+                  console.log(order.cadeteriumId, cadeteria.id)
+                }         
                 if (order.cadeteriumId == cadeteria.id) {
                   return order.status == selected ||
                     order.status == selected ? (
@@ -141,6 +145,7 @@ const ListOrders = () => {
                     </ListItem>
                   ) : null;
                 }
+        
               })}
           </List>
         </div>

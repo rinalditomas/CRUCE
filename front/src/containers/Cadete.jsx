@@ -1,11 +1,7 @@
 import React from "react";
-import {
-  useHistory,
-  useLocation,
-} from "react-router-dom";
-import Navbar from "../components/Navbar";
+
 import Footer from "../components/Footer";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector} from "react-redux";
 import CadeteOrders from "../components/Cadete/CadeteOrders";
 
 
@@ -15,7 +11,6 @@ export default function Cadete() {
   const user = useSelector((state) => state.users.user);
   return (
     <div>
-      <Navbar />
       {user && !user.admin ? <CadeteOrders /> : <Error />}
       <Footer />
     </div>

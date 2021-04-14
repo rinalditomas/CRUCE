@@ -5,8 +5,8 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
-import adminMenuStyles from "../utils/stylesAdmin";
-import { upLoadOrders } from "../state/orders";
+import adminMenuStyles from "../../utils/stylesAdmin";
+import { upLoadOrders } from "../../state/orders";
 import { useDispatch } from "react-redux";
 
 

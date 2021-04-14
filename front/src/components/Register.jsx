@@ -33,7 +33,7 @@ const User = () => {
   const dispatch = useDispatch();
 
   const cadeteriaList = useSelector((state) => state.cadeterias.cadeterias);
-
+  const history = useHistory();
   const cadeteriaEmail = (companyId) =>
     cadeteriaList.filter((e) => e.id === companyId);
 
@@ -64,7 +64,7 @@ const User = () => {
         const cad = cadeteriaEmail(payload.cadeteriumId)[0];
 
         messages.success("Usuario registrado");
-        return sendmail(email, name, cad);
+        return sendmail(email, name, cad) && history.push("/login-as/cadete");
       } else {
         messages.error("No se ha podido registrar al usuario");
       }
@@ -214,7 +214,9 @@ const User = () => {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link to="/login-as/cadete">Ya tienes una cuenta? Logueate.</Link>
+                  <Link to="/login-as/cadete">
+                    Ya tienes una cuenta? Logueate.
+                  </Link>
                 </Grid>
               </Grid>
             </form>

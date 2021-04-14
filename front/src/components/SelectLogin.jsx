@@ -41,7 +41,7 @@ const Main = () => {
                 variant="contained"
                 size="large"
                 className={classes.button_cadete}
-                onClick={() => history.push("/login")}
+                onClick={() => history.push("/login-as/cadete")}
               >
                 Cadete
               </Button>
@@ -66,7 +66,7 @@ const Main = () => {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={() => history.push("/cadeteria/login")}
+                onClick={() => history.push("/login-as/cadeteria")}
                 size="large"
                 className={classes.button_cadeteria}
               >
