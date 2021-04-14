@@ -5,12 +5,12 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
-import adminMenuStyles from "../utils/stylesAdmin";
-import { upLoadOrders } from "../state/orders";
+import adminMenuStyles from "../../utils/stylesAdmin";
+import { upLoadOrders } from "../../state/orders";
 import { useDispatch } from "react-redux";
-import Navbar from "./Navbar";
 
-const Prueba = () => {
+
+const ExcelUpload = () => {
   const classes = adminMenuStyles();
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
@@ -57,7 +57,6 @@ const Prueba = () => {
   };
   return (
     <React.Fragment>
-      <Navbar />
       <CssBaseline />
       <main>
         {/* Hero unit */}
@@ -75,11 +74,11 @@ const Prueba = () => {
                         file.name.slice(
                           file.name.length - 4,
                           file.name.length
-                        ) == ".xls" ||
+                        ) === ".xls" ||
                         file.name.slice(
                           file.name.length - 5,
                           file.name.length
-                        ) == ".xlsx"
+                        ) === ".xlsx"
                       ) {
                         readExcel(file);
                       } else {
@@ -123,4 +122,4 @@ const Prueba = () => {
   );
 };
 
-export default Prueba;
+export default ExcelUpload;

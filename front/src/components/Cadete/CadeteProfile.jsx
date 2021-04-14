@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useState } from "react";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
@@ -9,27 +9,36 @@ import { useHistory } from "react-router-dom";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
-
 import { InputLabel } from "@material-ui/core";
-import { editProfileCadeteria } from "../../state/cadeterias";
+import { editProfileUser } from "../../state/users";
 
-import useStyles from "../../utils/stylesCadeteria";
+const useStyles = makeStyles((theme) => ({
+  button: {
+    marginTop: theme.spacing(3),
+    marginLeft: theme.spacing(1),
+    backgroundColor: "#C25500",
+    width: "100%",
+  },
+  inputRoot: {
+    color: "inherit",
+  },
+  inputInput: {
+    padding: theme.spacing(1, 1, 1, 0),
+    // vertical padding + font size from searchIcon
+    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
+    transition: theme.transitions.create("width"),
+    width: "100%",
+    [theme.breakpoints.up("md")]: {
+      width: "20ch",
+    },
+  },
+}));
 
-import { useSnackbar } from "notistack";
-import messageHandler from "../../utils/messagesHandler";
-
-import { fetchCad } from "../../state/cadeterias";
-import CadeteriaNavbar from "./CadeteriaNavbar";
-
-export default function ProfileCadeteria() {
+export default function ProfileCadete() {
   const dispatch = useDispatch();
-
+  const user = useSelector((state) => state.users.user);
   const [input, setInput] = useState({});
   const history = useHistory();
-
-  const messages = messageHandler(useSnackbar());
-
-  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -38,62 +47,54 @@ export default function ProfileCadeteria() {
     setInput({ ...input, [key]: value });
   };
 
-  const editCadeteria = (e) => {
+  const editCadete = (e) => {
     e.preventDefault();
-    const id = cadeteria.id;
-    dispatch(editProfileCadeteria({ id, input }))
-      .then((res) => {
-        console.log("RESPUES DE EDICION DE PERFIL", res);
-
-        if (res.payload === undefined) {
-          messages.error("ocurrió un error");
-          history.push("/cadeteria/listOrders");
-        } else {
-          dispatch(fetchCad());
-          messages.info("datos actualizados");
-        }
-      })
-      .catch((err) => console.log("Error en el catch ===>", err));
+    const id = user.id;
+    dispatch(editProfileUser({ id, input })).then((res) => {
+      if (res.payload === 201) {
+        alert("datos actualizados");
+        history.push("/cadeteOrders");
+      } else alert("ocurrió un error");
+    });
   };
-
-  console.log("CADETERIA EN PROFILE ====>", cadeteria);
+  console.log("userrrrrrrrrrrr", user);
 
   return (
     <React.Fragment>
-      <CadeteriaNavbar />
       <Typography variant="h6" gutterBottom>
-        Editar el perfil de la cadeteria
+        Editar el perfil
       </Typography>
       <form style={{ marginLeft: "7%" }}>
-        <Grid container spacing={3}>
+        <Grid container spacing={3}>  
           <Grid item xs={10}>
             <TextField
-              name="nameCompany"
-              id="nameCampany"
+              name="firstName"
+              id="nombre"
               label="Nombre"
               fullWidth
-              placeholder={cadeteria && cadeteria.nameCompany}
+              placeholder={user && user.firstName}
+              onChange={handleChange}
+            />
+          </Grid>
+          <Grid item xs={10}>
+            <TextField
+              name="lastName"
+              label="Apellido"
+              id="apellido"
+              autoComplete="lname"
+              fullWidth
+              placeholder={user && user.lastName}
               onChange={handleChange}
             />
           </Grid>
 
-          <Grid item xs={10}>
-            <TextField
-              name="email"
-              label="Email"
-              id="email"
-              fullWidth
-              placeholder={cadeteria && cadeteria.email}
-              onChange={handleChange}
-            />
-          </Grid>
           <Grid item xs={10}>
             <TextField
               id="password"
               name="password"
               label="Contraseña"
-              fullWidth
               type="password"
+              fullWidth
               onChange={handleChange}
             />
           </Grid>
@@ -103,19 +104,31 @@ export default function ProfileCadeteria() {
               id="phoneNum"
               label="Numero de telefono"
               fullWidth
-              placeholder={cadeteria && cadeteria.phoneNum}
+              placeholder={user && user.phoneNum}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={10}>
-            <TextField
-              name="address"
-              id="address"
-              label="Direccion"
+            <InputLabel id="demo-simple-select-filled-label">
+              {input.vehicle == null ? user.vehicle : input.vehicle}
+            </InputLabel>
+            <Select
               fullWidth
-              placeholder={cadeteria && cadeteria.address}
+              labelId="demo-simple-select-filled-label"
+              name="vehicle"
+              id="demo-simple-select-filled"
               onChange={handleChange}
-            />
+            >
+              <MenuItem value="moto" key={1}>
+                Moto
+              </MenuItem>
+              <MenuItem value="bicicleta" key={2}>
+                Bicicleta
+              </MenuItem>
+              <MenuItem value="auto" key={3}>
+                Auto
+              </MenuItem>
+            </Select>
           </Grid>
         </Grid>
         <br></br>
@@ -125,7 +138,7 @@ export default function ProfileCadeteria() {
           type="submit"
           variant="contained"
           color="primary"
-          onClick={editCadeteria}
+          onClick={editCadete}
           className={useStyles.button}
           style={{
             backgroundColor: "#C25500",

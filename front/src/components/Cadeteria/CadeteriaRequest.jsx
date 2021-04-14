@@ -55,7 +55,6 @@ export default function CadeteriaRequest() {
 
   return (
     <>
-      <Navbar />
       <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de cadeterias</h1>

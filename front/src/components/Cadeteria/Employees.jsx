@@ -16,7 +16,6 @@ import { admitCadete, allCadetes } from "../../state/users";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
-import CadeteriaNavbar from "./CadeteriaNavbar";
 import { Chip } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 
@@ -55,7 +54,6 @@ export default function CadeteriaRequest() {
 
   return (
     <>
-      <CadeteriaNavbar />
       <div className={classes.root}>
         <div>
           <h1 className="titulo">Solicitudes de cadetes</h1>

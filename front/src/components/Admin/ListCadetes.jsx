@@ -7,13 +7,12 @@ import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
-import Navbar from "../Navbar";
+
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -47,10 +46,8 @@ export default function ListCadetes() {
     });
   };
 
-  return (
-    <>
-      <Navbar />
-      <div className={classes.root}>
+  return ( <>
+    <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de cadetes</h1>
           <Link

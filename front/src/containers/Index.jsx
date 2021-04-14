@@ -1,49 +1,35 @@
 import React, { useEffect } from "react";
-import { Route, Switch } from "react-router-dom";
-import { useDispatch, useSelector } from "react-redux";
 
+import { Route, Switch, Redirect } from "react-router-dom";
+import { useDispatch } from "react-redux";
 import { fetchMe } from "../state/users";
-import { Redirect } from "react-router-dom";
+import { fetchCad } from "../state/cadeterias";
 
 import Cadete from "./Cadete";
 import Admin from "./Admin";
 import Cadeteria from "./Cadeteria";
 import Home from "../components/Home";
-
-import ProfileCadeteria from "../components/Cadeteria/ProfileCadeteria";
-import CadeteriaPanel from "../components/Cadeteria/CadeteriaPanel";
-
+import ProfileCadeteria from "../components/Cadeteria/CadeteriaProfile";
 import ListOrders from "../components/Cadeteria/ListOrders";
 import ListCadetes from "../components/Admin/ListCadetes";
-import Metricas from "../components/Metricas";
-import CadeteRequest from "../components/Cadeteria/CadeteRequest";
-import Cadetes from "../components/Cadeteria/Cadetes";
-import CadeteriaLogin from "../components/Cadeteria/CadeteriaLogin";
-import CadeteriaNavbar from "../components/Cadeteria/CadeteriaNavbar";
-
-import CadeteOrders from "../components/Cadete/CadeteOrders";
+import CadeteRequest from "../components/Cadeteria/Employees";
+import Cadetes from "../components/Cadeteria/ListEmployees";
+import CadeteriaLogin from "../components/Cadeteria/LoginCadeteria";
 import SingleOrder from "../components/Cadete/SingleOrder";
-import ProfileCadete from "../components/Cadete/ProfileCadete";
-
-import DataLoading from "../components/DataLoading";
+import ProfileCadete from "../components/Cadete/CadeteProfile";
+import DataLoading from "../components/Admin/ExcelUpload";
+import Login from "../components/Login";
 import ListCadeterias from "../components/Admin/ListCadeterias";
 import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
-
-import { fetchCad } from "../state/cadeterias";
-
-import Login from "../components/Login";
-
 import SelectButtons from "../components/SelectButtons";
-import HomeNavbar from "../components/HomeNavbar";
-
+import Navbar from "../components/Navbar";
 import RegisterCadeteria from "../components/Cadeteria/RegisterCadeteria";
-import RegisterUser from "../components/RegisterUser";
-
+import RegisterUser from "../components/Register.jsx";
 import SelectLogin from "../components/SelectLogin";
+import ResetPassword from "../components/ResetPassword";
+import SimpleModal from "../components/ForgotPassword";
 
 const Index = () => {
-  const user = useSelector((state) => state.users.user);
-  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const dispatch = useDispatch();
 
@@ -54,28 +40,24 @@ const Index = () => {
 
   return (
     <div>
+      <Navbar />
       <Switch>
-        <Route exact path="/cadete" component={Cadete} />
-        <Route exact path="/cadeteria" component={Cadeteria} />
-        <Route exact path="/admin" component={Admin} />
-        <Route exact path="/select" component={SelectButtons} />
-        <Route exact path="/selectLogin" component={SelectLogin} />
+        <Route exact path="/login-as" component={SelectLogin} />
+        <Route exact path="/login-as/cadete" component={Login} />
+        <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 
-        <Route exact path="/cadeteria/register" component={RegisterCadeteria} />
-        <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
-        <Route exact path="/cadeteria/listOrders" component={ListOrders} />
-        <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
-        <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
-        <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
-
-        <Route exact path="/register" component={RegisterUser} />
-        {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
-        <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
+        <Route exact path="/register-as" component={SelectButtons} />
+        <Route exact path="/register-as/cadete" component={RegisterUser} />
         <Route
-          path="/cadete/singleOrder/:id/:orderNumber"
-          render={({ match }) => <SingleOrder match={match.params} />}
+          exact
+          path="/register-as/cadeteria"
+          component={RegisterCadeteria}
         />
 
+        <Route exact path="/reset/:token/" component={ResetPassword} />
+        <Route exact path="/forgot/" component={SimpleModal} />
+
+        <Route exact path="/admin" component={Admin} />
         <Route exact path="/admin/uploadorders" component={DataLoading} />
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
@@ -85,11 +67,22 @@ const Index = () => {
           component={CadeteriaRequest}
         />
 
-        <Route exact path="/login" component={Login} />
-        <Route exact path="/register" component={SelectButtons} />
-        <Route exact path="/cadeteria/login" component={CadeteriaLogin} />
+        <Route exact path="/cadeteria" component={Cadeteria} />
+        <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
+        <Route exact path="/cadeteria/listOrders" component={ListOrders} />
+        <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
+        <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
+        <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
 
-        <Route exact path="/" component={Home} />
+        <Route exact path="/cadete" component={Cadete} />
+        {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
+        <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
+        <Route
+          path="/cadete/singleOrder/:id/:orderNumber"
+          render={({ match }) => <SingleOrder match={match.params} />}
+        />
+
+        <Route path="/" component={Home} />
         <Redirect to="/" />
       </Switch>
     </div>

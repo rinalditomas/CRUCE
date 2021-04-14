@@ -17,10 +17,7 @@ import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
 import { loginRequest, fetchMe } from "../state/users";
-
 import messagesHandler from "../utils/messagesHandler";
-
-import HomeNavbar from "../components/HomeNavbar";
 
 export default function Login() {
   const messages = messagesHandler(useSnackbar());
@@ -54,7 +51,6 @@ export default function Login() {
 
   return (
     <>
-      <HomeNavbar />
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -107,9 +103,14 @@ export default function Login() {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs></Grid>
+                <Grid item xs>
+                  <Link to="/forgot">
+                    Forgot password?
+                  </Link>
+                </Grid>
+
                 <Grid item>
-                  <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/register-as/cadete">{"No tienes cuenta? Registrate"}</Link>
                 </Grid>
               </Grid>
               <Box mt={5}>
