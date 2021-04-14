@@ -13,6 +13,10 @@ import axios from "axios";
 import { Grid } from "@material-ui/core";
 import Navbar from "../Navbar";
 
+import "leaflet/dist/leaflet.css";
+
+import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
+
 const useStyles = makeStyles({
   root: {
     maxWidth: 500,
@@ -53,7 +57,23 @@ export default function SingleOrder({ match }) {
   };
 
   return (
-    <>
+    <MapContainer
+      center={[-26.8198, -65.2169]}
+      zoom={16}
+      scrollWheelZoom={true}
+      className="leaflet-container"
+    >
+      <TileLayer
+        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+      />
+      <Marker position={[-26.8198, -65.2169]}>
+        <Popup>
+          A pretty CSS3 popup. <br /> Easily customizable.
+        </Popup>
+      </Marker>
+    </MapContainer>
+    /*   <>
       <Navbar />
       <Card className={classes.root}>
         <CardActionArea>
@@ -134,7 +154,7 @@ export default function SingleOrder({ match }) {
           ) : null}
         </CardActions>
       </Card>
-    </>
+    </> */
   );
 }
 

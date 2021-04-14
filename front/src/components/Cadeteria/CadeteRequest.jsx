@@ -39,6 +39,7 @@ export default function CadeteriaRequest() {
   const [dense, setDense] = React.useState(false);
 
   const cadetes = useSelector((state) => state.users.users);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
   const messages = messagesHandler(useSnackbar());
 
   useEffect(() => {
@@ -72,29 +73,36 @@ export default function CadeteriaRequest() {
           <List dense={dense}>
             {cadetes &&
               cadetes.map((cadete) => {
-                return cadete.authorized === false && cadete.admin === false ? (
-                  <ListItem key={cadete.id}>
-                    <ListItemText primary={cadete.firstName} />
-                    <ListItemSecondaryAction>
-                      {!cadete.active ? (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadete.id);
-                          }}
-                        >
-                          <Chip
-                            icon={<DoneIcon />}
-                            label="Aceptar"
-                            style={{ color: "green" }}
-                            variant="outlined"
-                          />
-                        </IconButton>
-                      ) : null}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ) : null;
+                if (cadete.cadeteriumId == cadeteria.id) {
+                  return cadete.authorized === false &&
+                    cadete.admin === false ? (
+                    <ListItem key={cadete.id}>
+                      <ListItemText
+                        primary={cadete.firstName + " " + cadete.lastName}
+                      />
+                      <ListItemSecondaryAction>
+                        {!cadete.active ? (
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => {
+                              const r = window.confirm("¿Autorizar la cadete?");
+                              if (r == true) return handleActive(cadete.id);
+                              else return null;
+                            }}
+                          >
+                            <Chip
+                              icon={<DoneIcon />}
+                              label="Aceptar"
+                              style={{ color: "green" }}
+                              variant="outlined"
+                            />
+                          </IconButton>
+                        ) : null}
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  ) : null;
+                }
               })}
           </List>
         </div>

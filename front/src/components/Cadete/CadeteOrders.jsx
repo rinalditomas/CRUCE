@@ -5,7 +5,7 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { allOrders, orderState } from "../../state/orders";
@@ -32,6 +32,7 @@ const CadeteOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const cadete = useSelector((state) => state.users.user);
+  const history = useHistory();
 
   useEffect(() => {
     dispatch(allOrders());
@@ -47,18 +48,21 @@ const CadeteOrders = () => {
   //   });
   // };
 
-  const update = (orderNumber, status, cadeteId) => {
+  const update = (orderNumber, status, cadeteId, orderId) => {
     let state;
     if (status == "En camino") {
-      state = "Entregado";
+      history.push(`/cadete/singleOrder/${orderId}/${orderNumber}`);
     }
     if (status === "Pendiente") {
       state = "En camino";
+      dispatch(
+        orderState({
+          orderNumber: orderNumber,
+          state: state,
+          cadeteId: cadeteId,
+        })
+      );
     }
-
-    dispatch(
-      orderState({ orderNumber: orderNumber, state: state, cadeteId: cadeteId })
-    );
   };
 
   return (
@@ -94,7 +98,12 @@ const CadeteOrders = () => {
                           variant="outlined"
                           color="primary"
                           onClick={() => {
-                            update(order.orderNumber, order.status, cadete.id);
+                            update(
+                              order.orderNumber,
+                              order.status,
+                              cadete.id,
+                              order.id
+                            );
                           }}
                         >
                           {order.status}

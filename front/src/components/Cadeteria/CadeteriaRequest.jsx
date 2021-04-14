@@ -9,6 +9,8 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
+import Chip from "@material-ui/core/Chip";
+import DoneIcon from "@material-ui/icons/Done";
 
 import { useDispatch, useSelector } from "react-redux";
 import { admitCadeteria, allCadeterias } from "../../state/cadeterias";
@@ -84,17 +86,34 @@ export default function CadeteriaRequest() {
                             handleActive(cadeteria.id);
                           }}
                         >
-                          <BlockIcon />
+                          <Chip
+                            icon={<DoneIcon />}
+                            label="Autorizar"
+                            style={{ color: "grey" }}
+                            variant="outlined"
+                          />
                         </IconButton>
                       ) : (
                         <IconButton
                           edge="end"
                           aria-label="delete"
+                          // onClick={() => {
+                          //   handleActive(cadeteria.id);
+                          // }}
                           onClick={() => {
-                            handleActive(cadeteria.id);
+                            const r = window.confirm(
+                              "Â¿Autorizar la cadeteria?"
+                            );
+                            if (r == true) return handleActive(cadeteria.id);
+                            else return null;
                           }}
                         >
-                          <CheckIcon />
+                          <Chip
+                            icon={<DoneIcon />}
+                            label="Autorizar"
+                            style={{ color: "grey" }}
+                            variant="outlined"
+                          />
                         </IconButton>
                       )}
                     </ListItemSecondaryAction>
