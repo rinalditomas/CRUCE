@@ -1,4 +1,7 @@
 import React from "react";
+
+import { useLocation } from "react-router-dom";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -14,6 +17,9 @@ import { useSnackbar } from "notistack";
 import messagesHandler from "../utils/messagesHandler";
 
 const Navbar = () => {
+  
+  const location = useLocation().pathname.split("/");
+
   const classes = useStyles();
   const history = useHistory();
 
@@ -30,15 +36,10 @@ const Navbar = () => {
   };
 
   const userTypeColor = (color = "") => {
-    let admin = user && user.admin;
-    switch (admin) {
-      case true:
-        color = "admin";
-        break;
-      default:
-        color = "cadete";
-    }
-    return color;
+    if (location.includes("admin")) return "admin";
+    if (location.includes("cadeteria")) return "cadeteria";
+    if (location.includes("cadete")) return "cadete";
+    return "base";
   };
 
   return (

@@ -19,57 +19,62 @@ import { Link, useHistory } from "react-router-dom";
 
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
-
 import InputLabel from "@material-ui/core/InputLabel";
-
 import FormControl from "@material-ui/core/FormControl";
-import { makeStyles } from "@material-ui/core/styles";
-
 import { allCadeterias } from "../state/cadeterias";
-
 import { useSnackbar } from "notistack";
+import { sendmail } from "../state/sendmail";
 import messageHandler from "../utils/messagesHandler";
-///manejo de errores
 
-import { unwrapResult } from "@reduxjs/toolkit";
-import HomeNavbar from "./HomeNavbar";
 const User = () => {
-  const { enqueueSnackbar } = useSnackbar();
-
   const classes = useStyles();
-  const history = useHistory();
+
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
+
   const cadeteriaList = useSelector((state) => state.cadeterias.cadeterias);
+  const history = useHistory();
+  const cadeteriaEmail = (companyId) =>
+    cadeteriaList.filter((e) => e.id === companyId);
 
   const messages = messageHandler(useSnackbar());
 
   const handleChange = (e) => {
     const key = e.target.name;
     const value = e.target.value;
-
     setInput({ ...input, [key]: value });
   };
 
   useEffect(() => {
     dispatch(allCadeterias())
-      .then((res) => console.log(res))
+      .then((res) => res)
       .catch((err) => err);
   }, [dispatch]);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    dispatch(registerRequest(input))
-      .then(({ payload }) => {
-        if (!payload) messages.error();
-        else messages.success("Usuario registrado") && history.push("/login");
-      })
-      .catch((err) => messages.error(err));
+
+    try {
+      const res = await dispatch(registerRequest(input));
+      const { payload } = res;
+
+      if (!payload.errors) {
+        const email = payload.email;
+        const name = `${payload.firstName} ${payload.lastName}`;
+        const cad = cadeteriaEmail(payload.cadeteriumId)[0];
+
+        messages.success("Usuario registrado");
+        return sendmail(email, name, cad) && history.push("/login-as/cadete");
+      } else {
+        payload.errors.map((e) => messages.error(e.message));
+      }
+    } catch (e) {
+      messages.error("Hubo un problema con el registro");
+    }
   };
 
   return (
     <>
-      <HomeNavbar />
       <div style={{ paddingTop: "2rem" }}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -166,7 +171,7 @@ const User = () => {
                     required
                     fullWidth
                     id="phoneNum"
-                    label="phoneNum"
+                    label="Número telefónico"
                     name="phoneNum"
                     autoComplete="phoneNum"
                     onChange={handleChange}
@@ -209,7 +214,9 @@ const User = () => {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link to="/login">Ya tienes una cuenta? Logueate.</Link>
+                  <Link to="/login-as/cadete">
+                    Ya tienes una cuenta? Logueate.
+                  </Link>
                 </Grid>
               </Grid>
             </form>

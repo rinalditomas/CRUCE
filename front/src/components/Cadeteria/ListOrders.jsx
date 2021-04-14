@@ -19,7 +19,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { allOrders } from "../../state/orders";
 // import { orderState} from "../state/order";
 
-import CadeteriaNavbar from "./CadeteriaNavbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -41,6 +40,9 @@ const ListOrders = () => {
   const orders = useSelector((state) => state.orders.orders);
   const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
+
+  console.log('orders', orders, 'cadeteria', cadeteria)
+
   const [selected, setSelected] = useState("Pendiente");
 
   useEffect(() => {
@@ -55,7 +57,7 @@ const ListOrders = () => {
 
   return (
     <>
-      <CadeteriaNavbar />
+    
       <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de Ordenes</h1>
@@ -112,11 +114,21 @@ const ListOrders = () => {
           <List dense={dense}>
             {orders &&
               orders.map((order) => {
+<<<<<<< HEAD
                 if (
                   order.cadeteriumId == cadeteria.id ||
                   (order.status == selected && order.cadeteriumId == null)
                 ) {
                   return order.status == selected ? (
+=======
+                {
+                  console.log(order.status);
+                  console.log(order.cadeteriumId, cadeteria.id)
+                }         
+                if (order.cadeteriumId == cadeteria.id) {
+                  return order.status == selected 
+                     ? (
+>>>>>>> d7c585eac409af1e31561affeed16ab6fb56d56a
                     <ListItem key={order.id}>
                       <Link
                         to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
@@ -141,6 +153,31 @@ const ListOrders = () => {
                     </ListItem>
                   ) : null;
                 }
+                return order.status == "Pendiente" ? (
+                  <ListItem key={order.id}>
+                    <Link
+                      to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
+                    >
+                      <ListItemText
+                        primary={
+                          order.street +
+                          " " +
+                          order.number +
+                          " " +
+                          (order.complement ? order.complement : "")
+                        }
+                      />
+                    </Link>
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Button variant="outlined" color="primary">
+                          {order.status}
+                        </Button>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+        
               })}
           </List>
         </div>

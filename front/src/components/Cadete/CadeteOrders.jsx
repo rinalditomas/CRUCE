@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { allOrders, orderState } from "../../state/orders";
 // import { orderState} from "../state/order";
 
-import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {

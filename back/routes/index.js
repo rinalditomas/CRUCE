@@ -9,6 +9,8 @@ const productRoutes = require("./productRoutes");
 const adminRoutes = require("./adminRoutes");
 const Me = require("./me");
 const userRoutes = require("./userRoutes");
+const sendEmail = require('./sendMail')
+const auth = require('./auth');
 
 router.use("/me", Me);
 router.use("/register", RegisterRoutes);
@@ -18,5 +20,10 @@ router.use("/product", productRoutes);
 router.use("/login", LoginRoutes);
 router.use("/admin", adminRoutes);
 router.use("/user", userRoutes);
+router.use('/user', auth);
+
+//envio de emails
+router.use("/sendmail", sendEmail)
+router.use("/sendmail", sendEmail)
 
 module.exports = router;

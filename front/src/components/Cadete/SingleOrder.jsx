@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
-import Navbar from "../Navbar";
+
 
 import "leaflet/dist/leaflet.css";
 
@@ -57,6 +57,7 @@ export default function SingleOrder({ match }) {
   };
 
   return (
+<<<<<<< HEAD
     <MapContainer
       center={[-26.8198, -65.2169]}
       zoom={16}
@@ -75,6 +76,9 @@ export default function SingleOrder({ match }) {
     </MapContainer>
     /*   <>
       <Navbar />
+=======
+    <>
+>>>>>>> d7c585eac409af1e31561affeed16ab6fb56d56a
       <Card className={classes.root}>
         <CardActionArea>
           <iframe

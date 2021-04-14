@@ -9,7 +9,6 @@ export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   return axios
     .post("http://localhost:8000/api/register", input)
     .then((res) => res.data)
-    .then((user) => user)
     .catch((e) => console.log(e));
 });
 
@@ -44,7 +43,8 @@ export const editProfileUser = createAsyncThunk(
         `http://localhost:8000/api/user/editProfileCadete/${dates.id}`,
         dates.input
       )
-      .then((res) => res.status);
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
   }
 );
 

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -9,10 +9,9 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
-import axios from "axios";
+
 import { useDispatch, useSelector } from "react-redux";
 import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
-import Navbar from "../Navbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -26,21 +25,6 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(4, 0, 2),
   },
 }));
-
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
-// function generate(element) {
-//   return [0, 1, 2].map((value) =>
-//     React.cloneElement(element, {
-//       key: value,
-//     }),
-//   );
-// }
 
 export default function ListCadeterias() {
   const classes = useStyles();
@@ -62,10 +46,7 @@ export default function ListCadeterias() {
     });
   };
 
-  return (
-    <>
-      <Navbar />
-      <div className={classes.root}>
+  return ( <> <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de cadeterias</h1>
           <Link
