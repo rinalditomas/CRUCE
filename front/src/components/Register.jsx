@@ -58,7 +58,7 @@ const User = () => {
       const res = await dispatch(registerRequest(input));
       const { payload } = res;
 
-      if (payload) {
+      if (!payload.errors) {
         const email = payload.email;
         const name = `${payload.firstName} ${payload.lastName}`;
         const cad = cadeteriaEmail(payload.cadeteriumId)[0];
@@ -66,10 +66,10 @@ const User = () => {
         messages.success("Usuario registrado");
         return sendmail(email, name, cad) && history.push("/login-as/cadete");
       } else {
-        messages.error("No se ha podido registrar al usuario");
+        payload.errors.map((e) => messages.error(e.message));
       }
     } catch (e) {
-      console.log("-----errr", e);
+      messages.error("Hubo un problema con el registro");
     }
   };
 

@@ -7,10 +7,9 @@ import axios from "axios";
 
 export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   return axios
-    .post("http://localhost:8000/api/register", input)
-    .then((res) => res.data)
-    .then((user) => user)
-    .catch((e) => console.log(e));
+    .post("http://localhost:8000/api/register", input) 
+    .then((res) => res.data)   
+    .catch((e) => console.log(e));           
 });
 
 export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
