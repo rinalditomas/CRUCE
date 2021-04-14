@@ -41,9 +41,7 @@ const Index = () => {
   return (
     <div>
       <Navbar />
-
       <Switch>  
-        
         <Route exact path="/login-as" component={SelectLogin} />
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />

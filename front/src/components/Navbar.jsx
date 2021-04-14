@@ -1,6 +1,6 @@
 import React from "react";
 
-import { useLocation, useParams } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
@@ -19,6 +19,7 @@ import messagesHandler from "../utils/messagesHandler";
 const Navbar = () => {
   
   const location = useLocation().pathname.split("/");
+
   const classes = useStyles();
   const history = useHistory();
 
@@ -38,7 +39,6 @@ const Navbar = () => {
     if (location.includes("admin")) return "admin";
     if (location.includes("cadeteria")) return "cadeteria";
     if (location.includes("cadete")) return "cadete";
-
     return "base";
   };
 
