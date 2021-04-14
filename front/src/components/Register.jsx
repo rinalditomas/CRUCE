@@ -19,31 +19,20 @@ import { Link, useHistory } from "react-router-dom";
 
 import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
-
 import InputLabel from "@material-ui/core/InputLabel";
-
 import FormControl from "@material-ui/core/FormControl";
-import { makeStyles } from "@material-ui/core/styles";
-
 import { allCadeterias } from "../state/cadeteria";
-
 import { useSnackbar } from "notistack";
-import messageHandler from "../utils/messagesHandler";
-
-import HomeNavbar from "./HomeNavbar";
-
 import { sendmail } from "../state/sendmail";
-
+import messageHandler from "../utils/messagesHandler";
 
 const User = () => {
   const classes = useStyles();
-  const history = useHistory();
 
   const [input, setInput] = useState({});
-
   const dispatch = useDispatch();
 
-  const cadeteriaList = useSelector((state) => state.cadeteria.cadeterias);
+  const cadeteriaList = useSelector((state) => state.cadeteria).cadeterias;
 
   const cadeteriaEmail = (companyId) =>
     cadeteriaList.filter((e) => e.id === companyId);
@@ -68,7 +57,6 @@ const User = () => {
     try {
       const res = await dispatch(registerRequest(input));
       const { payload } = res;
-      console.log("PAYLOAD -=---->", payload);
 
       if (payload) {
         const email = payload.email;
@@ -87,7 +75,6 @@ const User = () => {
 
   return (
     <>
-      <HomeNavbar />
       <div style={{ paddingTop: "2rem" }}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
@@ -226,7 +213,7 @@ const User = () => {
               </Button>
               <Grid container justify="flex-end">
                 <Grid item>
-                  <Link to="/login">Ya tienes una cuenta? Logueate.</Link>
+                  <Link to="/login-as/cadete">Ya tienes una cuenta? Logueate.</Link>
                 </Grid>
               </Grid>
             </form>

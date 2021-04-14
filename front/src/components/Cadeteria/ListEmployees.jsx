@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -6,24 +6,15 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import BlockIcon from "@material-ui/icons/Block";
-import CheckIcon from "@material-ui/icons/Check";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import axios from "axios";
+
 import { allCadetes, editStateCadete } from "../../state/admin";
 import { useDispatch, useSelector } from "react-redux";
-import CadeteriaNavbar from "./CadeteriaNavbar";
-
 import Chip from "@material-ui/core/Chip";
-import FaceIcon from "@material-ui/icons/Face";
 import DoneIcon from "@material-ui/icons/Done";
-
 import ListItemAvatar from "@material-ui/core/ListItemAvatar";
-import Checkbox from "@material-ui/core/Checkbox";
-
 import Avatar from "@material-ui/core/Avatar";
-
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
@@ -35,7 +26,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Cadetes() {
+export default function ListEmployees() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
   const [secondary, setSecondary] = React.useState(false);
@@ -78,7 +69,6 @@ export default function Cadetes() {
 
   return (
     <>
-      <CadeteriaNavbar />
       <h1 className="titulo">Lista de cadetes</h1>
 
       <Link
@@ -93,7 +83,7 @@ export default function Cadetes() {
       <List dense className={classes.root}>
         {cadetes &&
           cadetes.map((cadete) => {
-            if (!cadete.authorized && cadete.admin == false)
+            if (!cadete.authorized && cadete.admin === false)
               return (
                 <ListItem key={cadete} button>
                   <ListItemAvatar>

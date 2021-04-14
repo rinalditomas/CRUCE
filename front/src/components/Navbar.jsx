@@ -1,4 +1,7 @@
 import React from "react";
+
+import { useLocation, useParams } from "react-router-dom";
+
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -11,9 +14,11 @@ import { clearUser } from "../state/user";
 import useStyles from "../utils/stylesNavbar";
 
 import { useSnackbar } from "notistack";
-import messagesHandler from '../utils/messagesHandler'
+import messagesHandler from "../utils/messagesHandler";
 
 const Navbar = () => {
+  
+  const location = useLocation().pathname.split("/");
   const classes = useStyles();
   const history = useHistory();
 
@@ -21,25 +26,20 @@ const Navbar = () => {
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.cadete);
 
-
-  const messages = messagesHandler(useSnackbar()) 
+  const messages = messagesHandler(useSnackbar());
 
   const logout = () => {
     localStorage.removeItem("token");
-    dispatch(clearUser()) && messages.info()
+    dispatch(clearUser()) && messages.info();
     history.push("/");
   };
 
   const userTypeColor = (color = "") => {
-    let admin = user && user.admin;
-    switch (admin) {
-      case true:
-        color = "admin";
-        break;
-      default:
-        color = "cadete";
-    }
-    return color;
+    if (location.includes("admin")) return "admin";
+    if (location.includes("cadeteria")) return "cadeteria";
+    if (location.includes("cadete")) return "cadete";
+
+    return "base";
   };
 
   return (
@@ -76,7 +76,6 @@ const Navbar = () => {
           </Link>
           {user && user.admin ? (
             <>
-          
               <Link to="/admin" style={{ color: "inherit" }}>
                 <Button color="inherit">admin panel</Button>
               </Link>

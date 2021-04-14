@@ -17,7 +17,6 @@ import { allCadetes } from "../../state/admin";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
-import CadeteriaNavbar from "./CadeteriaNavbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,7 +53,6 @@ export default function CadeteriaRequest() {
 
   return (
     <>
-      <CadeteriaNavbar />
       <div className={classes.root}>
         <div>
           <h1 className="titulo">Solicitudes de cadetes</h1>

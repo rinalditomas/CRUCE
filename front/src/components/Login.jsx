@@ -16,13 +16,9 @@ import useStyles from "../utils/stylesLogins";
 import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
-
 import { loginRequest } from "../state/user";
 import { fetchMe } from "../state/user";
-
 import messagesHandler from "../utils/messagesHandler";
-import SimpleModal from '../components/ForgotPassword'
-import HomeNavbar from "../components/HomeNavbar";
 
 
 export default function Login() {
@@ -57,7 +53,7 @@ export default function Login() {
 
   return (
     <>
-      <HomeNavbar />
+      
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -117,7 +113,7 @@ export default function Login() {
                 </Grid>
 
                 <Grid item>
-                  <Link to="/register">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/register-as/cadete">{"No tienes cuenta? Registrate"}</Link>
                 </Grid>
               </Grid>
               <Box mt={5}>

@@ -7,7 +7,7 @@ import cadeteriaReducer from "./cadeteria";
 import adminReducer from "./admin";
 
 const store = configureStore({
-  middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger),
+/*   middleware: (getDefaultMiddleware) => getDefaultMiddleware().concat(logger), */
   reducer: {
     cadete: userReducer,
     orders: ordersReducer,

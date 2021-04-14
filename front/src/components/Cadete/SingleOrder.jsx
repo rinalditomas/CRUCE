@@ -11,7 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import axios from "axios";
 import { Grid } from "@material-ui/core";
-import Navbar from "../Navbar";
+
 
 const useStyles = makeStyles({
   root: {
@@ -54,7 +54,6 @@ export default function SingleOrder({ match }) {
 
   return (
     <>
-      <Navbar />
       <Card className={classes.root}>
         <CardActionArea>
           <iframe

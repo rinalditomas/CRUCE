@@ -11,15 +11,8 @@ import Box from "@material-ui/core/Box";
 import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
-
-
-
-import CadeteriaNavbar from './CadeteriaNavbar'
-
 import { useSnackbar } from "notistack";
-
 import { useDispatch } from "react-redux";
-
 import { CadloginRequest } from "../../state/cadeteria";
 import { fetchCad } from "../../state/cadeteria";
 
@@ -28,7 +21,7 @@ import messagesHandler from "../../utils/messagesHandler";
 import Copyright from "../../utils/Copyright";
 import useStyles from "../../utils/stylesLogins";
 
-const CadeteriaLogin = () => {
+const LoginCadeteria = () => {
   const messages = messagesHandler(useSnackbar());
 
   const classes = useStyles();
@@ -56,7 +49,6 @@ const CadeteriaLogin = () => {
 
   return (
     <div>
-      <CadeteriaNavbar/>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
@@ -111,7 +103,7 @@ const CadeteriaLogin = () => {
               <Grid container>
                 <Grid item xs></Grid>
                 <Grid item>
-                  <Link to="/cadeteria/register">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/register-as/cadeteria">{"No tienes cuenta? Registrate"}</Link>
                 </Grid>
               </Grid>
               <Box mt={5}>
@@ -125,4 +117,4 @@ const CadeteriaLogin = () => {
   );
 };
 
-export default CadeteriaLogin;
+export default LoginCadeteria;

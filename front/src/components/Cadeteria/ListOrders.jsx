@@ -11,7 +11,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { ordersList } from "../../state/orders";
 // import { orderState} from "../state/order";
 
-import CadeteriaNavbar from "./CadeteriaNavbar";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -39,7 +38,7 @@ const ListOrders = () => {
 
   return (
     <>
-      <CadeteriaNavbar />
+    
       <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de Ordenes</h1>
