@@ -60,8 +60,8 @@ export const editProfileCadeteria = createAsyncThunk(
         `http://localhost:8000/api/cadeteria/editProfileCadeteria/${data.id}`,
         data.input
       )
-      .then((res) => res)
-      .catch((err) => err);
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
   }
 );
 // Cambia el estado de una cadetería, de activo a inactivo

@@ -7,9 +7,9 @@ import axios from "axios";
 
 export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   return axios
-    .post("http://localhost:8000/api/register", input) 
-    .then((res) => res.data)   
-    .catch((e) => console.log(e));           
+    .post("http://localhost:8000/api/register", input)
+    .then((res) => res.data)
+    .catch((e) => console.log(e));
 });
 
 export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
@@ -43,7 +43,8 @@ export const editProfileUser = createAsyncThunk(
         `http://localhost:8000/api/user/editProfileCadete/${dates.id}`,
         dates.input
       )
-      .then((res) => res.status);
+      .then((res) => res.data)
+      .catch((err) => console.log(err));
   }
 );
 

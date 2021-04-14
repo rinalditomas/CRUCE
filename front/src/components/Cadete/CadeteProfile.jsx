@@ -3,42 +3,26 @@ import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
-import { makeStyles } from "@material-ui/core/styles";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { InputLabel } from "@material-ui/core";
 import { editProfileUser } from "../../state/users";
 
-const useStyles = makeStyles((theme) => ({
-  button: {
-    marginTop: theme.spacing(3),
-    marginLeft: theme.spacing(1),
-    backgroundColor: "#C25500",
-    width: "100%",
-  },
-  inputRoot: {
-    color: "inherit",
-  },
-  inputInput: {
-    padding: theme.spacing(1, 1, 1, 0),
-    // vertical padding + font size from searchIcon
-    paddingLeft: `calc(1em + ${theme.spacing(4)}px)`,
-    transition: theme.transitions.create("width"),
-    width: "100%",
-    [theme.breakpoints.up("md")]: {
-      width: "20ch",
-    },
-  },
-}));
+import { fetchMe } from "../../state/users";
+
+import useStyles from "../../utils/stylesCadeteProfile";
+import { useSnackbar } from "notistack";
+import messageHandler from "../../utils/messagesHandler";
 
 export default function ProfileCadete() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.user);
   const [input, setInput] = useState({});
   const history = useHistory();
+
+  const messages = messageHandler(useSnackbar());
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -50,14 +34,18 @@ export default function ProfileCadete() {
   const editCadete = (e) => {
     e.preventDefault();
     const id = user.id;
-    dispatch(editProfileUser({ id, input })).then((res) => {
-      if (res.payload === 201) {
-        alert("datos actualizados");
-        history.push("/cadeteOrders");
-      } else alert("ocurrió un error");
+    dispatch(editProfileUser({ id, input })).then(({ payload }) => {
+      if (!payload.errors) {
+        messages.info("Datos actualizados");
+        dispatch(fetchMe()) && history.push("/cadete");
+      } else {
+        payload.errors.map((e) => messages.error(e.message)) &&
+          dispatch(fetchMe());
+      }
     });
   };
-  console.log("userrrrrrrrrrrr", user);
+
+  console.log("Usuario --->", user);
 
   return (
     <React.Fragment>
@@ -65,7 +53,7 @@ export default function ProfileCadete() {
         Editar el perfil
       </Typography>
       <form style={{ marginLeft: "7%" }}>
-        <Grid container spacing={3}>  
+        <Grid container spacing={3}>
           <Grid item xs={10}>
             <TextField
               name="firstName"
@@ -87,28 +75,18 @@ export default function ProfileCadete() {
               onChange={handleChange}
             />
           </Grid>
-
-          <Grid item xs={10}>
-            <TextField
-              id="password"
-              name="password"
-              label="Contraseña"
-              type="password"
-              fullWidth
-              onChange={handleChange}
-            />
-          </Grid>
           <Grid item xs={10}>
             <TextField
               name="phoneNum"
               id="phoneNum"
-              label="Numero de telefono"
+              label="Número de teléfono"
               fullWidth
               placeholder={user && user.phoneNum}
               onChange={handleChange}
             />
           </Grid>
           <Grid item xs={10}>
+            <br></br>
             <InputLabel id="demo-simple-select-filled-label">
               {input.vehicle == null ? user.vehicle : input.vehicle}
             </InputLabel>
