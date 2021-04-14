@@ -28,6 +28,8 @@ import RegisterUser from "../components/Register.jsx";
 import SelectLogin from "../components/SelectLogin";
 import ResetPassword from "../components/ResetPassword";
 import SimpleModal from "../components/ForgotPassword";
+import Metricas from "../components/Admin/Metrics"
+
 
 const Index = () => {
 
@@ -61,6 +63,7 @@ const Index = () => {
         <Route exact path="/admin/uploadorders" component={DataLoading} />
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
+        <Route exact path="/admin/metrics" component={Metricas} />
         <Route
           exact
           path="/admin/cadeteriaRequest"
@@ -72,7 +75,7 @@ const Index = () => {
         <Route exact path="/cadeteria/listOrders" component={ListOrders} />
         <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
-        <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
+        <Route exact path="/cadeteria/metrics" />
 
         <Route exact path="/cadete" component={Cadete} />
         {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
