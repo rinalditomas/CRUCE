@@ -119,8 +119,8 @@ const ListOrders = () => {
                   console.log(order.cadeteriumId, cadeteria.id)
                 }         
                 if (order.cadeteriumId == cadeteria.id) {
-                  return order.status == selected ||
-                    order.status == selected ? (
+                  return order.status == selected 
+                     ? (
                     <ListItem key={order.id}>
                       <Link
                         to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
@@ -145,6 +145,30 @@ const ListOrders = () => {
                     </ListItem>
                   ) : null;
                 }
+                return order.status == "Pendiente" ? (
+                  <ListItem key={order.id}>
+                    <Link
+                      to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
+                    >
+                      <ListItemText
+                        primary={
+                          order.street +
+                          " " +
+                          order.number +
+                          " " +
+                          (order.complement ? order.complement : "")
+                        }
+                      />
+                    </Link>
+                    <ListItemSecondaryAction>
+                      <IconButton>
+                        <Button variant="outlined" color="primary">
+                          {order.status}
+                        </Button>
+                      </IconButton>
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
         
               })}
           </List>
