@@ -171,7 +171,7 @@ const User = () => {
                     required
                     fullWidth
                     id="phoneNum"
-                    label="phoneNum"
+                    label="Número telefónico"
                     name="phoneNum"
                     autoComplete="phoneNum"
                     onChange={handleChange}
