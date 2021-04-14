@@ -12,7 +12,9 @@ import { Link, useHistory } from "react-router-dom";
 import useStyles from "../../utils/stylesRegister";
 import Copyright from "../../utils/Copyright";
 import { useDispatch } from "react-redux";
-import { registerCadeteria } from "../../state/cadeteria";
+
+import { registerCadeteria } from "../../state/cadeterias";
+
 import { useSnackbar } from "notistack";
 import { sendmail } from "../../state/sendmail";
 import { sendmailToAdmin } from "../../state/sendmail";

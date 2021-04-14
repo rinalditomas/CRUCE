@@ -5,7 +5,7 @@ import CadeteriaPanel from "../components/Cadeteria/CadeteriaPanel";
 import Error from "../components/Error";
 
 export default function Cadeteria() {
-  const cadeteria = useSelector((state) => state.cadeteria);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   return (
     <div>

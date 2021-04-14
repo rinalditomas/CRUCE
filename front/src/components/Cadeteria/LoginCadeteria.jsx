@@ -13,8 +13,9 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { useSnackbar } from "notistack";
 import { useDispatch } from "react-redux";
-import { CadloginRequest } from "../../state/cadeteria";
-import { fetchCad } from "../../state/cadeteria";
+
+import { CadloginRequest } from "../../state/cadeterias";
+import { fetchCad } from "../../state/cadeterias";
 
 //UTILS
 import messagesHandler from "../../utils/messagesHandler";
@@ -40,9 +41,11 @@ const LoginCadeteria = () => {
     dispatch(CadloginRequest(input))
       .then((res) => dispatch(fetchCad()))
       .then((res) => {
-        console.log('resouesta en login ', res)
-        if (!res.payload)  messages.error() && history.push("/cadeteria/login");
-        else messages.success('Cadeteria ingresada correctamente') && history.push("/cadeteria");
+        console.log("resouesta en login ", res);
+        if (!res.payload) messages.error() && history.push("/cadeteria/login");
+        else
+          messages.success("Cadeteria ingresada correctamente") &&
+            history.push("/cadeteria");
       })
       .catch((e) => messages.error() && history.push("/cadeteria/login"));
   };

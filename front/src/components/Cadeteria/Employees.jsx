@@ -11,12 +11,13 @@ import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
-import { admitCadete } from "../../state/cadeteria";
-import { allCadetes } from "../../state/admin";
+import { admitCadete, allCadetes } from "../../state/users";
 
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
+import { Chip } from "@material-ui/core";
+import DoneIcon from "@material-ui/icons/Done";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -36,7 +37,7 @@ export default function CadeteriaRequest() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
 
-  const cadetes = useSelector((state) => state.admin.cadetes);
+  const cadetes = useSelector((state) => state.users.users);
   const messages = messagesHandler(useSnackbar());
 
   useEffect(() => {
@@ -67,36 +68,32 @@ export default function CadeteriaRequest() {
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
-            {cadetes.map((cadete) => {
-              return cadete.authorized === false && cadete.admin === false ? (
-                <ListItem key={cadete.id}>
-                  <ListItemText primary={cadete.firstName} />
-                  <ListItemSecondaryAction>
-                    {cadete.active ? (
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadete.id);
-                        }}
-                      >
-                        <BlockIcon />
-                      </IconButton>
-                    ) : (
-                      <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadete.id);
-                        }}
-                      >
-                        <CheckIcon />
-                      </IconButton>
-                    )}
-                  </ListItemSecondaryAction>
-                </ListItem>
-              ) : null;
-            })}
+            {cadetes &&
+              cadetes.map((cadete) => {
+                return cadete.authorized === false && cadete.admin === false ? (
+                  <ListItem key={cadete.id}>
+                    <ListItemText primary={cadete.firstName} />
+                    <ListItemSecondaryAction>
+                      {!cadete.active ? (
+                        <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <Chip
+                            icon={<DoneIcon />}
+                            label="Aceptar"
+                            style={{ color: "green" }}
+                            variant="outlined"
+                          />
+                        </IconButton>
+                      ) : null}
+                    </ListItemSecondaryAction>
+                  </ListItem>
+                ) : null;
+              })}
           </List>
         </div>
       </div>

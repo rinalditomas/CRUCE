@@ -5,11 +5,12 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { editProfileCadeteria } from "../../state/cadeteria";
+import { editProfileCadeteria } from "../../state/cadeterias";
 import useStyles from "../../utils/stylesCadeteria";
 import { useSnackbar } from "notistack";
 import messageHandler from "../../utils/messagesHandler";
-import { fetchCad } from "../../state/cadeteria";
+import { fetchCad } from "../../state/cadeterias";
+
 
 export default function ProfileCadeteria() {
   const dispatch = useDispatch();
@@ -19,7 +20,7 @@ export default function ProfileCadeteria() {
 
   const messages = messageHandler(useSnackbar());
 
-  const cadeteria = useSelector((state) => state.cadeteria);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const handleChange = (e) => {
     const key = e.target.name;

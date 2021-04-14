@@ -10,8 +10,7 @@ import { useHistory } from "react-router-dom";
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
 import { InputLabel } from "@material-ui/core";
-import { editProfileUser } from "../../state/user";
-
+import { editProfileUser } from "../../state/users";
 
 const useStyles = makeStyles((theme) => ({
   button: {
@@ -37,7 +36,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ProfileCadete() {
   const dispatch = useDispatch();
-  const user = useSelector((state) => state.cadete);
+  const user = useSelector((state) => state.users.user);
   const [input, setInput] = useState({});
   const history = useHistory();
 
@@ -66,22 +65,7 @@ export default function ProfileCadete() {
         Editar el perfil
       </Typography>
       <form style={{ marginLeft: "7%" }}>
-        <Grid container spacing={3}>
-          {/* <Grid item xs={10} >
-          <TextField
-            required
-            id="search"
-            name="search"
-            label="search"
-            fullWidth
-            classes={{ root: useStyles.inputRoot, input: useStyles.inputInput, }}
-            inputProps={{ 'aria-label': 'search' }}
-             onKeyDown= {(e)=>enter(e)} 
-             value={value}
-             onChange={(e)=>setValue(e.target.value)} 
-             />
-        </Grid> */}
-
+        <Grid container spacing={3}>  
           <Grid item xs={10}>
             <TextField
               name="firstName"

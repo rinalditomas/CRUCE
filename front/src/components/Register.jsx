@@ -11,7 +11,7 @@ import Container from "@material-ui/core/Container";
 import NativeSelect from "@material-ui/core/NativeSelect";
 import { useDispatch, useSelector } from "react-redux";
 
-import { registerRequest } from "../state/user";
+import { registerRequest } from "../state/users";
 
 import MenuItem from "@material-ui/core/MenuItem";
 import Select from "@material-ui/core/Select";
@@ -21,7 +21,7 @@ import useStyles from "../utils/stylesRegister";
 import Copyright from "../utils/Copyright";
 import InputLabel from "@material-ui/core/InputLabel";
 import FormControl from "@material-ui/core/FormControl";
-import { allCadeterias } from "../state/cadeteria";
+import { allCadeterias } from "../state/cadeterias";
 import { useSnackbar } from "notistack";
 import { sendmail } from "../state/sendmail";
 import messageHandler from "../utils/messagesHandler";
@@ -32,7 +32,7 @@ const User = () => {
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
 
-  const cadeteriaList = useSelector((state) => state.cadeteria).cadeterias;
+  const cadeteriaList = useSelector((state) => state.cadeterias.cadeterias);
 
   const cadeteriaEmail = (companyId) =>
     cadeteriaList.filter((e) => e.id === companyId);
@@ -153,10 +153,11 @@ const User = () => {
                     >
                       {cadeteriaList &&
                         cadeteriaList.map((cad, i) => {
-                          if (cad.authorized && cad.active !== false)
+                          if (cad.authorized)
                             return (
                               <MenuItem value={`${cad.nameCompany}`} key={i}>
-                                {`${cad.nameCompany}`}
+                                {`${cad.nameCompany}`}{" "}
+                                {cad.active ? null : " (cadetería inactiva)"}
                               </MenuItem>
                             );
                         })}

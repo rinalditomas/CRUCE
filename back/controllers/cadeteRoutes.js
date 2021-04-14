@@ -3,7 +3,11 @@ const jwt = require("jsonwebtoken");
 
 const userController = {
   allCadetes(req, res, next) {
-    User.findAll()
+    User.findAll({
+      where: {
+        admin: false,
+      },
+    })
       .then((cadete) => {
         res.send(cadete);
       })

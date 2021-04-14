@@ -16,10 +16,8 @@ import useStyles from "../utils/stylesLogins";
 import { useSnackbar } from "notistack";
 
 import { useDispatch } from "react-redux";
-import { loginRequest } from "../state/user";
-import { fetchMe } from "../state/user";
+import { loginRequest, fetchMe } from "../state/users";
 import messagesHandler from "../utils/messagesHandler";
-
 
 export default function Login() {
   const messages = messagesHandler(useSnackbar());
@@ -53,7 +51,6 @@ export default function Login() {
 
   return (
     <>
-      
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
         <Grid item xs={false} sm={4} md={7} className={classes.image} />

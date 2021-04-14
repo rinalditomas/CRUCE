@@ -1,7 +1,4 @@
 import React from "react";
-
-import { useLocation } from "react-router-dom";
-
 import AppBar from "@material-ui/core/AppBar";
 import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
@@ -16,18 +13,13 @@ import useStyles from "../utils/stylesNavbar";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../utils/messagesHandler";
 
-const Navbar = () => {
-  
-  const location = useLocation().pathname.split("/");
-
+const HomeNavbar = () => {
   const classes = useStyles();
   const history = useHistory();
-
   const dispatch = useDispatch();
-  const token = localStorage.getItem("token");
   const user = useSelector((state) => state.users.user);
-
   const messages = messagesHandler(useSnackbar());
+  const token = localStorage.getItem("token");
 
   const logoutUser = () => {
     localStorage.removeItem("token");
@@ -35,16 +27,12 @@ const Navbar = () => {
     history.push("/");
   };
 
-  const userTypeColor = (color = "") => {
-    if (location.includes("admin")) return "admin";
-    if (location.includes("cadeteria")) return "cadeteria";
-    if (location.includes("cadete")) return "cadete";
-    return "base";
-  };
-
   return (
     <div className={classes.root}>
-      <AppBar position="static" className={classes[`${userTypeColor()}`]}>
+      <AppBar
+        position="static"
+        style={{ backgroundColor: "#d9d9d9", color: "black" }}
+      >
         <Toolbar>
           <IconButton
             edge="start"
@@ -88,4 +76,5 @@ const Navbar = () => {
     </div>
   );
 };
-export default Navbar;
+
+export default HomeNavbar;

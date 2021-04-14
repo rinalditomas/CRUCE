@@ -9,15 +9,14 @@ import { useSelector, useDispatch } from "react-redux";
 import CadeteOrders from "../components/Cadete/CadeteOrders";
 
 
-
 import Error from "../components/Error";
 
 export default function Cadete() {
-  const user = useSelector((state) => state.cadete);
+  const user = useSelector((state) => state.users.user);
   return (
     <div>
       <Navbar />
-      {user && !user.admin ? <CadeteOrders/> : <Error />}
+      {user && !user.admin ? <CadeteOrders /> : <Error />}
       <Footer />
     </div>
   );

@@ -1,20 +1,20 @@
-import {
+/* import {
   createReducer,
   createAction,
   createAsyncThunk,
 } from "@reduxjs/toolkit";
 import axios from "axios";
 
-export const clearUser = createAction("CLEAR_USER");
+export const clearUser = createAction("CLEAR_USER"); */
 
-export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
+/* export const registerRequest = createAsyncThunk("REGISTER_REQUEST", (input) => {
   return axios
     .post("http://localhost:8000/api/register", input)
     .then((res) => res.data)
     .catch((e) => console.log(e));
-});
+}); */
 
-export const fetchMe = createAsyncThunk("FETCH_ME", () => {
+/* export const fetchMe = createAsyncThunk("FETCH_ME", () => {
   const loginToken = JSON.parse(localStorage.getItem("token"));
   return axios
     .get(`http://localhost:8000/api/me`, {
@@ -24,18 +24,18 @@ export const fetchMe = createAsyncThunk("FETCH_ME", () => {
       return r.data;
     })
     .catch((err) => console.log(err));
-});
+}); */
 
-export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
+/* export const loginRequest = createAsyncThunk("LOGIN_REQUEST", (input) => {
   return axios
     .post("http://localhost:8000/api/login", input)
     .then((res) => {
       localStorage.setItem("token", JSON.stringify(res.data.token));
     })
     .catch((err) => console.log(err));
-});
+}); */
 
-export const sendToken = createAsyncThunk("LOGIN", (token) => {
+/* export const sendToken = createAsyncThunk("LOGIN", (token) => {
   return axios
     .post(
       "http://localhost:8000/api/me",
@@ -44,9 +44,9 @@ export const sendToken = createAsyncThunk("LOGIN", (token) => {
     )
     .then((res) => res.data)
     .catch((err) => console.log(err));
-});
+}); */
 
-export const editProfileUser = createAsyncThunk(
+/* export const editProfileUser = createAsyncThunk(
   "EDIT_PROFILE_USER",
   (dates) => {
     return axios
@@ -56,11 +56,9 @@ export const editProfileUser = createAsyncThunk(
       )
       .then((res) => res.status);
   }
-);
+); */
 
-const initialState = {
-  cadete: [],
-};
+/* const userReducer = createReducer([], {
 
 const userReducer = createReducer(initialState, {
   [fetchMe.fulfilled]: (state, action) => action.payload,
@@ -75,7 +73,7 @@ const userReducer = createReducer(initialState, {
   [clearUser]: (state, action) => {
     return {};
   },
-});
+}); */
 
 // const initialState = {
 //   cadeterias: [],
@@ -95,4 +93,5 @@ const userReducer = createReducer(initialState, {
 //     };
 //   },
 
-export default userReducer;
+
+/* export default userReducer; */

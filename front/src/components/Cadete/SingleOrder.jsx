@@ -29,7 +29,7 @@ export default function SingleOrder({ match }) {
   const [products, setProducts] = useState([]);
   const order = useSelector((state) => state.orders.singleOrder);
 
-  const cadete = useSelector((state) => state.cadete);
+  const cadete = useSelector((state) => state.users.user);
 
   useEffect(() => {
     dispatch(singleOrder(match.id)).then(

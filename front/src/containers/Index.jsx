@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 
 import { Route, Switch, Redirect } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { fetchMe } from "../state/user";
-import { fetchCad } from "../state/cadeteria";
+import { fetchMe } from "../state/users";
+import { fetchCad } from "../state/cadeterias";
 
 import Cadete from "./Cadete";
 import Admin from "./Admin";
@@ -29,8 +29,8 @@ import SelectLogin from "../components/SelectLogin";
 import ResetPassword from "../components/ResetPassword";
 import SimpleModal from "../components/ForgotPassword";
 
-
 const Index = () => {
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -41,14 +41,18 @@ const Index = () => {
   return (
     <div>
       <Navbar />
-      <Switch>  
+      <Switch>
         <Route exact path="/login-as" component={SelectLogin} />
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 
         <Route exact path="/register-as" component={SelectButtons} />
         <Route exact path="/register-as/cadete" component={RegisterUser} />
-        <Route exact path="/register-as/cadeteria" component={RegisterCadeteria} />
+        <Route
+          exact
+          path="/register-as/cadeteria"
+          component={RegisterCadeteria}
+        />
 
         <Route exact path="/reset/:token/" component={ResetPassword} />
         <Route exact path="/forgot/" component={SimpleModal} />
@@ -57,7 +61,11 @@ const Index = () => {
         <Route exact path="/admin/uploadorders" component={DataLoading} />
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
-        <Route exact path="/admin/cadeteriaRequest" component={CadeteriaRequest} />
+        <Route
+          exact
+          path="/admin/cadeteriaRequest"
+          component={CadeteriaRequest}
+        />
 
         <Route exact path="/cadeteria" component={Cadeteria} />
         <Route exact path="/cadeteria/perfil" component={ProfileCadeteria} />
@@ -65,12 +73,8 @@ const Index = () => {
         <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
         <Route exact path="/cadeteria/metricas" component={ProfileCadeteria} />
-        <Route
-          path="/cadeteria/singleOrder/:id"
-          render={({ match }) => <SingleOrder match={match.params.id} />}
-        />
 
-         <Route exact path="/cadete" component={Cadete} />
+        <Route exact path="/cadete" component={Cadete} />
         {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
         <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
