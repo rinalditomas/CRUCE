@@ -5,12 +5,13 @@ import TextField from "@material-ui/core/TextField";
 import Button from "@material-ui/core/Button";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import { editProfileCadeteria } from "../../state/cadeterias";
+
 import useStyles from "../../utils/stylesCadeteria";
 import { useSnackbar } from "notistack";
 import messageHandler from "../../utils/messagesHandler";
-import { fetchCad } from "../../state/cadeterias";
 
+import { editProfileCadeteria } from "../../state/cadeterias";
+import { fetchCad } from "../../state/cadeterias";
 
 export default function ProfileCadeteria() {
   const dispatch = useDispatch();
@@ -33,18 +34,15 @@ export default function ProfileCadeteria() {
     e.preventDefault();
     const id = cadeteria.id;
     dispatch(editProfileCadeteria({ id, input }))
-      .then((res) => {
-        console.log("RESPUES DE EDICION DE PERFIL", res);
-
-        if (res.payload === undefined) {
-          messages.error("ocurrió un error");
-          history.push("/cadeteria/listOrders");
+      .then(({ payload }) => {
+        if (payload.errors) {
+          payload.errors.map((e) => messages.error(e.message)) && dispatch(fetchCad());
         } else {
           dispatch(fetchCad());
-          messages.info("datos actualizados");
+          messages.info("datos actualizados") && history.push("/cadeteria");
         }
       })
-      .catch((err) => console.log("Error en el catch ===>", err));
+      .catch((err) => messages.error("Fallo al actualizar los datos"));
   };
 
   console.log("CADETERIA EN PROFILE ====>", cadeteria);
@@ -63,27 +61,6 @@ export default function ProfileCadeteria() {
               label="Nombre"
               fullWidth
               placeholder={cadeteria && cadeteria.nameCompany}
-              onChange={handleChange}
-            />
-          </Grid>
-
-          <Grid item xs={10}>
-            <TextField
-              name="email"
-              label="Email"
-              id="email"
-              fullWidth
-              placeholder={cadeteria && cadeteria.email}
-              onChange={handleChange}
-            />
-          </Grid>
-          <Grid item xs={10}>
-            <TextField
-              id="password"
-              name="password"
-              label="Contraseña"
-              fullWidth
-              type="password"
               onChange={handleChange}
             />
           </Grid>
