@@ -9,8 +9,9 @@ import Typography from "@material-ui/core/Typography";
 import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import axios from "axios";
 import { Grid } from "@material-ui/core";
+import axios from "axios";
+
 
 
 import "leaflet/dist/leaflet.css";
@@ -56,8 +57,8 @@ export default function SingleOrder({ match }) {
     });
   };
 
-  return (
-<<<<<<< HEAD
+  return ( 
+  <>
     <MapContainer
       center={[-26.8198, -65.2169]}
       zoom={16}
@@ -74,11 +75,6 @@ export default function SingleOrder({ match }) {
         </Popup>
       </Marker>
     </MapContainer>
-    /*   <>
-      <Navbar />
-=======
-    <>
->>>>>>> d7c585eac409af1e31561affeed16ab6fb56d56a
       <Card className={classes.root}>
         <CardActionArea>
           <iframe
@@ -158,7 +154,7 @@ export default function SingleOrder({ match }) {
           ) : null}
         </CardActions>
       </Card>
-    </> */
+    </> 
   );
 }
 
