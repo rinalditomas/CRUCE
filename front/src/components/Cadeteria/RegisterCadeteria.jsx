@@ -18,13 +18,13 @@ import { registerCadeteria } from "../../state/cadeterias";
 import { useSnackbar } from "notistack";
 import { sendmail } from "../../state/sendmail";
 import { sendmailToAdmin } from "../../state/sendmail";
-import messagesHandler from "../../utils/messagesHandler"
+import messagesHandler from "../../utils/messagesHandler";
 
 const RegisterCadeteria = () => {
   const messages = messagesHandler(useSnackbar());
 
   const classes = useStyles();
-  const history = useHistory()
+  const history = useHistory();
   const [input, setInput] = useState({});
   const dispatch = useDispatch();
 
@@ -46,30 +46,14 @@ const RegisterCadeteria = () => {
 
         messages.success("Cadeteria registrada correctamente");
         sendmail(email, name);
-        sendmailToAdmin(payload)
-        history.push('/login-as/cadeteria')
+        sendmailToAdmin(payload);
+        history.push("/login-as/cadeteria");
       } else {
         payload.errors.map((e) => messages.error(e.message));
       }
     } catch (e) {
       messages.error("Hubo un problema con el registro");
     }
-
-    /* try {
-      const res = await dispatch(registerCadeteria(input));
-      const { payload } = res;
-      const name = payload.nameCompany;
-      const email = payload.email;
-
-      payload.errors
-        ? payload.errors.map((e) => messages.error(e.message))
-        : messages.success("Cadeteria registrada correctamente") &&
-          sendmail(email, name) &&
-          sendmailToAdmin(payload);
-      history.push("/cadeteria/login");
-    } catch (e) {
-      messages.error("Hubo un problema con el registro");
-    } */
   };
 
   return (
