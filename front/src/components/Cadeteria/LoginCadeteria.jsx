@@ -104,9 +104,13 @@ const LoginCadeteria = () => {
                 Sign In
               </Button>
               <Grid container>
-                <Grid item xs></Grid>
+                <Grid item xs>
+                  <Link to="/forgot-cadeteria">Olvidaste tu contraseña?</Link>
+                </Grid>
                 <Grid item>
-                  <Link to="/register-as/cadeteria">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/register-as/cadeteria">
+                    {"No tienes cuenta? Registrate"}
+                  </Link>
                 </Grid>
               </Grid>
               <Box mt={5}>

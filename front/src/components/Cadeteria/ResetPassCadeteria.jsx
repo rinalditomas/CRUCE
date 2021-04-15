@@ -11,13 +11,13 @@ import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
 import { useParams, useHistory } from "react-router-dom";
 
-import useStyles from "../utils/stylesResetPass";
-import Copyright from "../utils/Copyright";
+import useStyles from "../../utils/stylesResetPass";
+import Copyright from "../../utils/Copyright";
 import { useSnackbar } from "notistack";
-import { resetPassword } from "../state/resetPassword";
-import messagesHandler from "../utils/messagesHandler";
+import { resetPasswordCadeteria } from "../../state/resetPassword";
+import messagesHandler from "../../utils/messagesHandler";
 
-const ResetPassword = () => {
+const ResetPasswordCadeteria = () => {
   const classes = useStyles();
   const params = useParams();
   const token = params.token;
@@ -36,9 +36,9 @@ const ResetPassword = () => {
     event.preventDefault();
     const { newPass, passConfirm } = input;
     if (newPass === passConfirm) {
-      resetPassword(newPass, token);
+      resetPasswordCadeteria(newPass, token);
       messages.success("coinciden, password actualizada") &&
-        history.push("/login-as/cadete");
+        history.push("/login-as/cadeteria");
     } else {
       messages.error("las passwords no coinciden");
     }
@@ -102,4 +102,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ResetPasswordCadeteria;

@@ -104,13 +104,13 @@ export default function Login() {
               </Button>
               <Grid container>
                 <Grid item xs>
-                  <Link to="/forgot">
-                    Forgot password?
-                  </Link>
+                  <Link to="/forgot">Olvidaste tu contraseña?</Link>
                 </Grid>
 
                 <Grid item>
-                  <Link to="/register-as/cadete">{"No tienes cuenta? Registrate"}</Link>
+                  <Link to="/register-as/cadete">
+                    {"No tienes cuenta? Registrate"}
+                  </Link>
                 </Grid>
               </Grid>
               <Box mt={5}>
