@@ -11,7 +11,7 @@ export default function Cadete() {
   const user = useSelector((state) => state.users.user);
   return (
     <div>
-      {user && !user.admin ? <CadeteOrders /> : <Error />}
+      {user && !user.admin && user.authorized == true  ? <CadeteOrders /> : <Error />}
       <Footer />
     </div>
   );

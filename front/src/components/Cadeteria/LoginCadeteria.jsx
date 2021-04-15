@@ -42,12 +42,12 @@ const LoginCadeteria = () => {
       .then((res) => dispatch(fetchCad()))
       .then((res) => {
         console.log("resouesta en login ", res);
-        if (!res.payload) messages.error() && history.push("/cadeteria/login");
+        if (!res.payload) messages.error();
         else
           messages.success("Cadeteria ingresada correctamente") &&
             history.push("/cadeteria");
       })
-      .catch((e) => messages.error() && history.push("/cadeteria/login"));
+      .catch((e) => messages.error());
   };
 
   return (

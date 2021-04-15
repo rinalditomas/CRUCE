@@ -44,7 +44,7 @@ const ListOrders = () => {
   const [selected, setSelected] = useState("Pendiente");
 
   useEffect(() => {
-    dispatch(allOrders());
+    dispatch(allOrders(cadeteria.id));
   }, []);
 
   const selectStateOrders = (par) => {

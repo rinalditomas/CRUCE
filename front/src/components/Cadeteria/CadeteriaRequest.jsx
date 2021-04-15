@@ -101,7 +101,7 @@ export default function CadeteriaRequest() {
                           // }}
                           onClick={() => {
                             const r = window.confirm(
-                              "Â¿Autorizar la cadeteria?"
+                              "¿Autorizar la cadeteria?"
                             );
                             if (r == true) return handleActive(cadeteria.id);
                             else return null;
