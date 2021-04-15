@@ -6,9 +6,8 @@ import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../../utils/stylesAdmin";
-import { upLoadOrders } from "../../state/orders";
+import { upLoadOrders, testAllOrders } from "../../state/orders";
 import { useDispatch } from "react-redux";
-
 
 const ExcelUpload = () => {
   const classes = adminMenuStyles();
@@ -45,15 +44,22 @@ const ExcelUpload = () => {
     });
   };
 
-  const upload = () => {
-    dispatch(upLoadOrders({ items })).then((res) => {
-      console.log("PEEEEEEEEEEEEEEEEEEE", res);
-      if (res.payload === 200) {
-        alert("Tu archivo se cargo correctamente");
-      } else {
-        alert("Hubo un error en la carga");
-      }
-    });
+  /*  if (res.payload === 200) {
+    alert("Tu archivo se cargo correctamente");
+  } else {
+    alert("Hubo un error en la carga");
+  } */
+
+  const upload = async () => {
+    try {
+      const loadOrders = await dispatch(upLoadOrders({ items }));
+      console.log("Carga de archivos", loadOrders);
+      const getOrders = await dispatch(testAllOrders());
+      console.log("Ordenes", getOrders);
+    } catch (e) {
+      console.log(e);
+      alert("hubo un error", e);
+    }
   };
   return (
     <React.Fragment>

@@ -46,7 +46,7 @@ export const fetchCad = createAsyncThunk("FETCH_CAD", () => {
 // Trae todas las cadeterías
 export const allCadeterias = createAsyncThunk("GET_ALL_CADETERIAS", () => {
   return axios
-    .get("http://localhost:8000/api/cadeteria/allCadeterias/",)
+    .get("http://localhost:8000/api/cadeteria/allCadeterias/")
     .then((res) => res.data)
     .catch((e) => console.log(e));
 });
@@ -104,7 +104,7 @@ const cadeteriasReducer = createReducer(initialState, {
   [registerCadeteria.fulfilled]: (state, action) => {
     return {
       ...state,
-      cadeterias: [...state.cadeterias, action.payload],
+      cadeterias: action.payload,
     };
   },
 
