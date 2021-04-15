@@ -43,37 +43,39 @@ const authController = {
             .status(401)
             .send({ error: "El token no es valido o ha expirado" });
       });
-    }
+    } else {
+      const user = await User.findOne({ where: { resetToken } });
+      if (!user) {
+        return res
+          .status(400)
+          .send({ error: "El usuario con este token no existe" });
+      } else {
+        const obj = { password: newPass, resetToken: "" };
+        const resetUser = await user.update(obj);
+        const hashPassword = resetUser.hashPassword(resetUser.password);
 
-    const user = await User.findOne({ where: { resetToken } });
-    if (!user)
-      res.status(400).send({ error: "El usuario con este token no existe" });
-    else {
-      const obj = { password: newPass, resetToken: "" };
-      const resetUser = await user.update(obj);
-      const hashPassword = resetUser.hashPassword(resetUser.password);
+        const updated = await user.update({ password: hashPassword });
 
-      const updated = await user.update({ password: hashPassword });
+        const sendEmail = transporter.sendMail(
+          {
+            from: "cruceresetpass@gmail.com",
+            to: user.email,
+            subject: `Password reset`,
+            text: "Se ha producido un cambio de password",
+            html: `<div><b>"Tu password cambio"</b></div>`,
+          },
+          (error, info) => {
+            error
+              ? res.status(500).send(error.message)
+              : res.status(200).json(info);
+          }
+        );
 
-      const sendEmail = transporter.sendMail(
-        {
-          from: "cruceresetpass@gmail.com",
-          to: user.email,
-          subject: `Password reset`,
-          text: "Se ha producido un cambio de password",
-          html: `<div><b>"Tu password cambio"</b></div>`,
-        },
-        (error, info) => {
-          error
-            ? res.status(500).send(error.message)
-            : res.status(200).json(info);
-        }
-      );
-
-      updated
-        ? res.status(200).send("Tu password ha cambiado exitosamente") &&
-          sendEmail
-        : res.status(400).send("Error al cambiar la password");
+        updated
+          ? res.status(200).send("Tu password ha cambiado exitosamente") &&
+            sendEmail
+          : res.status(400).send("Error al cambiar la password");
+      }
     }
   },
 };

@@ -114,21 +114,11 @@ const ListOrders = () => {
           <List dense={dense}>
             {orders &&
               orders.map((order) => {
-<<<<<<< HEAD
                 if (
                   order.cadeteriumId == cadeteria.id ||
                   (order.status == selected && order.cadeteriumId == null)
                 ) {
                   return order.status == selected ? (
-=======
-                {
-                  console.log(order.status);
-                  console.log(order.cadeteriumId, cadeteria.id)
-                }         
-                if (order.cadeteriumId == cadeteria.id) {
-                  return order.status == selected 
-                     ? (
->>>>>>> d7c585eac409af1e31561affeed16ab6fb56d56a
                     <ListItem key={order.id}>
                       <Link
                         to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}

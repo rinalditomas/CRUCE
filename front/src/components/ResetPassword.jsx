@@ -15,7 +15,7 @@ import useStyles from "../utils/stylesResetPass";
 import Copyright from "../utils/Copyright";
 import { useSnackbar } from "notistack";
 import { resetPassword } from "../state/resetPassword";
-import messagesHandler from '../utils/messagesHandler'
+import messagesHandler from "../utils/messagesHandler";
 
 const ResetPassword = () => {
   const classes = useStyles();
@@ -51,7 +51,7 @@ const ResetPassword = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Password reset
+          Restablecer contraseña
         </Typography>
         <form
           className={classes.form}
@@ -63,7 +63,7 @@ const ResetPassword = () => {
             required
             fullWidth
             name="newPass"
-            label="New password"
+            label="Nueva contraseña"
             type="password"
             id="newPass"
             autoComplete="current-password"
@@ -75,7 +75,7 @@ const ResetPassword = () => {
             required
             fullWidth
             id="passConfirm"
-            label="Confirm password"
+            label="Confirmar contraseña"
             name="passConfirm"
             type="password"
             autoComplete="confirm password"
@@ -89,7 +89,7 @@ const ResetPassword = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Enviar
           </Button>
           <Grid container></Grid>
         </form>

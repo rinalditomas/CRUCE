@@ -50,7 +50,6 @@ User.init(
       type: S.BOOLEAN,
       defaultValue: false,
     },
-
     vehicle: {
       type: S.ENUM({
         values: ["bicicleta", "auto", "moto"],
@@ -66,8 +65,6 @@ User.init(
   },
   { sequelize: db, modelName: "user" }
 );
-
-
 
 
 

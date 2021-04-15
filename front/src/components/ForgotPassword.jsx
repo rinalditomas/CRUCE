@@ -49,7 +49,7 @@ const ResetPassword = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Verificar correo electronico
+          Recuperar contraseña
         </Typography>
         <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
@@ -58,7 +58,7 @@ const ResetPassword = () => {
             required
             fullWidth
             name="email"
-            label="Email Address"
+            label="Correo electronico"
             type="email"
             id="email"
             autoComplete="current-email"
@@ -72,7 +72,7 @@ const ResetPassword = () => {
             color="primary"
             className={classes.submit}
           >
-            Sign In
+            Enviar confirmacion
           </Button>
           <Grid container></Grid>
         </form>
