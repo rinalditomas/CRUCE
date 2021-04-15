@@ -18,7 +18,8 @@ const cadeteriaController = {
         .update({
           active: !cadeteria.active,
         })
-        .then((cadeteria) => res.status(200).send(cadeteria))
+        .then((cadeteria) => {
+          res.status(200).send(cadeteria)})
         .catch((err) => res.status(500).send(err));
     });
   },

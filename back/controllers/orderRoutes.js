@@ -58,8 +58,21 @@ const NewOrderController = {
 
   async allOrders(req, res) {
     try {
-      const orders = await Order.findAll();
-      res.send(orders);
+      const cadeteria = await Cadeteria.findByPk(req.params.id)
+      const ordenes = await Order.findAll({
+        where:{
+          cadeteriumId : cadeteria.id
+        }
+      })
+      if(cadeteria.active == true){
+        const orders = await Order.findAll();
+        res.send(orders);
+      }
+      if(cadeteria.active == false){
+        
+        res.status(200).send({state:cadeteria.active, orders:ordenes})
+      }
+     
     } catch (error) {
       console.log(error);
       res.send(error);

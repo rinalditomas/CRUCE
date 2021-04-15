@@ -9,6 +9,8 @@ import BlockIcon from "@material-ui/icons/Block";
 import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
+import Chip from "@material-ui/core/Chip";
+import DoneIcon from "@material-ui/icons/Done";
 
 import { useDispatch, useSelector } from "react-redux";
 import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
@@ -68,23 +70,33 @@ export default function ListCadeterias() {
                     <ListItemSecondaryAction>
                       {cadeteria.active ? (
                         <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadeteria.id);
-                          }}
-                        >
-                          <BlockIcon />
-                        </IconButton>
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          handleActive(cadeteria.id);
+                        }}
+                      >
+                        <Chip
+                          icon={<DoneIcon />}
+                          label="Activo"
+                          style={{ color: "green" }}
+                          variant="outlined"
+                        />
+                      </IconButton>
                       ) : (
                         <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadeteria.id);
-                          }}
-                        >
-                          <CheckIcon />
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          handleActive(cadeteria.id);
+                        }}
+                      >
+                        <Chip
+                          icon={<BlockIcon />}
+                          label="Inactivo"
+                          color="secondary"
+                          variant="outlined"
+                        />
                         </IconButton>
                       )}
                     </ListItemSecondaryAction>
