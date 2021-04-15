@@ -9,21 +9,22 @@ import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 
 import Container from "@material-ui/core/Container";
-import { useParams, useHistory } from "react-router-dom";
+import useStyles from "../../utils/stylesResetPass";
+import Copyright from "../../utils/Copyright";
 
-import useStyles from "../utils/stylesResetPass";
-import Copyright from "../utils/Copyright";
 import { useSnackbar } from "notistack";
-import { resetPassword } from "../state/resetPassword";
-import messagesHandler from "../utils/messagesHandler";
+import messagesHandler from "../../utils/messagesHandler";
 
-const ResetPassword = () => {
+import { forgotPasswordCadeteria } from "../../state/resetPassword";
+import { useHistory } from "react-router";
+
+const ForgotPasswordCadeteria = () => {
   const classes = useStyles();
-  const params = useParams();
-  const token = params.token;
-  const history = useHistory();
   const messages = messagesHandler(useSnackbar());
+
   const [input, setInput] = useState({});
+
+  const history = useHistory();
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -32,16 +33,12 @@ const ResetPassword = () => {
     setInput({ ...input, [key]: value });
   };
 
-  const handleSubmit = (event, input, token) => {
-    event.preventDefault();
-    const { newPass, passConfirm } = input;
-    if (newPass === passConfirm) {
-      resetPassword(newPass, token);
-      messages.success("coinciden, password actualizada") &&
-        history.push("/login-as/cadete");
-    } else {
-      messages.error("las passwords no coinciden");
-    }
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    forgotPasswordCadeteria(input)
+      .then((res) => messages.success("Verificacion enviada"))
+      .then(history.push("/select"))
+      .catch((err) => messages.error("La operacion no es valida"));
   };
 
   return (
@@ -52,36 +49,21 @@ const ResetPassword = () => {
           <LockOutlinedIcon />
         </Avatar>
         <Typography component="h1" variant="h5">
-          Restablecer contraseña
+          Recuperar contraseña
         </Typography>
-        <form
-          className={classes.form}
-          onSubmit={(e) => handleSubmit(e, input, token)}
-        >
+        <form className={classes.form} onSubmit={handleSubmit}>
           <TextField
             variant="outlined"
             margin="normal"
             required
             fullWidth
-            name="newPass"
-            label="Nueva contraseña"
-            type="password"
-            id="newPass"
-            autoComplete="current-password"
+            name="email"
+            label="Correo electronico"
+            type="email"
+            id="email"
+            autoComplete="current-email"
             onChange={handleChange}
-          />
-          <TextField
-            variant="outlined"
-            margin="normal"
-            required
-            fullWidth
-            id="passConfirm"
-            label="Confirmar contraseña"
-            name="passConfirm"
-            type="password"
-            autoComplete="confirm password"
-            autoFocus
-            onChange={handleChange}
+            value={input.email}
           />
           <Button
             type="submit"
@@ -90,7 +72,7 @@ const ResetPassword = () => {
             color="primary"
             className={classes.submit}
           >
-            Enviar
+            Enviar confirmacion
           </Button>
           <Grid container></Grid>
         </form>
@@ -102,4 +84,4 @@ const ResetPassword = () => {
   );
 };
 
-export default ResetPassword;
+export default ForgotPasswordCadeteria;
