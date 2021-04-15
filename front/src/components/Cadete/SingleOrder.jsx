@@ -12,8 +12,6 @@ import { useHistory } from "react-router";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 
-
-
 import "leaflet/dist/leaflet.css";
 
 import { MapContainer, TileLayer, Marker, Popup } from "react-leaflet";
@@ -57,27 +55,27 @@ export default function SingleOrder({ match }) {
     });
   };
 
-  return ( 
-  <>
-    <MapContainer
-      center={[-26.8198, -65.2169]}
-      zoom={16}
-      scrollWheelZoom={true}
-      className="leaflet-container"
-    >
-      <TileLayer
-        attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
-        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
-      />
-      <Marker position={[-26.8198, -65.2169]}>
-        <Popup>
-          A pretty CSS3 popup. <br /> Easily customizable.
-        </Popup>
-      </Marker>
-    </MapContainer>
+  return (
+    <>
+      <MapContainer
+        center={[-26.8198, -65.2169]}
+        zoom={16}
+        scrollWheelZoom={true}
+        className="leaflet-container"
+      >
+        <TileLayer
+          attribution='&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
+          url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+        />
+        <Marker position={[-26.8198, -65.2169]}>
+          <Popup>
+            A pretty CSS3 popup. <br /> Easily customizable.
+          </Popup>
+        </Marker>
+      </MapContainer>
       <Card className={classes.root}>
         <CardActionArea>
-          <iframe
+          {/*    <iframe
             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3350.274812272798!2d-68.84847478505935!3d-32.890901676398016!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x967e09c0d5fed751%3A0x859ef7231006759c!2sMITRE%20870!5e0!3m2!1ses-419!2sar!4v1617304827229!5m2!1ses-419!2sar"
             title="img"
             width="100%"
@@ -85,7 +83,7 @@ export default function SingleOrder({ match }) {
             style={{ border: 0 }}
             allowfullscreen=""
             loading="lazy"
-          ></iframe>
+          ></iframe> */}
           ;
           <CardContent>
             <Typography gutterBottom variant="h5" component="h2">
@@ -154,7 +152,7 @@ export default function SingleOrder({ match }) {
           ) : null}
         </CardActions>
       </Card>
-    </> 
+    </>
   );
 }
 
