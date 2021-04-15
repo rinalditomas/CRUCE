@@ -31,10 +31,14 @@ const CadeteOrders = () => {
   const dispatch = useDispatch();
   const orders = useSelector((state) => state.orders.orders);
   const cadete = useSelector((state) => state.users.user);
+  const [estado, setEstado]= React.useState(false)
   const history = useHistory();
 
   useEffect(() => {
-    dispatch(allOrders());
+    dispatch(allOrders(cadete.cadeteriumId))
+    .then((res)=>{if(res.payload.state == false){
+      setEstado(true)
+    }})
   }, []);
 
   const ordersToShow = [];
@@ -63,8 +67,28 @@ const CadeteOrders = () => {
       );
     }
   };
-
+  if(!cadete.active){
+    return(
+      <div className={classes.root}>
+        <h1>No estas activo</h1>
+      <img style={{maxWidth:'100%'}}
+        src="https://images.assetsdelivery.com/compings_v2/lkeskinen/lkeskinen1610/lkeskinen161000200.jpg"
+        alt="403"
+      />
+      </div>)
+  }
+  if(estado === true){
+    return(
+    <div className={classes.root}>
+      <h1>Tu cadeteria no esta activa</h1>
+    <img style={{maxWidth:'100%'}}
+      src="https://images.assetsdelivery.com/compings_v2/lkeskinen/lkeskinen1610/lkeskinen161000200.jpg"
+      alt="403"
+    />
+    </div>)
+  }else{
   return (
+    
     <>
       <div className={classes.root}>
         <div>
@@ -116,7 +140,7 @@ const CadeteOrders = () => {
         </div>
       </div>
     </>
-  );
+  );}
 };
 
 export default CadeteOrders;

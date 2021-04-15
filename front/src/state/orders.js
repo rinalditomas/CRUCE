@@ -6,10 +6,12 @@ import {
 import axios from "axios";
 
 // Trae todas las órdenes
-export const allOrders = createAsyncThunk("ALL_OREDERS", () => {
+export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
-    .get("http://localhost:8000/api/orders")
-    .then((res) => res.data)
+    .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
+    .then((res) =>{
+      console.log("ACA ESTA LA RESPUESTA DEL BACK",res)
+      return res.data})
     .catch((e) => console.log(e));
 });
 
@@ -60,7 +62,12 @@ const initialState = {
 
 const ordersReducer = createReducer(initialState, {
   [allOrders.fulfilled]: (state, action) => {
-    return { ...state, orders: action.payload };
+    console.log("ACA ESTA EL ACTION",action.payload)
+    if(action.payload.orders){
+      return { ...state, orders: action.payload.orders };
+    }else{
+      return { ...state, orders: action.payload };
+    }
   },
 
   [orderState.fulfilled]: (state, action) => {

@@ -12,6 +12,8 @@ import PersonAddIcon from "@material-ui/icons/PersonAdd";
 import axios from "axios";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
+import Chip from "@material-ui/core/Chip";
+import DoneIcon from "@material-ui/icons/Done";
 
 
 const useStyles = makeStyles((theme) => ({
@@ -71,23 +73,34 @@ export default function ListCadetes() {
                     <ListItemSecondaryAction>
                       {cadete.active ? (
                         <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadete.id);
-                          }}
-                        >
-                          <BlockIcon />
-                        </IconButton>
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          handleActive(cadete.id);
+                        }}
+                      >
+                        <Chip
+                          icon={<DoneIcon />}
+                          label="Activo"
+                          style={{ color: "green" }}
+                          variant="outlined"
+                        />
+                      </IconButton>
+                     
                       ) : (
                         <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadete.id);
-                          }}
-                        >
-                          <CheckIcon />
+                        edge="end"
+                        aria-label="delete"
+                        onClick={() => {
+                          handleActive(cadete.id);
+                        }}
+                      >
+                        <Chip
+                          icon={<BlockIcon />}
+                          label="Inactivo"
+                          color="secondary"
+                          variant="outlined"
+                        />
                         </IconButton>
                       )}
                     </ListItemSecondaryAction>

@@ -107,6 +107,21 @@ export default function ListEmployees() {
                       <ListItemSecondaryAction>
                         {!cadete.active ? (
                           <IconButton
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <Chip
+                            icon={<BlockIcon />}
+                            label="Inactivo"
+                            color="secondary"
+                            variant="outlined"
+                          />
+                        </IconButton>
+                        ) : (
+                          <IconButton
                             edge="end"
                             aria-label="delete"
                             onClick={() => {
@@ -120,21 +135,7 @@ export default function ListEmployees() {
                               variant="outlined"
                             />
                           </IconButton>
-                        ) : (
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => {
-                              handleActive(cadete.id);
-                            }}
-                          >
-                            <Chip
-                              icon={<BlockIcon />}
-                              label="Inactivo"
-                              color="secondary"
-                              variant="outlined"
-                            />
-                          </IconButton>
+                         
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>
