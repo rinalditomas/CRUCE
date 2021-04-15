@@ -28,11 +28,11 @@ import RegisterUser from "../components/Register.jsx";
 import SelectLogin from "../components/SelectLogin";
 import ResetPassword from "../components/ResetPassword";
 import SimpleModal from "../components/ForgotPassword";
-import Metricas from "../components/Admin/Metrics"
-
+import Metricas from "../components/Admin/Metrics";
+import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria";
+import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
 
 const Index = () => {
-
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -58,6 +58,17 @@ const Index = () => {
 
         <Route exact path="/reset/:token/" component={ResetPassword} />
         <Route exact path="/forgot/" component={SimpleModal} />
+
+        <Route
+          exact
+          path="/reset-cadeteria/:token/"
+          component={ResetPasswordCadeteria}
+        />
+        <Route
+          exact
+          path="/forgot-cadeteria/"
+          component={ForgotPasswordCadeteria}
+        />
 
         <Route exact path="/admin" component={Admin} />
         <Route exact path="/admin/uploadorders" component={DataLoading} />
