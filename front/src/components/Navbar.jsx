@@ -17,7 +17,6 @@ import { useSnackbar } from "notistack";
 import messagesHandler from "../utils/messagesHandler";
 
 const Navbar = () => {
-  
   const location = useLocation().pathname.split("/");
 
   const classes = useStyles();
@@ -57,10 +56,10 @@ const Navbar = () => {
           <Typography variant="h6" className={classes.title}></Typography>
           {!token ? (
             <>
-              <Link to="/selectLogin" style={{ color: "inherit" }}>
+              <Link to="/login-as" style={{ color: "inherit" }}>
                 <Button color="inherit">Login</Button>
               </Link>
-              <Link to="/select" style={{ color: "inherit" }}>
+              <Link to="/register-as" style={{ color: "inherit" }}>
                 <Button color="inherit">Register</Button>
               </Link>
             </>

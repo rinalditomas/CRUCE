@@ -19,7 +19,6 @@ import { useSelector, useDispatch } from "react-redux";
 import { allOrders } from "../../state/orders";
 // import { orderState} from "../state/order";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -40,8 +39,7 @@ const ListOrders = () => {
   const orders = useSelector((state) => state.orders.orders);
   const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
-
-  console.log('orders', orders, 'cadeteria', cadeteria)
+  console.log("orders", orders, "cadeteria", cadeteria);
 
   const [selected, setSelected] = useState("Pendiente");
 
@@ -57,7 +55,6 @@ const ListOrders = () => {
 
   return (
     <>
-    
       <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de Ordenes</h1>
@@ -108,7 +105,7 @@ const ListOrders = () => {
           </Grid>
         </div>
         <div>
-          <h3 className="titulo">Entregadas</h3>
+          <h3 className="titulo">{selected}</h3>
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
@@ -143,31 +140,6 @@ const ListOrders = () => {
                     </ListItem>
                   ) : null;
                 }
-                return order.status == "Pendiente" ? (
-                  <ListItem key={order.id}>
-                    <Link
-                      to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
-                    >
-                      <ListItemText
-                        primary={
-                          order.street +
-                          " " +
-                          order.number +
-                          " " +
-                          (order.complement ? order.complement : "")
-                        }
-                      />
-                    </Link>
-                    <ListItemSecondaryAction>
-                      <IconButton>
-                        <Button variant="outlined" color="primary">
-                          {order.status}
-                        </Button>
-                      </IconButton>
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ) : null;
-        
               })}
           </List>
         </div>
