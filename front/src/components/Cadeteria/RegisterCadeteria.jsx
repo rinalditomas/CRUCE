@@ -5,6 +5,7 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
+import Paper from "@material-ui/core/Paper";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -59,7 +60,7 @@ const RegisterCadeteria = () => {
 
   return (
     <>
-      <div style={{ paddingTop: "2rem" }}>
+      <div style={{ paddingTop: "2rem" }} className={classes.image}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
