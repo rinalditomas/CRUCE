@@ -59,6 +59,8 @@ export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
     .then((res) => res.data)
     .catch((e) => console.log(e));
 });
+
+
 const updateOrder = (orders, newOrder) => {
   return orders.map((order) =>
     order.id === newOrder.id ? { ...order, status: newOrder.status } : order
