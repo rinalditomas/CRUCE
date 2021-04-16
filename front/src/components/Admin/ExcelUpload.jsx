@@ -9,10 +9,16 @@ import adminMenuStyles from "../../utils/stylesAdmin";
 import { upLoadOrders, testAllOrders } from "../../state/orders";
 import { useDispatch } from "react-redux";
 
+import { useSnackbar } from "notistack";
+
+import messagesHandler from '../../utils/messagesHandler'
+
 const ExcelUpload = () => {
   const classes = adminMenuStyles();
   const [items, setItems] = useState([]);
   const dispatch = useDispatch();
+
+  const messages = messagesHandler(useSnackbar());
 
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
@@ -55,10 +61,10 @@ const ExcelUpload = () => {
       const loadOrders = await dispatch(upLoadOrders({ items }));
       console.log("Carga de archivos", loadOrders);
       const getOrders = await dispatch(testAllOrders());
-      console.log("Ordenes", getOrders);
+      messages.success('Archivos cargados correctamente')
     } catch (e) {
       console.log(e);
-      alert("hubo un error", e);
+      messages.error("No se pudo cargar el archivo");
     }
   };
   return (

@@ -9,7 +9,7 @@ export default function Cadeteria() {
 
   return (
     <div>
-      {cadeteria && cadeteria.id && cadeteria.authorized == true ? <CadeteriaPanel /> : <Error />}
+      {cadeteria && cadeteria.id ? <CadeteriaPanel /> : <Error />}
       <Footer />
     </div>
   );
