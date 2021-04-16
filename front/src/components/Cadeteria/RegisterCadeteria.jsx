@@ -38,6 +38,7 @@ const RegisterCadeteria = () => {
     e.preventDefault();
 
     const res = await dispatch(registerCadeteria(input));
+  /*   const update = await dispatch() */
     const { payload } = res;
     try {
       if (!payload.errors) {
