@@ -9,9 +9,10 @@ import axios from "axios";
 export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
     .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
-    .then((res) =>{
-      console.log("ACA ESTA LA RESPUESTA DEL BACK",res)
-      return res.data})
+    .then((res) => {
+      console.log("ACA ESTA LA RESPUESTA DEL BACK", res);
+      return res.data;
+    })
     .catch((e) => console.log(e));
 });
 
@@ -41,6 +42,15 @@ export const orderState = createAsyncThunk(
   }
 );
 
+export const testAllOrders = createAsyncThunk("ALL_ORDERS_TEST", async () => {
+  try {
+    const res = await axios.get("http://localhost:8000/api/orders/test/orders");
+    return res.data;
+  } catch (err) {
+    return console.log(err);
+  }
+});
+
 // Trae una orden en particular
 export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
   return axios
@@ -62,10 +72,10 @@ const initialState = {
 
 const ordersReducer = createReducer(initialState, {
   [allOrders.fulfilled]: (state, action) => {
-    console.log("ACA ESTA EL ACTION",action.payload)
-    if(action.payload.orders){
+    console.log("ACA ESTA EL ACTION", action.payload);
+    if (action.payload.orders) {
       return { ...state, orders: action.payload.orders };
-    }else{
+    } else {
       return { ...state, orders: action.payload };
     }
   },
@@ -81,6 +91,11 @@ const ordersReducer = createReducer(initialState, {
   [upLoadOrders.fulfilled]: (state, action) => {
     return { ...state, orders: action.payload };
   },
+
+  [testAllOrders.fulfilled]: (state, action) => {
+    return { ...state, orders: action.payload };
+  },
+  
 });
 
 export default ordersReducer;

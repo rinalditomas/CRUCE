@@ -8,5 +8,8 @@ router.get("/getCadeteOrders/:id", NewOrderController.allOrders);
 router.get("/:id", NewOrderController.findOrderById);
 router.put("/edit/:id", NewOrderController.changeStateOrders);
 
+router.get("/test/orders", NewOrderController.findAllOrders);
+
+
 
 module.exports = router;

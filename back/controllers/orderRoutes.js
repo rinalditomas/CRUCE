@@ -4,25 +4,6 @@ const NewOrderController = {
   newOrder(req, res, next) {
     const orders = req.body.items;
     orders.map((order) => {
-      /*  Order.findOrCreate({
-          where: {
-            orderNumber: order.Order,
-          },
-          defaults: {
-            clientName: order["Client Name"],
-            clientLastName: order["Client Last Name"],
-            productName: order["SKU Name"],
-            productSku: order["ID_SKU"],
-            creationDate: order["Creation Date"],
-            orderNumber: order.Order,
-            province: order["UF"],
-            city: order.City,
-            street: order.Street,
-            number: order.Number,
-            complement: order.Complement,
-          },
-        });
- */
       Product.create({
         productName: order["SKU Name"],
         productSku: order["ID_SKU"],
@@ -58,46 +39,33 @@ const NewOrderController = {
 
   async allOrders(req, res) {
     try {
-      const cadeteria = await Cadeteria.findByPk(req.params.id)
+      const cadeteria = await Cadeteria.findByPk(req.params.id);
       const ordenes = await Order.findAll({
-        where:{
-          cadeteriumId : cadeteria.id
-        }
-      })
-      if(cadeteria.active == true){
+        where: {
+          cadeteriumId: cadeteria.id,
+        },
+      });
+      if (cadeteria.active == true) {
         const orders = await Order.findAll();
         res.send(orders);
       }
-      if(cadeteria.active == false){
-        
-        res.status(200).send({state:cadeteria.active, orders:ordenes})
+      if (cadeteria.active == false) {
+        res.status(200).send({ state: cadeteria.active, orders: ordenes });
       }
-     
     } catch (error) {
       console.log(error);
       res.send(error);
     }
   },
-  /*  async allOrders(req, res) {
-    let list = {};
-    let ord = [];
+
+  async findAllOrders(req, res) {
     try {
       const orders = await Order.findAll();
-      orders.map((order) => {
-        if (!order.userId) list[order.orderNumber] = true;
-      });
-
-      for (id in list) {
-        const ordy = await Order.findOne({
-          where: { orderNumber: id },
-        });
-        ord.push(ordy);
-      }
-      res.send(ord);
+      res.status(200).send(orders);
     } catch (e) {
-      res.send(e);
+      res.status(500).send(e);
     }
-  }, */
+  },
 
   async findOrderById(req, res) {
     const id = req.params.id;

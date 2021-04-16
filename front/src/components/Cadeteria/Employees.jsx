@@ -84,7 +84,7 @@ export default function CadeteriaRequest() {
                             edge="end"
                             aria-label="delete"
                             onClick={() => {
-                              const r = window.confirm("¿Autorizar la cadete?");
+                              const r = window.confirm("¿Autorizar al cadete?");
                               if (r == true) return handleActive(cadete.id);
                               else return null;
                             }}
