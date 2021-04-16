@@ -15,7 +15,6 @@ import { useDispatch, useSelector } from "react-redux";
 import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
 
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -48,8 +47,9 @@ export default function ListCadetes() {
     });
   };
 
-  return ( <>
-    <div className={classes.root}>
+  return (
+    <>
+      <div className={classes.root}>
         <div>
           <h1 className="titulo">Lista de cadetes</h1>
           <Link
@@ -65,7 +65,7 @@ export default function ListCadetes() {
           <List dense={dense}>
             {cadetes &&
               cadetes.map((cadete) => {
-                return (
+                return cadete.authorized ? (
                   <ListItem>
                     <ListItemText
                       primary={cadete.firstName + " " + cadete.lastName}
@@ -73,39 +73,38 @@ export default function ListCadetes() {
                     <ListItemSecondaryAction>
                       {cadete.active ? (
                         <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadete.id);
-                        }}
-                      >
-                        <Chip
-                          icon={<DoneIcon />}
-                          label="Activo"
-                          style={{ color: "green" }}
-                          variant="outlined"
-                        />
-                      </IconButton>
-                     
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <Chip
+                            icon={<DoneIcon />}
+                            label="Activo"
+                            style={{ color: "green" }}
+                            variant="outlined"
+                          />
+                        </IconButton>
                       ) : (
                         <IconButton
-                        edge="end"
-                        aria-label="delete"
-                        onClick={() => {
-                          handleActive(cadete.id);
-                        }}
-                      >
-                        <Chip
-                          icon={<BlockIcon />}
-                          label="Inactivo"
-                          color="secondary"
-                          variant="outlined"
-                        />
+                          edge="end"
+                          aria-label="delete"
+                          onClick={() => {
+                            handleActive(cadete.id);
+                          }}
+                        >
+                          <Chip
+                            icon={<BlockIcon />}
+                            label="Inactivo"
+                            color="secondary"
+                            variant="outlined"
+                          />
                         </IconButton>
                       )}
                     </ListItemSecondaryAction>
                   </ListItem>
-                );
+                ) : null
               })}
           </List>
         </div>

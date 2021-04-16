@@ -67,6 +67,23 @@ const CadeteOrders = () => {
       );
     }
   };
+
+  if (!cadete.authorized) {
+    return (
+      <div className={classes.root}>
+        <h1>Tu cadeteria aun no te ha autorizado</h1>
+        <img
+          style={{ maxWidth: "100%" }}
+          src="https://images.assetsdelivery.com/compings_v2/lkeskinen/lkeskinen1610/lkeskinen161000200.jpg"
+          alt="403"
+        />
+      </div>
+    );
+  }
+
+
+  
+
   if (!cadete.active) {
     return (
       <div className={classes.root}>

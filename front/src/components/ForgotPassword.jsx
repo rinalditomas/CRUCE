@@ -17,12 +17,17 @@ import messagesHandler from "../utils/messagesHandler";
 
 import { forgotPassword } from "../state/resetPassword";
 import { useHistory } from "react-router";
+import { useDispatch } from "react-redux";
+import { logout } from "../state/users";
 
 const ResetPassword = () => {
   const classes = useStyles();
   const messages = messagesHandler(useSnackbar());
 
   const [input, setInput] = useState({});
+
+  const dispatch = useDispatch();
+  const remove = localStorage.removeItem("token");
 
   const history = useHistory();
 
@@ -32,6 +37,8 @@ const ResetPassword = () => {
 
     setInput({ ...input, [key]: value });
   };
+
+  
 
   const handleSubmit = (e) => {
     e.preventDefault();
