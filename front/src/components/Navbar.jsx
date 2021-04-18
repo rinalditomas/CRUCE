@@ -25,6 +25,7 @@ const Navbar = () => {
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.users.user);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
 
   const messages = messagesHandler(useSnackbar());
 
@@ -45,14 +46,19 @@ const Navbar = () => {
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
         <Toolbar>
-          <IconButton
+          <Typography variant="h5" className={classes.title}>
+            {user ? `Hola ${user.firstName}` : null}
+            {cadeteria ? cadeteria.nameCompany : null}
+          </Typography>
+
+          {/*   <IconButton
             edge="start"
             className={classes.menuButton}
             color="inherit"
             aria-label="menu"
           >
             <MenuIcon />
-          </IconButton>
+          </IconButton> */}
           <Typography variant="h6" className={classes.title}></Typography>
           {!token ? (
             <>

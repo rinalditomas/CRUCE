@@ -12,7 +12,7 @@ import Grid from "@material-ui/core/Grid";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import { useSnackbar } from "notistack";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 import { CadloginRequest } from "../../state/cadeterias";
 import { fetchCad } from "../../state/cadeterias";
@@ -24,7 +24,7 @@ import useStyles from "../../utils/stylesLogins";
 
 const LoginCadeteria = () => {
   const messages = messagesHandler(useSnackbar());
-
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
   const classes = useStyles();
   const [input, setInput] = useState([]);
   const dispatch = useDispatch();
@@ -49,7 +49,9 @@ const LoginCadeteria = () => {
       })
       .catch((e) => messages.error());
   };
-
+  if (cadeteria && cadeteria.id) {
+    history.push("/cadeteria");
+  }
   return (
     <div>
       <Grid container component="main" className={classes.root}>

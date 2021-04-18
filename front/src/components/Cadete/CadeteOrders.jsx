@@ -1,14 +1,20 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
 import { Link, useHistory } from "react-router-dom";
-import { Button } from "@material-ui/core";
+import {
+  Button,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  IconButton,
+} from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { allOrders, orderState } from "../../state/orders";
+import { useSnackbar } from "notistack";
+import messagesHandler from "../../utils/messagesHandler";
+
+import socket from "../../utils/socket";
 // import { orderState} from "../state/order";
 
 const useStyles = makeStyles((theme) => ({
@@ -33,23 +39,27 @@ const CadeteOrders = () => {
   const [estado, setEstado] = React.useState(false);
   const history = useHistory();
 
+  const messages = messagesHandler(useSnackbar());
+
   useEffect(() => {
-    dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
-      if (res.payload.state == false) {
-        setEstado(true);
-      }
+    if (cadete.id) {
+      dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
+        if (res.payload.state == false) {
+          setEstado(true);
+        }
+      });
+      socket.emit("conectado", cadete.firstName + " " + cadete.lastName);
+    }
+  }, [cadete]);
+
+  socket.on("orden", (mensaje) => {
+    dispatch(allOrders(cadete.cadeteriumId)).then(() => {
+      messages.info(`${mensaje.nombre} ha tomado un orden`);
     });
-  }, []);
-
-  const ordersToShow = [];
-
-  // const filter = (orders) => {
-  //   orders.map((order) => {
-  //     order.userId == cadete.id || order.userId == null
-  //       ? ordersToShow.push(order)
-  //       : null;
-  //   });
-  // };
+  });
+  socket.on("ordenes", (ordenes) => {
+    return dispatch(allOrders(cadete.cadeteriumId));
+  });
 
   const update = (orderNumber, status, cadeteId, orderId) => {
     let state;
@@ -64,7 +74,9 @@ const CadeteOrders = () => {
           state: state,
           cadeteId: cadeteId,
         })
-      );
+      ).then(({ payload }) => {
+        socket.emit("orden", { orden: payload });
+      });
     }
   };
 
@@ -80,10 +92,6 @@ const CadeteOrders = () => {
       </div>
     );
   }
-
-
-  
-
   if (!cadete.active) {
     return (
       <div className={classes.root}>
