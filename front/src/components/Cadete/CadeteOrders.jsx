@@ -26,9 +26,6 @@ const CadeteOrders = () => {
   const [estado, setEstado] = useState(false);
   const history = useHistory();
 
-
- 
-
   useEffect(() => {
 
     dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
@@ -39,9 +36,6 @@ const CadeteOrders = () => {
  
    
   }, []);
-
-
-    
 
 
 
