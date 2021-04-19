@@ -55,12 +55,12 @@ export default function ExtraAvatar({name}) {
   return (
     <div className={classes.root}>
       <StyledBadge
-      /* overlap="circle"
+       overlap="circle"
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
         }}
-        variant="dot" */
+        variant="dot" 
       >
         <Avatar
           alt="Cadete"

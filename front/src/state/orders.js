@@ -6,8 +6,6 @@ export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
     .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
     .then((res) => {
-<<<<<<< HEAD
-=======
       return res.data;
     })
     .catch((e) => console.log(e));
@@ -16,7 +14,6 @@ export const adminOrders = createAsyncThunk("ADMIN_ORDERS", () => {
   return axios
     .get(`http://localhost:8000/api/orders/adminOrders`)
     .then((res) => {
->>>>>>> 7f751d06c121163461e59e8d423d8573632d14fd
       return res.data;
     })
     .catch((e) => console.log(e));

@@ -1,14 +1,8 @@
 const express = require("express");
 const cors = require("cors");
-
 const app = express();
-<<<<<<< HEAD
 const httpServer = require("http").createServer(app);
-=======
-const http = require("http").createServer(app);
->>>>>>> 7f751d06c121163461e59e8d423d8573632d14fd
 const db = require("./db");
-
 const config = require("./server.config.js");
 const routes = require("./routes");
 
@@ -32,11 +26,7 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routes);
 
-const io = require("socket.io")(http, {
-  cors: {
-    origen: "http://localhost:3000/",
-  },
-});
+
 
 io.on("connection", (socket) => {
   let nombre;
@@ -71,7 +61,7 @@ io.on("connection", (socket) => {
 
 const startServer = async () => {
   await db.sync({ force: false });
-  http.listen(config.port, () =>
+  httpServer.listen(config.port, () =>
     console.log(`Server listening at port ${config.port}`)
   );
 };
