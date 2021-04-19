@@ -41,6 +41,10 @@ const CadeteOrders = () => {
 
   const messages = messagesHandler(useSnackbar());
 
+  socket.on("ordenes", (ordenes) => {
+    return dispatch(allOrders(cadete.cadeteriumId));
+  });
+
   useEffect(() => {
     if (cadete.id) {
       dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
@@ -53,12 +57,9 @@ const CadeteOrders = () => {
   }, [cadete]);
 
   socket.on("orden", (mensaje) => {
-    dispatch(allOrders(cadete.cadeteriumId)).then(() => {
+    return dispatch(allOrders(cadete.cadeteriumId)).then(() => {
       messages.info(`${mensaje.nombre} ha tomado un orden`);
     });
-  });
-  socket.on("ordenes", (ordenes) => {
-    return dispatch(allOrders(cadete.cadeteriumId));
   });
 
   const update = (orderNumber, status, cadeteId, orderId) => {
