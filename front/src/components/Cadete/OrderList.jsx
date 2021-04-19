@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
@@ -14,10 +14,10 @@ import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
 import RadioButtonCheckedTwoToneIcon from "@material-ui/icons/RadioButtonCheckedTwoTone";
 import { useHistory } from "react-router";
 
-import { useSnackbar } from "notistack";
+
 import { useDispatch, useSelector } from "react-redux";
 import { orderState } from "../../state/orders";
-import messagesHandler from "../../utils/messagesHandler";
+
 
 import socket from "../../utils/socket";
 
@@ -38,9 +38,6 @@ export default function CustomList({ order }) {
 
   const dispatch = useDispatch();
   const cadete = useSelector((state) => state.users.user);
-  const orders = useSelector((state) => state.orders.orders);
-  const [estado, setEstado] = React.useState(false);
-  const messages = messagesHandler(useSnackbar());
 
   const handleClick = () => {
     setOpen(!open);

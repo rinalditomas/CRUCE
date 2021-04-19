@@ -1,10 +1,7 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import Paper from "@material-ui/core/Paper";
-import Divider from "@material-ui/core/Divider";
 import IconButton from "@material-ui/core/IconButton";
-import CheckCircleOutlinedIcon from "@material-ui/icons/CheckCircleOutlined";
-import BlockOutlinedIcon from "@material-ui/icons/BlockOutlined";
 import AvatarEXtra from "./AvatarExtra";
 import { Chip, Typography } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
@@ -39,12 +36,9 @@ export default function Requests({
   handleActive,
 }) {
   const classes = useStyles();
-
   const { firstName, lastName } = cadete;
-
   const { nameCompany, CUIT } = cadeteria;
 
-  const TypeColor = (cad) => {};
 
   return (
     <>

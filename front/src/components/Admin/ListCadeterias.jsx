@@ -1,43 +1,15 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import {
-  List,
-  ListItem,
-  ListItemSecondaryAction,
-  ListItemText,
-  IconButton,
-  Chip,
-  Grid,
-} from "@material-ui/core";
-import BlockIcon from "@material-ui/icons/Block";
+import { IconButton, Grid } from "@material-ui/core";
+
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
-import DoneIcon from "@material-ui/icons/Done";
 import { useDispatch, useSelector } from "react-redux";
 import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
 import Request from "../../utils/Request";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-
-    maxWidth: 752,
-    alignItems: "center",
-    textAlign: "center",
-    justifyContent: "center",
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-    textAlign: "center",
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-  },
-}));
 
 export default function ListCadeterias() {
-  const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
+
   const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
 
   const dispatch = useDispatch();

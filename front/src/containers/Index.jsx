@@ -54,6 +54,7 @@ const Index = () => {
       <Route exact path="/socket" component={Socketio} />
 
         <Route exact path="/login-as" component={SelectLogin} />
+       {/*  <Route exact path="/dashboard" component={dashboard} /> */}
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 

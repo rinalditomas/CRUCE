@@ -116,10 +116,10 @@ const ListOrders = () => {
             {orders &&
               orders.map((order) => {
                 if (
-                  order.cadeteriumId == cadeteria.id ||
-                  (order.status == selected && order.cadeteriumId == null)
+                  order.cadeteriumId === cadeteria.id ||
+                  (order.status === selected && order.cadeteriumId == null)
                 ) {
-                  return order.status == selected ? (
+                  return order.status === selected ? (
                     <ListItem key={order.id}>
                       <Link
                         to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
