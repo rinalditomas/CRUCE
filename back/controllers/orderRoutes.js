@@ -58,15 +58,6 @@ const NewOrderController = {
     }
   },
 
-  async findAllOrders(req, res) {
-    try {
-      const orders = await Order.findAll();
-      res.status(200).send(orders);
-    } catch (e) {
-      res.status(500).send(e);
-    }
-  },
-
   async findOrderById(req, res) {
     const id = req.params.id;
     try {
@@ -81,9 +72,6 @@ const NewOrderController = {
     const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId;
-    console.log(orderNumber, "ACA ESTA LA ORDER NUMBER");
-    console.log(status, "ACA ESTA EL ESTADO");
-    console.log(cadeteId, "ACA ES EL ID DEL CADETE");
 
     User.findByPk(cadeteId).then((cadete) => {
       Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
@@ -103,9 +91,16 @@ const NewOrderController = {
       });
     });
   },
-};
+  async ordersFromAdmin(req, res) {
+    try {
+      const orders = await Order.findAll({});
+      res.send(orders);
+    } catch (e) {
+      res.send(e);
+    }
+  },
 
-/*  Order.findByPk(id).then((order) => {
+  /*  Order.findByPk(id).then((order) => {
             order
               .setUser(cadete)
               .then(() => {
@@ -124,5 +119,6 @@ const NewOrderController = {
         });
       })
       .catch((e) => console.log(e));*/
+};
 
 module.exports = NewOrderController;

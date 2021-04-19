@@ -33,6 +33,11 @@ import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria
 import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
 import Socketio from "../components/Socketio";
 
+
+///styled
+
+import StyledComponents from '../components/Styled/StyledComponents'
+
 const Index = () => {
   const dispatch = useDispatch();
 
@@ -59,6 +64,8 @@ const Index = () => {
           path="/register-as/cadeteria"
           component={RegisterCadeteria}
         />
+
+        <Route exact path="/styled" component={StyledComponents} />
 
         <Route exact path="/reset/:token/" component={ResetPassword} />
         <Route exact path="/forgot/" component={SimpleModal} />

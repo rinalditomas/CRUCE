@@ -104,7 +104,7 @@ const cadeteriasReducer = createReducer(initialState, {
   [registerCadeteria.fulfilled]: (state, action) => {
     return {
       ...state,
-      cadeterias: action.payload,
+      cadeterias: [...state.cadeterias, action.payload],
     };
   },
 
