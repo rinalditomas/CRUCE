@@ -31,6 +31,10 @@ app.use("/api", routes);
 io.on("connection", (socket) => {
   let nombre;
 
+  socket.on("conectado", (nomb) => {
+    nombre = nomb;
+    console.log(`SE CONECTO ${nombre}`);
+  });
   socket.on("ordenes", (ordenes) => {
     socket.broadcast.emit("ordenes", {
       mensaje: `El administrador cargó nuevas ordenes`,
@@ -38,15 +42,12 @@ io.on("connection", (socket) => {
     });
   });
 
-  socket.on("conectado", (nomb) => {
-    nombre = nomb;
-    console.log(`SE CONECTO ${nombre}`);
-  });
-
   socket.on("orden", (orden) => {
     socket.broadcast.emit("orden", {
       nombre: nombre,
-      orden: orden.orden,
+    });
+    socket.emit("orden", {
+      nombre: nombre,
     });
   });
 

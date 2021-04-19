@@ -7,6 +7,7 @@ import {
   ListItemText,
   IconButton,
   Chip,
+  Grid,
 } from "@material-ui/core";
 import BlockIcon from "@material-ui/icons/Block";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
@@ -14,14 +15,20 @@ import { Link } from "react-router-dom";
 import DoneIcon from "@material-ui/icons/Done";
 import { useDispatch, useSelector } from "react-redux";
 import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
+import Request from "../../utils/Request";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
+
     maxWidth: 752,
+    alignItems: "center",
+    textAlign: "center",
+    justifyContent: "center",
   },
   demo: {
     backgroundColor: theme.palette.background.paper,
+    textAlign: "center",
   },
   title: {
     margin: theme.spacing(4, 0, 2),
@@ -49,8 +56,15 @@ export default function ListCadeterias() {
 
   return (
     <>
-      {" "}
-      <div className={classes.root}>
+      <Grid
+        container
+        xs={12}
+        xl={12}
+        direction="column"
+        justify="center"
+        alignItems="stretch"
+        style={{ margin: 3, padding: 10 }}
+      >
         <div>
           <h1 className="titulo">Lista de cadeterias</h1>
           <Link
@@ -62,52 +76,15 @@ export default function ListCadeterias() {
             </IconButton>
           </Link>
         </div>
-        <div className={classes.demo}>
-          <List dense={dense}>
-            {cadeterias &&
-              cadeterias.map((cadeteria) => {
-                return cadeteria.authorized ? (
-                  <ListItem key={cadeteria.id}>
-                    <ListItemText primary={cadeteria.nameCompany} />
-                    <ListItemSecondaryAction>
-                      {cadeteria.active ? (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadeteria.id);
-                          }}
-                        >
-                          <Chip
-                            icon={<DoneIcon />}
-                            label="Activo"
-                            style={{ color: "green" }}
-                            variant="outlined"
-                          />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadeteria.id);
-                          }}
-                        >
-                          <Chip
-                            icon={<BlockIcon />}
-                            label="Inactivo"
-                            color="secondary"
-                            variant="outlined"
-                          />
-                        </IconButton>
-                      )}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                ) : null;
-              })}
-          </List>
-        </div>
-      </div>
+        <Grid Item>
+          {cadeterias &&
+            cadeterias.map((cadeteria) => {
+              return cadeteria.authorized ? (
+                <Request cadeteria={cadeteria} handleActive={handleActive} />
+              ) : null;
+            })}
+        </Grid>
+      </Grid>
     </>
   );
 }

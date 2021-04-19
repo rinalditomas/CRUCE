@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import { CustomButton } from "../../utils/Buttons";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -16,18 +16,15 @@ const CadeteriaPanel = () => {
         <div className={classes.heroContent}>
           <Container maxWidth="sm">
             <div className={classes.heroButtons}>
-              <Grid container spacing={4} justify="center" >
+              <Grid container spacing={4} justify="center">
                 <Grid item xs={13}>
                   <Link
                     to="/cadeteria/listOrders"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button
-                      variant="contained"
-                      className={classes.button_panel}
-                    >
+                    <CustomButton color="red" variant="contained">
                       Ordenes
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Grid>
                 <Grid item xs={14}>
@@ -35,12 +32,9 @@ const CadeteriaPanel = () => {
                     to="/cadeteria/listCadetes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button
-                      variant="contained"
-                      className={classes.button_panel}
-                    >
+                    <CustomButton color="red" variant="contained">
                       Lista de Cadetes
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Grid>
                 <Grid item xs={15}>
@@ -48,12 +42,9 @@ const CadeteriaPanel = () => {
                     to="/cadeteria/perfil"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button
-                      variant="contained"
-                      className={classes.button_panel}
-                    >
+                    <CustomButton color="red" variant="contained">
                       Perfil
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Grid>
                 <Grid item xs={16}>
@@ -61,12 +52,9 @@ const CadeteriaPanel = () => {
                     to="/cadeteria/solicitudes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button
-                      variant="contained"
-                      className={classes.button_panel}
-                    >
+                    <CustomButton color="red" variant="contained">
                       Solicitudes pendientes
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Grid>
                 <Grid item xs={17}>
@@ -74,12 +62,9 @@ const CadeteriaPanel = () => {
                     to="/cadeteria/metricas"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button
-                      variant="contained"
-                      className={classes.button_panel}
-                    >
+                    <CustomButton color="red" variant="contained">
                       Metricas
-                    </Button>
+                    </CustomButton>
                   </Link>
                 </Grid>
               </Grid>

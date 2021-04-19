@@ -11,6 +11,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
+import messagesHandler from "../../utils/messagesHandler";
 
 import "leaflet/dist/leaflet.css";
 
@@ -22,6 +23,8 @@ import {
   Circle,
   Tooltip,
 } from "react-leaflet";
+import socket from "../../utils/socket";
+import { useSnackbar } from "notistack";
 
 const useStyles = makeStyles({
   root: {
@@ -43,6 +46,7 @@ export default function SingleOrder({ match }) {
   const cadete = useSelector((state) => state.users.user);
   const [coord, setCoord] = useState(/*[-26.8198, -65.2169]*/);
   const [carga, setCarga] = useState(false);
+  const messages = messagesHandler(useSnackbar());
 
   useEffect(() => {
     dispatch(singleOrder(match.id)).then((res) => {
@@ -56,35 +60,27 @@ export default function SingleOrder({ match }) {
           setCoord(res.data.features[0].geometry.coordinates);
         })
         .then(() => {
-          return (
-            axios
-              .get(`http://localhost:8000/api/product/${match.orderNumber}`)
+          return axios
+            .get(`http://localhost:8000/api/product/${match.orderNumber}`)
 
-              .then((res) => setProducts(res.data.count))
-              /* .then(() => {
-            return axios.get(
-              `https://nominatim.openstreetmap.org/search?street=${ordenes.number}+${ordenes.street}&city=${ordenes.city}&state=${ordenes.province}&country=argentina&format=geocodejson`
-            );
-          })
-          .then((res) => {
-            setCoord(res.data.features[0].geometry.coordinates);
-          }) */
-              .then(setCarga(false))
-              /*  .then(() => {
-            return axios.get(
-              `https://nominatim.openstreetmap.org/search?street=${ordenes.number}${ordenes.street}&city=${ordenes.city}&state=${ordenes.province}&country=argentina&format=geocodejson`
-            );
-          })
-          .then((res) => {
-            console.log(res, "ACA ESTA LA RESPUESTA");
-            setCoord(res.data.features[0].geometry.coordinates);
-          });
-      }) */
-              .catch((err) => console.log(err))
-          );
+            .then((res) => setProducts(res.data.count))
+
+            .then(setCarga(false))
+
+            .catch((err) => console.log(err));
         });
     });
   }, []);
+
+  socket.on("orden", (mensaje) => {
+    dispatch(singleOrder(match.id)).then(() => {
+      if (cadete.firstName + " " + cadete.lastName !== mensaje.nombre) {
+        messages.info(`${mensaje.nombre} ha tomado un orden`);
+      } else {
+        messages.info(`has tomado un orden`);
+      }
+    });
+  });
 
   const ChangeState = (state) => {
     const state2 = {
@@ -92,10 +88,14 @@ export default function SingleOrder({ match }) {
       state: state,
       orderNumber: order.orderNumber,
     };
-    dispatch(orderState(state2)).then((order) => {
-      if (order.payload.status !== "En camino") history.push("/cadete");
-      else dispatch(singleOrder(match.id));
-    });
+    dispatch(orderState(state2))
+      .then((order) => {
+        if (order.payload.status !== "En camino") history.push("/cadete");
+        else dispatch(singleOrder(match.id));
+      })
+      .then((order) => {
+        socket.emit("orden", { orden: order });
+      });
   };
 
   return (
@@ -128,7 +128,7 @@ export default function SingleOrder({ match }) {
                 " " +
                 (order.complement ? order.complement : "")}{" "}
               <br />
-              {"tel: " + order.clientPhone}
+              Tel: <a href={`tel:+${order.clientPhone}`}>{order.clientPhone}</a>
             </Typography>
             <Typography
               variant="body2"

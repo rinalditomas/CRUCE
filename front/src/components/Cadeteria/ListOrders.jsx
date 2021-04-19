@@ -49,6 +49,7 @@ const ListOrders = () => {
   socket.on("ordenes", (ordenes) => {
     return dispatch(adminOrders());
   });
+
   socket.on("orden", (ordenes) => {
     dispatch(allOrders(cadeteria.id));
   });
