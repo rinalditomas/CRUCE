@@ -31,6 +31,7 @@ import SimpleModal from "../components/ForgotPassword";
 import Metricas from "../components/Admin/Metrics";
 import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria";
 import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
+import dashboard from "../components/Admin/dashboard"
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -45,6 +46,7 @@ const Index = () => {
       <Navbar />
       <Switch>
         <Route exact path="/login-as" component={SelectLogin} />
+        <Route exact path="/dashboard" component={dashboard} />
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 

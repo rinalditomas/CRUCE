@@ -37,6 +37,7 @@ const NewOrderController = {
     res.status(200).send(lastOrders);
   },
 
+
   async allOrders(req, res) {
     try {
       const cadeteria = await Cadeteria.findByPk(req.params.id);

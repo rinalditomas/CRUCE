@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
@@ -22,6 +22,9 @@ import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
 import Orders from './Orders';
+import Tabla from "./dashboard"
+import { useDispatch, useSelector } from 'react-redux';
+import { metricOrders } from '../../state/orders';
 
 function Copyright() {
   return (
@@ -103,7 +106,7 @@ const useStyles = makeStyles((theme) => ({
     overflow: 'auto',
   },
   container: {
-    paddingTop: theme.spacing(4),
+    paddingTop: theme.spacing(1),
     paddingBottom: theme.spacing(4),
   },
   paper: {
@@ -113,13 +116,24 @@ const useStyles = makeStyles((theme) => ({
     flexDirection: 'column',
   },
   fixedHeight: {
-    height: 240,
+    height: 340,
   },
 }));
 
 export default function Dashboard() {
+  const dispatch = useDispatch() 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const metrics = useSelector((state) => state.orders.metrics);
+
+  useEffect(() => {
+    dispatch(metricOrders({id:2,model:"cadeteria"}));
+  }, []);
+
+  console.log("-------------------------------------------------")
+  console.log("-----------------------",metrics,"--------------------------")
+  console.log("-------------------------------------------------")
+
   const handleDrawerOpen = () => {
     setOpen(true);
   };
@@ -129,62 +143,36 @@ export default function Dashboard() {
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
+    <div>
+       <h1>Rendimiento de cadeterias</h1>
+    <div className = "tabla">
+      <Tabla />
+    </div>
+   
+   
     <div className={classes.root}>
       <CssBaseline />
-      <AppBar position="absolute" className={clsx(classes.appBar, open && classes.appBarShift)}>
-        <Toolbar className={classes.toolbar}>
-          <IconButton
-            edge="start"
-            color="inherit"
-            aria-label="open drawer"
-            onClick={handleDrawerOpen}
-            className={clsx(classes.menuButton, open && classes.menuButtonHidden)}
-          >
-            <MenuIcon />
-          </IconButton>
-          <Typography component="h1" variant="h6" color="inherit" noWrap className={classes.title}>
-            Dashboard
-          </Typography>
-          <IconButton color="inherit">
-            <Badge badgeContent={4} color="secondary">
-              <NotificationsIcon />
-            </Badge>
-          </IconButton>
-        </Toolbar>
-      </AppBar>
-      <Drawer
-        variant="permanent"
-        classes={{
-          paper: clsx(classes.drawerPaper, !open && classes.drawerPaperClose),
-        }}
-        open={open}
-      >
-        <div className={classes.toolbarIcon}>
-          <IconButton onClick={handleDrawerClose}>
-            <ChevronLeftIcon />
-          </IconButton>
-        </div>
-        <Divider />
-        <List>{mainListItems}</List>
-        <Divider />
-        <List>{secondaryListItems}</List>
-      </Drawer>
+    
+     
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
+        
         <Container maxWidth="lg" className={classes.container}>
-          <Grid container spacing={3}>
+       
+        
+          <Grid container spacing={5}>
             {/* Chart */}
-            <Grid item xs={12} md={8} lg={9}>
+            {/* <Grid item xs={12} md={15} lg={16}>
               <Paper className={fixedHeightPaper}>
                 <Chart />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Recent Deposits */}
-            <Grid item xs={12} md={4} lg={3}>
+            {/* <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
-            </Grid>
+            </Grid> */}
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
@@ -197,6 +185,7 @@ export default function Dashboard() {
           </Box>
         </Container>
       </main>
+    </div>
     </div>
   );
 }
