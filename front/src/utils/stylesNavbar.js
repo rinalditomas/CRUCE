@@ -11,6 +11,16 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
   },
 
+  titleWelcome: {
+    display: "flex",
+    textAlign: "center",
+    textTransform: "uppercase",
+    flexGrow: 1,
+    justifyContent: "center",
+    alignContent: "baseline",
+    textShadow: "2px 2px 2px grey",
+  },
+
   base: {
     background: "linear-gradient(45deg, #eeeeee, 30%, #9e9e9e 90%)",
     color: "black",

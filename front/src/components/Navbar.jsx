@@ -46,8 +46,8 @@ const Navbar = () => {
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
         <Toolbar>
-          <Typography variant="h5" className={classes.title}>
-            {user ? `Hola ${user.firstName}` : null}
+          <Typography variant="h7" className={classes.titleWelcome}>
+            {user ? `Bienvenido ${user.firstName} ${user.lastName}` : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>
 

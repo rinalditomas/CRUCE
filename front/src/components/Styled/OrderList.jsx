@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import ListSubheader from "@material-ui/core/ListSubheader";
 import List from "@material-ui/core/List";
@@ -12,24 +12,62 @@ import ExpandMore from "@material-ui/icons/ExpandMore";
 import PhoneInTalkOutlinedIcon from "@material-ui/icons/PhoneInTalkOutlined";
 import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
 import RadioButtonCheckedTwoToneIcon from "@material-ui/icons/RadioButtonCheckedTwoTone";
+import { useHistory } from "react-router";
+
+import { useSnackbar } from "notistack";
+import { useDispatch, useSelector } from "react-redux";
+import { orderState } from "../../state/orders";
+import messagesHandler from "../../utils/messagesHandler";
+
+import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
-
     backgroundColor: theme.palette.background.paper,
   },
   nested: {
-    paddingLeft: theme.spacing(4),
+    paddingLeft: theme.spacing(5),
   },
 }));
 
 export default function CustomList({ order }) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
+  const history = useHistory();
+
+  const dispatch = useDispatch();
+  const cadete = useSelector((state) => state.users.user);
+  const orders = useSelector((state) => state.orders.orders);
+  const [estado, setEstado] = React.useState(false);
+  const messages = messagesHandler(useSnackbar());
 
   const handleClick = () => {
     setOpen(!open);
+  };
+
+  const typeColor = () => {
+    if (order.status === "Pendiente") return "teal";
+    if (order.status === "En camino") return "lime";
+  };
+
+  const update = (orderNumber, status, cadeteId, orderId) => {
+    let state;
+    if (status === "En camino") {
+      history.push(`/cadete/singleOrder/${orderId}/${orderNumber}`);
+    }
+    if (status === "Pendiente") {
+      state = "En camino";
+      dispatch(
+        orderState({
+          orderNumber,
+          state,
+          cadeteId,
+        })
+      ).then(({ payload }) => {
+        socket.emit("orden", { orden: payload });
+      });
+    }
   };
 
   return (
@@ -79,9 +117,14 @@ export default function CustomList({ order }) {
           </ListItem>
         </List>
       </Collapse>
-      <ListItem button onClick={() => alert("Cambiar el estado")}>
+      <ListItem
+        button
+        onClick={() => {
+          update(order.orderNumber, order.status, cadete.id, order.id);
+        }}
+      >
         <ListItemIcon>
-          <RadioButtonCheckedTwoToneIcon />
+          <RadioButtonCheckedTwoToneIcon style={{ color: `${typeColor()}` }} />
         </ListItemIcon>
         <ListItemText primary={`${order.status}`} />
       </ListItem>
@@ -89,7 +132,9 @@ export default function CustomList({ order }) {
         <ListItemIcon></ListItemIcon>
         <ListItemText
           secondary="Detalle"
-          onClick={() => alert("Redirigir al detalle")}
+          onClick={() =>
+            history.push(`/cadete/singleOrder/${order.id}/${order.orderNumber}`)
+          }
         />
       </ListItem>
     </List>

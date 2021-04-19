@@ -93,7 +93,7 @@ const StyledComponents = () => {
                     "linear-gradient(45deg, #eeeeee, 30%, #9e9e9e 90%)",
                 }}
               >
-                <Requests cadete={cadete} /* cadeteria={cadeteria}  *//>
+                <Requests cadete={cadete} /* cadeteria={cadeteria}  */ />
               </Paper>
             </Grid>
           </Grid>
