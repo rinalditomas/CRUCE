@@ -19,7 +19,8 @@ const cadeteriaController = {
           active: !cadeteria.active,
         })
         .then((cadeteria) => {
-          res.status(200).send(cadeteria)})
+          res.status(200).send(cadeteria);
+        })
         .catch((err) => res.status(500).send(err));
     });
   },

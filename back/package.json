@@ -23,6 +23,7 @@
     "pg-hstore": "^2.3.3",
     "seed": "^0.4.4",
     "sequelize": "^6.6.2",
+    "socket.io": "^4.0.1",
     "volleyball": "^1.5.1"
   }
 }

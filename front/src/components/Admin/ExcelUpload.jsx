@@ -1,24 +1,18 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
-import Button from "@material-ui/core/Button";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import { Button, Container, Grid, CssBaseline } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../../utils/stylesAdmin";
-import { upLoadOrders, testAllOrders } from "../../state/orders";
-import { useDispatch } from "react-redux";
-
-import { useSnackbar } from "notistack";
-
-import messagesHandler from '../../utils/messagesHandler'
+import { upLoadOrders } from "../../state/orders";
+import { useDispatch, useSelector } from "react-redux";
+import socket from "../../utils/socket";
+import { adminOrders } from "../../state/orders";
 
 const ExcelUpload = () => {
   const classes = adminMenuStyles();
   const [items, setItems] = useState([]);
+  const orders = useSelector((state) => state.orders.orders);
   const dispatch = useDispatch();
-
-  const messages = messagesHandler(useSnackbar());
 
   const readExcel = (file) => {
     const promise = new Promise((resolve, reject) => {
@@ -50,22 +44,16 @@ const ExcelUpload = () => {
     });
   };
 
-  /*  if (res.payload === 200) {
-    alert("Tu archivo se cargo correctamente");
-  } else {
-    alert("Hubo un error en la carga");
-  } */
-
-  const upload = async () => {
-    try {
-      const loadOrders = await dispatch(upLoadOrders({ items }));
-      console.log("Carga de archivos", loadOrders);
-      const getOrders = await dispatch(testAllOrders());
-      messages.success('Archivos cargados correctamente')
-    } catch (e) {
-      console.log(e);
-      messages.error("No se pudo cargar el archivo");
-    }
+  const upload = () => {
+    dispatch(upLoadOrders({ items })).then((res) => {
+      if (res.payload === 200) {
+        dispatch(adminOrders());
+        alert("Tu archivo se cargo correctamente");
+      } else {
+        alert("Hubo un error en la carga");
+      }
+    });
+    socket.emit("ordenes", orders);
   };
   return (
     <React.Fragment>

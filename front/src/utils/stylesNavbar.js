@@ -25,6 +25,18 @@ const useStyles = makeStyles((theme) => ({
   cadeteria: {
     background: "#ff5757",
   },
+  sectionDesktop: {
+    display: "none",
+    [theme.breakpoints.up("md")]: {
+      display: "flex",
+    },
+  },
+  sectionMobile: {
+    display: "flex",
+    [theme.breakpoints.up("md")]: {
+      display: "none",
+    },
+  },
 }));
 
 export default useStyles;

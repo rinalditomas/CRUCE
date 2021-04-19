@@ -1,8 +1,4 @@
-import {
-  createReducer,
-  createAction,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Trae todas las órdenes
@@ -10,6 +6,17 @@ export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
     .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
     .then((res) => {
+<<<<<<< HEAD
+      return res.data;
+    })
+    .catch((e) => console.log(e));
+});
+export const adminOrders = createAsyncThunk("ADMIN_ORDERS", () => {
+  return axios
+    .get(`http://localhost:8000/api/orders/adminOrders`)
+    .then((res) => {
+=======
+>>>>>>> a403b485e8e0cf99556888711cc1a8f5309b2791
       return res.data;
     })
     .catch((e) => console.log(e));
@@ -40,15 +47,6 @@ export const orderState = createAsyncThunk(
   }
 );
 
-export const testAllOrders = createAsyncThunk("ALL_ORDERS_TEST", async () => {
-  try {
-    const res = await axios.get("http://localhost:8000/api/orders/test/orders");
-    return res.data;
-  } catch (err) {
-    return console.log(err);
-  }
-});
-
 // Trae una orden en particular
 export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
   return axios
@@ -76,6 +74,10 @@ const ordersReducer = createReducer(initialState, {
       return { ...state, orders: action.payload };
     }
   },
+  [adminOrders.fulfilled]: (state, action) => {
+    console.log("ORDENES ADMIN REDUX", action.payload);
+    return { ...state, orders: action.payload };
+  },
 
   [orderState.fulfilled]: (state, action) => {
     return { ...state, orders: updateOrder(state.orders, action.payload) };
@@ -88,11 +90,6 @@ const ordersReducer = createReducer(initialState, {
   [upLoadOrders.fulfilled]: (state, action) => {
     return { ...state, orders: action.payload };
   },
-
-  [testAllOrders.fulfilled]: (state, action) => {
-    return { ...state, orders: action.payload };
-  },
-  
 });
 
 export default ordersReducer;

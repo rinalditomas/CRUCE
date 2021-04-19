@@ -58,15 +58,6 @@ const NewOrderController = {
     }
   },
 
-  async findAllOrders(req, res) {
-    try {
-      const orders = await Order.findAll();
-      res.status(200).send(orders);
-    } catch (e) {
-      res.status(500).send(e);
-    }
-  },
-
   async findOrderById(req, res) {
     const id = req.params.id;
     try {
@@ -80,7 +71,12 @@ const NewOrderController = {
   changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
+<<<<<<< HEAD
+    const cadeteId = req.body.cadeteId;
+
+=======
     const cadeteId = req.body.cadeteId
+>>>>>>> a403b485e8e0cf99556888711cc1a8f5309b2791
     User.findByPk(cadeteId).then((cadete) => {
       Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
         Order.findOne({
@@ -108,9 +104,16 @@ const NewOrderController = {
       }) 
     }) .catch((err) => console.log(err));
   },
-};
+  async ordersFromAdmin(req, res) {
+    try {
+      const orders = await Order.findAll({});
+      res.send(orders);
+    } catch (e) {
+      res.send(e);
+    }
+  },
 
-/*  Order.findByPk(id).then((order) => {
+  /*  Order.findByPk(id).then((order) => {
             order
               .setUser(cadete)
               .then(() => {
@@ -129,5 +132,6 @@ const NewOrderController = {
         });
       })
       .catch((e) => console.log(e));*/
+};
 
 module.exports = NewOrderController;
