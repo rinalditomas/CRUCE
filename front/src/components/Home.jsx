@@ -4,6 +4,7 @@ import Box from "@material-ui/core/Box";
 import useStyles from "../utils/stylesRegister";
 import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
+import { CustomButtonB } from "../utils/Buttons";
 
 const Home = () => {
   const history = useHistory();
@@ -26,7 +27,7 @@ const Home = () => {
                   alt=""
                 />
               </Box>
-              <Button
+              <CustomButtonB
                 color="primary"
                 variant="contained"
                 size="large"
@@ -34,15 +35,14 @@ const Home = () => {
                 onClick={() => history.push("/register-as")}
               >
                 Registrarse
-              </Button>
+              </CustomButtonB>
             </Box>
           </Box>
 
           <Box display="flex" justifyContent="center" m={1} p={1}>
             <Box p={1}>
-              <Box display="flex" justifyContent="center">
-              </Box>
-              <Button
+              <Box display="flex" justifyContent="center"></Box>
+              <CustomButtonB
                 color="primary"
                 variant="contained"
                 size="large"
@@ -50,7 +50,7 @@ const Home = () => {
                 onClick={() => history.push("/login-as")}
               >
                 Loguearse
-              </Button>
+              </CustomButtonB>
             </Box>
           </Box>
         </Box>
