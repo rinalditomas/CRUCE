@@ -30,6 +30,26 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
+     pickUpDate: {
+      type: S.DATE,
+      defaultValue: null,
+    },
+     deliveryDate: {
+      type: S.DATE,
+      defaultValue: null,
+    },
+     inTransit: {
+      type: S.VIRTUAL,
+      get() {
+        return this.getDataValue('deliveryDate')- this.getDataValue('pickUpDate')
+      }
+    },
+     pickUpaverage: {
+      type: S.VIRTUAL,
+      get() {
+        return this.getDataValue('pickUpDate')- this.getDataValue('createdAt')
+      }
+    },
     street: {
       type: S.STRING,
       allowNull: false,
@@ -46,10 +66,6 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
-    // notes: {
-    //   type: S.STRING,
-    //   allowNull: false,
-    // },
     status: {
       type: S.ENUM({
         values: ["Pendiente", "En camino", "Entregado", "Devuelto a sucursal"],

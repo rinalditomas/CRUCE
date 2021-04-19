@@ -40,6 +40,7 @@ const ListOrders = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
+<<<<<<< HEAD
     if (cadeteria.id) {
       dispatch(allOrders(cadeteria.id));
       socket.emit("conectado", cadeteria.nameCompany);
@@ -53,6 +54,13 @@ const ListOrders = () => {
   socket.on("orden", (ordenes) => {
     dispatch(allOrders(cadeteria.id));
   });
+=======
+    if(cadeteria.id){
+      dispatch(allOrders(cadeteria.id));
+    }
+    
+  }, []);
+>>>>>>> a403b485e8e0cf99556888711cc1a8f5309b2791
 
   const selectStateOrders = (par) => {
     setSelected(par);

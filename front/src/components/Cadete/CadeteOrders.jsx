@@ -38,8 +38,22 @@ const CadeteOrders = () => {
   const orders = useSelector((state) => state.orders.orders);
   const [estado, setEstado] = React.useState(false);
   const history = useHistory();
+<<<<<<< HEAD
 
   const messages = messagesHandler(useSnackbar());
+=======
+  
+  useEffect(() => {
+    if(cadete.id){
+     dispatch(allOrders(cadete.cadeteriumId))
+     .then((res) => {
+      if (res.payload.state == false) {
+        setEstado(true);
+      }
+    })}
+  
+  }, [cadete]);
+>>>>>>> a403b485e8e0cf99556888711cc1a8f5309b2791
 
   socket.on("ordenes", (ordenes) => {
     return dispatch(allOrders(cadete.cadeteriumId));
