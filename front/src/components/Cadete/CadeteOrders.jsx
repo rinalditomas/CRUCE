@@ -1,5 +1,5 @@
-import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
+import React, { useEffect, useState } from "react";
+
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
@@ -9,51 +9,45 @@ import { Link, useHistory } from "react-router-dom";
 import { Button } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { allOrders, orderState } from "../../state/orders";
-// import { orderState} from "../state/order";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 752,
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-  },
-}));
+import useStyles from "../../utils/stylesCadeteOrders";
+
+import { io } from "socket.io-client";
+
+const socket = io.connect("http://localhost:8000");
+
 
 const CadeteOrders = () => {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
+  const [dense, setDense] = useState(false);
   const dispatch = useDispatch();
   const cadete = useSelector((state) => state.users.user);
   const orders = useSelector((state) => state.orders.orders);
-  const [estado, setEstado] = React.useState(false);
+  const [estado, setEstado] = useState(false);
   const history = useHistory();
 
+
+ 
+
   useEffect(() => {
+
     dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
-      if (res.payload.state == false) {
+      if (res.payload.state === false) {
         setEstado(true);
       }
-    });
+    })
+ 
+   
   }, []);
 
-  const ordersToShow = [];
 
-  // const filter = (orders) => {
-  //   orders.map((order) => {
-  //     order.userId == cadete.id || order.userId == null
-  //       ? ordersToShow.push(order)
-  //       : null;
-  //   });
-  // };
+    
+
+
 
   const update = (orderNumber, status, cadeteId, orderId) => {
     let state;
-    if (status == "En camino") {
+    if (status === "En camino") {
       history.push(`/cadete/singleOrder/${orderId}/${orderNumber}`);
     }
     if (status === "Pendiente") {
@@ -80,9 +74,6 @@ const CadeteOrders = () => {
       </div>
     );
   }
-
-
-  
 
   if (!cadete.active) {
     return (
@@ -118,8 +109,8 @@ const CadeteOrders = () => {
             <List dense={dense}>
               {orders &&
                 orders.map((order) => {
-                  return order.status != "Entregado" &&
-                    order.status != "Devuelto a sucursal" &&
+                  return order.status !== "Entregado" &&
+                    order.status !== "Devuelto a sucursal" &&
                     (order.userId === cadete.id || order.userId == null) ? (
                     <ListItem key={order.id}>
                       <Link
