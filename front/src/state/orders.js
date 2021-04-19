@@ -10,7 +10,6 @@ export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
     .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
     .then((res) => {
-      console.log("ACA ESTA LA RESPUESTA DEL BACK", res);
       return res.data;
     })
     .catch((e) => console.log(e));
@@ -27,7 +26,6 @@ export const upLoadOrders = createAsyncThunk("UPLOAD_ORDERS", (items) => {
 export const orderState = createAsyncThunk(
   "ORDERS_STATE",
   (order, thunkApi) => {
-    console.log("ACA ESTA LA ORDEN DE REDUX", order);
     return axios
       .put(`http://localhost:8000/api/orders/edit/${order.orderNumber}`, {
         status: order.state,
@@ -72,7 +70,6 @@ const initialState = {
 
 const ordersReducer = createReducer(initialState, {
   [allOrders.fulfilled]: (state, action) => {
-    console.log("ACA ESTA EL ACTION", action.payload);
     if (action.payload.orders) {
       return { ...state, orders: action.payload.orders };
     } else {

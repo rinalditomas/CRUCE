@@ -32,14 +32,17 @@ const CadeteOrders = () => {
   const orders = useSelector((state) => state.orders.orders);
   const [estado, setEstado] = React.useState(false);
   const history = useHistory();
-
+  
   useEffect(() => {
-    dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
+    if(cadete.id){
+     dispatch(allOrders(cadete.cadeteriumId))
+     .then((res) => {
       if (res.payload.state == false) {
         setEstado(true);
       }
-    });
-  }, []);
+    })}
+  
+  }, [cadete]);
 
   const ordersToShow = [];
 
