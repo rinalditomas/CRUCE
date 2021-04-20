@@ -105,10 +105,9 @@ const metricsController = {
 //           if((metricas.deliver > 0) == true){
 //             Allmetrics.push(metricas)
 //           }
-          
+
 //           console.log("ADENTRO DE ORDERS",Allmetrics)
           
-        
 //             metricas.id=0;
 //             metricas.deliver=0;
 //             metricas.returned=0;
