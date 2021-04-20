@@ -41,7 +41,6 @@ const CadeteOrders = () => {
         setEstado(true);
       }
     })}
-  
   }, [cadete]);
 
   const ordersToShow = [];

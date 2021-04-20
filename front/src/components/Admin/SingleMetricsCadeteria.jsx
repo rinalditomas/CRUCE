@@ -21,25 +21,17 @@ import NotificationsIcon from '@material-ui/icons/Notifications';
 import { mainListItems, secondaryListItems } from './listItems';
 import Chart from './Chart';
 import Deposits from './Deposits';
+import OrdenesEntregadas from './OrdenesEntregadas';
 import Orders from './Orders';
 import Tabla from "./dashboard"
 import { useDispatch, useSelector } from 'react-redux';
-import { AllcadeteriasMetrics, metricOrders } from '../../state/orders';
+import { AllcadeteriasMetrics, allOrders, metricOrders } from '../../state/orders';
 import { allCadeterias } from '../../state/cadeterias';
+import Title from './Title';
 
 
-function Copyright() {
-  return (
-    <Typography variant="body2" color="textSecondary" align="center">
-      {'Copyright © '}
-      <Link color="inherit" href="https://material-ui.com/">
-        Your Website
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+
+
 
 const drawerWidth = 240;
 
@@ -122,19 +114,20 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export default function Dashboard() {
+export default function SingleMetricsCadeteria({match}) {
+
   const dispatch = useDispatch() 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const metrics = useSelector((state) => state.orders.metrics);
-  const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
+  const metrics = useSelector((state) => state.orders.singleMetrics);
+  const orders = useSelector((state) => state.orders.orders);
 
   useEffect(() => {
-    dispatch(AllcadeteriasMetrics());
-    dispatch(allCadeterias());
+    dispatch(metricOrders({id:match.id,model:'cadeteria'}))
+    dispatch(allOrders(match.id))
   }, []);
-  
-  console.log("aca estoy en metricas, no en el dashboard", metrics)
+
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -146,9 +139,9 @@ export default function Dashboard() {
 
   return (
     <div>
-       <h1>Rendimiento de cadeterias</h1>
+       <h1>Rendimiento de NombreCADETERIA</h1>
     <div className = "tabla">
-      <Tabla metricas = {metrics} />
+      {/* <Tabla metricas = {metrics} /> */}
     </div>
    
    
@@ -160,29 +153,34 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-       
-        
+    
           <Grid container spacing={5}>
-            {/* Chart */}
-            {/* <Grid item xs={12} md={15} lg={16}>
+           
+            <Grid item xs={12} md={4} lg={3}>
+            <Title>Ordenes Entregadas</Title>
               <Paper className={fixedHeightPaper}>
-                <Chart />
+                <OrdenesEntregadas orders={orders} />
               </Paper>
-            </Grid> */}
-            {/* Recent Deposits */}
-            {/* <Grid item xs={12} md={4} lg={3}>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
               <Paper className={fixedHeightPaper}>
                 <Deposits />
               </Paper>
-            </Grid> */}
-            {/* Recent Orders */}
-            <Grid item xs={12}>
-              <Paper className={classes.paper}>
-                <Orders metricas = {metrics}/>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Deposits />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+              <Paper className={fixedHeightPaper}>
+                <Deposits />
               </Paper>
             </Grid>
           </Grid>
-        
+          <Box pt={4}>
+
+          </Box>
         </Container>
       </main>
     </div>

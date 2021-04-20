@@ -18,13 +18,13 @@ import Link from '@material-ui/core/Link';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import Orders from './Orders';
-import Tabla from "./dashboard"
+import { mainListItems, secondaryListItems } from '../Admin/listItems';
+
+
+import ListMetricsCadete from './ListMetricsCadete';
+import Chart from "./Chart"
 import { useDispatch, useSelector } from 'react-redux';
-import { AllcadeteriasMetrics, metricOrders } from '../../state/orders';
+import { AllcadeteriasMetrics, AllcadetesMetrics, metricOrders } from '../../state/orders';
 import { allCadeterias } from '../../state/cadeterias';
 
 
@@ -129,9 +129,10 @@ export default function Dashboard() {
   const metrics = useSelector((state) => state.orders.metrics);
   const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
 
+
+
   useEffect(() => {
-    dispatch(AllcadeteriasMetrics());
-    dispatch(allCadeterias());
+    dispatch(AllcadetesMetrics());
   }, []);
   
   console.log("aca estoy en metricas, no en el dashboard", metrics)
@@ -146,9 +147,9 @@ export default function Dashboard() {
 
   return (
     <div>
-       <h1>Rendimiento de cadeterias</h1>
+       <h1>Rendimiento de Cadetes</h1>
     <div className = "tabla">
-      <Tabla metricas = {metrics} />
+      <Chart metricas = {metrics} />
     </div>
    
    
@@ -178,11 +179,10 @@ export default function Dashboard() {
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders metricas = {metrics}/>
+                <ListMetricsCadete metricas = {metrics}/>
               </Paper>
             </Grid>
           </Grid>
-        
         </Container>
       </main>
     </div>
