@@ -38,7 +38,12 @@ io.on("connection", (socket) => {
     socket.broadcast.emit("cadetes", {
       mensaje: "Se cambio el estado de un cadete",
     });
-    console.log("Estados de cadetes");
+  });
+
+  socket.on("cadeterias", () => {
+    socket.broadcast.emit("cadeterias", {
+      mensaje: "Se cambio el estado de una cadeteria",
+    });
   });
 
   socket.on("ordenes", (ordenes) => {

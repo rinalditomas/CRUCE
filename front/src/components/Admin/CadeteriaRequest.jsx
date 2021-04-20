@@ -14,8 +14,7 @@ import { admitCadeteria, allCadeterias } from "../../state/cadeterias";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
-import socket from '../../utils/socket';
-
+import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,9 +48,12 @@ export default function CadeteriaRequest() {
         ? messages.success("Estado cambiado correctamente")
         : messages.error("Hubo un problema");
     });
+    socket.emit("cadeterias");
   };
 
-
+  socket.on("cadeterias", () => {
+    dispatch(allCadeterias());
+  });
 
   return (
     <>

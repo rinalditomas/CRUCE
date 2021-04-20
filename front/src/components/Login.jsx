@@ -46,9 +46,9 @@ export default function Login() {
             : messages.success("Usuario ingresado correctamente") &&
               history.push("/cadete");
       })
-      .catch((e) => history.push("/login"));
+      .catch((e) => history.push("/login-as"));
   };
-  if (cadete && cadete.id) {
+  if (cadete && cadete.authorized) {
     history.push("/cadete");
   }
 

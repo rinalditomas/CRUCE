@@ -51,8 +51,12 @@ export default function CadeteriaRequest() {
         : messages.error("Hubo un problema");
     });
 
-    socket.emit("cadete", {});
+    socket.emit("cadetes");
   };
+
+  socket.on("cadetes", () => {
+    dispatch(allCadetes());
+  });
 
   return (
     <>

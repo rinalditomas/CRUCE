@@ -16,8 +16,7 @@ import DoneIcon from "@material-ui/icons/Done";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
-import socket from '../../utils/socket'
-
+import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,14 +50,13 @@ export default function ListEmployees() {
         ? messages.success("Estado cambiado correctamente")
         : messages.error("Hubo un problema");
     });
-    socket.emit('cadetes')
-  };
 
+    socket.emit("cadetes", id);
+  };
 
   socket.on("cadetes", (cadetes) => {
     dispatch(allCadetes());
   });
-
 
   return (
     <>
@@ -85,19 +83,19 @@ export default function ListEmployees() {
                       <ListItemSecondaryAction>
                         {!cadete.active ? (
                           <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadete.id);
-                          }}
-                        >
-                          <Chip
-                            icon={<BlockIcon />}
-                            label="Inactivo"
-                            color="secondary"
-                            variant="outlined"
-                          />
-                        </IconButton>
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => {
+                              handleActive(cadete.id);
+                            }}
+                          >
+                            <Chip
+                              icon={<BlockIcon />}
+                              label="Inactivo"
+                              color="secondary"
+                              variant="outlined"
+                            />
+                          </IconButton>
                         ) : (
                           <IconButton
                             edge="end"
@@ -113,7 +111,6 @@ export default function ListEmployees() {
                               variant="outlined"
                             />
                           </IconButton>
-                         
                         )}
                       </ListItemSecondaryAction>
                     </ListItem>

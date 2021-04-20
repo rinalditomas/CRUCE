@@ -9,6 +9,7 @@ import messagesHandler from "../../utils/messagesHandler";
 import socket from "../../utils/socket";
 // import { orderState} from "../state/order";
 import OrderList from "./OrderList";
+import { fetchMe } from "../../state/users";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -54,6 +55,11 @@ const CadeteOrders = () => {
     }
   }, [cadete]);
 
+  socket.on("cadetes", () => {
+    console.log("fetchme ========>");
+    dispatch(fetchMe());
+  });
+
   socket.on("orden", (mensaje) => {
     dispatch(allOrders(cadete.cadeteriumId)).then(() => {
       if (cadete.firstName + " " + cadete.lastName !== mensaje.nombre) {
@@ -68,7 +74,6 @@ const CadeteOrders = () => {
     dispatch(allOrders(cadete.cadeteriumId));
   });
 
-  
   if (!cadete.authorized) {
     return (
       <div className={classes.root}>
