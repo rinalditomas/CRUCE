@@ -5,7 +5,6 @@ import Toolbar from "@material-ui/core/Toolbar";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import IconButton from "@material-ui/core/IconButton";
-import MenuIcon from "@material-ui/icons/Menu";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../state/users";
@@ -78,13 +77,7 @@ const Navbar = () => {
           aria-controls="primary-search-account-menu"
           aria-haspopup="true"
           color="inherit"
-        >
-          {/* {nombreUsuario ? (
-            <Avatar alt="Remy Sharp" src="cata.jpg" />
-          ) : (
-            <AccountCircle />
-          )} */}
-        </IconButton>
+        ></IconButton>
       </MenuItem>
 
       {!token ? (
@@ -144,14 +137,13 @@ const Navbar = () => {
     </Menu>
   );
 
-  const menuId = "primary-search-account-menu";
 
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
         <Toolbar>
-          <Typography variant="h5" className={classes.title}>
-            {user ? `Hola ${user.firstName}` : null}
+          <Typography variant="h7" className={classes.titleWelcome}>
+            {user ? `Bienvenido ${user.firstName} ${user.lastName}` : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>
           <div className={classes.sectionDesktop}>

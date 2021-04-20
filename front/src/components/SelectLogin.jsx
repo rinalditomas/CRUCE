@@ -1,9 +1,8 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import useStyles from "../utils/stylesRegister";
 import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
-
+import { CustomButton } from "../utils/Buttons";
 
 const Main = () => {
   const classes = useStyles();
@@ -13,14 +12,13 @@ const Main = () => {
     <div>
       <div>
         <h1>Ingresar como</h1>
-        <Box 
+        <Box
           display="flex"
           justifyContent="center"
           flexDirection="column"
-          style={{ marginTop: "4rem"}}
+          style={{ marginTop: "4rem" }}
           bgcolor="#f6f6f6"
         >
-        
           <Box
             display="flex"
             justifyContent="center"
@@ -30,21 +28,21 @@ const Main = () => {
           >
             <Box p={1} bgcolor="#f6f6f6">
               <Box display="flex" justifyContent="center">
-              <img
+                <img
                   className={classes.large2}
                   src={process.env.PUBLIC_URL + "deli.png"}
                   alt=""
                 />
               </Box>
-              <Button
-                color="primary"
+              <CustomButton
+                /*  color="primary" */
                 variant="contained"
                 size="large"
                 className={classes.button_cadete}
                 onClick={() => history.push("/login-as/cadete")}
               >
                 Cadete
-              </Button>
+              </CustomButton>
             </Box>
           </Box>
 
@@ -63,15 +61,15 @@ const Main = () => {
                   alt=""
                 />
               </Box>
-              <Button
+              <CustomButton
                 variant="contained"
-                color="secondary"
+                color="red"
                 onClick={() => history.push("/login-as/cadeteria")}
                 size="large"
                 className={classes.button_cadeteria}
               >
                 Cadeteria
-              </Button>
+              </CustomButton>
             </Box>
           </Box>
         </Box>

@@ -1,5 +1,5 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
+import { CustomButtonB } from "../../utils/Buttons";
 import CssBaseline from "@material-ui/core/CssBaseline";
 import Grid from "@material-ui/core/Grid";
 import Container from "@material-ui/core/Container";
@@ -22,9 +22,9 @@ const AdminPanel = () => {
                     to="/admin/listCadeterias"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" className={classes.button_admin}>
+                    <CustomButtonB color="admin" variant="contained">
                       Cadeteria
-                    </Button>
+                    </CustomButtonB>
                   </Link>
                 </Grid>
                 <Grid item xs={15}>
@@ -32,9 +32,9 @@ const AdminPanel = () => {
                     to="/admin/listCadetes"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" className={classes.button_admin}>
+                    <CustomButtonB color="admin" variant="contained">
                       Cadete
-                    </Button>
+                    </CustomButtonB>
                   </Link>
                 </Grid>
                 <Grid item xs={16}>
@@ -42,9 +42,9 @@ const AdminPanel = () => {
                     to="/admin/metrics"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" className={classes.button_admin}>
+                    <CustomButtonB color="admin" variant="contained">
                       Metricas
-                    </Button>
+                    </CustomButtonB>
                   </Link>
                 </Grid>
                 <Grid item xs={17}>
@@ -52,9 +52,9 @@ const AdminPanel = () => {
                     to="/admin/cadeteriaRequest"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" className={classes.button_admin}>
+                    <CustomButtonB color="admin" variant="contained">
                       Solicitudes
-                    </Button>
+                    </CustomButtonB>
                   </Link>
                 </Grid>
                 <Grid item xs={18}>
@@ -62,9 +62,9 @@ const AdminPanel = () => {
                     to="/admin/uploadorders"
                     style={{ textDecoration: "none", color: "inherit" }}
                   >
-                    <Button variant="contained" className={classes.button_admin}>
+                    <CustomButtonB color="admin" variant="contained">
                       Cargar Ordenes
-                    </Button>
+                    </CustomButtonB>
                   </Link>
                 </Grid>
               </Grid>

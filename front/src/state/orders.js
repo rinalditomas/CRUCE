@@ -6,16 +6,15 @@ export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
     .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
     .then((res) => {
-
       return res.data;
     })
     .catch((e) => console.log(e));
 });
+
 export const adminOrders = createAsyncThunk("ADMIN_ORDERS", () => {
   return axios
     .get(`http://localhost:8000/api/orders/adminOrders`)
     .then((res) => {
-
       return res.data;
     })
     .catch((e) => console.log(e));
@@ -39,7 +38,6 @@ export const orderState = createAsyncThunk(
       })
 
       .then((res) => {
-        console.log("HOOOOLAAAAAAA", res.data);
         return res.data;
       })
       .catch((e) => console.log(e));
@@ -54,6 +52,16 @@ export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
     .then((res) => res.data)
     .catch((e) => console.log(e));
 });
+export const metricOrders = createAsyncThunk("METRIC_ORDER", (obj) => {
+  console.log(obj.id, obj.model);
+  return axios
+    .get(
+      `http://localhost:8000/api/metrics/${obj.id}/${obj.model}/cadeteria-average`
+    )
+    .then((res) => res.data)
+    .catch((e) => console.log(e));
+});
+
 const updateOrder = (orders, newOrder) => {
   return orders.map((order) =>
     order.id === newOrder.id ? { ...order, status: newOrder.status } : order
@@ -63,6 +71,7 @@ const updateOrder = (orders, newOrder) => {
 const initialState = {
   orders: [],
   singleOrder: {},
+  metrics: {},
 };
 
 const ordersReducer = createReducer(initialState, {
@@ -88,6 +97,9 @@ const ordersReducer = createReducer(initialState, {
 
   [upLoadOrders.fulfilled]: (state, action) => {
     return { ...state, orders: action.payload };
+  },
+  [metricOrders.fulfilled]: (state, action) => {
+    return { ...state, metrics: action.payload };
   },
 });
 
