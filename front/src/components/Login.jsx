@@ -15,13 +15,13 @@ import Copyright from "../utils/Copyright";
 import useStyles from "../utils/stylesLogins";
 import { useSnackbar } from "notistack";
 
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { loginRequest, fetchMe } from "../state/users";
 import messagesHandler from "../utils/messagesHandler";
 
 export default function Login() {
   const messages = messagesHandler(useSnackbar());
-
+  const cadete = useSelector((state) => state.users.user);
   const classes = useStyles();
   const [input, setInput] = useState([]);
   const dispatch = useDispatch();
@@ -46,8 +46,11 @@ export default function Login() {
             : messages.success("Usuario ingresado correctamente") &&
               history.push("/cadete");
       })
-      .catch((e) => history.push("/login"));
+      .catch((e) => history.push("/login-as"));
   };
+  if (cadete && cadete.authorized) {
+    history.push("/cadete");
+  }
 
   return (
     <>

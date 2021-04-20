@@ -1,23 +1,23 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
 import { Link } from "react-router-dom";
 import {
   Button,
   InputLabel,
   MenuItem,
   Select,
-  Option,
   FormControl,
   Grid,
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  IconButton,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { allOrders } from "../../state/orders";
-// import { orderState} from "../state/order";
+import { adminOrders, allOrders } from "../../state/orders";
+import socket from "../../utils/socket";
+import { fetchCad } from "../../state/cadeterias";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,27 +35,33 @@ const useStyles = makeStyles((theme) => ({
 const ListOrders = () => {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
-  const dispatch = useDispatch();
-  const orders = useSelector((state) => state.orders.orders);
   const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
-
-  console.log("orders", orders, "cadeteria", cadeteria);
-
+  const orders = useSelector((state) => state.orders.orders);
   const [selected, setSelected] = useState("Pendiente");
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    if(cadeteria.id){
+    if (cadeteria.id) {
       dispatch(allOrders(cadeteria.id));
+      socket.emit("conectado", cadeteria.nameCompany);
     }
-    
-  }, []);
+  }, [cadeteria]);
+
+  socket.on("ordenes", (ordenes) => {
+    return dispatch(adminOrders());
+  });
+
+  socket.on("orden", (ordenes) => {
+    dispatch(allOrders(cadeteria.id));
+  });
+  
+  socket.on('cadeterias' ,() => {
+    dispatch(fetchCad());
+  })
 
   const selectStateOrders = (par) => {
     setSelected(par);
   };
-
-  console.log("OORRDEEERS", orders);
-
   return (
     <>
       <div className={classes.root}>
@@ -66,7 +72,7 @@ const ListOrders = () => {
           <Grid item xs={12}>
             <FormControl variant="outlined" style={{ minWidth: 395 }}>
               <InputLabel htmlFor="outlined-age-native-simple">
-                Medio de transporte
+                Estado de ordenes
               </InputLabel>
               <Select
                 fullWidth
@@ -115,10 +121,10 @@ const ListOrders = () => {
             {orders &&
               orders.map((order) => {
                 if (
-                  order.cadeteriumId == cadeteria.id ||
-                  (order.status == selected && order.cadeteriumId == null)
+                  order.cadeteriumId === cadeteria.id ||
+                  (order.status === selected && order.cadeteriumId == null)
                 ) {
-                  return order.status == selected ? (
+                  return order.status === selected ? (
                     <ListItem key={order.id}>
                       <Link
                         to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}

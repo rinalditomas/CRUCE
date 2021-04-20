@@ -12,7 +12,7 @@ import Home from "../components/Home";
 import ProfileCadeteria from "../components/Cadeteria/CadeteriaProfile";
 import ListOrders from "../components/Cadeteria/ListOrders";
 import ListCadetes from "../components/Admin/ListCadetes";
-import CadeteRequest from "../components/Cadeteria/Employees";
+import CadeteRequest from "../components/Cadeteria/EmployeesRequest";
 import Cadetes from "../components/Cadeteria/ListEmployees";
 import CadeteriaLogin from "../components/Cadeteria/LoginCadeteria";
 import SingleOrder from "../components/Cadete/SingleOrder";
@@ -20,7 +20,7 @@ import ProfileCadete from "../components/Cadete/CadeteProfile";
 import DataLoading from "../components/Admin/ExcelUpload";
 import Login from "../components/Login";
 import ListCadeterias from "../components/Admin/ListCadeterias";
-import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
+import CadeteriaRequest from "../components/Admin/CadeteriaRequest";
 import SelectButtons from "../components/SelectButtons";
 import Navbar from "../components/Navbar";
 import RegisterCadeteria from "../components/Cadeteria/RegisterCadeteria";
@@ -35,6 +35,12 @@ import dashboard from "../components/Admin/dashboard"
 import SingleMetricsCadeteria from "../components/Admin/SingleMetricsCadeteria";
 import CadeteriaMetrics from "../components/Cadeteria/CadeteriaMetrics";
 import SingleOrderAdmin from "../components/Admin/singleOrder"
+import Socketio from "../components/Socketio";
+
+
+///styled
+
+import StyledComponents from '../components/Styled/StyledComponents';
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -44,12 +50,17 @@ const Index = () => {
     dispatch(fetchCad());
   }, []);
 
+
+
   return (
     <div>
       <Navbar />
       <Switch>
+
+      <Route exact path="/socket" component={Socketio} />
+
         <Route exact path="/login-as" component={SelectLogin} />
-        <Route exact path="/dashboard" component={dashboard} />
+       {/*  <Route exact path="/dashboard" component={dashboard} /> */}
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 
@@ -60,6 +71,8 @@ const Index = () => {
           path="/register-as/cadeteria"
           component={RegisterCadeteria}
         />
+
+        <Route exact path="/styled" component={StyledComponents} />
 
         <Route exact path="/reset/:token/" component={ResetPassword} />
         <Route exact path="/forgot/" component={SimpleModal} />

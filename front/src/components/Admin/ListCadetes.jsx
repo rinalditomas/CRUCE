@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -6,14 +6,15 @@ import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
 import BlockIcon from "@material-ui/icons/Block";
-import CheckIcon from "@material-ui/icons/Check";
 import { Link } from "react-router-dom";
 import PersonAddIcon from "@material-ui/icons/PersonAdd";
-import axios from "axios";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
+
+
+import socket from '../../utils/socket'
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -31,7 +32,6 @@ const useStyles = makeStyles((theme) => ({
 export default function ListCadetes() {
   const classes = useStyles();
   const [dense, setDense] = React.useState(false);
-  const [secondary, setSecondary] = React.useState(false);
   const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
 
@@ -44,8 +44,14 @@ export default function ListCadetes() {
       res.payload
         ? alert("Estado cambiado correctamente")
         : alert("Hubo un problema");
-    });
+    })
+    socket.emit('cadetes')
   };
+
+  socket.on("cadetes", (cadetes) => {
+    dispatch(allCadetes());
+  });
+
 
   return (
     <>
@@ -65,7 +71,7 @@ export default function ListCadetes() {
           <List dense={dense}>
             {cadetes &&
               cadetes.map((cadete) => {
-                return cadete.authorized ? (
+                return (
                   <ListItem>
                     <ListItemText
                       primary={cadete.firstName + " " + cadete.lastName}
@@ -104,7 +110,7 @@ export default function ListCadetes() {
                       )}
                     </ListItemSecondaryAction>
                   </ListItem>
-                ) : null
+                );
               })}
           </List>
         </div>

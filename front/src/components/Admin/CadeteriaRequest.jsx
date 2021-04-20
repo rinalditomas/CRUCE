@@ -1,25 +1,20 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
-import BlockIcon from "@material-ui/icons/Block";
-import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
-
 import { useDispatch, useSelector } from "react-redux";
 import { admitCadeteria, allCadeterias } from "../../state/cadeterias";
-
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
-import Navbar from "../../components/Navbar";
-import CadeteriaNavbar from "./CadeteriaNavbar";
+import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,7 +48,12 @@ export default function CadeteriaRequest() {
         ? messages.success("Estado cambiado correctamente")
         : messages.error("Hubo un problema");
     });
+    socket.emit("cadeterias");
   };
+
+  socket.on("cadeterias", () => {
+    dispatch(allCadeterias());
+  });
 
   return (
     <>
@@ -96,14 +96,11 @@ export default function CadeteriaRequest() {
                         <IconButton
                           edge="end"
                           aria-label="delete"
-                          // onClick={() => {
-                          //   handleActive(cadeteria.id);
-                          // }}
                           onClick={() => {
                             const r = window.confirm(
                               "¿Autorizar la cadeteria?"
                             );
-                            if (r == true) return handleActive(cadeteria.id);
+                            if (r === true) return handleActive(cadeteria.id);
                             else return null;
                           }}
                         >

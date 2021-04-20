@@ -59,15 +59,6 @@ const NewOrderController = {
     }
   },
 
-  async findAllOrders(req, res) {
-    try {
-      const orders = await Order.findAll();
-      res.status(200).send(orders);
-    } catch (e) {
-      res.status(500).send(e);
-    }
-  },
-
   async findOrderById(req, res) {
     const id = req.params.id;
     try {
@@ -81,54 +72,48 @@ const NewOrderController = {
   changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
-    const cadeteId = req.body.cadeteId
-    User.findByPk(cadeteId).then((cadete) => {
-      Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
-        Order.findOne({
-          where: {
-            orderNumber: orderNumber,
-          },
-        })
-          .then((order) => {
-            if(order.status == "Pendiente"){
-              order
-              .setUser(cadete)
-              .then(order.setCadeterium(cadeteria))
-              .then(order.update({
-                 status: status,
-                 pickUpDate: Date.now()
-               }))
-            }
-            if(order.status == "En camino"){
-              order.update({
-                status: status,
-                deliveryDate: Date.now()
-              })
-            }
-            }).then((newOrders) => res.send(newOrders));
-      }) 
-    }) .catch((err) => console.log(err));
-  },
-};
+    const cadeteId = req.body.cadeteId;
 
-/*  Order.findByPk(id).then((order) => {
-            order
-              .setUser(cadete)
-              .then(() => {
-                order.setCadeterium(cadeteria);
-              })
-              .then(() => {
+    User.findByPk(cadeteId)
+      .then((cadete) => {
+        Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
+          Order.findOne({
+            where: {
+              orderNumber: orderNumber,
+            },
+          })
+            .then((order) => {
+              if (order.status == "Pendiente") {
                 order
-                  .update({
-                    status: status,
-                  })
-                  .then((order) => {
-                    res.send(order);
-                  });
-              });
-          });
+                  .setUser(cadete)
+                  .then(order.setCadeterium(cadeteria))
+                  .then(
+                    order.update({
+                      status: status,
+                      pickUpDate: Date.now(),
+                    })
+                  );
+              }
+              if (order.status == "En camino") {
+                order.update({
+                  status: status,
+                  deliveryDate: Date.now(),
+                });
+              }
+            })
+            .then((newOrders) => res.send(newOrders));
         });
       })
-      .catch((e) => console.log(e));*/
+      .catch((err) => console.log(err));
+  },
+  async ordersFromAdmin(req, res) {
+    try {
+      const orders = await Order.findAll({});
+      res.send(orders);
+    } catch (e) {
+      res.send(e);
+    }
+  },
+};
 
 module.exports = NewOrderController;

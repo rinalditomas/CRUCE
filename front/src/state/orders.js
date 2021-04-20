@@ -1,14 +1,19 @@
-import {
-  createReducer,
-  createAction,
-  createAsyncThunk,
-} from "@reduxjs/toolkit";
+import { createReducer, createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 
 // Trae todas las órdenes
 export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
   return axios
     .get(`http://localhost:8000/api/orders/getCadeteOrders/${id}`)
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => console.log(e));
+});
+
+export const adminOrders = createAsyncThunk("ADMIN_ORDERS", () => {
+  return axios
+    .get(`http://localhost:8000/api/orders/adminOrders`)
     .then((res) => {
       return res.data;
     })
@@ -33,21 +38,11 @@ export const orderState = createAsyncThunk(
       })
 
       .then((res) => {
-        console.log("HOOOOLAAAAAAA", res.data);
         return res.data;
       })
       .catch((e) => console.log(e));
   }
 );
-
-export const testAllOrders = createAsyncThunk("ALL_ORDERS_TEST", async () => {
-  try {
-    const res = await axios.get("http://localhost:8000/api/orders/test/orders");
-    return res.data;
-  } catch (err) {
-    return console.log(err);
-  }
-});
 
 // Trae una orden en particular
 export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
@@ -60,7 +55,9 @@ export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
 export const metricOrders = createAsyncThunk("METRIC_ORDER", (obj) => {
   
   return axios
-    .get(`http://localhost:8000/api/metrics/${obj.id}/${obj.model}/cadeteria-average`)
+    .get(
+      `http://localhost:8000/api/metrics/${obj.id}/${obj.model}/cadeteria-average`
+    )
     .then((res) => res.data)
     .catch((e) => console.log(e));
 });
@@ -101,6 +98,10 @@ const ordersReducer = createReducer(initialState, {
       return { ...state, orders: action.payload };
     }
   },
+  [adminOrders.fulfilled]: (state, action) => {
+    console.log("ORDENES ADMIN REDUX", action.payload);
+    return { ...state, orders: action.payload };
+  },
 
   [orderState.fulfilled]: (state, action) => {
     return { ...state, orders: updateOrder(state.orders, action.payload) };
@@ -123,9 +124,9 @@ const ordersReducer = createReducer(initialState, {
     return { ...state, singleMetrics: action.payload };
   },
 
-  [testAllOrders.fulfilled]: (state, action) => {
-    return { ...state, orders: action.payload };
-  },
+  // [testAllOrders.fulfilled]: (state, action) => {
+  //   return { ...state, orders: action.payload };
+  // },
   
 });
 

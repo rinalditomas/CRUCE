@@ -5,7 +5,6 @@ import CssBaseline from "@material-ui/core/CssBaseline";
 import TextField from "@material-ui/core/TextField";
 import Grid from "@material-ui/core/Grid";
 import Box from "@material-ui/core/Box";
-import Paper from "@material-ui/core/Paper";
 import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
 import Typography from "@material-ui/core/Typography";
 import Container from "@material-ui/core/Container";
@@ -20,6 +19,8 @@ import { useSnackbar } from "notistack";
 import { sendmail } from "../../state/sendmail";
 import { sendmailToAdmin } from "../../state/sendmail";
 import messagesHandler from "../../utils/messagesHandler";
+
+import socket from '../../utils/socket'
 
 const RegisterCadeteria = () => {
   const messages = messagesHandler(useSnackbar());
@@ -39,7 +40,6 @@ const RegisterCadeteria = () => {
     e.preventDefault();
 
     const res = await dispatch(registerCadeteria(input));
-  /*   const update = await dispatch() */
     const { payload } = res;
     try {
       if (!payload.errors) {
@@ -47,6 +47,7 @@ const RegisterCadeteria = () => {
         const email = payload.email;
 
         messages.success("Cadeteria registrada correctamente");
+        socket.emit('cadeterias');
         sendmail(email, name);
         sendmailToAdmin(payload);
         history.push("/login-as/cadeteria");
@@ -60,7 +61,7 @@ const RegisterCadeteria = () => {
 
   return (
     <>
-      <div style={{ paddingTop: "2rem" }} className={classes.image}>
+      <div style={{ paddingTop: "2rem" }}>
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>

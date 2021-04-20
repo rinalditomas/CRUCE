@@ -1,13 +1,11 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
-
   paper: {
     marginTop: theme.spacing(8),
     display: "flex",
     flexDirection: "column",
     alignItems: "center",
-  /*   backgroundColor: "rgba(60, 63, 70, 0.76)", fontWeight: "bold", */
   },
   avatar: {
     margin: theme.spacing(1),
@@ -16,13 +14,9 @@ const useStyles = makeStyles((theme) => ({
   form: {
     width: "100%", // Fix IE 11 issue.
     marginTop: theme.spacing(3),
-   
   },
   submit: {
     margin: theme.spacing(3, 0, 2),
-    borderRadius: '10px',
-    width: '100%',
-    backgroundColor: '#ff5757'
   },
   margin: {
     /*  display: 'flex', */
