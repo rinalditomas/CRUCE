@@ -14,10 +14,11 @@ import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
 import RadioButtonCheckedTwoToneIcon from "@material-ui/icons/RadioButtonCheckedTwoTone";
 import { useHistory } from "react-router";
 
-
 import { useDispatch, useSelector } from "react-redux";
 import { orderState } from "../../state/orders";
 
+import { useSnackbar } from "notistack";
+import messagesHandler from "../../utils/messagesHandler";
 
 import socket from "../../utils/socket";
 
@@ -36,6 +37,7 @@ export default function CustomList({ order }) {
   const [open, setOpen] = React.useState(true);
   const history = useHistory();
 
+  const messages = messagesHandler(useSnackbar());
   const dispatch = useDispatch();
   const cadete = useSelector((state) => state.users.user);
 
@@ -49,26 +51,31 @@ export default function CustomList({ order }) {
   };
 
   const update = (orderNumber, status, cadeteId, orderId) => {
-
     let state;
     if (status === "En camino") {
       history.push(`/cadete/singleOrder/${orderId}/${orderNumber}`);
     }
     if (status === "Pendiente") {
       state = "En camino";
-      dispatch(
-        orderState({
-          orderNumber,
-          state,
-          cadeteId,
-        })
-      ).then(({ payload }) => {
-        socket.emit("orden", { orden: payload });
-      });
+
+      setTimeout(() => {
+        dispatch(
+          orderState({
+            orderNumber,
+            state,
+            cadeteId,
+          })
+        ).then(({payload}) => {
+          console.log("-----", payload);
+          if (typeof payload === "object")
+            socket.emit("orden", { orden: payload });
+          else {
+            return messages.info(payload);
+          }
+        });
+      }, 2000);
     }
   };
-
-  
 
   return (
     <List

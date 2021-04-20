@@ -28,21 +28,18 @@ export const upLoadOrders = createAsyncThunk("UPLOAD_ORDERS", (items) => {
 });
 
 // Le cambia el estado a ala  orden (pendiente, en camino, entregada, devuelto a cadetería)
-export const orderState = createAsyncThunk(
-  "ORDERS_STATE",
-  (order, thunkApi) => {
-    return axios
-      .put(`http://localhost:8000/api/orders/edit/${order.orderNumber}`, {
-        status: order.state,
-        cadeteId: order.cadeteId,
-      })
+export const orderState = createAsyncThunk("ORDERS_STATE", (order) => {
+  return axios
+    .put(`http://localhost:8000/api/orders/edit/${order.orderNumber}`, {
+      status: order.state,
+      cadeteId: order.cadeteId,
+    })
 
-      .then((res) => {
-        return res.data;
-      })
-      .catch((e) => console.log(e));
-  }
-);
+    .then((res) => {
+      return res.data;
+    })
+    .catch((e) => console.log(e));
+});
 
 // Trae una orden en particular
 export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
@@ -72,6 +69,7 @@ const initialState = {
   orders: [],
   singleOrder: {},
   metrics: {},
+  orderError: "",
 };
 
 const ordersReducer = createReducer(initialState, {
@@ -88,7 +86,11 @@ const ordersReducer = createReducer(initialState, {
   },
 
   [orderState.fulfilled]: (state, action) => {
-    return { ...state, orders: updateOrder(state.orders, action.payload) };
+    if (typeof action.payload === "object")
+      return { ...state, orders: updateOrder(state.orders, action.payload) };
+    else {
+      return { ...state, orderError: action.payload };
+    }
   },
 
   [singleOrder.fulfilled]: (state, action) => {
