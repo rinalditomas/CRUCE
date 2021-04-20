@@ -73,23 +73,37 @@ const NewOrderController = {
     const status = req.body.status;
     const cadeteId = req.body.cadeteId;
 
-    User.findByPk(cadeteId).then((cadete) => {
-      Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
-        Order.findOne({
-          where: {
-            orderNumber: orderNumber,
-          },
-        })
-          .then((order) => {
-            order
-              .setUser(cadete)
-              .then(order.setCadeterium(cadeteria))
-              .then(order.update({ status: status }))
-              .then((newOrders) => res.send(newOrders));
+    User.findByPk(cadeteId)
+      .then((cadete) => {
+        Cadeteria.findByPk(cadete.cadeteriumId).then((cadeteria) => {
+          Order.findOne({
+            where: {
+              orderNumber: orderNumber,
+            },
           })
-          .catch((err) => console.log(err));
-      });
-    });
+            .then((order) => {
+              if (order.status == "Pendiente") {
+                order
+                  .setUser(cadete)
+                  .then(order.setCadeterium(cadeteria))
+                  .then(
+                    order.update({
+                      status: status,
+                      pickUpDate: Date.now(),
+                    })
+                  );
+              }
+              if (order.status == "En camino") {
+                order.update({
+                  status: status,
+                  deliveryDate: Date.now(),
+                });
+              }
+            })
+            .then((newOrders) => res.send(newOrders));
+        });
+      })
+      .catch((err) => console.log(err));
   },
   async ordersFromAdmin(req, res) {
     try {
@@ -99,26 +113,6 @@ const NewOrderController = {
       res.send(e);
     }
   },
-
-  /*  Order.findByPk(id).then((order) => {
-            order
-              .setUser(cadete)
-              .then(() => {
-                order.setCadeterium(cadeteria);
-              })
-              .then(() => {
-                order
-                  .update({
-                    status: status,
-                  })
-                  .then((order) => {
-                    res.send(order);
-                  });
-              });
-          });
-        });
-      })
-      .catch((e) => console.log(e));*/
 };
 
 module.exports = NewOrderController;

@@ -9,8 +9,7 @@ import messagesHandler from "../../utils/messagesHandler";
 
 import socket from "../../utils/socket";
 // import { orderState} from "../state/order";
-
-import OrderList from "../Styled/OrderList";
+import OrderList from "./OrderList";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,11 +57,16 @@ const CadeteOrders = () => {
 
   socket.on("orden", (mensaje) => {
     dispatch(allOrders(cadete.cadeteriumId)).then(() => {
-      messages.info(`${mensaje.nombre} ha tomado un orden`);
+      if (cadete.firstName + " " + cadete.lastName !== mensaje.nombre) {
+        messages.info(`${mensaje.nombre} ha tomado un orden`);
+      } else {
+        messages.info(`has tomado un orden`);
+      }
     });
   });
+
   socket.on("ordenes", (ordenes) => {
-    return dispatch(allOrders(cadete.cadeteriumId));
+    dispatch(allOrders(cadete.cadeteriumId));
   });
 
   if (!cadete.authorized) {
@@ -103,8 +107,12 @@ const CadeteOrders = () => {
   } else {
     return (
       <div>
-        <Typography variant="h3" key="1" style={{ margin: 20, padding: 20 }}>
-          Lista de ordenes
+        <Typography
+          variant="h4"
+          key="1"
+          style={{ margin: 20, padding: 20, textAlign: "center" }}
+        >
+          LISTA DE ORDENES
         </Typography>
         <Container
           style={{
@@ -148,38 +156,3 @@ const CadeteOrders = () => {
 };
 
 export default CadeteOrders;
-
-/* 
-<ListItem key={order.id}>
-                      <Link
-                        to={`/cadete/singleOrder/${order.id}/${order.orderNumber}`}
-                      >
-                        <ListItemText
-                          primary={
-                            order.street +
-                            " " +
-                            order.number +
-                            " " +
-                            (order.complement ? order.complement : "")
-                          }
-                        />
-                      </Link>
-                      <ListItemSecondaryAction>
-                        <IconButton>
-                          <Button
-                            variant="outlined"
-                            color="primary"
-                            onClick={() => {
-                              update(
-                                order.orderNumber,
-                                order.status,
-                                cadete.id,
-                                order.id
-                              );
-                            }}
-                          >
-                            {order.status}
-                          </Button>
-                        </IconButton>
-                      </ListItemSecondaryAction>
-                    </ListItem> */
