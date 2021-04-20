@@ -10,6 +10,7 @@ export const allOrders = createAsyncThunk("ALL_OREDERS", (id) => {
     })
     .catch((e) => console.log(e));
 });
+
 export const adminOrders = createAsyncThunk("ADMIN_ORDERS", () => {
   return axios
     .get(`http://localhost:8000/api/orders/adminOrders`)
