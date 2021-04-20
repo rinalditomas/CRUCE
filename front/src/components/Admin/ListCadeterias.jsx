@@ -6,12 +6,14 @@ import { Link } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
 import Request from "../../utils/Request";
+import { useSnackbar } from "notistack";
+import messagesHandler from "../../utils/messagesHandler";
 
+import socket from "../../utils/socket";
 
 export default function ListCadeterias() {
-
   const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
-
+  const messages = messagesHandler(useSnackbar());
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -24,6 +26,8 @@ export default function ListCadeterias() {
         ? alert("Estado cambiado correctamente")
         : alert("Hubo un problema");
     });
+    socket.emit("cadeterias");
+    
   };
 
   return (

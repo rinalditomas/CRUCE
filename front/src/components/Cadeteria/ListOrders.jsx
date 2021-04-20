@@ -17,6 +17,7 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import { adminOrders, allOrders } from "../../state/orders";
 import socket from "../../utils/socket";
+import { fetchCad } from "../../state/cadeterias";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -53,6 +54,10 @@ const ListOrders = () => {
   socket.on("orden", (ordenes) => {
     dispatch(allOrders(cadeteria.id));
   });
+  
+  socket.on('cadeterias' ,() => {
+    dispatch(fetchCad());
+  })
 
   const selectStateOrders = (par) => {
     setSelected(par);

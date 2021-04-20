@@ -137,13 +137,14 @@ const Navbar = () => {
     </Menu>
   );
 
-
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
         <Toolbar>
           <Typography variant="h7" className={classes.titleWelcome}>
-            {user ? `Bienvenido ${user.firstName} ${user.lastName}` : null}
+            {user && user.authorized
+              ? `Bienvenido ${user.firstName} ${user.lastName}`
+              : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>
           <div className={classes.sectionDesktop}>

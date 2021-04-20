@@ -25,6 +25,8 @@ import { useSnackbar } from "notistack";
 import { sendmail } from "../state/sendmail";
 import messageHandler from "../utils/messagesHandler";
 
+import socket from '../utils/socket'
+
 const User = () => {
   const classes = useStyles();
 
@@ -63,13 +65,19 @@ const User = () => {
         const cad = cadeteriaEmail(payload.cadeteriumId)[0];
 
         messages.success("Usuario registrado");
-        return sendmail(email, name, cad) && history.push("/login-as/cadete");
+        socket.emit('cadetes');
+        return sendmail(email, name, cad) && history.push("/login-as/cadete") ;
       } else {
         payload.errors.map((e) => messages.error(e.message));
       }
+
+
     } catch (e) {
       messages.error("Hubo un problema con el registro");
     }
+
+
+
   };
 
   return (

@@ -49,6 +49,7 @@ export default function CustomList({ order }) {
   };
 
   const update = (orderNumber, status, cadeteId, orderId) => {
+
     let state;
     if (status === "En camino") {
       history.push(`/cadete/singleOrder/${orderId}/${orderNumber}`);
@@ -66,6 +67,8 @@ export default function CustomList({ order }) {
       });
     }
   };
+
+  
 
   return (
     <List

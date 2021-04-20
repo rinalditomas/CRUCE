@@ -20,6 +20,8 @@ import { sendmail } from "../../state/sendmail";
 import { sendmailToAdmin } from "../../state/sendmail";
 import messagesHandler from "../../utils/messagesHandler";
 
+import socket from '../../utils/socket'
+
 const RegisterCadeteria = () => {
   const messages = messagesHandler(useSnackbar());
 
@@ -45,6 +47,7 @@ const RegisterCadeteria = () => {
         const email = payload.email;
 
         messages.success("Cadeteria registrada correctamente");
+        socket.emit('cadeterias');
         sendmail(email, name);
         sendmailToAdmin(payload);
         history.push("/login-as/cadeteria");
