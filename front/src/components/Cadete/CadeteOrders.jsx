@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Paper, Grid, Container, Typography } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
-import { allOrders} from "../../state/orders";
+import { allOrders } from "../../state/orders";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
@@ -68,6 +68,7 @@ const CadeteOrders = () => {
     dispatch(allOrders(cadete.cadeteriumId));
   });
 
+  
   if (!cadete.authorized) {
     return (
       <div className={classes.root}>
