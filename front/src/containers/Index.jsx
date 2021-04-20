@@ -20,7 +20,7 @@ import ProfileCadete from "../components/Cadete/CadeteProfile";
 import DataLoading from "../components/Admin/ExcelUpload";
 import Login from "../components/Login";
 import ListCadeterias from "../components/Admin/ListCadeterias";
-import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
+import CadeteriaRequest from "../components/Admin/CadeteriaRequest";
 import SelectButtons from "../components/SelectButtons";
 import Navbar from "../components/Navbar";
 import RegisterCadeteria from "../components/Cadeteria/RegisterCadeteria";
@@ -31,6 +31,7 @@ import SimpleModal from "../components/ForgotPassword";
 import Metricas from "../components/Admin/Metrics";
 import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria";
 import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
+import Socketio from "../components/Socketio";
 
 
 ///styled
@@ -49,7 +50,11 @@ const Index = () => {
     <div>
       <Navbar />
       <Switch>
+
+      <Route exact path="/socket" component={Socketio} />
+
         <Route exact path="/login-as" component={SelectLogin} />
+       {/*  <Route exact path="/dashboard" component={dashboard} /> */}
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 

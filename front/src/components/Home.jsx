@@ -2,7 +2,6 @@ import React from "react";
 import Box from "@material-ui/core/Box";
 
 import useStyles from "../utils/stylesRegister";
-import Button from "@material-ui/core/Button";
 import { useHistory } from "react-router-dom";
 import { CustomButtonB } from "../utils/Buttons";
 

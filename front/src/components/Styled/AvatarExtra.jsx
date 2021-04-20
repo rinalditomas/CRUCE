@@ -32,13 +32,6 @@ const StyledBadge = withStyles((theme) => ({
   },
 }))(Badge);
 
-const SmallAvatar = withStyles((theme) => ({
-  root: {
-    width: 22,
-    height: 22,
-    border: `2px solid ${theme.palette.background.paper}`,
-  },
-}))(Avatar);
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -55,12 +48,12 @@ export default function ExtraAvatar({name}) {
   return (
     <div className={classes.root}>
       <StyledBadge
-      /* overlap="circle"
+       overlap="circle"
         anchorOrigin={{
           vertical: "bottom",
           horizontal: "right",
         }}
-        variant="dot" */
+        variant="dot" 
       >
         <Avatar
           alt="Cadete"

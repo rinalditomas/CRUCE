@@ -10,7 +10,7 @@ import { Container, Typography, Paper, Grid } from "@material-ui/core";
 
 import { makeStyles } from "@material-ui/core/styles";
 
-import { List, cadetes, cadeterias } from "./zList";
+import { List, cadetes } from "./zList";
 import NestedList from "./OrderList";
 import Requests from "./Requests";
 

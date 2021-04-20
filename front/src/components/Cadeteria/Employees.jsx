@@ -1,12 +1,10 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
-import BlockIcon from "@material-ui/icons/Block";
-import CheckIcon from "@material-ui/icons/Check";
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
 
@@ -18,6 +16,7 @@ import messagesHandler from "../../utils/messagesHandler";
 
 import { Chip } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
+import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -51,6 +50,8 @@ export default function CadeteriaRequest() {
         ? messages.success("Estado cambiado correctamente")
         : messages.error("Hubo un problema");
     });
+
+    socket.emit("cadete", {});
   };
 
   return (
@@ -71,7 +72,7 @@ export default function CadeteriaRequest() {
           <List dense={dense}>
             {cadetes &&
               cadetes.map((cadete) => {
-                if (cadete.cadeteriumId == cadeteria.id) {
+                if (cadete.cadeteriumId === cadeteria.id) {
                   return cadete.authorized === false &&
                     cadete.admin === false ? (
                     <ListItem key={cadete.id}>
@@ -85,7 +86,7 @@ export default function CadeteriaRequest() {
                             aria-label="delete"
                             onClick={() => {
                               const r = window.confirm("¿Autorizar la cadete?");
-                              if (r == true) return handleActive(cadete.id);
+                              if (r === true) return handleActive(cadete.id);
                               else return null;
                             }}
                           >

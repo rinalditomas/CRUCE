@@ -1,5 +1,4 @@
 import React from "react";
-import Button from "@material-ui/core/Button";
 import useStyles from "../utils/stylesRegister";
 import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
