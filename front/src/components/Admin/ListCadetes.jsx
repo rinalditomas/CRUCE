@@ -13,6 +13,9 @@ import { useDispatch, useSelector } from "react-redux";
 import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
 
+
+import socket from '../../utils/socket'
+
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -41,8 +44,14 @@ export default function ListCadetes() {
       res.payload
         ? alert("Estado cambiado correctamente")
         : alert("Hubo un problema");
-    });
+    })
+    socket.emit('cadetes')
   };
+
+  socket.on("cadetes", (cadetes) => {
+    dispatch(allCadetes());
+  });
+
 
   return (
     <>

@@ -26,8 +26,6 @@ app.use(express.urlencoded({ extended: true }));
 
 app.use("/api", routes);
 
-
-
 io.on("connection", (socket) => {
   let nombre;
 
@@ -35,6 +33,14 @@ io.on("connection", (socket) => {
     nombre = nomb;
     console.log(`SE CONECTO ${nombre}`);
   });
+
+  socket.on("cadetes", () => {
+    socket.broadcast.emit("cadetes", {
+      mensaje: "Se cambio el estado de un cadete",
+    });
+    console.log("Estados de cadetes");
+  });
+
   socket.on("ordenes", (ordenes) => {
     socket.broadcast.emit("ordenes", {
       mensaje: `El administrador cargó nuevas ordenes`,

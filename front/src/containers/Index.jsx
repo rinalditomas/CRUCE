@@ -20,7 +20,7 @@ import ProfileCadete from "../components/Cadete/CadeteProfile";
 import DataLoading from "../components/Admin/ExcelUpload";
 import Login from "../components/Login";
 import ListCadeterias from "../components/Admin/ListCadeterias";
-import CadeteriaRequest from "../components/Cadeteria/CadeteriaRequest";
+import CadeteriaRequest from "../components/Admin/CadeteriaRequest";
 import SelectButtons from "../components/SelectButtons";
 import Navbar from "../components/Navbar";
 import RegisterCadeteria from "../components/Cadeteria/RegisterCadeteria";

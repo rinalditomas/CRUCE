@@ -1,4 +1,4 @@
-import React, { useEffect} from "react";
+import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
 import ListItem from "@material-ui/core/ListItem";
@@ -16,6 +16,7 @@ import messagesHandler from "../../utils/messagesHandler";
 
 import { Chip } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
+import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -49,6 +50,8 @@ export default function CadeteriaRequest() {
         ? messages.success("Estado cambiado correctamente")
         : messages.error("Hubo un problema");
     });
+
+    socket.emit("cadete", {});
   };
 
   return (

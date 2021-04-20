@@ -16,6 +16,9 @@ import DoneIcon from "@material-ui/icons/Done";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
+import socket from '../../utils/socket'
+
+
 const useStyles = makeStyles((theme) => ({
   root: {
     width: "100%",
@@ -48,7 +51,13 @@ export default function ListEmployees() {
         ? messages.success("Estado cambiado correctamente")
         : messages.error("Hubo un problema");
     });
+    socket.emit('cadetes')
   };
+
+
+  socket.on("cadetes", (cadetes) => {
+    dispatch(allCadetes());
+  });
 
 
   return (
