@@ -112,11 +112,11 @@ const Navbar = () => {
       )}
       <MenuItem>
         <Link
-          to="/"
+          to="/cadete/profileCadete"
           style={{ color: "inherit" }}
           onClick={handleMobileMenuClose}
         >
-          <Button color="inherit">Home</Button>
+          <Button color="inherit">Perfil</Button>
         </Link>
       </MenuItem>
       {user && user.admin ? (

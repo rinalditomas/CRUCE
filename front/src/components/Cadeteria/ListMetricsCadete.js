@@ -1,5 +1,5 @@
 import React from 'react';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Table from '@material-ui/core/Table';
 import TableBody from '@material-ui/core/TableBody';
@@ -71,7 +71,7 @@ export default function Orders({metricas}) {
               <TableCell align='center'>{row.returned}</TableCell>
               <TableCell align='center'>{row.averageTimeDeli}</TableCell>
               <TableCell align='center' >{row.averageTimePick}</TableCell>
-             <Link to={`/admin/metricas/${row.id}/cadeteria`}>
+             <Link to={`/cadeteria/metrics/${row.id}/cadete`}>
 
                <TableCell align='center'>Click</TableCell>
 

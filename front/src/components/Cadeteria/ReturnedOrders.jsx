@@ -2,7 +2,7 @@ import React from 'react';
 import {Link} from 'react-router-dom';
 import { makeStyles } from '@material-ui/core/styles';
 import Typography from '@material-ui/core/Typography';
-import Title from './Title';
+
 
 function preventDefault(event) {
   event.preventDefault();
@@ -25,8 +25,8 @@ export default function OrdenesEntregadas({orders, id}) {
     
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-      {orders.map((order)=>{
-       if(order.cadeteriumId == id){
+      {orders && orders.map((order)=>{
+       if(order.userId == id){
         return order.status == "Devuelto a sucursal" ?  
         (<Link to={`/admin/metrics/SingleOrder/${order.id}/${order.orderNumber}`}>
             <h5>{order.orderNumber} - {((order.deliveryDate).toString()).slice(0,[10])}</h5>

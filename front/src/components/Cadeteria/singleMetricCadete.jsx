@@ -14,22 +14,23 @@ import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
+import {Link} from 'react-router-dom';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
 import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
-import OrdenesEntregadas from './OrdenesEntregadas';
-import OrdenesDevueltas from './OrdenesDevueltas';
-import TiempoPromedioEntrega from './TiempoPromedioEntrega';
-import Orders from './Orders';
-import Tabla from "./dashboard"
+// import { mainListItems, secondaryListItems } from './listItems';
+// import Chart from './Chart';
+import Deposits from '../Admin/Deposits';
+import DeliverOrders from '../Cadeteria/DeliverOrders';
+import OrdenesDevueltas from '../Admin/OrdenesDevueltas';
+import AverageTimeDeliver from '../Cadeteria/AverageTimeDeliver';
+import ReturnedOrders from '../Cadeteria/ReturnedOrders';
+// import Orders from '../Admin/Orders';
+// import Tabla from "../Admin/dashboard"
 import { useDispatch, useSelector } from 'react-redux';
 import { AllcadeteriasMetrics, allOrders, metricOrders } from '../../state/orders';
 import { allCadeterias } from '../../state/cadeterias';
-import Title from './Title';
+import Title from '../Admin/Title';
 
 
 
@@ -121,13 +122,16 @@ export default function SingleMetricsCadeteria({match}) {
   const dispatch = useDispatch() 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const metrics = useSelector((state) => state.orders.singleMetrics);
+//   const metrics = useSelector((state) => state.orders.singleMetrics);
   const orders = useSelector((state) => state.orders.orders);
+  const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
+  console.log("ACA ESTA EL MATCH",cadeteria)
 
   useEffect(() => {
-    dispatch(metricOrders({id:match.id,model:'cadeteria'}))
-    dispatch(allOrders(match.id))
-  }, []);
+    // dispatch(metricOrders({id:match.id,model:'cadete'}))
+    if(cadeteria.id)
+    dispatch(allOrders(cadeteria.id))
+  }, [cadeteria]);
 
   
 
@@ -155,25 +159,25 @@ export default function SingleMetricsCadeteria({match}) {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de NombreCADETERIA</h1>
+         <h1>Rendimiento de NombreCADETE</h1>
           <Grid container spacing={5}>
            
             <Grid item xs={12} md={4} lg={3}>
             <Title>Entregadas</Title>
               <Paper className={fixedHeightPaper}>
-                <OrdenesEntregadas orders={orders} id= {match.id} />
+                <DeliverOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
             <Title>Promedio de entrega</Title>
               <Paper className={fixedHeightPaper}>
-                <TiempoPromedioEntrega orders={orders} id= {match.id}/>
+                <AverageTimeDeliver orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
             <Title>Devueltas a Sucursal</Title>
               <Paper className={fixedHeightPaper}>
-                <OrdenesDevueltas orders={orders} id= {match.id} />
+                <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>

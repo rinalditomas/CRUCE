@@ -127,7 +127,7 @@ const ListOrders = () => {
                   return order.status === selected ? (
                     <ListItem key={order.id}>
                       <Link
-                        to={`/cadeteria/singleOrder/${order.id}/${order.orderNumber}`}
+                        to={`/cadeteria/metrics/singleOrder/${order.id}/${order.orderNumber}`}
                       >
                         <ListItemText
                           primary={

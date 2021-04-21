@@ -14,9 +14,9 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OrdenesEntregadas({orders}) {
+export default function OrdenesEntregadas({orders, id}) {
 
-    console.log(orders)
+    console.log(id)
 
   const classes = useStyles();
   return (
@@ -26,11 +26,15 @@ export default function OrdenesEntregadas({orders}) {
       </Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
       {orders.map((order)=>{
-            console.log(order)
-          return ( 
-          <Link to={`/admin/metrics/SingleOrder/${order.id}/${order.orderNumber}`}>
+       if(order.cadeteriumId == id){
+        return order.status == "Entregado" ?  
+        (<Link to={`/admin/metrics/SingleOrder/${order.id}/${order.orderNumber}`}>
             <h5>{order.orderNumber} - {((order.deliveryDate).toString()).slice(0,[10])}</h5>
-          </Link> )
+          </Link> ) : null
+       }
+        
+      
+     
         })}
       </Typography>
  
