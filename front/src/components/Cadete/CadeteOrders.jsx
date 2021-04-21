@@ -56,16 +56,15 @@ const CadeteOrders = () => {
   }, [cadete]);
 
   socket.on("cadetes", () => {
-    console.log("fetchme ========>");
     dispatch(fetchMe());
   });
 
   socket.on("orden", (mensaje) => {
     dispatch(allOrders(cadete.cadeteriumId)).then(() => {
-      if (cadete.firstName + " " + cadete.lastName !== mensaje.nombre) {
-        messages.info(`${mensaje.nombre} ha tomado un orden`);
-      } else {
-        messages.info(`has tomado un orden`);
+      if (typeof mensaje === "object") {
+        cadete.firstName + " " + cadete.lastName !== mensaje.nombre
+          ? messages.info(`${mensaje.nombre} ha tomado un orden`)
+          : messages.info(`has tomado un orden`);
       }
     });
   });
