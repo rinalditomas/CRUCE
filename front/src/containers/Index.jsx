@@ -31,6 +31,10 @@ import SimpleModal from "../components/ForgotPassword";
 import Metricas from "../components/Admin/Metrics";
 import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria";
 import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
+import dashboard from "../components/Admin/dashboard"
+import SingleMetricsCadeteria from "../components/Admin/SingleMetricsCadeteria";
+import CadeteriaMetrics from "../components/Cadeteria/CadeteriaMetrics";
+import SingleOrderAdmin from "../components/Admin/singleOrder"
 import Socketio from "../components/Socketio";
 
 
@@ -88,6 +92,15 @@ const Index = () => {
         <Route exact path="/admin/uploadorders" component={DataLoading} />
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
+        <Route
+          exact path="/admin/metrics/:id/cadeteria"
+          render={({ match }) => <SingleMetricsCadeteria match={match.params} />}
+        />
+         <Route
+          path="/admin/metrics/SingleOrder/:id/:orderNumber"
+          render={({ match }) => <SingleOrderAdmin match={match.params} />}
+        />
+        
         <Route exact path="/admin/metrics" component={Metricas} />
         <Route
           exact
@@ -100,7 +113,7 @@ const Index = () => {
         <Route exact path="/cadeteria/listOrders" component={ListOrders} />
         <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
-        <Route exact path="/cadeteria/metrics" />
+        <Route exact path="/cadeteria/metricas" component={CadeteriaMetrics}/>
 
         <Route exact path="/cadete" component={Cadete} />
         {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}

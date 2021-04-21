@@ -1,4 +1,3 @@
-
 const { Order, Product, User, Cadeteria } = require("../models");
 
 const metricsController = {
@@ -15,7 +14,7 @@ const metricsController = {
   },
 
   async cadeteReturnedTotal(req, res) {
-      const userId = req.params.id
+    const userId = req.params.id;
     try {
       const returned = await Order.findAndCountAll({
         where: { status: "Devuelto a sucursal", userId },
@@ -25,166 +24,195 @@ const metricsController = {
       res.status(500).send(e);
     }
   },
-  async averageTimeCadeteria(req,res){
-    console.log(req.params)
-    const id = req.params.id
+
+  /////promedio de una cadeteria en particular 
+  async averageTimeCadeteria(req, res) {
+    console.log(req.params);
+    const id = req.params.id;
     let orders;
 
     try {
-      const metricas={
-        deliver:0,
-        returned:0,
-        averageTimeDeli :0,
+      const metricas = {
+        deliver: 0,
+        returned: 0,
+        averageTimeDeli: 0,
         averageTimePick: 0,
+        name:"",
+      };
+      if (req.params.modelo === "cadeteria") {
+        orders = await Order.findAll({
+          where: {
+            cadeteriumId: id,
+          },include: Cadeteria
+        });
       }
-      if(req.params.modelo === "cadeteria"){
-         orders= await Order.findAll({where:{
-          cadeteriumId: id }})
+      if (req.params.modelo === "cadete") {
+        orders = await Order.findAll({
+          where: {
+            userId: id,
+          },include: User
+        });
       }
-      if(req.params.modelo === "cadete"){
-          orders= await Order.findAll({where:{
-          userId: id }})
-      }
-    
-     let contador = 0
-      orders.map((order)=>{
-        if(order.status == "Entregado"){
-          contador ++
+
+      let contador = 0;
+      orders.map((order) => {
+        if (order.status == "Entregado") {
+          contador++;
           metricas.deliver += 1;
-          metricas.averageTimeDeli += order.deliveryDate - order.pickUpDate
-          metricas.averageTimePick += order.pickUpDate - order.createdAt 
+          metricas.averageTimeDeli += order.deliveryDate - order.pickUpDate;
+          metricas.averageTimePick += order.pickUpDate - order.createdAt;
         }
-        if(order.status == "Devuelto a sucursal"){
+        if (order.status == "Devuelto a sucursal") {
           metricas.returned += 1;
         }
-      })
-      metricas.averageTimeDeli = metricas.averageTimeDeli / contador
-      metricas.averageTimePick = metricas.averageTimePick / contador
-    
-      res.status(200).send({metricas})
-     
+      });
+      metricas.averageTimeDeli = metricas.averageTimeDeli / contador;
+      metricas.averageTimePick = metricas.averageTimePick / contador;
+
+      res.status(200).send({ metricas });
     } catch (error) {
-      console.log(error)
+      console.log(error);
     }
   },
-//   avergateTimeAllCadeterias(req,res){
-   
-//     const  Allmetrics = []
-//     let metricas={
-//       id:0,
-//       deliver:0,
-//       returned:0,
-//       averageTimeDeli :0,
-//       averageTimePick: 0,}
 
-//       Cadeteria.findAll().then((cadeterias)=>{
-//         cadeterias.map((cadeteria)=>{
-         
-//           Order.findAll({
-//             where:{
-//               cadeteriumId:cadeteria.id
-//             }
-//           }).then((orders)=>{
-        
-//             metricas.id = cadeteria.id
-//             let contador = 0
-//             orders.map((order)=>{
-//                     if(order.status == "Entregado"){
-//                       contador ++
-//                       metricas.deliver += 1;
-//                       metricas.averageTimeDeli += order.deliveryDate - order.pickUpDate
-//                       metricas.averageTimePick += order.pickUpDate - order.createdAt 
-//                     }
-//                     if(order.status == "Devuelto a sucursal"){
-//                       metricas.returned += 1;
-//                     }
-//           })
-//           metricas.averageTimeDeli = metricas.averageTimeDeli / contador
-//           metricas.averageTimePick = metricas.averageTimePick / contador
-         
-//           if((metricas.deliver > 0) == true){
-//             Allmetrics.push(metricas)
-//           }
-
-//           console.log("ADENTRO DE ORDERS",Allmetrics)
-          
-//             metricas.id=0;
-//             metricas.deliver=0;
-//             metricas.returned=0;
-//             metricas.averageTimeDeli =0;
-//             metricas.averageTimePick= 0;
-       
-          
-//         })
-//         console.log("AFUERA DE ORDERS",Allmetrics)
-//       })
-      
-//   })
- 
-// }
-
-
-  async avergateTimeAllCadeterias(req,res){
-   
-    let orders;
-    let Allmetrics = []
-    let metricas ={
-      id:0,
-      deliver:0,
-      returned:0,
-      averageTimeDeli :0,
-      averageTimePick: 0,}
-      
-    let objet = "hola"
-  
-
-
+  //promedio de todas las cadeterias
+  async avergateTimeAllCadeterias(req, res) {
+    let metricas = {};
     try {
+      const ordenes = await Order.findAll({
+        where:{
+          status :[ "Entregado", "Devuelto a sucursal"]
+        },include:Cadeteria
+      });
 
-          const cadeterias = await Cadeteria.findAll()
-          const ordenes= await Order.findAll()
-  
-    cadeterias.map((cadeteria)=>{
-      
-      metricas.id = cadeteria.id
-      let contador = 0
-      ordenes.map((orden)=>{
-        if(cadeteria.id == orden.cadeteriumId){
-          if(orden.status == "Entregado"){
-            
-                contador ++
-                metricas.deliver += 1;
-                metricas.averageTimeDeli += orden.deliveryDate - orden.pickUpDate
-                metricas.averageTimePick += orden.pickUpDate - orden.createdAt 
-              }
-              if(orden.status == "Devuelto a sucursal"){
-                metricas.returned += 1;
-              }
-        }
-      })
-      
-      metricas.averageTimeDeli = metricas.averageTimeDeli / contador
-      metricas.averageTimePick = metricas.averageTimePick / contador
-
-      Allmetrics.push(metricas)
+      ordenes.map((orden) => {
        
-      // metricas.id=0;
-      // metricas.deliver=0;
-      // metricas.returned=0;
-      // metricas.averageTimeDeli =0;
-      // metricas.averageTimePick= 0;
-
-    })
+          if (metricas[orden.cadeteriumId]) {
+            if (orden.status == "Entregado") {
+              metricas[orden.cadeteriumId].contador += 1;
+              metricas[orden.cadeteriumId].deliver += 1;
+              metricas[orden.cadeteriumId].averageTimeDeli +=
+                orden.deliveryDate - orden.pickUpDate;
+              metricas[orden.cadeteriumId].averageTimePick +=
+                orden.pickUpDate - orden.createdAt;
+            }
+            if (orden.status == "Devuelto a sucursal") {
+              metricas[orden.cadeteriumId].returned += 1;
+            }
+          } else {
+           
+            if (orden.status == "Entregado") {
+              metricas[orden.cadeteriumId] = {
+                contador: 1,
+                deliver: 1,
+                returned: 0,
+                averageTimeDeli: orden.deliveryDate - orden.pickUpDate,
+                averageTimePick: orden.pickUpDate - orden.createdAt,
+                name: orden.cadeterium.nameCompany
+              };
+            }
+            if (orden.status == "Devuelto a sucursal") {
+              metricas[orden.cadeteriumId] = {
+                contador: 0,
+                deliver: 0,
+                returned: 1,
+                averageTimeDeli: 0,
+                averageTimePick: 0,
+                name: orden.cadeterium.nameCompany
   
-    console.log(Allmetrics)
-   
+              };
+            }
+          }
+       
+        
+      });
+     
+      for (const id in metricas) {
+        metricas[id].averageTimeDeli /= metricas[id].contador
+        metricas[id].averageTimePick /= metricas[id].contador
+      }
+    
+      console.log(metricas)
+      res.send(metricas)
 
-    }catch(error){
-      
-          console.log(error)
+    } catch (error) {
+      console.log(error);
     }
-  }
+  },
+/// Metricas de todos los cadetes
+  async avergateTimeAllCadetes(req, res) {
+    let metricas = {};
+    try {
+      const ordenes = await Order.findAll({
+        where:{
+          status :[ "Entregado", "Devuelto a sucursal"]
+        },include:User
+      });
+     
+
+      ordenes.map((orden) => {
+       
+          if (metricas[orden.userId]) {
+            if (orden.status == "Entregado") {
+              metricas[orden.userId].contador += 1;
+              metricas[orden.userId].deliver += 1;
+              metricas[orden.userId].averageTimeDeli +=
+                orden.deliveryDate - orden.pickUpDate;
+              metricas[orden.userId].averageTimePick +=
+                orden.pickUpDate - orden.createdAt;
+            }
+            if (orden.status == "Devuelto a sucursal") {
+              metricas[orden.userId].returned += 1;
+            }
+          } else {
+           
+            if (orden.status == "Entregado") {
+              metricas[orden.userId] = {
+                contador: 1,
+                deliver: 1,
+                returned: 0,
+                averageTimeDeli: orden.deliveryDate - orden.pickUpDate,
+                averageTimePick: orden.pickUpDate - orden.createdAt,
+                name: orden.user.firstName ,
+                lastName: orden.user.lastName
+              };
+            }
+            if (orden.status == "Devuelto a sucursal") {
+              metricas[orden.userId] = {
+                contador: 0,
+                deliver: 0,
+                returned: 1,
+                averageTimeDeli: 0,
+                averageTimePick: 0,
+                name: orden.user.firstName,
+                lastName: orden.user.lastName
+                
   
+              };
+            }
+          }
+       
+        
+      });
+     
+      for (const id in metricas) {
+        metricas[id].averageTimeDeli /= metricas[id].contador
+        metricas[id].averageTimePick /= metricas[id].contador
+      }
+    console.log("---------------------------------")
+      console.log(metricas)
+      console.log("---------------------------------")
+      res.send(metricas)
+
+    } catch (error) {
+      console.log(error);
+    }
+  },
+
+
+
+
+
 };
 
 module.exports = metricsController;

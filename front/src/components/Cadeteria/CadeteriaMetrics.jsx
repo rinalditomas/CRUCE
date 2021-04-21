@@ -1,19 +1,30 @@
 import React, { useEffect } from 'react';
+import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-
+import Drawer from '@material-ui/core/Drawer';
 import Box from '@material-ui/core/Box';
-
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
 import Typography from '@material-ui/core/Typography';
-
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
 import Link from '@material-ui/core/Link';
-import Orders from './Orders';
-import Tabla from "./dashboard"
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import NotificationsIcon from '@material-ui/icons/Notifications';
+import { mainListItems, secondaryListItems } from '../Admin/listItems';
+
+
+import ListMetricsCadete from './ListMetricsCadete';
+import Chart from "./Chart"
 import { useDispatch, useSelector } from 'react-redux';
-import { AllcadeteriasMetrics, metricOrders } from '../../state/orders';
+import { AllcadeteriasMetrics, AllcadetesMetrics, metricOrders } from '../../state/orders';
 import { allCadeterias } from '../../state/cadeterias';
 
 
@@ -114,22 +125,31 @@ const useStyles = makeStyles((theme) => ({
 export default function Dashboard() {
   const dispatch = useDispatch() 
   const classes = useStyles();
+  const [open, setOpen] = React.useState(true);
   const metrics = useSelector((state) => state.orders.metrics);
   const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
 
+
+
   useEffect(() => {
-    dispatch(AllcadeteriasMetrics());
-    dispatch(allCadeterias());
+    dispatch(AllcadetesMetrics());
   }, []);
   
   console.log("aca estoy en metricas, no en el dashboard", metrics)
 
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
+  const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div>
-       <h1>Rendimiento de cadeterias</h1>
+       <h1>Rendimiento de Cadetes</h1>
     <div className = "tabla">
-      <Tabla metricas = {metrics} />
+      <Chart metricas = {metrics} />
     </div>
    
    
@@ -159,11 +179,10 @@ export default function Dashboard() {
             {/* Recent Orders */}
             <Grid item xs={12}>
               <Paper className={classes.paper}>
-                <Orders metricas = {metrics}/>
+                <ListMetricsCadete metricas = {metrics}/>
               </Paper>
             </Grid>
           </Grid>
-        
         </Container>
       </main>
     </div>
