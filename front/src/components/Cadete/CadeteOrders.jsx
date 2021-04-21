@@ -59,12 +59,12 @@ const CadeteOrders = () => {
     dispatch(fetchMe());
   });
 
-  socket.on("orden", (mensaje) => {
+  socket.on("orden", (orden) => {
     dispatch(allOrders(cadete.cadeteriumId)).then(() => {
-      if (typeof mensaje === "object") {
-        cadete.firstName + " " + cadete.lastName !== mensaje.nombre
-          ? messages.info(`${mensaje.nombre} ha tomado un orden`)
-          : messages.info(`has tomado un orden`);
+      if (typeof orden === "object" && orden.status === "En camino") {
+        cadete.firstName + " " + cadete.lastName !== orden.nombre
+          ? messages.info(`${orden.nombre} ha tomado un orden`)
+          : messages.info(`Has tomado un orden`);
       }
     });
   });

@@ -56,9 +56,11 @@ io.on("connection", (socket) => {
   socket.on("orden", (orden) => {
     socket.broadcast.emit("orden", {
       nombre: nombre,
+      orden: orden,
     });
     socket.emit("orden", {
       nombre: nombre,
+      orden: orden,
     });
   });
 
