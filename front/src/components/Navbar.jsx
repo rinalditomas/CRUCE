@@ -159,9 +159,17 @@ const Navbar = () => {
               </>
             ) : (
               <>
-                <Button color="inherit" onClick={logoutUser}>
-                  Logout
-                </Button>
+                <div>
+                  <IconButton
+                    aria-label="show more"
+                    aria-controls={mobileMenuId}
+                    aria-haspopup="true"
+                    onClick={handleMobileMenuOpen}
+                    color="inherit"
+                  >
+                    {user || cadeteria ? <AccountCircle /> : <MoreIcon />}
+                  </IconButton>
+                </div>
               </>
             )}
 

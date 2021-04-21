@@ -15,12 +15,7 @@ import messagesHandler from "../../utils/messagesHandler";
 
 import "leaflet/dist/leaflet.css";
 
-import {
-  MapContainer,
-  TileLayer,
-  Circle,
-  Tooltip,
-} from "react-leaflet";
+import { MapContainer, TileLayer, Circle, Tooltip } from "react-leaflet";
 import socket from "../../utils/socket";
 import { useSnackbar } from "notistack";
 
@@ -41,7 +36,7 @@ export default function SingleOrder({ match }) {
   const [products, setProducts] = useState([]);
   const order = useSelector((state) => state.orders.singleOrder);
 
-  const cadete = useSelector((state) => state.users.user);
+  const cadete = useSelector((state) => state.users.user); 
   const [coord, setCoord] = useState(/*[-26.8198, -65.2169]*/);
   const [carga, setCarga] = useState(false);
   const messages = messagesHandler(useSnackbar());
@@ -70,12 +65,12 @@ export default function SingleOrder({ match }) {
     });
   }, []);
 
-  socket.on("orden", (mensaje) => {
+  socket.on("orden", (orden) => {
     dispatch(singleOrder(match.id)).then(() => {
-      if (cadete.firstName + " " + cadete.lastName !== mensaje.nombre) {
-        messages.info(`${mensaje.nombre} ha tomado un orden`);
-      } else {
-        messages.info(`has tomado un orden`);
+      if (typeof orden === "object" && orden.status === "En camino") {
+        cadete.firstName + " " + cadete.lastName !== orden.nombre
+          ? messages.info(`${orden.nombre} ha tomado un orden`)
+          : messages.info(`Has tomado un orden *`);
       }
     });
   });
@@ -95,6 +90,9 @@ export default function SingleOrder({ match }) {
         socket.emit("orden", { orden: order });
       });
   };
+
+  console.log('usuario ====>', cadete)
+  
 
   return (
     <>
@@ -144,7 +142,7 @@ export default function SingleOrder({ match }) {
             >
               TOMAR
             </Button>
-          ) : order.status === "En camino" ? (
+          ) : order.status === "En camino" && order.userId === cadete.id ? (
             <>
               <Button
                 size="small"
