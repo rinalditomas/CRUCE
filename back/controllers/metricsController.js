@@ -78,7 +78,6 @@ const metricsController = {
 
   //promedio de todas las cadeterias
   async avergateTimeAllCadeterias(req, res) {
-    console.log('asdasdasdasdas')
     let metricas = {};
     try {
       const ordenes = await Order.findAll({
@@ -134,8 +133,6 @@ const metricsController = {
         metricas[id].averageTimeDeli /= metricas[id].contador
         metricas[id].averageTimePick /= metricas[id].contador
       }
-    
-      console.log(metricas)
       res.send(metricas)
 
     } catch (error) {
@@ -203,18 +200,12 @@ const metricsController = {
         metricas[id].averageTimeDeli /= metricas[id].contador
         metricas[id].averageTimePick /= metricas[id].contador
       }
-    console.log("---------------------------------")
-      console.log(metricas)
-      console.log("---------------------------------")
       res.send(metricas)
 
     } catch (error) {
       console.log(error);
     }
   },
-
-
-
 
 
 };

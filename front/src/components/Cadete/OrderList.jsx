@@ -65,11 +65,12 @@ export default function CustomList({ order }) {
             state,
             cadeteId,
           })
-        ).then(({payload}) => {
-          console.log("-----", payload);
-          if (typeof payload === "object")
-            socket.emit("orden", { orden: payload });
-          else {
+        ).then(({ payload }) => {
+          console.log("-----*", payload);
+          if (typeof payload === 'object') socket.emit("orden", { orden: payload });
+          if (payload.status === "En camino")
+            return messages.info("Has tomado una orden");
+          else if (typeof payload === "string") {
             return messages.info(payload);
           }
         });
