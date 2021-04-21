@@ -83,7 +83,7 @@ const updateOrder = (orders, newOrder) => {
 const initialState = {
   orders: [],
   singleOrder: {},
-  singleMetrics:{}
+  singleMetrics:{},
   metrics: {},
   orderError: "",
 };
@@ -117,6 +117,7 @@ const ordersReducer = createReducer(initialState, {
     return { ...state, orders: action.payload };
   },
   [AllcadeteriasMetrics.fulfilled]: (state, action) => {
+    console.log(action.payload, 'asdasdasdasads')
     return { ...state, metrics: action.payload };
   },
   [AllcadetesMetrics.fulfilled]: (state, action) => {

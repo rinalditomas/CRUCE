@@ -68,7 +68,7 @@ const NewOrderController = {
     }
   },
 
-  /* changeStateOrders(req, res) {
+  changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId;
@@ -92,7 +92,7 @@ const NewOrderController = {
                     pickUpDate: Date.now(),
                   })
                 )
-                .then((order) => res.send(order));
+               
             }
             if (order.status === "En camino") {
               order
@@ -100,15 +100,15 @@ const NewOrderController = {
                   status: status,
                   deliveryDate: Date.now(),
                 })
-                .then((order) => res.send(order));
+               
             }
           });
         });
       })
       .catch((err) => res.send(err));
   },
- */
 
+/* 
   async changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
@@ -141,7 +141,8 @@ const NewOrderController = {
     } catch (e) {
       res.send(e);
     }
-  },
+  }, */
+
   async ordersFromAdmin(req, res) {
     try {
       const orders = await Order.findAll({});
