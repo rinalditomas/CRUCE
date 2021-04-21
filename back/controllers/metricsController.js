@@ -37,19 +37,20 @@ const metricsController = {
         returned: 0,
         averageTimeDeli: 0,
         averageTimePick: 0,
+        name:"",
       };
       if (req.params.modelo === "cadeteria") {
         orders = await Order.findAll({
           where: {
             cadeteriumId: id,
-          },
+          },include: Cadeteria
         });
       }
       if (req.params.modelo === "cadete") {
         orders = await Order.findAll({
           where: {
             userId: id,
-          },
+          },include: User
         });
       }
 
