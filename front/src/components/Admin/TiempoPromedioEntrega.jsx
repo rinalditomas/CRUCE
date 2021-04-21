@@ -27,11 +27,9 @@ export default function OrdenesEntregadas({orders, id}) {
       <Typography color="textSecondary" className={classes.depositContext}>
       {orders.map((order)=>{
        if(order.cadeteriumId == id){
-        return order.status == "Devuelto a sucursal" ?  
-        (<Link to={`/admin/metrics/SingleOrder/${order.id}/${order.orderNumber}`}>
-            <h5>{order.orderNumber} - {((order.deliveryDate).toString()).slice(0,[10])}</h5>
-          </Link> ) : null
-       }
+        return order.status == "Entregado" ?  
+        (<h5>{order.inTransit}</h5>) : null
+        }
         })}
       </Typography>
  
