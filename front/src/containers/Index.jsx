@@ -129,6 +129,10 @@ const Index = () => {
         {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
         <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
+          path="/cadete/singleOrder/:id/:orderNumber"
+          render={({ match }) => <SingleOrder match={match.params} />}
+        />
+        <Route
           path="/cadeteria/metrics/singleOrder/:id/:orderNumber"
           render={({ match }) => <SingleOrderCadeteria match={match.params} />}
         />

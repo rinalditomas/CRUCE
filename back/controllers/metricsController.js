@@ -27,6 +27,7 @@ const metricsController = {
 
   /////promedio de una cadeteria en particular 
   async averageTimeCadeteria(req, res) {
+  
     console.log(req.params);
     const id = req.params.id;
     let orders;
@@ -77,6 +78,7 @@ const metricsController = {
 
   //promedio de todas las cadeterias
   async avergateTimeAllCadeterias(req, res) {
+    console.log('asdasdasdasdas')
     let metricas = {};
     try {
       const ordenes = await Order.findAll({
@@ -85,6 +87,7 @@ const metricsController = {
         },include:Cadeteria
       });
 
+      console.log(ordenes )
       ordenes.map((orden) => {
        
           if (metricas[orden.cadeteriumId]) {
@@ -141,6 +144,7 @@ const metricsController = {
   },
 /// Metricas de todos los cadetes
   async avergateTimeAllCadetes(req, res) {
+    console.log('test metricas ====>')
     let metricas = {};
     try {
       const ordenes = await Order.findAll({
