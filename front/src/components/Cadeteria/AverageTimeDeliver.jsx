@@ -16,17 +16,15 @@ const useStyles = makeStyles({
 
 export default function OrdenesEntregadas({orders, id}) {
 
-  let conversor = (time) => {
-    let hr = (time / 3600000) | 0;
-    if (hr / 10 < 1) hr = "0" + hr;
-
-    let min
-    if (time%3600000==0) min = "00"
-    else(min=(time%3600000/6000).toFixed(0))
+  let conversor = (tiempo) => {
+    let enMinutos=  (tiempo/1000)/60
+    let hs= enMinutos/60
+    let minutos=enMinutos%60
    
    
-    return hr+"hr : "+min+"min"
+    return Math.floor(hs)+" Hs : "+Math.round(minutos)+" Min"
   }
+
   
 
   const classes = useStyles();
@@ -39,7 +37,7 @@ export default function OrdenesEntregadas({orders, id}) {
       {orders && orders.map((order)=>{
        if(order.userId == id){
         return order.status == "Entregado" ?  
-        (<h5>{order.orderNumber} _____ {conversor(18700000)}</h5>) : null
+        (<h5>{order.orderNumber} _____ {conversor(order.inTransit)}</h5>) : null
         }
         })}
       </Typography>
