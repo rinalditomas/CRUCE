@@ -35,6 +35,8 @@ const drawerWidth = 240;
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
+    width: "100%",
+    margin: "auto",
   },
   toolbar: {
     paddingRight: 24, // keep right padding when drawer closed
@@ -127,12 +129,16 @@ export default function Dashboard() {
 
   return (
     <div>
-       <h1>Rendimiento de cadeterias</h1>
-    <div className = "tabla">
-      <Tabla metricas = {metrics} />
-    </div>
+       <h1>Rendimiento de Cadeterias</h1>
+
+
+    <Container maxWidth="lg" className={classes.container}>
+
+          <div className = "tabla">
+            <Tabla metricas = {metrics} />
+          </div>
    
-   
+    </Container>
     <div className={classes.root}>
       <CssBaseline />
     
@@ -140,30 +146,17 @@ export default function Dashboard() {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         
+       
         <Container maxWidth="lg" className={classes.container}>
        
-        
-          <Grid container spacing={5}>
-            {/* Chart */}
-            {/* <Grid item xs={12} md={15} lg={16}>
-              <Paper className={fixedHeightPaper}>
-                <Chart />
-              </Paper>
-            </Grid> */}
-            {/* Recent Deposits */}
-            {/* <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid> */}
-            {/* Recent Orders */}
-            <Grid item xs={12}>
+   
+            <Grid item xs={12} >
               <Paper className={classes.paper}>
                 <Orders metricas = {metrics}/>
-              </Paper>
-            </Grid>
+            </Paper>
+     
           </Grid>
-        
+         
         </Container>
       </main>
     </div>

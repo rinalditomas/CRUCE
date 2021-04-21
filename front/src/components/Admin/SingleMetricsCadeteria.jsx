@@ -122,14 +122,16 @@ export default function SingleMetricsCadeteria({match}) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
   const metrics = useSelector((state) => state.orders.singleMetrics);
+  const metric2 = useSelector((state) => state.orders.metrics);
   const orders = useSelector((state) => state.orders.orders);
 
   useEffect(() => {
     dispatch(metricOrders({id:match.id,model:'cadeteria'}))
+    dispatch(AllcadeteriasMetrics())
     dispatch(allOrders(match.id))
   }, []);
 
-  
+
 
   const handleDrawerOpen = () => {
     setOpen(true);
@@ -155,36 +157,29 @@ export default function SingleMetricsCadeteria({match}) {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de NombreCADETERIA</h1>
+         <h1>Rendimiento de {match.namecadeteria} </h1>
           <Grid container spacing={5}>
            
-            <Grid item xs={12} md={4} lg={3}>
-            <Title>Entregadas</Title>
+            <Grid item xs={12} md={3} lg={4}>
+            <Title>Ordenes Entregadas</Title>
               <Paper className={fixedHeightPaper}>
                 <OrdenesEntregadas orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de entrega</Title>
+            <Grid item xs={12} md={3} lg={4}>
+            <Title>Promedio de Entrega</Title>
               <Paper className={fixedHeightPaper}>
                 <TiempoPromedioEntrega orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={3} lg={4}>
             <Title>Devueltas a Sucursal</Title>
               <Paper className={fixedHeightPaper}>
                 <OrdenesDevueltas orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
             </Grid>
-          </Grid>
-          <Box pt={4}>
-
-          </Box>
+          
         </Container>
       </main>
     </div>

@@ -159,36 +159,30 @@ export default function SingleMetricsCadeteria({match}) {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de NombreCADETE</h1>
+         <h1>Rendimiento de {match.namecadete}</h1>
           <Grid container spacing={5}>
            
-            <Grid item xs={12} md={4} lg={3}>
-            <Title>Entregadas</Title>
+            <Grid item xs={12} md={3} lg={4}>
+            <Title>Ordenes Entregadas</Title>
               <Paper className={fixedHeightPaper}>
                 <DeliverOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de entrega</Title>
+            <Grid item xs={12} md={3} lg={4}>
+            <Title>Promedio de Entrega</Title>
               <Paper className={fixedHeightPaper}>
                 <AverageTimeDeliver orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+            <Grid item xs={12} md={3} lg={4}>
             <Title>Devueltas a Sucursal</Title>
               <Paper className={fixedHeightPaper}>
                 <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
-              <Paper className={fixedHeightPaper}>
-                <Deposits />
-              </Paper>
-            </Grid>
+           
           </Grid>
-          <Box pt={4}>
-
-          </Box>
+          
         </Container>
       </main>
     </div>
