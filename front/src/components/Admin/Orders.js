@@ -41,22 +41,17 @@ export default function Orders({metricas}) {
   console.log(rows)
 
 
-
-
-
-
- 
   console.log("ACA ESTAN LAS METRICAS EN",metricas)
   const classes = useStyles();
   return (
     <React.Fragment>
       <Title>Detalle Cadeterias</Title>
-      <Table size="small">
+      <Table size="medium"  >
         <TableHead>
           <TableRow>
             <TableCell>Cadeteria</TableCell>
-            <TableCell>NºO Entregadas</TableCell>
-            <TableCell>NºO Devueltas Sucursal</TableCell>
+            <TableCell>Nº Entregadas</TableCell>
+            <TableCell>Nº Devueltas Sucursal</TableCell>
             <TableCell>Tiempo Entrega (H)</TableCell>
             <TableCell >Tiempo Espera (H)</TableCell>
             <TableCell >Detalle</TableCell>
@@ -66,19 +61,16 @@ export default function Orders({metricas}) {
           {rows.map((row) => 
           {console.log(row)
             return(
-            <TableRow key={row.id}>
+            <TableRow key={row.id}  >
               <TableCell align='left'>{row.name}</TableCell>
               <TableCell align='center'>{row.deliver}</TableCell>
               <TableCell align='center'>{row.returned}</TableCell>
               <TableCell align='center'>{row.averageTimeDeli}</TableCell>
               <TableCell align='right' >{row.averageTimePick}</TableCell>
              <Link to={`/admin/metrics/${row.id}/cadeteria/${row.name}`}>
-
                <TableCell align='center'>Click</TableCell>
-
             </Link>
-            </TableRow>
-           
+            </TableRow>           
           )})}
         </TableBody>
       </Table>

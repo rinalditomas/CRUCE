@@ -17,14 +17,18 @@ const Main = () => {
           justifyContent="center"
           flexDirection="column"
           style={{ marginTop: "4rem" }}
-          bgcolor="#f6f6f6"
+          bgcolor='green'
+          width={300}
+          ali
         >
           <Box
             display="flex"
+            alignSelf="center"
             justifyContent="center"
             m={1}
             p={1}
             bgcolor="#f6f6f6"
+            width={230}
           >
             <Box p={1} bgcolor="#f6f6f6">
               <Box display="flex" justifyContent="center">
@@ -48,7 +52,9 @@ const Main = () => {
 
           <Box
             display="flex"
+            alignSelf="center"
             justifyContent="center"
+            width={230}
             m={1}
             p={1}
             bgcolor="#f6f6f6"
