@@ -8,6 +8,7 @@ import TableHead from '@material-ui/core/TableHead';
 import TableRow from '@material-ui/core/TableRow';
 import Title from './Title';
 import { useSelector } from 'react-redux';
+import { Grid } from '@material-ui/core';
 
 // Generate Order Data
 
@@ -54,10 +55,10 @@ export default function Orders({metricas}) {
         <TableHead>
           <TableRow>
             <TableCell>Cadeteria</TableCell>
-            <TableCell>Nº Ordenes Entregadas</TableCell>
-            <TableCell>Nº Ordenes Devueltas a Sucursal</TableCell>
-            <TableCell>Promedio de Entrega (horas)</TableCell>
-            <TableCell >Promedio de Espera(horas)</TableCell>
+            <TableCell>NºO Entregadas</TableCell>
+            <TableCell>NºO Devueltas Sucursal</TableCell>
+            <TableCell>Tiempo Entrega (H)</TableCell>
+            <TableCell >Tiempo Espera (H)</TableCell>
             <TableCell >Detalle</TableCell>
           </TableRow>
         </TableHead>
@@ -70,8 +71,8 @@ export default function Orders({metricas}) {
               <TableCell align='center'>{row.deliver}</TableCell>
               <TableCell align='center'>{row.returned}</TableCell>
               <TableCell align='center'>{row.averageTimeDeli}</TableCell>
-              <TableCell align='center' >{row.averageTimePick}</TableCell>
-             <Link to={`/admin/metrics/${row.id}/cadeteria`}>
+              <TableCell align='right' >{row.averageTimePick}</TableCell>
+             <Link to={`/admin/metrics/${row.id}/cadeteria/${row.name}`}>
 
                <TableCell align='center'>Click</TableCell>
 
@@ -81,7 +82,6 @@ export default function Orders({metricas}) {
           )})}
         </TableBody>
       </Table>
-    
     </React.Fragment>
   );
 }

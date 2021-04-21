@@ -54,10 +54,10 @@ export default function Orders({metricas}) {
         <TableHead>
           <TableRow>
             <TableCell>Cadete</TableCell>
-            <TableCell>Nº Ordenes Entregadas</TableCell>
-            <TableCell>Nº Ordenes Devueltas a Sucursal</TableCell>
-            <TableCell>Promedio de Entrega (horas)</TableCell>
-            <TableCell >Promedio de Espera(horas)</TableCell>
+            <TableCell>NºO Entregadas</TableCell>
+            <TableCell>NºO Devueltas Sucursal</TableCell>
+            <TableCell>Tiempo Entrega (H)</TableCell>
+            <TableCell >Tiempo Espera (H)</TableCell>
             <TableCell >Detalle</TableCell>
           </TableRow>
         </TableHead>
@@ -71,7 +71,7 @@ export default function Orders({metricas}) {
               <TableCell align='center'>{row.returned}</TableCell>
               <TableCell align='center'>{row.averageTimeDeli}</TableCell>
               <TableCell align='center' >{row.averageTimePick}</TableCell>
-             <Link to={`/cadeteria/metrics/${row.id}/cadete`}>
+             <Link to={`/cadeteria/metrics/${row.id}/cadete/${row.name}`}>
 
                <TableCell align='center'>Click</TableCell>
 

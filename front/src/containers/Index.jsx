@@ -95,7 +95,7 @@ const Index = () => {
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
         <Route
-          exact path="/admin/metrics/:id/cadeteria"
+          exact path="/admin/metrics/:id/cadeteria/:namecadeteria"
           render={({ match }) => <SingleMetricsCadeteria match={match.params} />}
         />
          <Route
@@ -117,7 +117,7 @@ const Index = () => {
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
         <Route exact path="/cadeteria/metricas" component={CadeteriaMetrics}/>
         <Route
-          exact path="/cadeteria/metrics/:id/cadete"
+          exact path="/cadeteria/metrics/:id/cadete/:namecadete"
           render={({ match }) => <SingleMetricsCadete match={match.params} />}
         />
         <Route
