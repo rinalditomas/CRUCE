@@ -181,13 +181,14 @@ export default function SingleMetricsCadeteria({match}) {
                 <AveragePendingTime orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={4} lg={3}>
+       
+            <Grid item xs={12} md={4} lg={3} >
             <Title>Ordenes Devueltas a Sucursal</Title>
               <Paper className={fixedHeightPaper}>
                 <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-           
+     
           </Grid>
           
         </Container>
