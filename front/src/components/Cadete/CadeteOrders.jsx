@@ -115,7 +115,12 @@ const CadeteOrders = () => {
         <Typography
           variant="h4"
           key="1"
-          style={{ margin: 20, padding: 20, textAlign: "center" }}
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
         >
           LISTA DE ORDENES
         </Typography>

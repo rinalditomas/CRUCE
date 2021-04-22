@@ -13,6 +13,7 @@ import { AllcadeteriasMetrics, allOrders, metricOrders } from '../../state/order
 import Title from './Title';
 
 import PromedioDeEspera from '../Admin/PromedioDeEspera'
+import { Typography } from '@material-ui/core';
 
 
 
@@ -119,28 +120,41 @@ export default function SingleMetricsCadeteria({match}) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de {match.namecadeteria} </h1>
+      
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >Rendimiento de {match.namecadeteria}     
+         </Typography>
+    
           <Grid container spacing={5}>
            
-            <Grid item xs={12} md={3} lg={4}>
+            <Grid item xs={12} md={4} lg={3}>
             <Title>Ordenes Entregadas</Title>
               <Paper className={fixedHeightPaper}>
                 <OrdenesEntregadas orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
+            <Grid item xs={12} md={4} lg={3}>
             <Title>Promedio de Entrega</Title>
               <Paper className={fixedHeightPaper}>
                 <TiempoPromedioEntrega orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
+            <Grid item xs={12} md={4} lg={3}>
             <Title>Promedio de Espera</Title>
               <Paper className={fixedHeightPaper}>
                 <PromedioDeEspera orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
+            <Grid item xs={12} md={4} lg={3}>
             <Title>Devueltas a Sucursal</Title>
               <Paper className={fixedHeightPaper}>
                 <OrdenesDevueltas orders={orders} id= {match.id} />

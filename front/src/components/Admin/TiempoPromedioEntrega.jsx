@@ -27,8 +27,8 @@ export default function OrdenesEntregadas({ orders, id }) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Typography component="p" variant="h4"></Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
+    
+     
         {orders.map((order) => {
           if (order.cadeteriumId == id) {
             return order.status == "Entregado" ? (
@@ -47,7 +47,7 @@ export default function OrdenesEntregadas({ orders, id }) {
             ) : null;
           }
         })}
-      </Typography>
+
     </React.Fragment>
   );
 }

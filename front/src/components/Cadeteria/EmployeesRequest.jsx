@@ -14,7 +14,7 @@ import { admitCadete, allCadetes } from "../../state/users";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
-import { Chip } from "@material-ui/core";
+import { Chip, CssBaseline, Typography } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 import socket from "../../utils/socket";
 
@@ -61,16 +61,23 @@ export default function CadeteriaRequest() {
   return (
     <>
       <div className={classes.root}>
+        <CssBaseline />
         <div>
-          <h1 className="titulo">Solicitudes de cadetes</h1>
-          <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <IconButton edge="end" aria-label="delete" className="icono">
-              <GroupAddIcon fontSize="large" />
-            </IconButton>
-          </Link>
+          
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "left",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >SOLICITUDES CADETES     
+         </Typography>
+
+     
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
