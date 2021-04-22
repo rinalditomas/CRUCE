@@ -73,7 +73,7 @@ export default function CustomList({ order }) {
             return messages.info(payload);
           }
         });
-      }, 2000);
+      }, 1000);
     }
   };
 

@@ -25,7 +25,7 @@ import { useSnackbar } from "notistack";
 import { sendmail } from "../state/sendmail";
 import messageHandler from "../utils/messagesHandler";
 
-import socket from '../utils/socket'
+import socket from "../utils/socket";
 
 const User = () => {
   const classes = useStyles();
@@ -65,19 +65,14 @@ const User = () => {
         const cad = cadeteriaEmail(payload.cadeteriumId)[0];
 
         messages.success("Usuario registrado");
-        socket.emit('cadetes');
-        return sendmail(email, name, cad) && history.push("/login-as/cadete") ;
+        socket.emit("cadetes");
+        return sendmail(email, name, cad) && history.push("/login-as/cadete");
       } else {
         payload.errors.map((e) => messages.error(e.message));
       }
-
-
     } catch (e) {
       messages.error("Hubo un problema con el registro");
     }
-
-
-
   };
 
   return (
@@ -86,12 +81,10 @@ const User = () => {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Registro de Cadete
-            </Typography>
+            <Avatar
+              src={process.env.PUBLIC_URL + "/deli.png"}
+              style={{ width: 50, height: 50 }}
+            />
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12} sm={6}>
