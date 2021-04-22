@@ -174,25 +174,28 @@ export default function SingleMetricsCadeteria({match}) {
          </Typography>          <Grid container spacing={5}>
            
             <Grid item xs={12} md={4} lg={3}>
-            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Entregadas</Typography>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}><Typography  variant="h6" style={{color: "white", margin: "auto"}}>Entregadas</Typography></Paper>
               <Paper className={fixedHeightPaper}>
                 <DeliverOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-             <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Entrega</Typography>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}>
+             <Typography  variant="h6" style={{color: "white", margin: "auto"}}>Promedio Entrega</Typography>     </Paper>
               <Paper className={fixedHeightPaper}>
                 <AverageTimeDeliver orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Espera</Typography>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}>
+            <Typography  variant="h6" style={{color: "white", margin: "auto"}}>Promedio Espera</Typography>  </Paper>
               <Paper className={fixedHeightPaper}>
                 <AveragePendingTime orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Devueltas a Sucursal</Typography>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}>
+            <Typography  variant="h6" style={{color: "white", margin: "auto"}}>Devueltas a Sucursal</Typography>  </Paper>
               <Paper className={fixedHeightPaper}>
                 <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>
