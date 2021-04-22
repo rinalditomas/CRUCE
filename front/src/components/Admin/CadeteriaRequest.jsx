@@ -61,10 +61,9 @@ export default function CadeteriaRequest() {
   });
 
   return (
-
-      <div style={{alignContent:'center',}} className={classes.root}>
-        <CssBaseline />
-        <div>
+    <div style={{ display: "grid", placeSelf: "center" }}>
+      <CssBaseline />
+      <div>
         <Typography
           variant="h4"
           key="1"
@@ -75,64 +74,63 @@ export default function CadeteriaRequest() {
             color: "black",
             fontWeight: "bold",
           }}
-        >SOLICITUDES DE CADETERIAS       
-         </Typography>
-         
-        </div>
-        <div className={classes.demo}>
-          <List dense={dense}>
-            {cadeterias &&
-              cadeterias.map((cadeteria) => {
-                return cadeteria.authorized === false ? (
-                  <Container maxWidth="lg" className={classes.container}>
-                  <Paper elevation={1}>
-                  <ListItem key={cadeteria.id}>
-                    <ListItemText primary={cadeteria.nameCompany} />
-                    <ListItemSecondaryAction>
-                      {cadeteria.active ? (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            handleActive(cadeteria.id);
-                          }}
-                        >
-                          <Chip
-                            icon={<DoneIcon />}
-                            label="Autorizar"
-                            style={{ color: "grey" }}
-                            variant="outlined"
-                          />
-                        </IconButton>
-                      ) : (
-                        <IconButton
-                          edge="end"
-                          aria-label="delete"
-                          onClick={() => {
-                            const r = window.confirm(
-                              "¿Autorizar la cadeteria?"
-                            );
-                            if (r === true) return handleActive(cadeteria.id);
-                            else return null;
-                          }}
-                        >
-                          <Chip
-                            icon={<DoneIcon />}
-                            label="Autorizar"
-                            style={{ color: "grey" }}
-                            variant="outlined"
-                          />
-                        </IconButton>
-                      )}
-                    </ListItemSecondaryAction>
-                  </ListItem>
-                  </Paper>
-                  </Container>
-                ) : null;
-              })}
-          </List>
-        </div>
+        >
+          SOLICITUDES DE CADETERIAS
+        </Typography>
       </div>
-
+      <div className={classes.demo}>
+        <List dense={dense}>
+          {cadeterias &&
+            cadeterias.map((cadeteria) => {
+              return cadeteria.authorized === false ? (
+                <Container maxWidth="lg" className={classes.container}>
+                  <Paper elevation={1}>
+                    <ListItem key={cadeteria.id}>
+                      <ListItemText primary={cadeteria.nameCompany} />
+                      <ListItemSecondaryAction>
+                        {cadeteria.active ? (
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => {
+                              handleActive(cadeteria.id);
+                            }}
+                          >
+                            <Chip
+                              icon={<DoneIcon />}
+                              label="Autorizar"
+                              style={{ color: "grey" }}
+                              variant="outlined"
+                            />
+                          </IconButton>
+                        ) : (
+                          <IconButton
+                            edge="end"
+                            aria-label="delete"
+                            onClick={() => {
+                              const r = window.confirm(
+                                "¿Autorizar la cadeteria?"
+                              );
+                              if (r === true) return handleActive(cadeteria.id);
+                              else return null;
+                            }}
+                          >
+                            <Chip
+                              icon={<DoneIcon />}
+                              label="Autorizar"
+                              style={{ color: "grey" }}
+                              variant="outlined"
+                            />
+                          </IconButton>
+                        )}
+                      </ListItemSecondaryAction>
+                    </ListItem>
+                  </Paper>
+                </Container>
+              ) : null;
+            })}
+        </List>
+      </div>
+    </div>
   );
 }

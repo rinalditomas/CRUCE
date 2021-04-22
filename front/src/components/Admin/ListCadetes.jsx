@@ -51,7 +51,7 @@ export default function ListCadetes() {
 
   return (
     <>
-      <div className={classes.root}>
+      <div style={{ display: "grid", placeSelf: "center" }}>
         <CssBaseline />
         <div>
 

@@ -23,9 +23,6 @@ import CheckIcon from "@material-ui/icons/Check";
 import SaveIcon from "@material-ui/icons/Save";
 
 
-
-
-
 const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
@@ -57,9 +54,6 @@ const useStyles = makeStyles((theme) => ({
     marginLeft: -12,
   },
 }));
-
-
-
 
 const ExcelUpload = () => {
   const [items, setItems] = useState([]);
