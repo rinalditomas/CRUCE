@@ -49,9 +49,18 @@ export default function ProfileCadeteria() {
 
   return (
     <React.Fragment>
-      <Typography variant="h6" gutterBottom>
-        Editar el perfil de la cadeteria
-      </Typography>
+      <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >EDITAR PERFIL CADETERIA   
+         </Typography>
       <form style={{ marginLeft: "7%" }}>
         <Grid container spacing={3}>
           <Grid item xs={10}>

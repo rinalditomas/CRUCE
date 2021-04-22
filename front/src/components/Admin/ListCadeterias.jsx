@@ -1,5 +1,5 @@
 import React, { useEffect } from "react";
-import { IconButton, Grid } from "@material-ui/core";
+import { IconButton, Grid, Typography, CssBaseline } from "@material-ui/core";
 
 import GroupAddIcon from "@material-ui/icons/GroupAdd";
 import { Link } from "react-router-dom";
@@ -42,15 +42,19 @@ export default function ListCadeterias() {
         style={{ margin: 3, padding: 10 }}
       >
         <div>
-          <h1 className="titulo">Lista de cadeterias</h1>
-          <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <IconButton edge="end" aria-label="delete" className="icono">
-              <GroupAddIcon fontSize="large" />
-            </IconButton>
-          </Link>
+          <CssBaseline />
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >LISTA DE CADETERIAS       
+         </Typography>
         </div>
         <Grid Item>
           {cadeterias &&

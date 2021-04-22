@@ -17,6 +17,8 @@ import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
 import socket from "../../utils/socket";
+import { CssBaseline, Typography } from "@material-ui/core";
+import Requests from "../../utils/Request";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -61,16 +63,20 @@ export default function ListEmployees() {
   return (
     <>
       <div className={classes.root}>
+        <CssBaseline />
         <div>
-          <h1 className="titulo">Solicitudes de cadetes</h1>
-          <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <IconButton edge="end" aria-label="delete" className="icono">
-              <GroupAddIcon fontSize="large" />
-            </IconButton>
-          </Link>
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >LISTA DE CADETES    
+         </Typography>
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
@@ -78,42 +84,7 @@ export default function ListEmployees() {
               cadetes.map((cadete) => {
                 if (cadete.authorized) {
                   return (
-                    <ListItem key={cadete.id}>
-                      <ListItemText primary={cadete.firstName} />
-                      <ListItemSecondaryAction>
-                        {!cadete.active ? (
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => {
-                              handleActive(cadete.id);
-                            }}
-                          >
-                            <Chip
-                              icon={<BlockIcon />}
-                              label="Inactivo"
-                              color="secondary"
-                              variant="outlined"
-                            />
-                          </IconButton>
-                        ) : (
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => {
-                              handleActive(cadete.id);
-                            }}
-                          >
-                            <Chip
-                              icon={<DoneIcon />}
-                              label="Activo"
-                              style={{ color: "green" }}
-                              variant="outlined"
-                            />
-                          </IconButton>
-                        )}
-                      </ListItemSecondaryAction>
-                    </ListItem>
+                   <Requests cadete={cadete} handleActive={handleActive} />
                   );
                 }
               })}
@@ -123,3 +94,39 @@ export default function ListEmployees() {
     </>
   );
 }
+{/* <ListItem key={cadete.id}>
+<ListItemText primary={cadete.firstName} />
+<ListItemSecondaryAction>
+  {!cadete.active ? (
+    <IconButton
+      edge="end"
+      aria-label="delete"
+      onClick={() => {
+        handleActive(cadete.id);
+      }}
+    >
+      <Chip
+        icon={<BlockIcon />}
+        label="Inactivo"
+        color="secondary"
+        variant="outlined"
+      />
+    </IconButton>
+  ) : (
+    <IconButton
+      edge="end"
+      aria-label="delete"
+      onClick={() => {
+        handleActive(cadete.id);
+      }}
+    >
+      <Chip
+        icon={<DoneIcon />}
+        label="Activo"
+        style={{ color: "green" }}
+        variant="outlined"
+      />
+    </IconButton>
+  )}
+</ListItemSecondaryAction>
+</ListItem> */}

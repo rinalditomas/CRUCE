@@ -102,7 +102,8 @@ const Navbar = () => {
               Logout
             </Button>
           </MenuItem>
-          {userTypeColor() !== "admin" ? (
+          {userTypeColor() !== "admin" && userTypeColor() !== "cadeteria" ? (
+            
             <MenuItem>
               <Link
                 to="/cadete/profileCadete"
@@ -120,7 +121,7 @@ const Navbar = () => {
           <MenuItem>
             <Link
               to="/admin"
-              style={{ color: "inherit" }}
+              style={{ color: "inherit", textDecoration: 'none' }}
               onClick={handleMobileMenuClose}
             >
               <Button color="inherit">admin panel</Button>
@@ -202,14 +203,7 @@ const Navbar = () => {
             )}
 
             {user && user.admin ? (
-              <>
-                <Link
-                  to="/admin"
-                  style={{ color: "inherit", textDecoration: "none" }}
-                >
-                  <Button color="inherit">admin panel</Button>
-                </Link>
-              </>
+              <></>
             ) : (
               <></>
             )}

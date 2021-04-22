@@ -129,8 +129,19 @@ export default function Dashboard() {
 
   return (
     <div>
-       <h1>Rendimiento de Cadeterias</h1>
-
+      <CssBaseline />
+       <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >RENDIMIENTO CADETERIAS   
+         </Typography>
 
     <Container maxWidth="lg" className={classes.container}>
 

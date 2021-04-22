@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import * as XLSX from "xlsx";
-import { Button, Container, Grid, CssBaseline } from "@material-ui/core";
+import { Button, Container, Grid, CssBaseline, Typography } from "@material-ui/core";
 import { Link } from "react-router-dom";
 import adminMenuStyles from "../../utils/stylesAdmin";
 import { upLoadOrders } from "../../state/orders";
@@ -57,11 +57,25 @@ const ExcelUpload = () => {
   };
   return (
     <React.Fragment>
+
+
       <CssBaseline />
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}
+        >CARGAR ORDENES       
+         </Typography>
       <main>
         {/* Hero unit */}
         <div className={classes.heroContent}>
-          <Container maxWidth="sm">
+          <Container  justify= "center" maxWidth="sm">
             <div className={classes.heroButtons}>
               <Grid container spacing={4} justify="center">
                 <Grid item xs={12}>
