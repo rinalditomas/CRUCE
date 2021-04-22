@@ -133,9 +133,7 @@ export default function SingleMetricsCadeteria({match}) {
           }}
         >Rendimiento de {match.namecadeteria}     
          </Typography>
-    
           <Grid container spacing={5}>
-           
             <Grid item xs={12} md={4} lg={3}>
             <Title>Ordenes Entregadas</Title>
               <Paper className={fixedHeightPaper}>
