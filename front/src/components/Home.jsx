@@ -48,7 +48,7 @@ const Home = () => {
                 className={classes.button_home}
                 onClick={() => history.push("/login-as")}
               >
-                Loguearse
+                Ingresar
               </CustomButtonB>
             </Box>
           </Box>
