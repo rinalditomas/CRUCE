@@ -42,16 +42,13 @@ export default function Orders({ metricas }) {
     };
   }
 
-
   let conversor = (tiempo) => {
     let enMinutos = tiempo / 1000 / 60;
     let hs = enMinutos / 60;
     let minutos = enMinutos % 60;
 
-    return Math.floor(hs)+" Hs : "+Math.round(minutos)+" Min"
+    return Math.floor(hs) + " Hs : " + Math.round(minutos) + " Min";
   };
-
-
 
   const dataRow = (obj) => {
     let resultado = [];
@@ -103,9 +100,15 @@ export default function Orders({ metricas }) {
                 <TableCell align="center">{row.returned}</TableCell>
                 <TableCell align="center">{row.averageTimeDeli}</TableCell>
                 <TableCell align="center">{row.averageTimePick}</TableCell>
-                <Link to={`/cadeteria/metrics/${row.id}/cadete/${row.name}`}>
-                  <TableCell align="center">Click</TableCell>
-                </Link>
+
+                <TableCell align="center">
+                  <Link
+                    to={`/cadeteria/metrics/${row.id}/cadete/${row.name}`}
+                    style={{ textDecoration: "none" }}
+                  >
+                    Ver
+                  </Link>
+                </TableCell>
               </TableRow>
             );
           })}
