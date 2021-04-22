@@ -160,30 +160,39 @@ export default function SingleMetricsCadeteria({match}) {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de {match.namecadete}</h1>
-          <Grid container spacing={5}>
+  <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >Rendimiento de {match.namecadete}     
+         </Typography>          <Grid container spacing={5}>
            
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Ordenes Entregadas</Title>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Entregadas</Typography>
               <Paper className={fixedHeightPaper}>
                 <DeliverOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de Entrega</Title>
+             <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Entrega</Typography>
               <Paper className={fixedHeightPaper}>
                 <AverageTimeDeliver orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de Espera</Title>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Espera</Typography>
               <Paper className={fixedHeightPaper}>
                 <AveragePendingTime orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-       
-            <Grid item xs={12} md={4} lg={3} >
-            <Title>Ordenes Devueltas a Sucursal</Title>
+            <Grid item xs={12} md={4} lg={3}>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Devueltas a Sucursal</Typography>
               <Paper className={fixedHeightPaper}>
                 <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>

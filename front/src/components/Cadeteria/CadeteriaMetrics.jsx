@@ -26,6 +26,7 @@ import Chart from "./Chart"
 import { useDispatch, useSelector } from 'react-redux';
 import { AllcadeteriasMetrics, AllcadetesMetrics, metricOrders } from '../../state/orders';
 import { allCadeterias } from '../../state/cadeterias';
+import Title from '../Admin/Title';
 
 
 function Copyright() {
@@ -147,7 +148,19 @@ export default function Dashboard() {
 
   return (
     <div>
-       <h1>Rendimiento de Cadetes</h1>
+         <CssBaseline />
+       <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "rgb(100,100,100)",
+            fontWeight: "bold",
+          }}>
+          RENDIMIENTO CADETE 
+         </Typography>
 
        <Container maxWidth="lg" className={classes.container}>
     <div className = "tabla">
@@ -167,6 +180,7 @@ export default function Dashboard() {
         
           <Grid container spacing={5}>
             <Grid item xs={12}>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Detalle de Cadetes</Typography>
               <Paper className={classes.paper}>
                 <ListMetricsCadete metricas = {metrics}/>
               </Paper>

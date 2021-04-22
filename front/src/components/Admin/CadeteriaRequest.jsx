@@ -15,6 +15,7 @@ import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
 import socket from "../../utils/socket";
+import { CssBaseline, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -58,16 +59,21 @@ export default function CadeteriaRequest() {
   return (
     <>
       <div className={classes.root}>
+        <CssBaseline />
         <div>
-          <h1 className="titulo">Lista de cadeterias</h1>
-          <Link
-            to="/register"
-            style={{ textDecoration: "none", color: "inherit" }}
-          >
-            <IconButton edge="end" aria-label="delete" className="icono">
-              <GroupAddIcon fontSize="large" />
-            </IconButton>
-          </Link>
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >LISTA DE CADETERIAS       
+         </Typography>
+         
         </div>
         <div className={classes.demo}>
           <List dense={dense}>

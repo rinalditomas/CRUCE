@@ -13,6 +13,7 @@ import { AllcadeteriasMetrics, allOrders, metricOrders } from '../../state/order
 import Title from './Title';
 
 import PromedioDeEspera from '../Admin/PromedioDeEspera'
+import { Typography } from '@material-ui/core';
 
 
 
@@ -119,29 +120,40 @@ export default function SingleMetricsCadeteria({match}) {
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de {match.namecadeteria} </h1>
+      
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >Rendimiento de {match.namecadeteria}     
+         </Typography>
           <Grid container spacing={5}>
-           
-            <Grid item xs={12} md={3} lg={4}>
-            <Title>Ordenes Entregadas</Title>
+            <Grid item xs={12} md={4} lg={3}>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}} align={'center'}>Entregadas</Typography>
               <Paper className={fixedHeightPaper}>
                 <OrdenesEntregadas orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
-            <Title>Promedio de Entrega</Title>
+            <Grid item xs={12} md={4} lg={3}>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Entrega</Typography>
               <Paper className={fixedHeightPaper}>
                 <TiempoPromedioEntrega orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
-            <Title>Promedio de Espera</Title>
+            <Grid item xs={12} md={4} lg={3}>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Espera</Typography>
               <Paper className={fixedHeightPaper}>
                 <PromedioDeEspera orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
-            <Title>Devueltas a Sucursal</Title>
+            <Grid item xs={12} md={4} lg={3}>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Devueltas a Sucursal</Typography>
               <Paper className={fixedHeightPaper}>
                 <OrdenesDevueltas orders={orders} id= {match.id} />
               </Paper>

@@ -76,15 +76,15 @@ export default function Orders({ metricas }) {
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Title>Detalle Cadetes</Title>
+     
       <Table size="small">
         <TableHead>
           <TableRow>
             <TableCell>Cadete</TableCell>
-            <TableCell>Nº Entregadas</TableCell>
-            <TableCell>Nº Devueltas Sucursal</TableCell>
-            <TableCell>Tiempo Entrega (H)</TableCell>
-            <TableCell>Tiempo Espera (H)</TableCell>
+            <TableCell>Entregadas</TableCell>
+            <TableCell>A Sucursal</TableCell>
+            <TableCell>Tiempo Entrega</TableCell>
+            <TableCell>Tiempo Espera</TableCell>
             <TableCell>Detalle</TableCell>
           </TableRow>
         </TableHead>

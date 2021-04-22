@@ -13,6 +13,8 @@ import {
   ListItemSecondaryAction,
   ListItemText,
   IconButton,
+  Typography,
+  CssBaseline,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { adminOrders, allOrders } from "../../state/orders";
@@ -54,10 +56,10 @@ const ListOrders = () => {
   socket.on("orden", (ordenes) => {
     dispatch(allOrders(cadeteria.id));
   });
-  
-  socket.on('cadeterias' ,() => {
+
+  socket.on("cadeterias", () => {
     dispatch(fetchCad());
-  })
+  });
 
   const selectStateOrders = (par) => {
     setSelected(par);
@@ -65,8 +67,22 @@ const ListOrders = () => {
   return (
     <>
       <div className={classes.root}>
-        <div>
-          <h1 className="titulo">Lista de Ordenes</h1>
+
+      <CssBaseline />
+        <div >
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >LISTA DE ORDENES       
+         </Typography>
+        
         </div>
         <div>
           <Grid item xs={12}>
@@ -80,6 +96,7 @@ const ListOrders = () => {
                 label="Medio de transporte"
                 name="vehicle"
                 id="demo-simple-select-filled"
+                defaultValue="Pendientes"
               >
                 <MenuItem
                   value={"Pendientes"}
@@ -113,9 +130,7 @@ const ListOrders = () => {
             </FormControl>
           </Grid>
         </div>
-        <div>
-          <h3 className="titulo">{selected}</h3>
-        </div>
+
         <div className={classes.demo}>
           <List dense={dense}>
             {orders &&
@@ -137,15 +152,9 @@ const ListOrders = () => {
                             " " +
                             (order.complement ? order.complement : "")
                           }
+                          
                         />
                       </Link>
-                      <ListItemSecondaryAction>
-                        <IconButton>
-                          <Button variant="outlined" color="primary">
-                            {order.status}
-                          </Button>
-                        </IconButton>
-                      </ListItemSecondaryAction>
                     </ListItem>
                   ) : null;
                 }
