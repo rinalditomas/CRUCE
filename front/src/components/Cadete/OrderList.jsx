@@ -58,23 +58,21 @@ export default function CustomList({ order }) {
     if (status === "Pendiente") {
       state = "En camino";
 
-      setTimeout(() => {
-        dispatch(
-          orderState({
-            orderNumber,
-            state,
-            cadeteId,
-          })
-        ).then(({ payload }) => {
-          if (typeof payload === "object")
-            socket.emit("orden", { orden: payload });
-          if (payload.status === "En camino")
-            return messages.info("Has tomado una orden");
-          else if (typeof payload === "string") {
-            return messages.info(payload);
-          }
-        });
-      }, 1000);
+      dispatch(
+        orderState({
+          orderNumber,
+          state,
+          cadeteId,
+        })
+      ).then(({ payload }) => {
+        if (typeof payload === "object")
+          socket.emit("orden", { orden: payload });
+        if (payload.status === "En camino")
+          return messages.info("Has tomado una orden");
+        else if (typeof payload === "string") {
+          return messages.info(payload);
+        }
+      });
     }
   };
 

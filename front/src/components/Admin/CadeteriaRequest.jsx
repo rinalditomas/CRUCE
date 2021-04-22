@@ -15,7 +15,7 @@ import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 
 import socket from "../../utils/socket";
-import { CssBaseline, Typography } from "@material-ui/core";
+import { Container, CssBaseline, Paper, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -27,6 +27,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2),
+  },
+  container: {
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(4),
   },
 }));
 
@@ -57,8 +61,8 @@ export default function CadeteriaRequest() {
   });
 
   return (
-    <>
-      <div className={classes.root}>
+
+      <div style={{alignContent:'center',}} className={classes.root}>
         <CssBaseline />
         <div>
         <Typography
@@ -71,7 +75,7 @@ export default function CadeteriaRequest() {
             color: "black",
             fontWeight: "bold",
           }}
-        >LISTA DE CADETERIAS       
+        >SOLICITUDES DE CADETERIAS       
          </Typography>
          
         </div>
@@ -80,6 +84,8 @@ export default function CadeteriaRequest() {
             {cadeterias &&
               cadeterias.map((cadeteria) => {
                 return cadeteria.authorized === false ? (
+                  <Container maxWidth="lg" className={classes.container}>
+                  <Paper elevation={1}>
                   <ListItem key={cadeteria.id}>
                     <ListItemText primary={cadeteria.nameCompany} />
                     <ListItemSecondaryAction>
@@ -120,11 +126,13 @@ export default function CadeteriaRequest() {
                       )}
                     </ListItemSecondaryAction>
                   </ListItem>
+                  </Paper>
+                  </Container>
                 ) : null;
               })}
           </List>
         </div>
       </div>
-    </>
+
   );
 }

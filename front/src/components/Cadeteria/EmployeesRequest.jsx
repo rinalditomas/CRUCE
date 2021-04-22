@@ -9,7 +9,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { admitCadete, allCadetes } from "../../state/users";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
+<<<<<<< HEAD
+
+import { Chip, Container, CssBaseline, Paper, Typography } from "@material-ui/core";
+=======
 import { Chip, CssBaseline, Typography } from "@material-ui/core";
+>>>>>>> 9d2dadf513f19ac91087e397fb1b58c6d2b5dc85
 import DoneIcon from "@material-ui/icons/Done";
 import socket from "../../utils/socket";
 
@@ -23,6 +28,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2),
+  },
+  container: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
 }));
 
@@ -78,6 +87,8 @@ export default function CadeteriaRequest() {
                 if (cadete.cadeteriumId === cadeteria.id) {
                   return cadete.authorized === false &&
                     cadete.admin === false ? (
+                      <Container maxWidth="lg" className={classes.container}>
+                      <Paper elevation={1}>
                     <ListItem key={cadete.id}>
                       <ListItemText
                         primary={cadete.firstName + " " + cadete.lastName}
@@ -103,6 +114,8 @@ export default function CadeteriaRequest() {
                         ) : null}
                       </ListItemSecondaryAction>
                     </ListItem>
+                    </Paper>
+                   </Container>
                   ) : null;
                 }
               })}

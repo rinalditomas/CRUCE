@@ -8,6 +8,7 @@ import {
   Select,
   FormControl,
   Grid,
+  Paper,
   List,
   ListItem,
   ListItemSecondaryAction,
@@ -15,6 +16,7 @@ import {
   IconButton,
   Typography,
   CssBaseline,
+  Container,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { adminOrders, allOrders } from "../../state/orders";
@@ -31,6 +33,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2),
+  },
+  container: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
 }));
 
@@ -85,7 +91,7 @@ const ListOrders = () => {
         
         </div>
         <div>
-          <Grid item xs={12}>
+          <Grid item xs={12} style={{marginBottom:20}}>
             <FormControl variant="outlined" style={{ minWidth: 395 }}>
               <InputLabel htmlFor="outlined-age-native-simple">
                 Estado de ordenes
@@ -140,10 +146,12 @@ const ListOrders = () => {
                   (order.status === selected && order.cadeteriumId == null)
                 ) {
                   return order.status === selected ? (
+                    <Container maxWidth="lg" className={classes.container}>
+                      <Paper elevation={1}>
                     <ListItem key={order.id}>
                       <Link
                         to={`/cadeteria/metrics/singleOrder/${order.id}/${order.orderNumber}`}
-                      >
+                     style={{textDecoration:'none'}} >
                         <ListItemText
                           primary={
                             order.street +
@@ -156,6 +164,8 @@ const ListOrders = () => {
                         />
                       </Link>
                     </ListItem>
+                    </Paper>
+                    </Container>
                   ) : null;
                 }
               })}
