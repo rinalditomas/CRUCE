@@ -1,8 +1,9 @@
-import React from 'react';
-import {Link} from 'react-router-dom';
-import { makeStyles } from '@material-ui/core/styles';
-import Typography from '@material-ui/core/Typography';
-import Title from './Title';
+import React from "react";
+import { Link } from "react-router-dom";
+import { makeStyles } from "@material-ui/core/styles";
+import Typography from "@material-ui/core/Typography";
+import Title from "./Title";
+import { Grid } from "@material-ui/core";
 
 function preventDefault(event) {
   event.preventDefault();
@@ -14,35 +15,39 @@ const useStyles = makeStyles({
   },
 });
 
-export default function OrdenesEntregadas({orders, id}) {
+export default function OrdenesEntregadas({ orders, id }) {
+  let conversor = (tiempo) => {
+    let enMinutos = tiempo / 1000 / 60;
+    let hs = enMinutos / 60;
+    let minutos = enMinutos % 60;
 
-    console.log(id)
-    let conversor = (tiempo) => {
-      let enMinutos=  (tiempo/1000)/60
-      let hs= enMinutos/60
-      let minutos=enMinutos%60
-     
-     
-      return Math.floor(hs)+" Hs : "+Math.round(minutos)+" Min"
-    }
-
+    return Math.floor(hs) + " Hs : " + Math.round(minutos) + " Min";
+  };
 
   const classes = useStyles();
   return (
     <React.Fragment>
-      <Typography component="p" variant="h4">
-    
-      </Typography>
+      <Typography component="p" variant="h4"></Typography>
       <Typography color="textSecondary" className={classes.depositContext}>
-      {orders.map((order)=>{
-       if(order.cadeteriumId == id){
-        return order.status == "Entregado" ?  
-        (<h5>{order.orderNumber} _____ {conversor(order.inTransit)}</h5>) : null
-        }
+        {orders.map((order) => {
+          if (order.cadeteriumId == id) {
+            return order.status == "Entregado" ? (
+              <Grid container direction="row" justify="space-between">
+                <Grid item>
+                  <Typography variant="subtitle1">
+                    {order.orderNumber}
+                  </Typography>
+                </Grid>
+                <Grid item>
+                  <Typography variant="subtitle1">
+                    {conversor(order.inTransit)}
+                  </Typography>
+                </Grid>
+              </Grid>
+            ) : null;
+          }
         })}
       </Typography>
- 
     </React.Fragment>
   );
 }
-    

@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Grid, Container, Typography } from "@material-ui/core";
+import { Paper, Grid, Container, Typography, CssBaseline } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { allOrders } from "../../state/orders";
 import { useSnackbar } from "notistack";
@@ -111,6 +111,7 @@ const CadeteOrders = () => {
   } else {
     return (
       <div>
+        <CssBaseline/>
         <Typography
           variant="h4"
           key="1"
@@ -120,13 +121,14 @@ const CadeteOrders = () => {
         </Typography>
         <Container
           style={{
-            backgroundColor: "#eeeeee",
             marginTop: 20,
             marginBottom: 10,
           }}
         >
           <Container
             style={{
+              display: 'flex',
+              justifyContent: 'center',
               marginTop: 20,
               marginBottom: 10,
             }}
@@ -144,6 +146,7 @@ const CadeteOrders = () => {
                           textAlign: "initial",
                           background:
                             "linear-gradient(45deg, #eeeeee, 30%, #9e9e9e 90%)",
+                            padding: '5px'
                         }}
                       >
                         <OrderList order={order} />

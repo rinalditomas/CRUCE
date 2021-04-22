@@ -6,5 +6,5 @@ import Error from "../components/Error";
 export default function App() {
   const user = useSelector((state) => state.users.user);
 
-  return <div>{user.id && user.admin ? <AdminPanel /> : <Error />}</div>;
+  return <div>{user && user.id && user.admin ? <AdminPanel /> : <Error />}</div>;
 }
