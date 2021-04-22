@@ -67,7 +67,7 @@ const ExcelUpload = () => {
             textAlign: "center",
             marginTop: 45,
             marginBottom: 50,
-            color: "rgb(100,100,100)",
+            color: "black",
             fontWeight: "bold",
           }}
         >CARGAR ORDENES       

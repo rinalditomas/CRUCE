@@ -71,7 +71,7 @@ export default function CadeteriaRequest() {
             textAlign: "left",
             marginTop: 45,
             marginBottom: 50,
-            color: "rgb(100,100,100)",
+            color: "black",
             fontWeight: "bold",
           }}
         >SOLICITUDES CADETES     

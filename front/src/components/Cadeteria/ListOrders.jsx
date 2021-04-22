@@ -73,10 +73,10 @@ const ListOrders = () => {
           variant="h4"
           key="1"
           style={{
-            textAlign: "left",
+            textAlign: "center",
             marginTop: 45,
             marginBottom: 50,
-            color: "rgb(100,100,100)",
+            color: "black",
             fontWeight: "bold",
           }}
         >LISTA DE ORDENES       

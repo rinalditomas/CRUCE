@@ -128,32 +128,32 @@ export default function SingleMetricsCadeteria({match}) {
             textAlign: "center",
             marginTop: 45,
             marginBottom: 50,
-            color: "rgb(100,100,100)",
+            color: "black",
             fontWeight: "bold",
           }}
         >Rendimiento de {match.namecadeteria}     
          </Typography>
           <Grid container spacing={5}>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Ordenes Entregadas</Title>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}} align={'center'}>Entregadas</Typography>
               <Paper className={fixedHeightPaper}>
                 <OrdenesEntregadas orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de Entrega</Title>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Entrega</Typography>
               <Paper className={fixedHeightPaper}>
                 <TiempoPromedioEntrega orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de Espera</Title>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Promedio Espera</Typography>
               <Paper className={fixedHeightPaper}>
                 <PromedioDeEspera orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Devueltas a Sucursal</Title>
+            <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Devueltas a Sucursal</Typography>
               <Paper className={fixedHeightPaper}>
                 <OrdenesDevueltas orders={orders} id= {match.id} />
               </Paper>
