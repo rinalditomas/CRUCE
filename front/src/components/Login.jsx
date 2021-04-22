@@ -59,12 +59,9 @@ export default function Login() {
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Sign in
-            </Typography>
+
+          
+  <Avatar src={process.env.PUBLIC_URL + "/deli.png"} style={{width: 50, height: 50}} />
             <form className={classes.form} onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
@@ -99,7 +96,7 @@ export default function Login() {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Ingresar
               </Button>
 
               <Grid container>
