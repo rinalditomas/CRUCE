@@ -9,7 +9,13 @@ import { useDispatch, useSelector } from "react-redux";
 import { admitCadete, allCadetes } from "../../state/users";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
-import { Chip, CssBaseline, Typography } from "@material-ui/core";
+import {
+  Chip,
+  Container,
+  CssBaseline,
+  Paper,
+  Typography,
+} from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 import socket from "../../utils/socket";
 
@@ -23,6 +29,10 @@ const useStyles = makeStyles((theme) => ({
   },
   title: {
     margin: theme.spacing(4, 0, 2),
+  },
+  container: {
+    paddingTop: theme.spacing(0.5),
+    paddingBottom: theme.spacing(0.5),
   },
 }));
 
@@ -58,18 +68,19 @@ export default function CadeteriaRequest() {
       <div className={classes.root}>
         <CssBaseline />
         <div>
-        <Typography
-          variant="h4"
-          key="1"
-          style={{
-            textAlign: "left",
-            marginTop: 45,
-            marginBottom: 50,
-            color: "black",
-            fontWeight: "bold",
-          }}
-        >SOLICITUDES CADETES     
-         </Typography>
+          <Typography
+            variant="h4"
+            key="1"
+            style={{
+              textAlign: "left",
+              marginTop: 45,
+              marginBottom: 50,
+              color: "black",
+              fontWeight: "bold",
+            }}
+          >
+            SOLICITUDES CADETES
+          </Typography>
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
@@ -78,31 +89,38 @@ export default function CadeteriaRequest() {
                 if (cadete.cadeteriumId === cadeteria.id) {
                   return cadete.authorized === false &&
                     cadete.admin === false ? (
-                    <ListItem key={cadete.id}>
-                      <ListItemText
-                        primary={cadete.firstName + " " + cadete.lastName}
-                      />
-                      <ListItemSecondaryAction>
-                        {!cadete.active ? (
-                          <IconButton
-                            edge="end"
-                            aria-label="delete"
-                            onClick={() => {
-                              const r = window.confirm("¿Autorizar la cadete?");
-                              if (r === true) return handleActive(cadete.id);
-                              else return null;
-                            }}
-                          >
-                            <Chip
-                              icon={<DoneIcon />}
-                              label="Aceptar"
-                              style={{ color: "green" }}
-                              variant="outlined"
-                            />
-                          </IconButton>
-                        ) : null}
-                      </ListItemSecondaryAction>
-                    </ListItem>
+                    <Container maxWidth="lg" className={classes.container}>
+                      <Paper elevation={1}>
+                        <ListItem key={cadete.id}>
+                          <ListItemText
+                            primary={cadete.firstName + " " + cadete.lastName}
+                          />
+                          <ListItemSecondaryAction>
+                            {!cadete.active ? (
+                              <IconButton
+                                edge="end"
+                                aria-label="delete"
+                                onClick={() => {
+                                  const r = window.confirm(
+                                    "¿Autorizar la cadete?"
+                                  );
+                                  if (r === true)
+                                    return handleActive(cadete.id);
+                                  else return null;
+                                }}
+                              >
+                                <Chip
+                                  icon={<DoneIcon />}
+                                  label="Aceptar"
+                                  style={{ color: "green" }}
+                                  variant="outlined"
+                                />
+                              </IconButton>
+                            ) : null}
+                          </ListItemSecondaryAction>
+                        </ListItem>
+                      </Paper>
+                    </Container>
                   ) : null;
                 }
               })}

@@ -156,7 +156,7 @@ export default function Dashboard() {
             textAlign: "center",
             marginTop: 45,
             marginBottom: 50,
-            color: "rgb(100,100,100)",
+            color: "black",
             fontWeight: "bold",
           }}>
           RENDIMIENTO CADETE 
@@ -176,8 +176,6 @@ export default function Dashboard() {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-       
-        
           <Grid container spacing={5}>
             <Grid item xs={12}>
             <Typography  variant="h6" style={{color: "rgb(100,100,100)"}}align={'center'}>Detalle de Cadetes</Typography>

@@ -57,23 +57,21 @@ export default function CustomList({ order }) {
     }
     if (status === "Pendiente") {
       state = "En camino";
-
-      setTimeout(() => {
-        dispatch(
-          orderState({
-            orderNumber,
-            state,
-            cadeteId,
-          })
-        ).then(({ payload }) => {
-          if (typeof payload === 'object') socket.emit("orden", { orden: payload });
-          if (payload.status === "En camino")
-            return messages.info("Has tomado una orden");
-          else if (typeof payload === "string") {
-            return messages.info(payload);
-          }
-        });
-      }, 1000);
+      dispatch(
+        orderState({
+          orderNumber,
+          state,
+          cadeteId,
+        })
+      ).then(({ payload }) => {
+        if (typeof payload === "object")
+          socket.emit("orden", { orden: payload });
+        if (payload.status === "En camino")
+          return messages.info("Has tomado una orden");
+        else if (typeof payload === "string") {
+          return messages.info(payload);
+        }
+      });
     }
   };
 
@@ -82,7 +80,7 @@ export default function CustomList({ order }) {
       id={order.id}
       style={{
         background: `linear-gradient(50deg, #fafafa , 96%, ${typeColor()} 100%)`,
-        borderRadius: '4px'
+        borderRadius: "4px",
       }}
       component="nav"
       aria-labelledby="nested-list-subheader"
