@@ -1,21 +1,10 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import BlockIcon from "@material-ui/icons/Block";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-
-import { Link } from "react-router-dom";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
-import Chip from "@material-ui/core/Chip";
-import DoneIcon from "@material-ui/icons/Done";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
-
 import socket from "../../utils/socket";
 import { CssBaseline, Typography } from "@material-ui/core";
 import Requests from "../../utils/Request";
@@ -62,7 +51,7 @@ export default function ListEmployees() {
 
   return (
     <>
-      <div className={classes.root}>
+      <div>
         <CssBaseline />
         <div>
         <Typography
@@ -94,39 +83,3 @@ export default function ListEmployees() {
     </>
   );
 }
-{/* <ListItem key={cadete.id}>
-<ListItemText primary={cadete.firstName} />
-<ListItemSecondaryAction>
-  {!cadete.active ? (
-    <IconButton
-      edge="end"
-      aria-label="delete"
-      onClick={() => {
-        handleActive(cadete.id);
-      }}
-    >
-      <Chip
-        icon={<BlockIcon />}
-        label="Inactivo"
-        color="secondary"
-        variant="outlined"
-      />
-    </IconButton>
-  ) : (
-    <IconButton
-      edge="end"
-      aria-label="delete"
-      onClick={() => {
-        handleActive(cadete.id);
-      }}
-    >
-      <Chip
-        icon={<DoneIcon />}
-        label="Activo"
-        style={{ color: "green" }}
-        variant="outlined"
-      />
-    </IconButton>
-  )}
-</ListItemSecondaryAction>
-</ListItem> */}

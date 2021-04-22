@@ -23,15 +23,15 @@ export default function ListCadeterias() {
   const handleActive = (id) => {
     dispatch(editStateCadeteria(id)).then((res) => {
       res.payload
-        ? alert("Estado cambiado correctamente")
-        : alert("Hubo un problema");
+        ? messages.success("Estado cambiado correctamente")
+        : messages.error("Hubo un problema");
     });
     socket.emit("cadeterias");
-    
   };
 
   return (
     <>
+      <CssBaseline />
       <Grid
         container
         xs={12}
@@ -42,19 +42,19 @@ export default function ListCadeterias() {
         style={{ margin: 3, padding: 10 }}
       >
         <div>
-          <CssBaseline />
-        <Typography
-          variant="h4"
-          key="1"
-          style={{
-            textAlign: "center",
-            marginTop: 45,
-            marginBottom: 50,
-            color: "rgb(100,100,100)",
-            fontWeight: "bold",
-          }}
-        >LISTA DE CADETERIAS       
-         </Typography>
+          <Typography
+            variant="h4"
+            key="1"
+            style={{
+              textAlign: "center",
+              marginTop: 45,
+              marginBottom: 50,
+              color: "rgb(100,100,100)",
+              fontWeight: "bold",
+            }}
+          >
+            LISTA DE CADETERIAS
+          </Typography>
         </div>
         <Grid Item>
           {cadeterias &&
