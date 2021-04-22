@@ -4,8 +4,6 @@ import { useHistory } from "react-router";
 import { Box, Typography } from "@material-ui/core";
 import { CustomButton } from "../utils/Buttons";
 
-import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
-
 const Main = () => {
   const classes = useStyles();
   const history = useHistory();
@@ -16,7 +14,7 @@ const Main = () => {
         variant="h4"
         style={{
           textAlign: "center",
-          marginTop: 45,
+          marginTop: 35,
           color: "rgb(100,100,100)",
           fontWeight: "bold",
         }}

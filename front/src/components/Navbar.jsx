@@ -37,10 +37,8 @@ const Navbar = () => {
   };
 
   const location = useLocation().pathname.split("/");
-
   const classes = useStyles();
   const history = useHistory();
-
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
   const user = useSelector((state) => state.users.user);
@@ -103,7 +101,6 @@ const Navbar = () => {
             </Button>
           </MenuItem>
           {userTypeColor() !== "admin" && userTypeColor() !== "cadeteria" ? (
-            
             <MenuItem>
               <Link
                 to="/cadete/profileCadete"
@@ -124,7 +121,7 @@ const Navbar = () => {
               style={{ color: "inherit", textDecoration: 'none' }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">admin panel</Button>
+              <Button color="inherit">Admin panel</Button>
             </Link>
           </MenuItem>
         </>
@@ -142,7 +139,7 @@ const Navbar = () => {
           {location[1] !== "" ? (
             <IconButton>
               <ArrowBackIosIcon
-                style={{ color: "grey" }}
+                style={{ color: "white" }}
                 onClick={() => history.goBack()}
               />
             </IconButton>
@@ -195,7 +192,7 @@ const Navbar = () => {
                         style={{ display: "flex", margin: 3 }}
                       />
                     ) : (
-                      <MoreIcon />
+                      <MoreIcon style={{backgroundColor: 'white'}} />
                     )}
                   </IconButton>
                 </div>

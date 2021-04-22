@@ -20,7 +20,7 @@ import { sendmail } from "../../state/sendmail";
 import { sendmailToAdmin } from "../../state/sendmail";
 import messagesHandler from "../../utils/messagesHandler";
 
-import socket from '../../utils/socket'
+import socket from "../../utils/socket";
 
 const RegisterCadeteria = () => {
   const messages = messagesHandler(useSnackbar());
@@ -47,7 +47,7 @@ const RegisterCadeteria = () => {
         const email = payload.email;
 
         messages.success("Cadeteria registrada correctamente");
-        socket.emit('cadeterias');
+        socket.emit("cadeterias");
         sendmail(email, name);
         sendmailToAdmin(payload);
         history.push("/login-as/cadeteria");
@@ -65,12 +65,10 @@ const RegisterCadeteria = () => {
         <Container component="main" maxWidth="xs">
           <CssBaseline />
           <div className={classes.paper}>
-            <Avatar className={classes.avatar}>
-              <LockOutlinedIcon />
-            </Avatar>
-            <Typography component="h1" variant="h5">
-              Registro de Cadeteria
-            </Typography>
+            <Avatar
+              src={process.env.PUBLIC_URL + "/asd.png"}
+              style={{ width: 60, height: 50, padding: 4 }}
+            />
             <form className={classes.form} onSubmit={handleSubmit}>
               <Grid container spacing={2}>
                 <Grid item xs={12}>
