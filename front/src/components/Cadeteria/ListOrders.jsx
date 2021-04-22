@@ -56,10 +56,10 @@ const ListOrders = () => {
   socket.on("orden", (ordenes) => {
     dispatch(allOrders(cadeteria.id));
   });
-  
-  socket.on('cadeterias' ,() => {
+
+  socket.on("cadeterias", () => {
     dispatch(fetchCad());
-  })
+  });
 
   const selectStateOrders = (par) => {
     setSelected(par);
@@ -67,6 +67,7 @@ const ListOrders = () => {
   return (
     <>
       <div className={classes.root}>
+
       <CssBaseline />
         <div >
         <Typography
@@ -95,7 +96,7 @@ const ListOrders = () => {
                 label="Medio de transporte"
                 name="vehicle"
                 id="demo-simple-select-filled"
-                defaultValue = "Pendientes"
+                defaultValue="Pendientes"
               >
                 <MenuItem
                   value={"Pendientes"}
@@ -129,7 +130,7 @@ const ListOrders = () => {
             </FormControl>
           </Grid>
         </div>
-     
+
         <div className={classes.demo}>
           <List dense={dense}>
             {orders &&
@@ -151,6 +152,7 @@ const ListOrders = () => {
                             " " +
                             (order.complement ? order.complement : "")
                           }
+                          
                         />
                       </Link>
                     </ListItem>

@@ -3,7 +3,8 @@ import Button from "@material-ui/core/Button";
 import useStyles from "../utils/stylesRegister";
 import { useHistory } from "react-router";
 import Box from "@material-ui/core/Box";
-
+import { Typography } from "@material-ui/core";
+import { CustomButton } from "../utils/Buttons";
 
 const Main = () => {
   const classes = useStyles();
@@ -11,73 +12,89 @@ const Main = () => {
 
   return (
     <div>
-
-      <div>
-      <h1>Registrarse como</h1>
-        <Box 
+    <Typography
+      variant="h4"
+      style={{
+        textAlign: "center",
+        marginTop: 45,
+        color: "rgb(100,100,100)",
+        fontWeight: "bold",
+      }}
+    >
+      REGISTRARSE COMO
+    </Typography>
+    <div style={{ display: "flex", justifyContent: "center" }}>
+      <Box
+        display="flex"
+        justifySelf="center"
+        flexDirection="column"
+        marginTop={5}
+        bgcolor="#f6f6f6"
+        width={300}
+        height={500}
+        alignItems="center"
+        borderRadius="30px"
+      >
+        <Box
           display="flex"
+          alignSelf="center"
           justifyContent="center"
-          flexDirection="column"
-          style={{ marginTop: "4rem"}}
+          m={1}
+          p={1}
           bgcolor="#f6f6f6"
+          width={230}
         >
-        
-          <Box
-            display="flex"
-            justifyContent="center"
-            m={1}
-            p={1}
-            bgcolor="#f6f6f6"
-          >
-            <Box p={1} bgcolor="#f6f6f6">
-              <Box display="flex" justifyContent="center">
+          <Box p={1} bgcolor="#f6f6f6">
+            <Box display="flex" justifyContent="center">
               <img
-                  className={classes.large2}
-                  src={process.env.PUBLIC_URL + "deli.png"}
-                  alt=""
-                />
-              </Box>
-              <Button
-                color="primary"
-                variant="contained"
-                size="large"
-                className={classes.button_cadete}
-                onClick={() => history.push("/register-as/cadete")}
-              >
-                Cadete
-              </Button>
+                className={classes.large2}
+                src={process.env.PUBLIC_URL + "deli.png"}
+                alt=""
+              />
             </Box>
-          </Box>
-
-          <Box
-            display="flex"
-            justifyContent="center"
-            m={1}
-            p={1}
-            bgcolor="#f6f6f6"
-          >
-            <Box p={1} bgcolor="#f6f6f6">
-              <Box display="flex" justifyContent="center">
-                <img
-                  className={classes.large}
-                  src={process.env.PUBLIC_URL + "asd.png"}
-                  alt=""
-                />
-              </Box>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={() => history.push("/register-as/cadeteria")}
-                size="large"
-                className={classes.button_cadeteria}
-              >
-                Cadeteria
-              </Button>
-            </Box>
+            <CustomButton
+              /*  color="primary" */
+              variant="contained"
+              size="large"
+              className={classes.button_cadete}
+              onClick={() => history.push("/register-as/cadete")}
+            >
+              Cadete
+            </CustomButton>
           </Box>
         </Box>
-      </div>
+
+        <Box
+          display="flex"
+          alignSelf="center"
+          justifyContent="center"
+          width={230}
+          m={1}
+          p={1}
+          bgcolor="#f6f6f6"
+        >
+          <Box p={1} bgcolor="#f6f6f6">
+            <Box display="flex" justifyContent="center">
+              <img
+                className={classes.large}
+                src={process.env.PUBLIC_URL + "asd.png"}
+                alt=""
+              />
+            </Box>
+            <CustomButton
+              variant="contained"
+              color="red"
+              onClick={() => history.push("/register-as/cadeteria")}
+              size="large"
+              className={classes.button_cadeteria}
+            >
+              Cadeteria
+            </CustomButton>
+          </Box>
+        </Box>
+      </Box>
     </div>
+  </div>
   );
 };
 
