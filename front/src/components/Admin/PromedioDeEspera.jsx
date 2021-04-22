@@ -2,7 +2,6 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
-import Title from "./Title";
 import { Grid } from "@material-ui/core";
 
 function preventDefault(event) {
@@ -26,10 +25,9 @@ export default function OrdenesEntregadas({ orders, id }) {
 
   const classes = useStyles();
   return (
-    <React.Fragment>
-      <Typography component="p" variant="h4"></Typography>
-      <Typography color="textSecondary" className={classes.depositContext}>
-        {orders.map((order) => {
+    <>
+      {orders &&
+        orders.map((order) => {
           if (order.cadeteriumId == id) {
             return order.status == "Entregado" ? (
               <Grid container direction="row" justify="space-between">
@@ -40,14 +38,13 @@ export default function OrdenesEntregadas({ orders, id }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="subtitle1">
-                    {conversor(order.inTransit)}
+                    {conversor(order.pickUpaverage)}
                   </Typography>
                 </Grid>
               </Grid>
             ) : null;
           }
         })}
-      </Typography>
-    </React.Fragment>
+    </>
   );
 }

@@ -28,7 +28,8 @@ export default function OrdenesEntregadas({ orders, id }) {
               return order.status == "Entregado" ? (
                 <Grid container direction="row" justify="space-between">
                   <Grid item>
-                    <Link style={{textDecoration: "none"}}
+                    <Link
+                      style={{ textDecoration: "none" }}
                       to={`/admin/metrics/SingleOrder/${order.id}/${order.orderNumber}`}
                     >
                       <Typography variant="subtitle1">
