@@ -33,6 +33,7 @@ import { allCadeterias } from '../../state/cadeterias';
 import Title from '../Admin/Title';
 
 
+import AveragePendingTime from './AveragePendingTime';
 
 
 
@@ -162,20 +163,26 @@ export default function SingleMetricsCadeteria({match}) {
          <h1>Rendimiento de {match.namecadete}</h1>
           <Grid container spacing={5}>
            
-            <Grid item xs={12} md={3} lg={4}>
+            <Grid item xs={12} md={4} lg={3}>
             <Title>Ordenes Entregadas</Title>
               <Paper className={fixedHeightPaper}>
                 <DeliverOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
+            <Grid item xs={12} md={4} lg={3}>
             <Title>Promedio de Entrega</Title>
               <Paper className={fixedHeightPaper}>
                 <AverageTimeDeliver orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
-            <Grid item xs={12} md={3} lg={4}>
-            <Title>Devueltas a Sucursal</Title>
+            <Grid item xs={12} md={4} lg={3}>
+            <Title>Promedio de Espera</Title>
+              <Paper className={fixedHeightPaper}>
+                <AveragePendingTime orders={orders} id= {match.id} />
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={4} lg={3}>
+            <Title>Ordenes Devueltas a Sucursal</Title>
               <Paper className={fixedHeightPaper}>
                 <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>

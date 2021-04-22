@@ -34,7 +34,7 @@ const useStyles = makeStyles((theme) => ({
 
 export default function CustomList({ order }) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(true);
+  const [open, setOpen] = React.useState(false);
   const history = useHistory();
 
   const messages = messagesHandler(useSnackbar());
@@ -46,7 +46,7 @@ export default function CustomList({ order }) {
   };
 
   const typeColor = () => {
-    if (order.status === "Pendiente") return "teal";
+    if (order.status === "Pendiente") return "#039be5";
     if (order.status === "En camino") return "lime";
   };
 
@@ -66,7 +66,6 @@ export default function CustomList({ order }) {
             cadeteId,
           })
         ).then(({ payload }) => {
-          console.log("-----*", payload);
           if (typeof payload === 'object') socket.emit("orden", { orden: payload });
           if (payload.status === "En camino")
             return messages.info("Has tomado una orden");
@@ -82,7 +81,8 @@ export default function CustomList({ order }) {
     <List
       id={order.id}
       style={{
-        background: "linear-gradient(50deg,#fafafa , 95%, #039be5 100%)",
+        background: `linear-gradient(50deg, #fafafa , 96%, ${typeColor()} 100%)`,
+        borderRadius: '4px'
       }}
       component="nav"
       aria-labelledby="nested-list-subheader"

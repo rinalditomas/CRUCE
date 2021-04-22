@@ -2,36 +2,17 @@ import React, { useEffect } from 'react';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/core/styles';
 import CssBaseline from '@material-ui/core/CssBaseline';
-import Drawer from '@material-ui/core/Drawer';
-import Box from '@material-ui/core/Box';
-import AppBar from '@material-ui/core/AppBar';
-import Toolbar from '@material-ui/core/Toolbar';
-import List from '@material-ui/core/List';
-import Typography from '@material-ui/core/Typography';
-import Divider from '@material-ui/core/Divider';
-import IconButton from '@material-ui/core/IconButton';
-import Badge from '@material-ui/core/Badge';
 import Container from '@material-ui/core/Container';
 import Grid from '@material-ui/core/Grid';
 import Paper from '@material-ui/core/Paper';
-import Link from '@material-ui/core/Link';
-import MenuIcon from '@material-ui/icons/Menu';
-import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import NotificationsIcon from '@material-ui/icons/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
-import Chart from './Chart';
-import Deposits from './Deposits';
 import OrdenesEntregadas from './OrdenesEntregadas';
 import OrdenesDevueltas from './OrdenesDevueltas';
 import TiempoPromedioEntrega from './TiempoPromedioEntrega';
-import Orders from './Orders';
-import Tabla from "./dashboard"
 import { useDispatch, useSelector } from 'react-redux';
 import { AllcadeteriasMetrics, allOrders, metricOrders } from '../../state/orders';
-import { allCadeterias } from '../../state/cadeterias';
 import Title from './Title';
 
-
+import PromedioDeEspera from '../Admin/PromedioDeEspera'
 
 
 
@@ -121,8 +102,6 @@ export default function SingleMetricsCadeteria({match}) {
   const dispatch = useDispatch() 
   const classes = useStyles();
   const [open, setOpen] = React.useState(true);
-  const metrics = useSelector((state) => state.orders.singleMetrics);
-  const metric2 = useSelector((state) => state.orders.metrics);
   const orders = useSelector((state) => state.orders.orders);
 
   useEffect(() => {
@@ -131,31 +110,14 @@ export default function SingleMetricsCadeteria({match}) {
     dispatch(allOrders(match.id))
   }, []);
 
-
-
-  const handleDrawerOpen = () => {
-    setOpen(true);
-  };
-  const handleDrawerClose = () => {
-    setOpen(false);
-  };
   const fixedHeightPaper = clsx(classes.paper, classes.fixedHeight);
 
   return (
     <div>
-       
-    <div className = "tabla">
-      {/* <Tabla metricas = {metrics} /> */}
-    </div>
-   
-   
     <div className={classes.root}>
       <CssBaseline />
-    
-     
       <main className={classes.content}>
         <div className={classes.appBarSpacer} />
-        
         <Container maxWidth="lg" className={classes.container}>
          <h1>Rendimiento de {match.namecadeteria} </h1>
           <Grid container spacing={5}>
@@ -170,6 +132,12 @@ export default function SingleMetricsCadeteria({match}) {
             <Title>Promedio de Entrega</Title>
               <Paper className={fixedHeightPaper}>
                 <TiempoPromedioEntrega orders={orders} id= {match.id}/>
+              </Paper>
+            </Grid>
+            <Grid item xs={12} md={3} lg={4}>
+            <Title>Promedio de Espera</Title>
+              <Paper className={fixedHeightPaper}>
+                <PromedioDeEspera orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={3} lg={4}>

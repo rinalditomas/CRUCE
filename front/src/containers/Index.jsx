@@ -31,18 +31,17 @@ import SimpleModal from "../components/ForgotPassword";
 import Metricas from "../components/Admin/Metrics";
 import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria";
 import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
-import dashboard from "../components/Admin/dashboard"
+import dashboard from "../components/Admin/dashboard";
 import SingleMetricsCadeteria from "../components/Admin/SingleMetricsCadeteria";
 import SingleMetricsCadete from "../components/Cadeteria/singleMetricCadete";
 import CadeteriaMetrics from "../components/Cadeteria/CadeteriaMetrics";
-import SingleOrderAdmin from "../components/Admin/singleOrder"
+import SingleOrderAdmin from "../components/Admin/singleOrder";
 import Socketio from "../components/Socketio";
-import SingleOrderCadeteria from '../components/Cadeteria/SingleOrderCadeteria'
-
+import SingleOrderCadeteria from "../components/Cadeteria/SingleOrderCadeteria";
 
 ///styled
 
-import StyledComponents from '../components/Styled/StyledComponents';
+import StyledComponents from "../components/Styled/StyledComponents";
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -52,17 +51,14 @@ const Index = () => {
     dispatch(fetchCad());
   }, []);
 
-
-
   return (
     <div>
       <Navbar />
       <Switch>
-
-      <Route exact path="/socket" component={Socketio} />
+        <Route exact path="/socket" component={Socketio} />
 
         <Route exact path="/login-as" component={SelectLogin} />
-       {/*  <Route exact path="/dashboard" component={dashboard} /> */}
+        {/*  <Route exact path="/dashboard" component={dashboard} /> */}
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 
@@ -95,14 +91,22 @@ const Index = () => {
         <Route exact path="/admin/ListCadetes" component={ListCadetes} />
         <Route exact path="/admin/listCadeterias" component={ListCadeterias} />
         <Route
-          exact path="/admin/metrics/:id/cadeteria/:namecadeteria"
-          render={({ match }) => <SingleMetricsCadeteria match={match.params} />}
+          exact
+          path="/admin/metrics/:id/cadeteria/:namecadeteria"
+          render={({ match }) => (
+            <SingleMetricsCadeteria match={match.params} />
+          )}
         />
-         <Route
+        <Route
           path="/admin/metrics/SingleOrder/:id/:orderNumber"
           render={({ match }) => <SingleOrderAdmin match={match.params} />}
         />
-        
+
+        <Route
+          path="/cadeteria/metrics/SingleOrder/:id/:orderNumber"
+          render={({ match }) => <SingleOrderAdmin match={match.params} />}
+        />
+
         <Route exact path="/admin/metrics" component={Metricas} />
         <Route
           exact
@@ -115,9 +119,10 @@ const Index = () => {
         <Route exact path="/cadeteria/listOrders" component={ListOrders} />
         <Route exact path="/cadeteria/listCadetes" component={Cadetes} />
         <Route exact path="/cadeteria/solicitudes" component={CadeteRequest} />
-        <Route exact path="/cadeteria/metricas" component={CadeteriaMetrics}/>
+        <Route exact path="/cadeteria/metricas" component={CadeteriaMetrics} />
         <Route
-          exact path="/cadeteria/metrics/:id/cadete/:namecadete"
+          exact
+          path="/cadeteria/metrics/:id/cadete/:namecadete"
           render={({ match }) => <SingleMetricsCadete match={match.params} />}
         />
         <Route
