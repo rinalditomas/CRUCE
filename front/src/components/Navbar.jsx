@@ -135,7 +135,7 @@ const Navbar = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
-        <Toolbar>
+        <Toolbar >
           {location[1] !== "" ? (
             <IconButton>
               <ArrowBackIosIcon
@@ -146,7 +146,7 @@ const Navbar = () => {
           ) : null}
           <Typography variant="h7" className={classes.titleWelcome}>
             {user && user.authorized
-              ? `Bienvenido ${user.firstName} ${user.lastName}`
+              ? `Hola ${user.firstName}`
               : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>

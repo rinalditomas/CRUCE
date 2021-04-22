@@ -67,21 +67,22 @@ const ListOrders = () => {
   return (
     <>
       <div className={classes.root}>
-        <CssBaseline />
-        <div>
-          <Typography
-            variant="h4"
-            key="1"
-            style={{
-              textAlign: "left",
-              marginTop: 45,
-              marginBottom: 50,
-              color: "rgb(100,100,100)",
-              fontWeight: "bold",
-            }}
-          >
-            LISTA DE ORDENES
-          </Typography>
+
+      <CssBaseline />
+        <div >
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >LISTA DE ORDENES       
+         </Typography>
+        
         </div>
         <div>
           <Grid item xs={12}>

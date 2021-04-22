@@ -33,7 +33,7 @@ const labels = (obj)=>{
       label: 'Promedio tiempo de entrega',
       data: labels(metricas).y3,
  
-      backgroundColor: '#3FBF50',
+      backgroundColor: '#99ddff',
       borderColor: 'rgba(255, 99, 132, 0.2)',
       
     },
@@ -41,7 +41,7 @@ const labels = (obj)=>{
       label: 'Promedio de espera',
       data: labels(metricas).y4,
 
-      backgroundColor: '#1C5D29',
+      backgroundColor: '#0000ff',
       borderColor: 'rgba(54, 162, 235, 0.2)',
      
     },

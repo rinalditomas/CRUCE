@@ -160,34 +160,47 @@ export default function SingleMetricsCadeteria({match}) {
         <div className={classes.appBarSpacer} />
         
         <Container maxWidth="lg" className={classes.container}>
-         <h1>Rendimiento de {match.namecadete}</h1>
-          <Grid container spacing={5}>
+  <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >Rendimiento de {match.namecadete}     
+         </Typography>          <Grid container spacing={5}>
            
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Ordenes Entregadas</Title>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}><Typography  variant="h6" style={{color: "white", margin: "auto"}}>Entregadas</Typography></Paper>
               <Paper className={fixedHeightPaper}>
                 <DeliverOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de Entrega</Title>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}>
+             <Typography  variant="h6" style={{color: "white", margin: "auto"}}>Promedio Entrega</Typography>     </Paper>
               <Paper className={fixedHeightPaper}>
                 <AverageTimeDeliver orders={orders} id= {match.id}/>
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Promedio de Espera</Title>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}>
+            <Typography  variant="h6" style={{color: "white", margin: "auto"}}>Promedio Espera</Typography>  </Paper>
               <Paper className={fixedHeightPaper}>
                 <AveragePendingTime orders={orders} id= {match.id} />
               </Paper>
             </Grid>
             <Grid item xs={12} md={4} lg={3}>
-            <Title>Ordenes Devueltas a Sucursal</Title>
+            <Paper  style={{background: "linear-gradient(45deg, #545454 30%, #a6a6a6 95%)", height: "50px", display: "flex", justifyContent:"center", borderTopLeftRadius: 10, borderTopRightRadius:10}} align={'center'}>
+            <Typography  variant="h6" style={{color: "white", margin: "auto"}}>Devueltas a Sucursal</Typography>  </Paper>
               <Paper className={fixedHeightPaper}>
                 <ReturnedOrders orders={orders} id= {match.id} />
               </Paper>
             </Grid>
-           
+     
           </Grid>
           
         </Container>
