@@ -15,6 +15,8 @@ import { useSnackbar } from "notistack";
 import messagesHandler from "../utils/messagesHandler";
 import { Menu, MenuItem } from "@material-ui/core";
 import MoreIcon from "@material-ui/icons/MoreVert";
+import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
+import Avatar from "@material-ui/core/Avatar";
 
 const Navbar = () => {
   const [anchorEl, setAnchorEl] = useState(null);
@@ -61,6 +63,7 @@ const Navbar = () => {
   };
 
   const mobileMenuId = "primary-search-account-menu-mobile";
+
   const renderMobileMenu = (
     <Menu
       anchorEl={mobileMoreAnchorEl}
@@ -71,21 +74,12 @@ const Navbar = () => {
       open={isMobileMenuOpen}
       onClose={handleMobileMenuClose}
     >
-      <MenuItem onClick={handleProfileMenuOpen}>
-        <IconButton
-          aria-label="account of current user"
-          aria-controls="primary-search-account-menu"
-          aria-haspopup="true"
-          color="inherit"
-        ></IconButton>
-      </MenuItem>
-
       {!token ? (
         <>
           <MenuItem>
             <Link
               to="/login-as"
-              style={{ color: "inherit" }}
+              style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
               <Button color="inherit">Login</Button>
@@ -94,7 +88,7 @@ const Navbar = () => {
           <MenuItem>
             <Link
               to="/register-as"
-              style={{ color: "inherit" }}
+              style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
               <Button color="inherit">Register</Button>
@@ -108,17 +102,19 @@ const Navbar = () => {
               Logout
             </Button>
           </MenuItem>
+          {userTypeColor() !== "admin" ? (
+            <MenuItem>
+              <Link
+                to="/cadete/profileCadete"
+                style={{ color: "inherit", textDecoration: "none" }}
+                onClick={handleMobileMenuClose}
+              >
+                <Button color="inherit">Perfil</Button>
+              </Link>
+            </MenuItem>
+          ) : null}
         </>
       )}
-      <MenuItem>
-        <Link
-          to="/cadete/profileCadete"
-          style={{ color: "inherit" }}
-          onClick={handleMobileMenuClose}
-        >
-          <Button color="inherit">Perfil</Button>
-        </Link>
-      </MenuItem>
       {user && user.admin ? (
         <>
           <MenuItem>
@@ -137,10 +133,19 @@ const Navbar = () => {
     </Menu>
   );
 
+  console.log(user);
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
         <Toolbar>
+          {location[1] !== "" ? (
+            <IconButton>
+              <ArrowBackIosIcon
+                style={{ color: "grey" }}
+                onClick={() => history.goBack()}
+              />
+            </IconButton>
+          ) : null}
           <Typography variant="h7" className={classes.titleWelcome}>
             {user && user.authorized
               ? `Bienvenido ${user.firstName} ${user.lastName}`
@@ -150,11 +155,23 @@ const Navbar = () => {
           <div className={classes.sectionDesktop}>
             {!token ? (
               <>
-                <Link to="/login-as" style={{ color: "inherit" }}>
+                <Link
+                  to="/login-as"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
                   <Button color="inherit">Login</Button>
                 </Link>
-                <Link to="/register-as" style={{ color: "inherit" }}>
+                <Link
+                  to="/register-as"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
                   <Button color="inherit">Register</Button>
+                </Link>
+                <Link
+                  to="/"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
+                  <Button color="inherit">Home</Button>
                 </Link>
               </>
             ) : (
@@ -167,18 +184,29 @@ const Navbar = () => {
                     onClick={handleMobileMenuOpen}
                     color="inherit"
                   >
-                    {user || cadeteria ? <AccountCircle /> : <MoreIcon />}
+                    {user || cadeteria ? (
+                      <Avatar
+                        alt={
+                          (user && user.firstName) ||
+                          (cadeteria && cadeteria.nameCompany)
+                        }
+                        src={process.env.PUBLIC_URL + "avatars/person-3.svg"}
+                        style={{ display: "flex", margin: 3 }}
+                      />
+                    ) : (
+                      <MoreIcon />
+                    )}
                   </IconButton>
                 </div>
               </>
             )}
 
-            <Link to="/" style={{ color: "inherit" }}>
-              <Button color="inherit">Home</Button>
-            </Link>
             {user && user.admin ? (
               <>
-                <Link to="/admin" style={{ color: "inherit" }}>
+                <Link
+                  to="/admin"
+                  style={{ color: "inherit", textDecoration: "none" }}
+                >
                   <Button color="inherit">admin panel</Button>
                 </Link>
               </>
@@ -195,7 +223,15 @@ const Navbar = () => {
               onClick={handleMobileMenuOpen}
               color="inherit"
             >
-              {user || cadeteria ? <AccountCircle /> : <MoreIcon />}
+              {user || cadeteria ? (
+                <Avatar
+                  alt={user && user.firstName}
+                  src={process.env.PUBLIC_URL + "avatars/person-2.svg"}
+                  style={{ display: "flex", margin: 3 }}
+                />
+              ) : (
+                <MoreIcon />
+              )}
             </IconButton>
           </div>
         </Toolbar>

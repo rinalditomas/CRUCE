@@ -3,6 +3,8 @@ import { Bar } from "@reactchartjs/react-chart.js";
 import { useSelector } from "react-redux";
 
 const MultiAxisLine = ({ metricas }) => {
+
+
   let conversor = (tiempo) => {
     let enMinutos = tiempo / 1000 / 60;
     let hs = enMinutos / 60;
@@ -11,10 +13,7 @@ const MultiAxisLine = ({ metricas }) => {
     return Math.floor(hs) + Math.round(minutos);
   };
 
-
   console.log(conversor(18000000))
-
-
 
   const labels = (obj) => {
     let y1 = [];

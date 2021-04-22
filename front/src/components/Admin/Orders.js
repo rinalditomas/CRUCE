@@ -28,10 +28,23 @@ export default function Orders({metricas}) {
     return { name, deliver, returned, averageTimeDeli, averageTimePick, id};
   }
   
+
+
+  let conversor = (tiempo) => {
+    let enMinutos = tiempo / 1000 / 60;
+    let hs = enMinutos / 60;
+    let minutos = enMinutos % 60;
+
+    return Math.floor(hs)+" Hs : "+Math.round(minutos)+" Min"
+  };
+
+  console.log(conversor(18000000))
+
+
   const dataRow = (obj)=>{
   let resultado  =[]
     for (const id in obj) {
-    resultado.push(createData(obj[id].name,obj[id].deliver,obj[id].returned,((obj[id].averageTimeDeli/36000000).toFixed(3)),(obj[id].averageTimePick/36000000).toFixed(3),id))
+    resultado.push(createData(obj[id].name,obj[id].deliver,obj[id].returned,(conversor(obj[id].averageTimeDeli)),conversor(obj[id].averageTimePick),id))
     }
     return resultado
   }
@@ -46,7 +59,7 @@ export default function Orders({metricas}) {
   return (
     <React.Fragment>
       <Title>Detalle Cadeterias</Title>
-      <Table size="medium"  >
+      <Table size="medium" >
         <TableHead>
           <TableRow>
             <TableCell>Cadeteria</TableCell>

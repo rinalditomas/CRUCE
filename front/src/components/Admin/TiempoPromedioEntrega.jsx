@@ -16,7 +16,7 @@ const useStyles = makeStyles({
 
 export default function OrdenesEntregadas({orders, id}) {
 
-    console.log(id)
+  
     let conversor = (tiempo) => {
       let enMinutos=  (tiempo/1000)/60
       let hs= enMinutos/60
@@ -25,6 +25,7 @@ export default function OrdenesEntregadas({orders, id}) {
      
       return Math.floor(hs)+" Hs : "+Math.round(minutos)+" Min"
     }
+  
 
 
   const classes = useStyles();

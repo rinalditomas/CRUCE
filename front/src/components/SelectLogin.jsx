@@ -1,8 +1,10 @@
 import React from "react";
 import useStyles from "../utils/stylesRegister";
 import { useHistory } from "react-router";
-import Box from "@material-ui/core/Box";
+import { Box, Typography } from "@material-ui/core";
 import { CustomButton } from "../utils/Buttons";
+
+import { createMuiTheme, ThemeProvider } from "@material-ui/core/styles";
 
 const Main = () => {
   const classes = useStyles();
@@ -10,16 +12,28 @@ const Main = () => {
 
   return (
     <div>
-      <div>
-        <h1>Ingresar como</h1>
+      <Typography
+        variant="h4"
+        style={{
+          textAlign: "center",
+          marginTop: 45,
+          color: "rgb(100,100,100)",
+          fontWeight: "bold",
+        }}
+      >
+        INGRESAR COMO
+      </Typography>
+      <div style={{ display: "flex", justifyContent: "center" }}>
         <Box
           display="flex"
-          justifyContent="center"
+          justifySelf="center"
           flexDirection="column"
-          style={{ marginTop: "4rem" }}
-          bgcolor='green'
+          marginTop={5}
+          bgcolor="#f6f6f6"
           width={300}
-          ali
+          height={500}
+          alignItems="center"
+          borderRadius="30px"
         >
           <Box
             display="flex"

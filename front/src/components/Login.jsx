@@ -92,10 +92,6 @@ export default function Login() {
                 onChange={handleChange}
                 value={input.password}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth
@@ -105,6 +101,7 @@ export default function Login() {
               >
                 Sign In
               </Button>
+
               <Grid container>
                 <Grid item xs>
                   <Link to="/forgot">Olvidaste tu contraseña?</Link>

@@ -42,6 +42,17 @@ export default function Orders({ metricas }) {
     };
   }
 
+
+  let conversor = (tiempo) => {
+    let enMinutos = tiempo / 1000 / 60;
+    let hs = enMinutos / 60;
+    let minutos = enMinutos % 60;
+
+    return Math.floor(hs)+" Hs : "+Math.round(minutos)+" Min"
+  };
+
+
+
   const dataRow = (obj) => {
     let resultado = [];
     for (const id in obj) {
@@ -50,8 +61,8 @@ export default function Orders({ metricas }) {
           obj[id].name,
           obj[id].deliver,
           obj[id].returned,
-          (obj[id].averageTimeDeli / 36000000).toFixed(3),
-          (obj[id].averageTimePick / 36000000).toFixed(3),
+          conversor(obj[id].averageTimeDeli),
+          conversor(obj[id].averageTimePick),
           id,
           obj[id].lastName
         )

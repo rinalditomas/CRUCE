@@ -2,14 +2,9 @@ import React from 'react'
 import { Bar } from '@reactchartjs/react-chart.js'
 import { useSelector } from "react-redux";
 
-
-
-
-
 const MultiAxisLine = ({metricas}) => {
 
 
-  
 const labels = (obj)=>{
   let y1=[]
   let x=[]
@@ -21,8 +16,8 @@ const labels = (obj)=>{
     x.push(obj[id].name)
     y1.push(obj[id].deliver)
     y2.push(obj[id].returned)
-    y3.push((obj[id].averageTimeDeli/36000000))
-    y4.push((obj[id].averageTimePick/36000000))
+    y3.push((obj[id].averageTimeDeli/3600000))
+    y4.push((obj[id].averageTimePick/3600000))
   }
 
   return {y1,x,y2,y3,y4}

@@ -47,7 +47,7 @@ Order.init(
      pickUpaverage: {
       type: S.VIRTUAL,
       get() {
-        return this.getDataValue('pickUpDate')- this.getDataValue('createdAt')
+        return this.getDataValue('pickUpDate') - this.getDataValue('createdAt')
       }
     },
     street: {
