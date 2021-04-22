@@ -58,7 +58,7 @@ export default function CustomList({ order }) {
     if (status === "Pendiente") {
       state = "En camino";
 
-      setTimeout(() => {
+
         dispatch(
           orderState({
             orderNumber,
@@ -73,7 +73,7 @@ export default function CustomList({ order }) {
             return messages.info(payload);
           }
         });
-      }, 2000);
+    
     }
   };
 
