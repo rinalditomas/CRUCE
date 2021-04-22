@@ -18,6 +18,7 @@ const useStyles = makeStyles((theme) => ({
     flexGrow: 1,
     justifyContent: "center",
     alignContent: "baseline",
+    fontSize: "20px",
     textShadow: "2px 2px 2px grey",
   },
 

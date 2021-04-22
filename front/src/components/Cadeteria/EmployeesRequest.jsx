@@ -5,16 +5,16 @@ import ListItem from "@material-ui/core/ListItem";
 import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
 import ListItemText from "@material-ui/core/ListItemText";
 import IconButton from "@material-ui/core/IconButton";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import { Link } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
 import { admitCadete, allCadetes } from "../../state/users";
-
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
+<<<<<<< HEAD
 
 import { Chip, Container, CssBaseline, Paper, Typography } from "@material-ui/core";
+=======
+import { Chip, CssBaseline, Typography } from "@material-ui/core";
+>>>>>>> 9d2dadf513f19ac91087e397fb1b58c6d2b5dc85
 import DoneIcon from "@material-ui/icons/Done";
 import socket from "../../utils/socket";
 
@@ -67,7 +67,6 @@ export default function CadeteriaRequest() {
       <div className={classes.root}>
         <CssBaseline />
         <div>
-          
         <Typography
           variant="h4"
           key="1"
@@ -80,8 +79,6 @@ export default function CadeteriaRequest() {
           }}
         >SOLICITUDES CADETES     
          </Typography>
-
-     
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
