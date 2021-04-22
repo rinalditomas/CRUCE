@@ -92,10 +92,6 @@ const LoginCadeteria = () => {
                 onChange={handleChange}
                 value={input.password}
               />
-              <FormControlLabel
-                control={<Checkbox value="remember" color="primary" />}
-                label="Remember me"
-              />
               <Button
                 type="submit"
                 fullWidth

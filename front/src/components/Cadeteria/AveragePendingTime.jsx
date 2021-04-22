@@ -38,7 +38,7 @@ export default function OrdenesEntregadas({ orders, id }) {
                 </Grid>
                 <Grid item>
                   <Typography variant="subtitle1">
-                    {conversor(order.inTransit)}
+                    {conversor(order.pickUpaverage)}
                   </Typography>
                 </Grid>
               </Grid>
