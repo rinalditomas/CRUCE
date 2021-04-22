@@ -41,14 +41,14 @@ const MultiAxisLine = ({ metricas }) => {
         label: "Promedio tiempo de entrega",
         data: labels(metricas).y3,
 
-        backgroundColor: "#3FBF50",
+        backgroundColor: "#ffb3b3",
         borderColor: "rgba(255, 99, 132, 0.2)",
       },
       {
         label: "Promedio de espera",
         data: labels(metricas).y4,
 
-        backgroundColor: "#1C5D29",
+        backgroundColor: "#ff0000",
         borderColor: "rgba(54, 162, 235, 0.2)",
       },
     ],

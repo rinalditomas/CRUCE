@@ -52,19 +52,21 @@ export default function ListCadetes() {
       <div className={classes.root}>
         <CssBaseline />
         <div>
-          <Typography
-            variant="h4"
-            key="1"
-            style={{
-              textAlign: "center",
-              marginTop: 45,
-              marginBottom: 50,
-              color: "rgb(100,100,100)",
-              fontWeight: "bold",
-            }}
-          >
-            LISTA DE CADETES
-          </Typography>
+
+        <Typography
+          variant="h4"
+          key="1"
+          style={{
+            textAlign: "center",
+            marginTop: 45,
+            marginBottom: 50,
+            color: "black",
+            fontWeight: "bold",
+          }}
+        >LISTA DE CADETES       
+         </Typography>
+         
+
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
