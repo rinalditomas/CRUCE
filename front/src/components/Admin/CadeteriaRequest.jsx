@@ -1,21 +1,23 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import { Link } from "react-router-dom";
-import Chip from "@material-ui/core/Chip";
 import DoneIcon from "@material-ui/icons/Done";
-import { useDispatch, useSelector } from "react-redux";
+import messagesHandler from "../../utils/messagesHandler";
+import {
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  Chip,
+  IconButton,
+  Container,
+  CssBaseline,
+  Paper,
+  Typography,
+} from "@material-ui/core";
+import { makeStyles } from "@material-ui/core/styles";
 import { admitCadeteria, allCadeterias } from "../../state/cadeterias";
 import { useSnackbar } from "notistack";
-import messagesHandler from "../../utils/messagesHandler";
-
+import { useDispatch, useSelector } from "react-redux";
 import socket from "../../utils/socket";
-import { Container, CssBaseline, Paper, Typography } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -35,12 +37,10 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 export default function CadeteriaRequest() {
-  const dispatch = useDispatch();
   const classes = useStyles();
+  const dispatch = useDispatch();
   const [dense, setDense] = React.useState(false);
-
   const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
-
   const messages = messagesHandler(useSnackbar());
 
   useEffect(() => {

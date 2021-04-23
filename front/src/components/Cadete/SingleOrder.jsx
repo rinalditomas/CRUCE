@@ -1,20 +1,22 @@
 import React, { useEffect, useState } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import axios from "axios";
+import {
+  Card,
+  CardActionArea,
+  CardActions,
+  CardContent,
+  Button,
+  Typography,
+  makeStyles,
+  Grid,
+} from "@material-ui/core";
 import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { Grid } from "@material-ui/core";
-import axios from "axios";
-import messagesHandler from "../../utils/messagesHandler";
 import { MapContainer, TileLayer, Circle, Tooltip } from "react-leaflet";
-import socket from "../../utils/socket";
 import { useSnackbar } from "notistack";
+import messagesHandler from "../../utils/messagesHandler";
+import socket from "../../utils/socket";
 import "leaflet/dist/leaflet.css";
 
 const useStyles = makeStyles({
@@ -31,17 +33,13 @@ export default function SingleOrder({ match }) {
   const history = useHistory();
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [products, setProducts] = useState([]);
   const order = useSelector((state) => state.orders.singleOrder);
-
   const cadete = useSelector((state) => state.users.user);
+  const [products, setProducts] = useState([]);
   const [coord, setCoord] = useState(/*[-26.8198, -65.2169]*/);
   const [carga, setCarga] = useState(false);
   const messages = messagesHandler(useSnackbar());
-
   const id = match.id;
-
-  console.log("-=-=====================id", id);
 
   useEffect(() => {
     dispatch(singleOrder(id)).then((res) => {
@@ -72,13 +70,6 @@ export default function SingleOrder({ match }) {
           : messages.info(`Has tomado un orden *`);
       }
     });
-
-    /*   window.location.reload();
-    if (typeof orden === "object" && orden.status === "En camino") {
-      cadete.firstName + " " + cadete.lastName !== orden.nombre
-        ? messages.info(`${orden.nombre} ha tomado un orden`)
-        : messages.info(`Has tomado un orden *`);
-    } */
   });
 
   const ChangeState = (state) => {
@@ -91,12 +82,6 @@ export default function SingleOrder({ match }) {
       if (order.payload.status !== "En camino") history.push("/cadete");
       if (typeof order.payload === "object")
         socket.emit("orden", { orden: order.payload });
-      /*  else {
-        dispatch(singleOrder(match.id)).then((order) => {
-          console.log("Orden ===>", order);
-          socket.emit("orden", { orden: order.payload });
-        });
-      } */
     });
   };
 

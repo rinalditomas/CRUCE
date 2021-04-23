@@ -11,22 +11,18 @@ import { logout } from "../../state/cadeterias";
 import useStyles from "../../utils/stylesNavbar";
 
 import { useSnackbar } from "notistack";
-import messagesHandler from '../../utils/messagesHandler'
+import messagesHandler from "../../utils/messagesHandler";
 
 const CadeteriaNavbar = () => {
   const classes = useStyles();
   const history = useHistory();
-
   const dispatch = useDispatch();
   const token = localStorage.getItem("token");
-
-
-  const messages = messagesHandler(useSnackbar())
-
+  const messages = messagesHandler(useSnackbar());
 
   const logoutCadeteria = () => {
     localStorage.removeItem("token");
-    dispatch(logout()) && messages.info('Deslogueado correctamente')
+    dispatch(logout()) && messages.info("Deslogueado correctamente");
     history.push("/cadeteria/login");
   };
 
@@ -67,4 +63,5 @@ const CadeteriaNavbar = () => {
     </div>
   );
 };
+
 export default CadeteriaNavbar;

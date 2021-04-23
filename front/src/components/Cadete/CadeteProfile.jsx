@@ -1,40 +1,27 @@
 import React, { useState } from "react";
-import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import {
-  Button,
-  Container,
-  CssBaseline,
-  Avatar,
-  Link,
-  Box,
-  Checkbox,
-  FormControl,
-  FormControlLabel,
-} from "@material-ui/core";
+import { Button, Container, CssBaseline } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import MenuItem from "@material-ui/core/MenuItem";
-import Select from "@material-ui/core/Select";
-import { InputLabel } from "@material-ui/core";
-import { editProfileUser } from "../../state/users";
-
-import LockOutlinedIcon from "@material-ui/icons/LockOutlined";
-
-import { fetchMe } from "../../state/users";
-
-import useStyles from "../../utils/stylesCadeteProfile";
+import {
+  Grid,
+  MenuItem,
+  Select,
+  TextField,
+  InputLabel,
+} from "@material-ui/core";
+import { editProfileUser, fetchMe } from "../../state/users";
 import { useSnackbar } from "notistack";
+import useStyles from "../../utils/stylesCadeteProfile";
 import messageHandler from "../../utils/messagesHandler";
 
 export default function ProfileCadete() {
+  const classes = useStyles();
   const dispatch = useDispatch();
   const user = useSelector((state) => state.users.user);
-  const [input, setInput] = useState({});
   const history = useHistory();
-
   const messages = messageHandler(useSnackbar());
+  const [input, setInput] = useState({});
 
   const handleChange = (e) => {
     const key = e.target.name;
@@ -42,8 +29,6 @@ export default function ProfileCadete() {
 
     setInput({ ...input, [key]: value });
   };
-
-  const classes = useStyles();
 
   const editCadete = (e) => {
     e.preventDefault();
@@ -58,7 +43,6 @@ export default function ProfileCadete() {
       }
     });
   };
-
 
   return (
     <Container component="main" maxWidth="xs" style={{ padding: 25 }}>
@@ -151,4 +135,3 @@ export default function ProfileCadete() {
     </Container>
   );
 }
-

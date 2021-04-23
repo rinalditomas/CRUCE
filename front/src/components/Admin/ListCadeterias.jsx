@@ -1,12 +1,9 @@
 import React, { useEffect } from "react";
-import { IconButton, Grid, Typography, CssBaseline } from "@material-ui/core";
-
-import GroupAddIcon from "@material-ui/icons/GroupAdd";
-import { Link } from "react-router-dom";
+import { Grid, Typography, CssBaseline } from "@material-ui/core";
 import { useDispatch, useSelector } from "react-redux";
 import { allCadeterias, editStateCadeteria } from "../../state/cadeterias";
-import Request from "../../utils/Request";
 import { useSnackbar } from "notistack";
+import Request from "../../utils/Request";
 import messagesHandler from "../../utils/messagesHandler";
 
 import socket from "../../utils/socket";
@@ -43,19 +40,19 @@ export default function ListCadeterias() {
       >
         <div>
           <CssBaseline />
-        <Typography
-          variant="h4"
-          key="1"
-          style={{
-            textAlign: "center",
-            marginTop: 45,
-            marginBottom: 50,
-            color: "black",
-            fontWeight: "bold",
-          }}
-        >LISTA DE CADETERIAS       
-         </Typography>
-
+          <Typography
+            variant="h4"
+            key="1"
+            style={{
+              textAlign: "center",
+              marginTop: 45,
+              marginBottom: 50,
+              color: "black",
+              fontWeight: "bold",
+            }}
+          >
+            LISTA DE CADETERIAS
+          </Typography>
         </div>
         <Grid Item>
           {cadeterias &&

@@ -1,25 +1,24 @@
 import React from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import ListSubheader from "@material-ui/core/ListSubheader";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemIcon from "@material-ui/core/ListItemIcon";
-import ListItemText from "@material-ui/core/ListItemText";
-import Collapse from "@material-ui/core/Collapse";
+import {
+  ListSubheader,
+  List,
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  Collapse,
+} from "@material-ui/core";
 import LocationOnOutlinedIcon from "@material-ui/icons/LocationOnOutlined";
 import ExpandLess from "@material-ui/icons/ExpandLess";
 import ExpandMore from "@material-ui/icons/ExpandMore";
 import PhoneInTalkOutlinedIcon from "@material-ui/icons/PhoneInTalkOutlined";
 import PermIdentityOutlinedIcon from "@material-ui/icons/PermIdentityOutlined";
 import RadioButtonCheckedTwoToneIcon from "@material-ui/icons/RadioButtonCheckedTwoTone";
-import { useHistory } from "react-router";
-
 import { useDispatch, useSelector } from "react-redux";
-import { orderState } from "../../state/orders";
-
 import { useSnackbar } from "notistack";
+import { useHistory } from "react-router";
+import { orderState } from "../../state/orders";
 import messagesHandler from "../../utils/messagesHandler";
-
 import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
@@ -116,7 +115,6 @@ export default function CustomList({ order }) {
                 <PhoneInTalkOutlinedIcon />
               </ListItemIcon>
               <a href={`tel:+${order.clientPhone}`}>{order.clientPhone}</a>
-              {/*  <ListItemText secondary={`${order.clientPhone}`} /> */}
             </ListItem>
           </ListItem>
         </List>

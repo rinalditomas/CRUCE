@@ -1,13 +1,19 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Grid, Container, Typography, CssBaseline } from "@material-ui/core";
+import {
+  Paper,
+  Grid,
+  Container,
+  Typography,
+  CssBaseline,
+} from "@material-ui/core";
+import { fetchMe } from "../../state/users";
 import { useSelector, useDispatch } from "react-redux";
 import { allOrders } from "../../state/orders";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
 import socket from "../../utils/socket";
 import OrderList from "./OrderList";
-import { fetchMe } from "../../state/users";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -42,7 +48,6 @@ const CadeteOrders = () => {
   const [estado, setEstado] = React.useState(false);
   const messages = messagesHandler(useSnackbar());
 
-
   useEffect(() => {
     if (cadete.id) {
       dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
@@ -58,7 +63,7 @@ const CadeteOrders = () => {
     dispatch(fetchMe());
   });
 
-   socket.on("orden", (orden) => {
+  socket.on("orden", (orden) => {
     dispatch(allOrders(cadete.cadeteriumId)).then(() => {
       if (typeof orden === "object" && orden.status === "En camino") {
         cadete.firstName + " " + cadete.lastName !== orden.nombre
@@ -66,8 +71,7 @@ const CadeteOrders = () => {
           : messages.info(`Has tomado un orden`);
       }
     });
-    console.log('SOCKET ======================================')
-  });  
+  });
 
   socket.on("ordenes", (ordenes) => {
     dispatch(allOrders(cadete.cadeteriumId));
@@ -111,7 +115,7 @@ const CadeteOrders = () => {
   } else {
     return (
       <div>
-        <CssBaseline/>
+        <CssBaseline />
         <Typography
           variant="h4"
           key="1"
@@ -132,8 +136,8 @@ const CadeteOrders = () => {
         >
           <Container
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               marginTop: 20,
               marginBottom: 10,
             }}
@@ -151,7 +155,7 @@ const CadeteOrders = () => {
                           textAlign: "initial",
                           background:
                             "linear-gradient(45deg, #eeeeee, 30%, #9e9e9e 90%)",
-                            padding: '5px'
+                          padding: "5px",
                         }}
                       >
                         <OrderList order={order} />

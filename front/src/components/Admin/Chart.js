@@ -1,18 +1,18 @@
-import React from 'react'
-import { Line } from '@reactchartjs/react-chart.js'
+import React from "react";
+import { Line } from "@reactchartjs/react-chart.js";
 
 const data = {
-  labels: ['1', '2', '3', '4', '5', '6'],
+  labels: ["1", "2", "3", "4", "5", "6"],
   datasets: [
     {
-      label: '# of Votes',
+      label: "# of Votes",
       data: [12, 19, 3, 5, 2, 3],
       fill: false,
-      backgroundColor: 'rgb(255, 99, 132)',
-      borderColor: 'rgba(255, 99, 132, 0.2)',
+      backgroundColor: "rgb(255, 99, 132)",
+      borderColor: "rgba(255, 99, 132, 0.2)",
     },
   ],
-}
+};
 
 const options = {
   scales: {
@@ -24,16 +24,16 @@ const options = {
       },
     ],
   },
-}
+};
 
 const LineChart = () => (
   <>
-    <div className='header'>
-      <h1 className='title'>Line Chart</h1>
-      <div className='links'>
+    <div className="header">
+      <h1 className="title">Line Chart</h1>
+      <div className="links">
         <a
-          className='btn btn-gh'
-          href='https://github.com/reactchartjs/react-chartjs-2/blob/react16/example/src/charts/Line.js'
+          className="btn btn-gh"
+          href="https://github.com/reactchartjs/react-chartjs-2/blob/react16/example/src/charts/Line.js"
         >
           Github Source
         </a>
@@ -41,6 +41,6 @@ const LineChart = () => (
     </div>
     <Line data={data} options={options} />
   </>
-)
+);
 
 export default LineChart;

@@ -1,13 +1,13 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import List from "@material-ui/core/List";
+import { makeStyles } from "@material-ui/core/styles";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
-import messagesHandler from "../../utils/messagesHandler";
-import socket from "../../utils/socket";
 import { CssBaseline, Typography } from "@material-ui/core";
+import socket from "../../utils/socket";
 import Requests from "../../utils/Request";
+import messagesHandler from "../../utils/messagesHandler";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -20,8 +20,6 @@ const useStyles = makeStyles((theme) => ({
   title: {
     margin: theme.spacing(4, 0, 2),
   },
-  
-
 }));
 
 export default function ListCadetes() {
@@ -29,7 +27,6 @@ export default function ListCadetes() {
   const [dense, setDense] = React.useState(false);
   const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
-
   const messages = messagesHandler(useSnackbar());
 
   useEffect(() => {
@@ -54,21 +51,19 @@ export default function ListCadetes() {
       <div style={{ display: "grid", placeSelf: "center" }}>
         <CssBaseline />
         <div>
-
-        <Typography
-          variant="h4"
-          key="1"
-          style={{
-            textAlign: "center",
-            marginTop: 45,
-            marginBottom: 50,
-            color: "black",
-            fontWeight: "bold",
-          }}
-        >LISTA DE CADETES       
-         </Typography>
-         
-
+          <Typography
+            variant="h4"
+            key="1"
+            style={{
+              textAlign: "center",
+              marginTop: 45,
+              marginBottom: 50,
+              color: "black",
+              fontWeight: "bold",
+            }}
+          >
+            LISTA DE CADETES
+          </Typography>
         </div>
         <div className={classes.demo}>
           <List dense={dense}>
