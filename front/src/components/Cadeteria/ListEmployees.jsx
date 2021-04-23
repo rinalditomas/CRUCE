@@ -1,5 +1,4 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
@@ -8,18 +7,6 @@ import messagesHandler from "../../utils/messagesHandler";
 import Requests from "../../utils/Request";
 import socket from "../../utils/socket";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  individualOrder: {
-    backgroundColor: "grey",
-    margin: 10,
-    borderRadius: 8,
-  },
-}));
 
 export default function ListEmployees() {
   const cadetes = useSelector((state) => state.users.users);
