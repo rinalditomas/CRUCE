@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
-
 import { useSelector, useDispatch } from "react-redux";
 import CadeteOrders from "../components/Cadete/CadeteOrders";
-
 import { fetchMe } from "../state/users";
 
 export default function Cadete() {
@@ -11,7 +9,7 @@ export default function Cadete() {
 
   useEffect(() => {
     dispatch(fetchMe());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

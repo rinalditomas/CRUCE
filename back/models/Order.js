@@ -30,25 +30,27 @@ Order.init(
       type: S.STRING,
       allowNull: false,
     },
-     pickUpDate: {
+    pickUpDate: {
       type: S.DATE,
       defaultValue: null,
     },
-     deliveryDate: {
+    deliveryDate: {
       type: S.DATE,
       defaultValue: null,
     },
-     inTransit: {
+    inTransit: {
       type: S.VIRTUAL,
       get() {
-        return this.getDataValue('deliveryDate')- this.getDataValue('pickUpDate')
-      }
+        return (
+          this.getDataValue("deliveryDate") - this.getDataValue("pickUpDate")
+        );
+      },
     },
-     pickUpaverage: {
+    pickUpaverage: {
       type: S.VIRTUAL,
       get() {
-        return this.getDataValue('pickUpDate') - this.getDataValue('createdAt')
-      }
+        return this.getDataValue("pickUpDate") - this.getDataValue("createdAt");
+      },
     },
     street: {
       type: S.STRING,

@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import * as XLSX from "xlsx";
 import {
   Button,
@@ -6,60 +7,18 @@ import {
   Grid,
   CssBaseline,
   Typography,
+  CircularProgress,
+  Fab,
 } from "@material-ui/core";
-import { Link } from "react-router-dom";
-import adminMenuStyles from "../../utils/stylesAdmin";
-import { upLoadOrders } from "../../state/orders";
-import { useDispatch, useSelector } from "react-redux";
-import socket from "../../utils/socket";
-import { adminOrders } from "../../state/orders";
-
 import clsx from "clsx";
-import { makeStyles } from "@material-ui/core/styles";
-import CircularProgress from "@material-ui/core/CircularProgress";
-import { green } from "@material-ui/core/colors";
-import Fab from "@material-ui/core/Fab";
+import socket from "../../utils/socket";
 import CheckIcon from "@material-ui/icons/Check";
 import SaveIcon from "@material-ui/icons/Save";
+import useStyles from "../../styles/stylesProgress";
 
-
-
-
-
-const useStyles = makeStyles((theme) => ({
-  root: {
-    display: 'flex',
-    alignItems: 'center',
-  },
-  wrapper: {
-    margin: theme.spacing(1),
-    position: 'relative',
-  },
-  buttonSuccess: {
-    backgroundColor: green[500],
-    '&:hover': {
-      backgroundColor: green[700],
-    },
-  },
-  fabProgress: {
-    color: green[500],
-    position: 'absolute',
-    top: -6,
-    left: -6,
-    zIndex: 1,
-  },
-  buttonProgress: {
-    color: green[500],
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    marginTop: -12,
-    marginLeft: -12,
-  },
-}));
-
-
-
+import { upLoadOrders } from "../../state/orders";
+import { useDispatch, useSelector } from "react-redux";
+import { adminOrders } from "../../state/orders";
 
 const ExcelUpload = () => {
   const [items, setItems] = useState([]);
@@ -67,10 +26,9 @@ const ExcelUpload = () => {
   const dispatch = useDispatch();
   const classes = useStyles();
 
-  
   const [loading, setLoading] = React.useState(false);
   const [success, setSuccess] = React.useState(false);
-  
+
   const buttonClassname = clsx({
     [classes.buttonSuccess]: success,
   });
@@ -82,20 +40,14 @@ const ExcelUpload = () => {
       }
 
       const fileReader = new FileReader();
-
       fileReader.readAsArrayBuffer(file);
 
       fileReader.onload = (e) => {
         const bufferArray = e.target.result;
-
         const wb = XLSX.read(bufferArray, { type: "buffer" });
-
         const wsname = wb.SheetNames;
-
         const ws = wb.Sheets[wsname];
-
         const data = XLSX.utils.sheet_to_json(ws);
-
         resolve(data);
       };
 
@@ -122,6 +74,7 @@ const ExcelUpload = () => {
     });
     socket.emit("ordenes", orders);
   };
+
   return (
     <React.Fragment>
       <CssBaseline />
@@ -231,28 +184,3 @@ const ExcelUpload = () => {
 };
 
 export default ExcelUpload;
-
-/* 
-
-<input
-type="file"
-className="file"
-onChange={(e) => {
-  const file = e.target.files[0];
-  if (
-    file.name.slice(
-      file.name.length - 4,
-      file.name.length
-    ) === ".xls" ||
-    file.name.slice(
-      file.name.length - 5,
-      file.name.length
-    ) === ".xlsx"
-  ) {
-    readExcel(file);
-  } else {
-    alert("Archivo Invalido");
-    e.target.value = "";
-  }
-}}
-/> */

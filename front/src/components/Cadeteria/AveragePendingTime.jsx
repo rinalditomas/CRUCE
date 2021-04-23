@@ -1,18 +1,6 @@
 import React from "react";
-import { Link } from "react-router-dom";
-import { makeStyles } from "@material-ui/core/styles";
 import Typography from "@material-ui/core/Typography";
 import { Grid } from "@material-ui/core";
-
-function preventDefault(event) {
-  event.preventDefault();
-}
-
-const useStyles = makeStyles({
-  depositContext: {
-    flex: 1,
-  },
-});
 
 export default function OrdenesEntregadas({ orders, id }) {
   let conversor = (tiempo) => {
@@ -23,7 +11,6 @@ export default function OrdenesEntregadas({ orders, id }) {
     return Math.floor(hs) + " Hs : " + Math.round(minutos) + " Min";
   };
 
-  const classes = useStyles();
   return (
     <>
       {orders &&

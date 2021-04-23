@@ -1,7 +1,7 @@
 import React from "react";
-import Footer from "../components/Footer";
 import { useSelector, useDispatch } from "react-redux";
 import CadeteriaPanel from "../components/Cadeteria/CadeteriaPanel";
+import Footer from "../components/Footer";
 import Error from "../components/Error";
 
 import { fetchCad } from "../state/cadeterias";

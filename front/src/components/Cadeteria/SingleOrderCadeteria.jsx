@@ -1,27 +1,18 @@
 import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardActionArea from "@material-ui/core/CardActionArea";
-import CardActions from "@material-ui/core/CardActions";
-import CardContent from "@material-ui/core/CardContent";
-import Button from "@material-ui/core/Button";
-import Typography from "@material-ui/core/Typography";
+import {
+  Card,
+  CardActionArea,
+  CardContent,
+  Typography,
+  Grid,
+} from "@material-ui/core";
 import { singleOrder, orderState } from "../../state/orders";
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router";
-import { Grid } from "@material-ui/core";
-import axios from "axios";
-
 import "leaflet/dist/leaflet.css";
-
-import {
-  MapContainer,
-  TileLayer,
-  Marker,
-  Popup,
-  Circle,
-  Tooltip,
-} from "react-leaflet";
+import axios from "axios";
+import { MapContainer, TileLayer, Circle, Tooltip } from "react-leaflet";
 
 const useStyles = makeStyles({
   root: {
@@ -56,36 +47,14 @@ export default function SingleOrder({ match }) {
           setCoord(res.data.features[0].geometry.coordinates);
         })
         .then(() => {
-          return (
-            axios
-              .get(`http://localhost:8000/api/product/${match.orderNumber}`)
-
-              .then((res) => setProducts(res.data.count))
-              /* .then(() => {
-            return axios.get(
-              `https://nominatim.openstreetmap.org/search?street=${ordenes.number}+${ordenes.street}&city=${ordenes.city}&state=${ordenes.province}&country=argentina&format=geocodejson`
-            );
-          })
-          .then((res) => {
-            setCoord(res.data.features[0].geometry.coordinates);
-          }) */
-              .then(setCarga(false))
-              /*  .then(() => {
-            return axios.get(
-              `https://nominatim.openstreetmap.org/search?street=${ordenes.number}${ordenes.street}&city=${ordenes.city}&state=${ordenes.province}&country=argentina&format=geocodejson`
-            );
-          })
-          .then((res) => {
-            console.log(res, "ACA ESTA LA RESPUESTA");
-            setCoord(res.data.features[0].geometry.coordinates);
-          });
-      }) */
-              .catch((err) => console.log(err))
-          );
+          return axios
+            .get(`http://localhost:8000/api/product/${match.orderNumber}`)
+            .then((res) => setProducts(res.data.count))
+            .then(setCarga(false))
+            .catch((err) => console.log(err));
         });
     });
   }, []);
-
 
   const ChangeState = (state) => {
     const state2 = {

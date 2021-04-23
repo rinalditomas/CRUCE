@@ -1,32 +1,26 @@
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
-import AppBar from "@material-ui/core/AppBar";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
-import Button from "@material-ui/core/Button";
-import IconButton from "@material-ui/core/IconButton";
+import {
+  AppBar,
+  Toolbar,
+  Typography,
+  Button,
+  IconButton,
+  Avatar,
+} from "@material-ui/core";
 import { Link, useHistory } from "react-router-dom";
 import { useSelector, useDispatch } from "react-redux";
 import { logout } from "../state/users";
-import useStyles from "../utils/stylesNavbar";
-import AccountCircle from "@material-ui/icons/AccountCircle";
-
 import { useSnackbar } from "notistack";
-import messagesHandler from "../utils/messagesHandler";
 import { Menu, MenuItem } from "@material-ui/core";
+import useStyles from "../styles/stylesNavbar";
 import MoreIcon from "@material-ui/icons/MoreVert";
 import ArrowBackIosIcon from "@material-ui/icons/ArrowBackIos";
-import Avatar from "@material-ui/core/Avatar";
+import messagesHandler from "../utils/messagesHandler";
 
 const Navbar = () => {
-  const [anchorEl, setAnchorEl] = useState(null);
   const [mobileMoreAnchorEl, setMobileMoreAnchorEl] = useState(null);
-
   const isMobileMenuOpen = Boolean(mobileMoreAnchorEl);
-
-  const handleProfileMenuOpen = (event) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleMobileMenuClose = () => {
     setMobileMoreAnchorEl(null);
@@ -46,6 +40,7 @@ const Navbar = () => {
 
   const messages = messagesHandler(useSnackbar());
 
+ 
   const logoutUser = () => {
     localStorage.removeItem("token");
     handleMobileMenuClose();
@@ -59,7 +54,6 @@ const Navbar = () => {
     if (location.includes("cadete")) return "cadete";
     return "base";
   };
-
   const mobileMenuId = "primary-search-account-menu-mobile";
 
   const renderMobileMenu = (
@@ -80,7 +74,7 @@ const Navbar = () => {
               style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">Login</Button>
+              <Button color="inherit">Ingreso</Button>
             </Link>
           </MenuItem>
           <MenuItem>
@@ -89,7 +83,7 @@ const Navbar = () => {
               style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">Register</Button>
+              <Button color="inherit">Registro</Button>
             </Link>
           </MenuItem>
         </>
@@ -118,10 +112,10 @@ const Navbar = () => {
           <MenuItem>
             <Link
               to="/admin"
-              style={{ color: "inherit", textDecoration: 'none' }}
+              style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">Admin panel</Button>
+              <Button color="inherit">Panel Admin</Button>
             </Link>
           </MenuItem>
         </>
@@ -131,11 +125,10 @@ const Navbar = () => {
     </Menu>
   );
 
-  console.log(user);
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
-        <Toolbar >
+        <Toolbar>
           {location[1] !== "" ? (
             <IconButton>
               <ArrowBackIosIcon
@@ -144,10 +137,8 @@ const Navbar = () => {
               />
             </IconButton>
           ) : null}
-          <Typography variant="h7" className={classes.titleWelcome}>
-            {user && user.authorized
-              ? `Hola ${user.firstName}`
-              : null}
+          <Typography className={classes.titleWelcome}>
+            {user && user.authorized ? `Hola ${user.firstName}` : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>
           <div className={classes.sectionDesktop}>
@@ -157,19 +148,23 @@ const Navbar = () => {
                   to="/login-as"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="inherit">Login</Button>
+                  <Button style={{ color: "white" }}>Ingreso</Button>
                 </Link>
                 <Link
                   to="/register-as"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="inherit">Register</Button>
+                  <Button color="inherit" style={{ color: "white" }}>
+                    Registro
+                  </Button>
                 </Link>
                 <Link
                   to="/"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="inherit">Home</Button>
+                  <Button color="inherit" style={{ color: "white" }}>
+                    Home
+                  </Button>
                 </Link>
               </>
             ) : (
@@ -192,20 +187,15 @@ const Navbar = () => {
                         style={{ display: "flex", margin: 3 }}
                       />
                     ) : (
-                      <MoreIcon style={{backgroundColor: 'white'}} />
+                      <MoreIcon style={{ backgroundColor: "white" }} />
                     )}
                   </IconButton>
                 </div>
               </>
             )}
 
-            {user && user.admin ? (
-              <></>
-            ) : (
-              <></>
-            )}
+            {user && user.admin ? <></> : <></>}
           </div>
-
           <div className={classes.sectionMobile}>
             <IconButton
               aria-label="show more"
@@ -217,7 +207,7 @@ const Navbar = () => {
               {user || cadeteria ? (
                 <Avatar
                   alt={user && user.firstName}
-                  src={process.env.PUBLIC_URL + "avatars/person-2.svg"}
+                  src={process.env.PUBLIC_URL + "avatars/person-3.svg"}
                   style={{ display: "flex", margin: 3 }}
                 />
               ) : (

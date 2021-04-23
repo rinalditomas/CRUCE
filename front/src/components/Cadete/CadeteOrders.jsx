@@ -1,15 +1,19 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import { Paper, Grid, Container, Typography, CssBaseline } from "@material-ui/core";
+import {
+  Paper,
+  Grid,
+  Container,
+  Typography,
+  CssBaseline,
+} from "@material-ui/core";
+import { fetchMe } from "../../state/users";
 import { useSelector, useDispatch } from "react-redux";
 import { allOrders } from "../../state/orders";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
-
 import socket from "../../utils/socket";
-// import { orderState} from "../state/order";
 import OrderList from "./OrderList";
-import { fetchMe } from "../../state/users";
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -76,7 +80,13 @@ const CadeteOrders = () => {
   if (!cadete.authorized) {
     return (
       <div className={classes.root}>
-        <h1>Tu cadeteria aun no te ha autorizado</h1>
+        <CssBaseline />
+        <Typography
+          variant="h6"
+          style={{ display: "grid", placeItems: "center", marginTop: 50 }}
+        >
+          Tu cadeteria aun no te ha autorizado
+        </Typography>
         <img
           style={{ maxWidth: "100%" }}
           src="https://images.assetsdelivery.com/compings_v2/lkeskinen/lkeskinen1610/lkeskinen161000200.jpg"
@@ -88,6 +98,7 @@ const CadeteOrders = () => {
   if (!cadete.active) {
     return (
       <div className={classes.root}>
+        <CssBaseline />
         <h1>No estas activo</h1>
         <img
           style={{ maxWidth: "100%" }}
@@ -100,6 +111,7 @@ const CadeteOrders = () => {
   if (estado === true) {
     return (
       <div className={classes.root}>
+        <CssBaseline />
         <h1>Tu cadeteria no esta activa</h1>
         <img
           style={{ maxWidth: "100%" }}
@@ -111,7 +123,7 @@ const CadeteOrders = () => {
   } else {
     return (
       <div>
-        <CssBaseline/>
+        <CssBaseline />
         <Typography
           variant="h4"
           key="1"
@@ -132,8 +144,8 @@ const CadeteOrders = () => {
         >
           <Container
             style={{
-              display: 'flex',
-              justifyContent: 'center',
+              display: "flex",
+              justifyContent: "center",
               marginTop: 20,
               marginBottom: 10,
             }}
@@ -151,7 +163,7 @@ const CadeteOrders = () => {
                           textAlign: "initial",
                           background:
                             "linear-gradient(45deg, #eeeeee, 30%, #9e9e9e 90%)",
-                            padding: '5px'
+                          padding: "5px",
                         }}
                       >
                         <OrderList order={order} />

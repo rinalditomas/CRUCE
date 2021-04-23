@@ -1,15 +1,16 @@
 import React from "react";
 import Box from "@material-ui/core/Box";
-
-import useStyles from "../utils/stylesRegister";
+import useStyles from "../styles/stylesRegister";
 import { useHistory } from "react-router-dom";
 import { CustomButtonB } from "../utils/Buttons";
+
 
 const Home = () => {
   const history = useHistory();
   const classes = useStyles();
   return (
     <div>
+      
       <div>
         <Box
           display="flex"

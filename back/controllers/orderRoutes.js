@@ -68,7 +68,7 @@ const NewOrderController = {
     }
   },
 
-  /*   changeStateOrders(req, res) {
+  /*  changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId; 
@@ -105,8 +105,7 @@ const NewOrderController = {
         });
       })
       .catch((err) => res.send(err));
-  }, 
- */
+  },  */
 
   async changeStateOrders(req, res) {
     const orderNumber = req.params.id;
@@ -121,8 +120,8 @@ const NewOrderController = {
         },
       });
 
-      if (order.userId && status === 'En camino') res.send("La orden ya está asignada"); 
-
+      if (order.userId && status === "En camino")
+        res.send("La orden ya está asignada");
       else if (order.status === "Pendiente") {
         await order.setUser(cadete);
         await order.setCadeterium(cadeteria);

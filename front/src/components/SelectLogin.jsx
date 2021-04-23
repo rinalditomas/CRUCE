@@ -1,5 +1,5 @@
 import React from "react";
-import useStyles from "../utils/stylesRegister";
+import useStyles from "../styles/stylesRegister";
 import { useHistory } from "react-router";
 import { Box, Typography } from "@material-ui/core";
 import { CustomButton } from "../utils/Buttons";
@@ -51,7 +51,6 @@ const Main = () => {
                 />
               </Box>
               <CustomButton
-                /*  color="primary" */
                 variant="contained"
                 size="large"
                 className={classes.button_cadete}

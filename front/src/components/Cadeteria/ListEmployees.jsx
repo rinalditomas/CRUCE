@@ -1,35 +1,17 @@
 import React, { useEffect } from "react";
-import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
+import { CssBaseline, Typography, List } from "@material-ui/core";
 import messagesHandler from "../../utils/messagesHandler";
-import socket from "../../utils/socket";
-import { CssBaseline, Typography } from "@material-ui/core";
 import Requests from "../../utils/Request";
+import socket from "../../utils/socket";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    width: "100%",
-    maxWidth: 360,
-    backgroundColor: theme.palette.background.paper,
-  },
-  individualOrder: {
-    backgroundColor: "grey",
-    margin: 10,
-    borderRadius: 8,
-  },
-}));
 
 export default function ListEmployees() {
-  const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
   const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
-
   const messages = messagesHandler(useSnackbar());
-  /*  console.log("aca estan los cadetes", cadetes); */
 
   useEffect(() => {
     dispatch(allCadetes());
@@ -51,9 +33,8 @@ export default function ListEmployees() {
 
   return (
     <>
-      <div>
+      <div style={{ display: "grid", placeSelf: "center" }}>
         <CssBaseline />
-        <div>
         <Typography
           variant="h4"
           key="1"
@@ -64,21 +45,19 @@ export default function ListEmployees() {
             color: "black",
             fontWeight: "bold",
           }}
-        >LISTA DE CADETES    
-         </Typography>
-        </div>
-        <div className={classes.demo}>
-          <List dense={dense}>
-            {cadetes &&
-              cadetes.map((cadete) => {
-                if (cadete.authorized) {
-                  return (
-                   <Requests cadete={cadete} handleActive={handleActive} />
-                  );
-                }
-              })}
-          </List>
-        </div>
+        >
+          LISTA DE CADETES
+        </Typography>
+      </div>
+      <div style={{ display: "grid", placeItems: "center" }}>
+        <List style={{ width: "80%" }}>
+          {cadetes &&
+            cadetes.map((cadete) => {
+              if (cadete.authorized) {
+                return <Requests cadete={cadete} handleActive={handleActive} />;
+              }
+            })}
+        </List>
       </div>
     </>
   );

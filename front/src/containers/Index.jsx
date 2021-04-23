@@ -31,17 +31,35 @@ import SimpleModal from "../components/ForgotPassword";
 import Metricas from "../components/Admin/Metrics";
 import ForgotPasswordCadeteria from "../components/Cadeteria/ForgotPassCadeteria";
 import ResetPasswordCadeteria from "../components/Cadeteria/ResetPassCadeteria";
-import dashboard from "../components/Admin/dashboard";
 import SingleMetricsCadeteria from "../components/Admin/SingleMetricsCadeteria";
 import SingleMetricsCadete from "../components/Cadeteria/singleMetricCadete";
 import CadeteriaMetrics from "../components/Cadeteria/CadeteriaMetrics";
 import SingleOrderAdmin from "../components/Admin/singleOrder";
-import Socketio from "../components/Socketio";
 import SingleOrderCadeteria from "../components/Cadeteria/SingleOrderCadeteria";
+
+import ParticlesBg from "particles-bg";
 
 ///styled
 
 import StyledComponents from "../components/Styled/StyledComponents";
+
+
+let config = {
+  num: [1, 2],
+  rps: 50,
+  radius: [30,60],
+  life: [100, 100],
+  v: [2, 3],
+  tha: [-40, 40],
+  alpha: [0.6, 0],
+  scale: [.1, 0.4],
+  position: "all",
+  color: ["random", "#ff0000"],
+  cross: "dead",
+  emitter: "follow",
+  random: 15
+};
+
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -49,16 +67,15 @@ const Index = () => {
   useEffect(() => {
     dispatch(fetchMe());
     dispatch(fetchCad());
-  }, []);
+   
+  }, [dispatch]);
 
   return (
     <div>
       <Navbar />
+       <ParticlesBg type="square" config={config} bg={true} />
       <Switch>
-        <Route exact path="/socket" component={Socketio} />
-
         <Route exact path="/login-as" component={SelectLogin} />
-        {/*  <Route exact path="/dashboard" component={dashboard} /> */}
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 
@@ -125,13 +142,7 @@ const Index = () => {
           path="/cadeteria/metrics/:id/cadete/:namecadete"
           render={({ match }) => <SingleMetricsCadete match={match.params} />}
         />
-        <Route
-          path="/cadeteria/metrics/singleOrder/:id/:orderNumber"
-          render={({ match }) => <SingleOrderCadeteria match={match.params} />}
-        />
-
         <Route exact path="/cadete" component={Cadete} />
-        {/*  <Route exact path="/cadete/cadeteOrders" component={CadeteOrders} /> */}
         <Route exact path="/cadete/profileCadete" component={ProfileCadete} />
         <Route
           path="/cadete/singleOrder/:id/:orderNumber"
