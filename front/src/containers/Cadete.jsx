@@ -9,7 +9,7 @@ export default function Cadete() {
 
   useEffect(() => {
     dispatch(fetchMe());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

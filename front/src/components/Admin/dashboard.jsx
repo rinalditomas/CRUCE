@@ -2,16 +2,6 @@ import React from "react";
 import { Bar } from "@reactchartjs/react-chart.js";
 
 const MultiAxisLine = ({ metricas }) => {
-  let conversor = (tiempo) => {
-    let enMinutos = tiempo / 1000 / 60;
-    let hs = enMinutos / 60;
-    let minutos = enMinutos % 60;
-
-    return Math.floor(hs) + Math.round(minutos);
-  };
-
-  console.log(conversor(18000000));
-
   const labels = (obj) => {
     let y1 = [];
     let x = [];

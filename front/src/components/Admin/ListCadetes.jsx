@@ -24,7 +24,6 @@ const useStyles = makeStyles((theme) => ({
 
 export default function ListCadetes() {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
   const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
   const messages = messagesHandler(useSnackbar());
@@ -66,7 +65,7 @@ export default function ListCadetes() {
           </Typography>
         </div>
         <div className={classes.demo}>
-          <List dense={dense}>
+          <List>
             {cadetes &&
               cadetes.map((cadete) => {
                 return <Requests cadete={cadete} handleActive={handleActive} />;

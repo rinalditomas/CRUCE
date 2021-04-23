@@ -78,7 +78,6 @@ const authController = {
     }
   },
 
-
   async forgotPasswordCadeteria(req, res) {
     const { email } = req.body;
     const cadeteria = await Cadeteria.findOne({ where: { email } });

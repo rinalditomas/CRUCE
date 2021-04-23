@@ -7,9 +7,6 @@ import { Chip, Typography } from "@material-ui/core";
 import DoneIcon from "@material-ui/icons/Done";
 import BlockIcon from "@material-ui/icons/Block";
 
-import { useSnackbar } from "notistack";
-import messagesHandler from "../utils/messagesHandler";
-
 const useStyles = makeStyles((theme) => ({
   root: {
     padding: 10,

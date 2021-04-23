@@ -47,7 +47,7 @@ const Index = () => {
   useEffect(() => {
     dispatch(fetchMe());
     dispatch(fetchCad());
-  }, []);
+  }, [dispatch]);
 
   return (
     <div>

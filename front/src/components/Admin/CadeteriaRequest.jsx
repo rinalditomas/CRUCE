@@ -39,7 +39,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CadeteriaRequest() {
   const classes = useStyles();
   const dispatch = useDispatch();
-  const [dense, setDense] = React.useState(false);
   const cadeterias = useSelector((state) => state.cadeterias.cadeterias);
   const messages = messagesHandler(useSnackbar());
 
@@ -79,7 +78,7 @@ export default function CadeteriaRequest() {
         </Typography>
       </div>
       <div className={classes.demo}>
-        <List dense={dense}>
+        <List>
           {cadeterias &&
             cadeterias.map((cadeteria) => {
               return cadeteria.authorized === false ? (
