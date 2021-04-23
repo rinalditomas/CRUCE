@@ -59,7 +59,6 @@ const Navbar = () => {
     if (location.includes("cadete")) return "cadete";
     return "base";
   };
-
   const mobileMenuId = "primary-search-account-menu-mobile";
 
   const renderMobileMenu = (
@@ -80,7 +79,7 @@ const Navbar = () => {
               style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">Login</Button>
+              <Button color="inherit">Ingreso</Button>
             </Link>
           </MenuItem>
           <MenuItem>
@@ -89,7 +88,7 @@ const Navbar = () => {
               style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">Register</Button>
+              <Button color="inherit">Registro</Button>
             </Link>
           </MenuItem>
         </>
@@ -118,10 +117,10 @@ const Navbar = () => {
           <MenuItem>
             <Link
               to="/admin"
-              style={{ color: "inherit", textDecoration: 'none' }}
+              style={{ color: "inherit", textDecoration: "none" }}
               onClick={handleMobileMenuClose}
             >
-              <Button color="inherit">Admin panel</Button>
+              <Button color="inherit">Panel Admin</Button>
             </Link>
           </MenuItem>
         </>
@@ -135,7 +134,7 @@ const Navbar = () => {
   return (
     <div className={classes.root}>
       <AppBar position="static" className={classes[`${userTypeColor()}`]}>
-        <Toolbar >
+        <Toolbar>
           {location[1] !== "" ? (
             <IconButton>
               <ArrowBackIosIcon
@@ -145,9 +144,7 @@ const Navbar = () => {
             </IconButton>
           ) : null}
           <Typography variant="h7" className={classes.titleWelcome}>
-            {user && user.authorized
-              ? `Hola ${user.firstName}`
-              : null}
+            {user && user.authorized ? `Hola ${user.firstName}` : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>
           <div className={classes.sectionDesktop}>
@@ -157,19 +154,25 @@ const Navbar = () => {
                   to="/login-as"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="inherit">Login</Button>
+                  <Button color="white" style={{ color: "white" }}>
+                    Ingreso
+                  </Button>
                 </Link>
                 <Link
                   to="/register-as"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="inherit">Register</Button>
+                  <Button color="inherit" style={{ color: "white" }}>
+                    Registro
+                  </Button>
                 </Link>
                 <Link
                   to="/"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="inherit">Home</Button>
+                  <Button color="inherit" style={{ color: "white" }}>
+                    Home
+                  </Button>
                 </Link>
               </>
             ) : (
@@ -192,18 +195,14 @@ const Navbar = () => {
                         style={{ display: "flex", margin: 3 }}
                       />
                     ) : (
-                      <MoreIcon style={{backgroundColor: 'white'}} />
+                      <MoreIcon style={{ backgroundColor: "white" }} />
                     )}
                   </IconButton>
                 </div>
               </>
             )}
 
-            {user && user.admin ? (
-              <></>
-            ) : (
-              <></>
-            )}
+            {user && user.admin ? <></> : <></>}
           </div>
 
           <div className={classes.sectionMobile}>

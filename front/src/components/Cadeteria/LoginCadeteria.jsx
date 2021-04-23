@@ -72,7 +72,7 @@ const LoginCadeteria = () => {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo electrónico"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -85,7 +85,7 @@ const LoginCadeteria = () => {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -99,7 +99,7 @@ const LoginCadeteria = () => {
                 color="primary"
                 className={classes.submit}
               >
-                Sign In
+                Ingresar
               </Button>
               <Grid container>
                 <Grid item xs>

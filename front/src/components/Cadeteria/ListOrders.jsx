@@ -11,12 +11,11 @@ import {
   Paper,
   List,
   ListItem,
-  ListItemSecondaryAction,
   ListItemText,
-  IconButton,
   Typography,
   CssBaseline,
   Container,
+  Tooltip
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { adminOrders, allOrders } from "../../state/orders";
@@ -35,8 +34,8 @@ const useStyles = makeStyles((theme) => ({
     margin: theme.spacing(4, 0, 2),
   },
   container: {
-    paddingTop: theme.spacing(0.5),
-    paddingBottom: theme.spacing(0.5),
+    paddingTop: theme.spacing(1),
+    paddingBottom: theme.spacing(1.5),
   },
 }));
 
@@ -73,7 +72,6 @@ const ListOrders = () => {
   return (
     <div style={{ display: "grid", placeSelf: "center" }}>
       <CssBaseline />
-
       <Typography
         variant="h4"
         key="1"
@@ -153,9 +151,10 @@ const ListOrders = () => {
                   <Container maxWidth="lg" className={classes.container}>
                     <Paper elevation={1}>
                       <ListItem key={order.id}>
+                        <Tooltip title='Ir al detalle'>
                         <Link
                           to={`/cadeteria/metrics/singleOrder/${order.id}/${order.orderNumber}`}
-                          style={{ textDecoration: "none" }}
+                          style={{ textDecoration: "none", color: 'black' }}
                         >
                           <ListItemText
                             primary={
@@ -164,9 +163,10 @@ const ListOrders = () => {
                               order.number +
                               " " +
                               (order.complement ? order.complement : "")
+
                             }
                           />
-                        </Link>
+                        </Link></Tooltip>
                       </ListItem>
                     </Paper>
                   </Container>

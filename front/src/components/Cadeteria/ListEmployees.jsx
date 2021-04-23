@@ -51,9 +51,8 @@ export default function ListEmployees() {
 
   return (
     <>
-      <div>
+      <div style={{ display: "grid", placeSelf: "center" }}>
         <CssBaseline />
-        <div>
         <Typography
           variant="h4"
           key="1"
@@ -67,8 +66,8 @@ export default function ListEmployees() {
         >LISTA DE CADETES    
          </Typography>
         </div>
-        <div className={classes.demo}>
-          <List dense={dense}>
+        <div style={{ display: "grid", placeItems: "center", }}>
+          <List style={{width: '80%'}}>
             {cadetes &&
               cadetes.map((cadete) => {
                 if (cadete.authorized) {
@@ -79,7 +78,6 @@ export default function ListEmployees() {
               })}
           </List>
         </div>
-      </div>
     </>
   );
 }

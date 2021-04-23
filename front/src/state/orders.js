@@ -44,7 +44,6 @@ export const orderState = createAsyncThunk("ORDERS_STATE", (order) => {
 // Trae una orden en particular
 export const singleOrder = createAsyncThunk("SINGLE_ORDER", (id) => {
   return axios
-
     .get(`http://localhost:8000/api/orders/${id}`)
     .then((res) => res.data)
     .catch((e) => console.log(e));
@@ -89,6 +88,7 @@ const initialState = {
 };
 
 const ordersReducer = createReducer(initialState, {
+ 
   [allOrders.fulfilled]: (state, action) => {
     if (action.payload.orders) {
       return { ...state, orders: action.payload.orders };
@@ -96,6 +96,7 @@ const ordersReducer = createReducer(initialState, {
       return { ...state, orders: action.payload };
     }
   },
+
   [adminOrders.fulfilled]: (state, action) => {
     console.log("ORDENES ADMIN REDUX", action.payload);
     return { ...state, orders: action.payload };

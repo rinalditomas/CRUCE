@@ -57,7 +57,6 @@ export default function CustomList({ order }) {
     }
     if (status === "Pendiente") {
       state = "En camino";
-
       dispatch(
         orderState({
           orderNumber,

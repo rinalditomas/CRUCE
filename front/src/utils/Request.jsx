@@ -12,7 +12,8 @@ import messagesHandler from "../utils/messagesHandler";
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    padding: 5,
+    padding: 10,
+    marginBottom: 30,
     display: "flex",
     alignItems: "center",
     justifyContent: "space-between",
@@ -43,9 +44,8 @@ export default function Requests({
   const { firstName, lastName } = cadete;
   const { nameCompany, CUIT } = cadeteria;
 
-
   return (
-    <>
+    <div style={{ display: "grid", placeItems: "center" }}>
       <Paper
         component="form"
         key={cadete.id || cadeteria.id}
@@ -87,6 +87,6 @@ export default function Requests({
           </IconButton>
         )}
       </Paper>
-    </>
+    </div>
   );
 }

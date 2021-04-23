@@ -68,7 +68,7 @@ const NewOrderController = {
     }
   },
 
-  /*   changeStateOrders(req, res) {
+ /*  changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId; 
@@ -105,10 +105,10 @@ const NewOrderController = {
         });
       })
       .catch((err) => res.send(err));
-  }, 
- */
+  },  */
+ 
 
-  async changeStateOrders(req, res) {
+   async changeStateOrders(req, res) {
     const orderNumber = req.params.id;
     const status = req.body.status;
     const cadeteId = req.body.cadeteId;
@@ -143,6 +143,8 @@ const NewOrderController = {
     }
   },
 
+
+  
   async ordersFromAdmin(req, res) {
     try {
       const orders = await Order.findAll({});

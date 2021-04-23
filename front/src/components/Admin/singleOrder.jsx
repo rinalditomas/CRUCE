@@ -17,8 +17,6 @@ import "leaflet/dist/leaflet.css";
 import {
   MapContainer,
   TileLayer,
-  Marker,
-  Popup,
   Circle,
   Tooltip,
 } from "react-leaflet";

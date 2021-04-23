@@ -65,9 +65,9 @@ export default function CadeteriaRequest() {
 
   return (
     <>
-      <div className={classes.root}>
+      <div style={{ display: "grid", placeSelf: "center" }}>
         <CssBaseline />
-        <div>
+        <div style={{ display: "grid", placeSelf: "center" }}>
           <Typography
             variant="h4"
             key="1"

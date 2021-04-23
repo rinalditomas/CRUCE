@@ -12,12 +12,10 @@ import { useHistory } from "react-router";
 import { Grid } from "@material-ui/core";
 import axios from "axios";
 import messagesHandler from "../../utils/messagesHandler";
-
-import "leaflet/dist/leaflet.css";
-
 import { MapContainer, TileLayer, Circle, Tooltip } from "react-leaflet";
 import socket from "../../utils/socket";
 import { useSnackbar } from "notistack";
+import "leaflet/dist/leaflet.css";
 
 const useStyles = makeStyles({
   root: {
@@ -36,13 +34,17 @@ export default function SingleOrder({ match }) {
   const [products, setProducts] = useState([]);
   const order = useSelector((state) => state.orders.singleOrder);
 
-  const cadete = useSelector((state) => state.users.user); 
+  const cadete = useSelector((state) => state.users.user);
   const [coord, setCoord] = useState(/*[-26.8198, -65.2169]*/);
   const [carga, setCarga] = useState(false);
   const messages = messagesHandler(useSnackbar());
 
+  const id = match.id;
+
+  console.log("-=-=====================id", id);
+
   useEffect(() => {
-    dispatch(singleOrder(match.id)).then((res) => {
+    dispatch(singleOrder(id)).then((res) => {
       let ordenes = res.payload;
       setCarga(true);
       return axios
@@ -55,24 +57,28 @@ export default function SingleOrder({ match }) {
         .then(() => {
           return axios
             .get(`http://localhost:8000/api/product/${match.orderNumber}`)
-
             .then((res) => setProducts(res.data.count))
-
             .then(setCarga(false))
-
             .catch((err) => console.log(err));
         });
     });
   }, []);
 
   socket.on("orden", (orden) => {
-    dispatch(singleOrder(match.id)).then(() => {
+    dispatch(singleOrder(id)).then(() => {
       if (typeof orden === "object" && orden.status === "En camino") {
         cadete.firstName + " " + cadete.lastName !== orden.nombre
           ? messages.info(`${orden.nombre} ha tomado un orden`)
           : messages.info(`Has tomado un orden *`);
       }
     });
+
+    /*   window.location.reload();
+    if (typeof orden === "object" && orden.status === "En camino") {
+      cadete.firstName + " " + cadete.lastName !== orden.nombre
+        ? messages.info(`${orden.nombre} ha tomado un orden`)
+        : messages.info(`Has tomado un orden *`);
+    } */
   });
 
   const ChangeState = (state) => {
@@ -81,18 +87,18 @@ export default function SingleOrder({ match }) {
       state: state,
       orderNumber: order.orderNumber,
     };
-    dispatch(orderState(state2))
-      .then((order) => {
-        if (order.payload.status !== "En camino") history.push("/cadete");
-        else dispatch(singleOrder(match.id));
-      })
-      .then((order) => {
-        socket.emit("orden", { orden: order });
-      });
+    dispatch(orderState(state2)).then((order) => {
+      if (order.payload.status !== "En camino") history.push("/cadete");
+      if (typeof order.payload === "object")
+        socket.emit("orden", { orden: order.payload });
+      /*  else {
+        dispatch(singleOrder(match.id)).then((order) => {
+          console.log("Orden ===>", order);
+          socket.emit("orden", { orden: order.payload });
+        });
+      } */
+    });
   };
-
-  console.log('usuario ====>', cadete)
-  
 
   return (
     <>

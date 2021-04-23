@@ -5,9 +5,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { allOrders } from "../../state/orders";
 import { useSnackbar } from "notistack";
 import messagesHandler from "../../utils/messagesHandler";
-
 import socket from "../../utils/socket";
-// import { orderState} from "../state/order";
 import OrderList from "./OrderList";
 import { fetchMe } from "../../state/users";
 
@@ -44,6 +42,7 @@ const CadeteOrders = () => {
   const [estado, setEstado] = React.useState(false);
   const messages = messagesHandler(useSnackbar());
 
+
   useEffect(() => {
     if (cadete.id) {
       dispatch(allOrders(cadete.cadeteriumId)).then((res) => {
@@ -59,7 +58,7 @@ const CadeteOrders = () => {
     dispatch(fetchMe());
   });
 
-  socket.on("orden", (orden) => {
+   socket.on("orden", (orden) => {
     dispatch(allOrders(cadete.cadeteriumId)).then(() => {
       if (typeof orden === "object" && orden.status === "En camino") {
         cadete.firstName + " " + cadete.lastName !== orden.nombre
@@ -67,7 +66,8 @@ const CadeteOrders = () => {
           : messages.info(`Has tomado un orden`);
       }
     });
-  });
+    console.log('SOCKET ======================================')
+  });  
 
   socket.on("ordenes", (ordenes) => {
     dispatch(allOrders(cadete.cadeteriumId));

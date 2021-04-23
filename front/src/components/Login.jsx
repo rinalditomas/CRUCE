@@ -59,9 +59,10 @@ export default function Login() {
         <Grid item xs={false} sm={4} md={7} className={classes.image} />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
-
-          
-  <Avatar src={process.env.PUBLIC_URL + "/deli.png"} style={{width: 50, height: 50}} />
+            <Avatar
+              src={process.env.PUBLIC_URL + "/deli.png"}
+              style={{ width: 50, height: 50 }}
+            />
             <form className={classes.form} onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
@@ -69,7 +70,7 @@ export default function Login() {
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Correo electrónico"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -82,7 +83,7 @@ export default function Login() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Contraseña"
                 type="password"
                 id="password"
                 autoComplete="current-password"
