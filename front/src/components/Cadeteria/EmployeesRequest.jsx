@@ -1,22 +1,22 @@
 import React, { useEffect } from "react";
 import { makeStyles } from "@material-ui/core/styles";
-import List from "@material-ui/core/List";
-import ListItem from "@material-ui/core/ListItem";
-import ListItemSecondaryAction from "@material-ui/core/ListItemSecondaryAction";
-import ListItemText from "@material-ui/core/ListItemText";
-import IconButton from "@material-ui/core/IconButton";
-import { useDispatch, useSelector } from "react-redux";
-import { admitCadete, allCadetes } from "../../state/users";
-import { useSnackbar } from "notistack";
-import messagesHandler from "../../utils/messagesHandler";
 import {
+  List,
+  ListItem,
+  ListItemSecondaryAction,
+  ListItemText,
+  IconButton,
   Chip,
   Container,
   CssBaseline,
   Paper,
   Typography,
 } from "@material-ui/core";
+import { useDispatch, useSelector } from "react-redux";
+import { admitCadete, allCadetes } from "../../state/users";
+import { useSnackbar } from "notistack";
 import DoneIcon from "@material-ui/icons/Done";
+import messagesHandler from "../../utils/messagesHandler";
 import socket from "../../utils/socket";
 
 const useStyles = makeStyles((theme) => ({
@@ -39,8 +39,6 @@ const useStyles = makeStyles((theme) => ({
 export default function CadeteriaRequest() {
   const dispatch = useDispatch();
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
-
   const cadetes = useSelector((state) => state.users.users);
   const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
   const messages = messagesHandler(useSnackbar());
@@ -83,7 +81,7 @@ export default function CadeteriaRequest() {
           </Typography>
         </div>
         <div className={classes.demo}>
-          <List dense={dense}>
+          <List>
             {cadetes &&
               cadetes.map((cadete) => {
                 if (cadete.cadeteriumId === cadeteria.id) {

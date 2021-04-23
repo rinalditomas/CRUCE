@@ -1,19 +1,21 @@
-import React, {useState } from "react";
-import Grid from "@material-ui/core/Grid";
-import Typography from "@material-ui/core/Typography";
-import TextField from "@material-ui/core/TextField";
-import Button from "@material-ui/core/Button";
+import React, { useState } from "react";
+import {
+  Grid,
+  Typography,
+  TextField,
+  Button,
+  CssBaseline,
+} from "@material-ui/core";
+
 import { useSelector, useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
-import useStyles from "../../utils/stylesCadeteria";
 import { useSnackbar } from "notistack";
-import messageHandler from "../../utils/messagesHandler";
 import { editProfileCadeteria } from "../../state/cadeterias";
 import { fetchCad } from "../../state/cadeterias";
-import { CssBaseline } from "@material-ui/core";
+import useStyles from "../../styles/stylesCadeteria";
+import messageHandler from "../../utils/messagesHandler";
 
 export default function ProfileCadeteria() {
-  
   const dispatch = useDispatch();
   const [input, setInput] = useState({});
   const history = useHistory();
@@ -33,7 +35,8 @@ export default function ProfileCadeteria() {
     dispatch(editProfileCadeteria({ id, input }))
       .then(({ payload }) => {
         if (payload.errors) {
-          payload.errors.map((e) => messages.error(e.message)) && dispatch(fetchCad());
+          payload.errors.map((e) => messages.error(e.message)) &&
+            dispatch(fetchCad());
         } else {
           dispatch(fetchCad());
           messages.info("datos actualizados") && history.push("/cadeteria");
@@ -44,19 +47,20 @@ export default function ProfileCadeteria() {
 
   return (
     <React.Fragment>
-      <CssBaseline/>
+      <CssBaseline />
       <Typography
-          variant="h4"
-          key="1"
-          style={{
-            textAlign: "center",
-            marginTop: 45,
-            marginBottom: 50,
-            color: "black",
-            fontWeight: "bold",
-          }}
-        >EDITAR PERFIL CADETERIA   
-         </Typography>
+        variant="h4"
+        key="1"
+        style={{
+          textAlign: "center",
+          marginTop: 45,
+          marginBottom: 50,
+          color: "black",
+          fontWeight: "bold",
+        }}
+      >
+        EDITAR PERFIL CADETERIA
+      </Typography>
       <form style={{ marginLeft: "7%" }}>
         <Grid container spacing={3}>
           <Grid item xs={10}>

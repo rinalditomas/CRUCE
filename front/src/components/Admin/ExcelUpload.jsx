@@ -14,7 +14,7 @@ import clsx from "clsx";
 import socket from "../../utils/socket";
 import CheckIcon from "@material-ui/icons/Check";
 import SaveIcon from "@material-ui/icons/Save";
-import useStyles from "../../utils/stylesProgress";
+import useStyles from "../../styles/stylesProgress";
 
 import { upLoadOrders } from "../../state/orders";
 import { useDispatch, useSelector } from "react-redux";

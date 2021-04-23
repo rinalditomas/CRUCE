@@ -10,7 +10,7 @@ import {
 import ListMetricsCadete from "./ListMetricsCadete";
 import { useDispatch, useSelector } from "react-redux";
 import { AllcadetesMetrics } from "../../state/orders";
-import useStyles from "../../utils/stylesCadeteriaMetrics";
+import useStyles from "../../styles/stylesCadeteriaMetrics";
 
 export default function Dashboard() {
   const dispatch = useDispatch();

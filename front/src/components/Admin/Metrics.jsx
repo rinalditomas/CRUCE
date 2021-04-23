@@ -10,7 +10,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { AllcadeteriasMetrics} from "../../state/orders";
 import { allCadeterias } from "../../state/cadeterias";
 
-import useStyles from "../../utils/stylesMetrics";
+import useStyles from "../../styles/stylesMetrics";
 
 
 export default function Dashboard() {

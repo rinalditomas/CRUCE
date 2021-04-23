@@ -17,7 +17,7 @@ import {
 } from "../../state/orders";
 import clsx from "clsx";
 import PromedioDeEspera from "../Admin/PromedioDeEspera";
-import useStyles from "../../utils/styleSingleMetricsCadeteria";
+import useStyles from "../../styles/styleSingleMetricsCadeteria";
 
 export default function SingleMetricsCadeteria({ match }) {
   const dispatch = useDispatch();

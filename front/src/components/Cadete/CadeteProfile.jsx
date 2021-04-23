@@ -12,7 +12,7 @@ import {
 } from "@material-ui/core";
 import { editProfileUser, fetchMe } from "../../state/users";
 import { useSnackbar } from "notistack";
-import useStyles from "../../utils/stylesCadeteProfile";
+import useStyles from "../../styles/stylesCadeteProfile";
 import messageHandler from "../../utils/messagesHandler";
 
 export default function ProfileCadete() {

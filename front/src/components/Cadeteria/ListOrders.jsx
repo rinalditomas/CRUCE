@@ -2,7 +2,6 @@ import React, { useEffect, useState } from "react";
 import { makeStyles } from "@material-ui/core/styles";
 import { Link } from "react-router-dom";
 import {
-  Button,
   InputLabel,
   MenuItem,
   Select,
@@ -15,7 +14,7 @@ import {
   Typography,
   CssBaseline,
   Container,
-  Tooltip
+  Tooltip,
 } from "@material-ui/core";
 import { useSelector, useDispatch } from "react-redux";
 import { adminOrders, allOrders } from "../../state/orders";
@@ -41,7 +40,6 @@ const useStyles = makeStyles((theme) => ({
 
 const ListOrders = () => {
   const classes = useStyles();
-  const [dense, setDense] = React.useState(false);
   const cadeteria = useSelector((state) => state.cadeterias.singleCadeteria);
   const orders = useSelector((state) => state.orders.orders);
   const [selected, setSelected] = useState("Pendiente");
@@ -140,7 +138,7 @@ const ListOrders = () => {
       </div>
 
       <div className={classes.demo}>
-        <List dense={dense}>
+        <List>
           {orders &&
             orders.map((order) => {
               if (
@@ -151,22 +149,22 @@ const ListOrders = () => {
                   <Container maxWidth="lg" className={classes.container}>
                     <Paper elevation={1}>
                       <ListItem key={order.id}>
-                        <Tooltip title='Ir al detalle'>
-                        <Link
-                          to={`/cadeteria/metrics/singleOrder/${order.id}/${order.orderNumber}`}
-                          style={{ textDecoration: "none", color: 'black' }}
-                        >
-                          <ListItemText
-                            primary={
-                              order.street +
-                              " " +
-                              order.number +
-                              " " +
-                              (order.complement ? order.complement : "")
-
-                            }
-                          />
-                        </Link></Tooltip>
+                        <Tooltip title="Ir al detalle">
+                          <Link
+                            to={`/cadeteria/metrics/singleOrder/${order.id}/${order.orderNumber}`}
+                            style={{ textDecoration: "none", color: "black" }}
+                          >
+                            <ListItemText
+                              primary={
+                                order.street +
+                                " " +
+                                order.number +
+                                " " +
+                                (order.complement ? order.complement : "")
+                              }
+                            />
+                          </Link>
+                        </Tooltip>
                       </ListItem>
                     </Paper>
                   </Container>

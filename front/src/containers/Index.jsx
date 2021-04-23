@@ -35,7 +35,6 @@ import SingleMetricsCadeteria from "../components/Admin/SingleMetricsCadeteria";
 import SingleMetricsCadete from "../components/Cadeteria/singleMetricCadete";
 import CadeteriaMetrics from "../components/Cadeteria/CadeteriaMetrics";
 import SingleOrderAdmin from "../components/Admin/singleOrder";
-import Socketio from "../components/Socketio";
 import SingleOrderCadeteria from "../components/Cadeteria/SingleOrderCadeteria";
 
 ///styled
@@ -54,10 +53,7 @@ const Index = () => {
     <div>
       <Navbar />
       <Switch>
-        <Route exact path="/socket" component={Socketio} />
-
         <Route exact path="/login-as" component={SelectLogin} />
-        {/*  <Route exact path="/dashboard" component={dashboard} /> */}
         <Route exact path="/login-as/cadete" component={Login} />
         <Route exact path="/login-as/cadeteria" component={CadeteriaLogin} />
 

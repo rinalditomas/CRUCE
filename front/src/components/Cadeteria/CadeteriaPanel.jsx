@@ -1,10 +1,8 @@
 import React from "react";
 import { CustomButton } from "../../utils/Buttons";
-import CssBaseline from "@material-ui/core/CssBaseline";
-import Grid from "@material-ui/core/Grid";
-import Container from "@material-ui/core/Container";
+import { CssBaseline, Grid, Container } from "@material-ui/core";
 import { Link } from "react-router-dom";
-import adminMenuStyles from "../../utils/stylesAdmin";
+import adminMenuStyles from "../../styles/stylesAdmin";
 
 const CadeteriaPanel = () => {
   const classes = adminMenuStyles();

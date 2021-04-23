@@ -1,8 +1,6 @@
 import React from "react";
-import Badge from "@material-ui/core/Badge";
-import Avatar from "@material-ui/core/Avatar";
+import { Avatar, Badge } from "@material-ui/core";
 import { makeStyles } from "@material-ui/core/styles";
-
 
 const useStyles = makeStyles((theme) => ({
   root: {
