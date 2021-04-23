@@ -10,8 +10,7 @@ const CadeteriaPanel = () => {
   return (
     <React.Fragment>
       <CssBaseline />
-      <main>
-        <div className={classes.heroContent}>
+        <div >
           <Container maxWidth="sm">
             <div className={classes.heroButtons}>
               <Grid container spacing={4} justify="center">
@@ -69,7 +68,6 @@ const CadeteriaPanel = () => {
             </div>
           </Container>
         </div>
-      </main>
     </React.Fragment>
   );
 };

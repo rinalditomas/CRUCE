@@ -53,14 +53,14 @@ export default function Login() {
     <>
       <Grid container component="main" className={classes.root}>
         <CssBaseline />
-        <Grid item xs={false} sm={4} md={7} className={classes.image} />
+        <Grid item xs={false} sm={4} md={7} className={classes.image}  />
         <Grid item xs={12} sm={8} md={5} component={Paper} elevation={6} square>
           <div className={classes.paper}>
             <Avatar
               src={process.env.PUBLIC_URL + "/deli.png"}
               style={{ width: 50, height: 50 }}
             />
-            <form className={classes.form} onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit}>
               <TextField
                 variant="outlined"
                 margin="normal"

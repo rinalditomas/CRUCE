@@ -80,7 +80,7 @@ export default function CadeteriaRequest() {
             SOLICITUDES CADETES
           </Typography>
         </div>
-        <div className={classes.demo}>
+        <div>
           <List>
             {cadetes &&
               cadetes.map((cadete) => {

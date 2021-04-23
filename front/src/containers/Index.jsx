@@ -37,9 +37,29 @@ import CadeteriaMetrics from "../components/Cadeteria/CadeteriaMetrics";
 import SingleOrderAdmin from "../components/Admin/singleOrder";
 import SingleOrderCadeteria from "../components/Cadeteria/SingleOrderCadeteria";
 
+import ParticlesBg from "particles-bg";
+
 ///styled
 
 import StyledComponents from "../components/Styled/StyledComponents";
+
+
+let config = {
+  num: [1, 2],
+  rps: 50,
+  radius: [30,60],
+  life: [100, 100],
+  v: [2, 3],
+  tha: [-40, 40],
+  alpha: [0.6, 0],
+  scale: [.1, 0.4],
+  position: "all",
+  color: ["random", "#ff0000"],
+  cross: "dead",
+  emitter: "follow",
+  random: 15
+};
+
 
 const Index = () => {
   const dispatch = useDispatch();
@@ -47,11 +67,13 @@ const Index = () => {
   useEffect(() => {
     dispatch(fetchMe());
     dispatch(fetchCad());
+   
   }, [dispatch]);
 
   return (
     <div>
       <Navbar />
+       <ParticlesBg type="square" config={config} bg={true} />
       <Switch>
         <Route exact path="/login-as" component={SelectLogin} />
         <Route exact path="/login-as/cadete" component={Login} />

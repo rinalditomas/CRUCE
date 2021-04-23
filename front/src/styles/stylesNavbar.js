@@ -1,6 +1,12 @@
 import { makeStyles } from "@material-ui/core/styles";
 
 const useStyles = makeStyles((theme) => ({
+  
+  body: {
+    backgroundColor: "white" /* initial color */,
+    transition: "all .5s",
+  },
+
   root: {
     flexGrow: 1,
   },
@@ -26,8 +32,19 @@ const useStyles = makeStyles((theme) => ({
     background: "linear-gradient(45deg, #eeeeee, 30%, #9e9e9e 90%)",
     color: "black",
   },
+
+  /*   style={{
+    backgroundColor: condition ? "red" : "green",
+    transition: "all .5s ease",
+    WebkitTransition: "all .5s ease",
+    MozTransition: "all .5s ease"
+  }} */
+
   cadete: {
     background: "linear-gradient(-60deg, #3f51b5 30%, #21CBF3 90%)",
+    transition: "all 3.s ease",
+    WebkitTransition: "all .5s ease",
+    MozTransition: "all .5s ease",
     color: "white",
   },
 

@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import List from "@material-ui/core/List";
-import { makeStyles } from "@material-ui/core/styles";
 import { allCadetes, editStateCadete } from "../../state/users";
 import { useDispatch, useSelector } from "react-redux";
 import { useSnackbar } from "notistack";
@@ -9,21 +8,7 @@ import socket from "../../utils/socket";
 import Requests from "../../utils/Request";
 import messagesHandler from "../../utils/messagesHandler";
 
-const useStyles = makeStyles((theme) => ({
-  root: {
-    flexGrow: 1,
-    maxWidth: 752,
-  },
-  demo: {
-    backgroundColor: theme.palette.background.paper,
-  },
-  title: {
-    margin: theme.spacing(4, 0, 2),
-  },
-}));
-
 export default function ListCadetes() {
-  const classes = useStyles();
   const cadetes = useSelector((state) => state.users.users);
   const dispatch = useDispatch();
   const messages = messagesHandler(useSnackbar());
@@ -64,7 +49,7 @@ export default function ListCadetes() {
             LISTA DE CADETES
           </Typography>
         </div>
-        <div className={classes.demo}>
+        <div>
           <List>
             {cadetes &&
               cadetes.map((cadete) => {

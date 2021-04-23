@@ -40,6 +40,7 @@ const Navbar = () => {
 
   const messages = messagesHandler(useSnackbar());
 
+ 
   const logoutUser = () => {
     localStorage.removeItem("token");
     handleMobileMenuClose();
@@ -136,7 +137,7 @@ const Navbar = () => {
               />
             </IconButton>
           ) : null}
-          <Typography variant="h7" className={classes.titleWelcome}>
+          <Typography className={classes.titleWelcome}>
             {user && user.authorized ? `Hola ${user.firstName}` : null}
             {cadeteria ? cadeteria.nameCompany : null}
           </Typography>
@@ -147,9 +148,7 @@ const Navbar = () => {
                   to="/login-as"
                   style={{ color: "inherit", textDecoration: "none" }}
                 >
-                  <Button color="white" style={{ color: "white" }}>
-                    Ingreso
-                  </Button>
+                  <Button style={{ color: "white" }}>Ingreso</Button>
                 </Link>
                 <Link
                   to="/register-as"

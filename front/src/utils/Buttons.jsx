@@ -37,13 +37,14 @@ export const CustomButtonB = styled(({ color, ...other }) => (
       : "0 3px 5px 2px rgba(68, 103, 103, .3)",
 
   color: "white",
-  height: 48,
+  height: 78,
   textAlign: "justify",
-  width: 120,
-  padding: 30,
+  width: 180,
+  padding: 50,
   margin: 8,
   border: 0,
   borderRadius: 5,
+  fontSize: '1.5rem'
 });
 
 export const StatusButton = styled(({ color, ...other }) => (

@@ -80,7 +80,13 @@ const CadeteOrders = () => {
   if (!cadete.authorized) {
     return (
       <div className={classes.root}>
-        <h1>Tu cadeteria aun no te ha autorizado</h1>
+        <CssBaseline />
+        <Typography
+          variant="h6"
+          style={{ display: "grid", placeItems: "center", marginTop: 50 }}
+        >
+          Tu cadeteria aun no te ha autorizado
+        </Typography>
         <img
           style={{ maxWidth: "100%" }}
           src="https://images.assetsdelivery.com/compings_v2/lkeskinen/lkeskinen1610/lkeskinen161000200.jpg"
@@ -92,6 +98,7 @@ const CadeteOrders = () => {
   if (!cadete.active) {
     return (
       <div className={classes.root}>
+        <CssBaseline />
         <h1>No estas activo</h1>
         <img
           style={{ maxWidth: "100%" }}
@@ -104,6 +111,7 @@ const CadeteOrders = () => {
   if (estado === true) {
     return (
       <div className={classes.root}>
+        <CssBaseline />
         <h1>Tu cadeteria no esta activa</h1>
         <img
           style={{ maxWidth: "100%" }}

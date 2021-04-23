@@ -77,7 +77,7 @@ export default function CadeteriaRequest() {
           SOLICITUDES DE CADETERIAS
         </Typography>
       </div>
-      <div className={classes.demo}>
+      <div>
         <List>
           {cadeterias &&
             cadeterias.map((cadeteria) => {

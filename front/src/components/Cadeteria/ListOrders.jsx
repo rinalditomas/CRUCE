@@ -135,9 +135,7 @@ const ListOrders = () => {
             </Select>
           </FormControl>
         </Grid>
-      </div>
 
-      <div className={classes.demo}>
         <List>
           {orders &&
             orders.map((order) => {
